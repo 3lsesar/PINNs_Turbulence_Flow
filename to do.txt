@@ -1,0 +1,2 @@
+Read relevant part of the ebook (AE2)
+make the code work and understand it
