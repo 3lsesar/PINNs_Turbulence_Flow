@@ -32,13 +32,15 @@ viscos = 1/5200
 
 # solve differential equation for k
 # load DNS data
-DNS_mean=np.genfromtxt("LM_Channel_5200_mean_prof.dat",comments="%")
+path = '/Users/cesar/Documents/GitHub/PINNs_Turbulence_Flow/Teacher Code/DNS_Data/'
+
+DNS_mean=np.genfromtxt(path + 'LM_Channel_5200_mean_prof.dat',comments="%")
 y_DNS=DNS_mean[:,0];
 yplus_DNS=DNS_mean[:,1];
 u_DNS=DNS_mean[:,2];
 dudy_DNS=np.gradient(u_DNS,yplus_DNS)
 
-DNS_stress=np.genfromtxt("LM_Channel_5200_vel_fluc_prof.dat",comments="%")
+DNS_stress=np.genfromtxt(path + "LM_Channel_5200_vel_fluc_prof.dat",comments="%")
 u2_DNS=DNS_stress[:,2];
 v2_DNS=DNS_stress[:,3];
 w2_DNS=DNS_stress[:,4];
@@ -48,7 +50,7 @@ dkdy_DNS=np.gradient(k_DNS,yplus_DNS,edge_order=2)
 d2kdy2_DNS=np.gradient(dkdy_DNS,yplus_DNS,edge_order=2)
 
          #y/delta                    y^+                   Production          Turbulent_Transport        Viscous_Transport       Pressure_Strain         Pressure_Transport        Viscous_Dissipation           Balance
-DNS_k_terms=np.genfromtxt("LM_Channel_5200_RSTE_k_prof.dat",comments="%")
+DNS_k_terms=np.genfromtxt(path + "LM_Channel_5200_RSTE_k_prof.dat",comments="%")
 
 diss_DNS=DNS_k_terms[:,7]
 Pk_DNS=DNS_k_terms[:,2]
@@ -65,7 +67,7 @@ vist_DNS = np.abs(uv_DNS/dudy_DNS)
 
 
 # load k-omega grid
-kom_data = np.loadtxt('y_u_k_om_uv_5200-RANS-half-channel.txt')
+kom_data = np.loadtxt(path + 'y_u_k_om_uv_5200-RANS-half-channel.txt')
 y_kom = kom_data[:,0]
 k_kom = kom_data[:,2]
 om_kom = kom_data[:,3]
