@@ -1,0 +1,145 @@
+import scipy.io as sio
+import sys
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+from IPython import display
+plt.rcParams.update({'font.size': 22})
+plt.rcParams.update({'figure.max_open_warning': 0})
+
+plt.interactive(True)
+plt.close('all')
+
+viscos=1/5200
+
+
+# makes sure figures are updated when using ipython
+display.clear_output(wait=True)
+
+datax= np.loadtxt("x2d.dat")
+x=datax[0:-1]
+ni=int(datax[-1])
+datay= np.loadtxt("y2d.dat")
+y=datay[0:-1]
+nj=int(datay[-1])
+
+x2d=np.zeros((ni+1,nj+1))
+y2d=np.zeros((ni+1,nj+1))
+
+x2d=np.reshape(x,(ni+1,nj+1))
+y2d=np.reshape(y,(ni+1,nj+1))
+
+# compute cell centers
+xp2d=0.25*(x2d[0:-1,0:-1]+x2d[0:-1,1:]+x2d[1:,0:-1]+x2d[1:,1:])
+yp2d=0.25*(y2d[0:-1,0:-1]+y2d[0:-1,1:]+y2d[1:,0:-1]+y2d[1:,1:])
+
+x=xp2d[:,0]
+y=yp2d[0,:]
+
+
+u2d=np.load('u2d_saved.npy')
+p2d=np.load('p2d_saved.npy')
+v2d=np.load('v2d_saved.npy')
+k2d=np.load('k2d_saved.npy')
+om2d=np.load('om2d_saved.npy')
+vis2d=np.load('vis2d_saved.npy')
+
+dudx2d,dudy2d=np.gradient(u2d,x,y)
+uv2d=-(vis2d-viscos)*dudy2d
+
+DNS_mean=np.genfromtxt("LM_Channel_5200_mean_prof.dat",comments="%")
+y_DNS=DNS_mean[:,0];
+yplus_DNS=DNS_mean[:,1];
+u_DNS=DNS_mean[:,2];
+
+DNS_stress=np.genfromtxt("LM_Channel_5200_vel_fluc_prof.dat",comments="%")
+u2_DNS=DNS_stress[:,2];
+v2_DNS=DNS_stress[:,3];
+w2_DNS=DNS_stress[:,4];
+uv_DNS=DNS_stress[:,5];
+
+
+k_DNS=0.5*(u2_DNS+v2_DNS+w2_DNS)
+
+# plot every jDNS DNS cells
+jDNS=20
+
+#load iteration history
+u_iter= np.loadtxt("u-iteratiom.dat")
+
+u5=u_iter[:,1]
+u10=u_iter[:,2]
+u20=u_iter[:,3]
+u30=u_iter[:,4]
+u40=u_iter[:,5]
+u50=u_iter[:,6]
+u60=u_iter[:,7]
+
+
+########################################## U 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+xx=2;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(y,u2d[i1,:],'b-',label="$x=2$")
+xx=10;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(y,u2d[i1,:],'r-',label="$x=10$")
+plt.plot(y_DNS[::jDNS],u_DNS[::jDNS],'o',label="DNS")
+plt.legend(loc='best',prop=dict(size=13))
+plt.ylabel("$U$")
+plt.xlabel("$y$")
+plt.axis([0, 1, 0, 28])
+plt.savefig('u_5200-channel.png',bbox_inches='tight')
+
+########################################## k 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+xx=2;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(y,k2d[i1,:],'b-',label="$x=2$")
+xx=10;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(y,k2d[i1,:],'r-',label="$x=10$")
+plt.plot(y_DNS[::jDNS],k_DNS[::jDNS],'o',label="DNS")
+plt.legend(loc='best',prop=dict(size=13))
+plt.ylabel("$k$")
+plt.xlabel("$y$")
+plt.axis([0, 1, 0, 5.5])
+plt.savefig('k_5200-channel.png',bbox_inches='tight')
+
+########################################## uv 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.25,bottom=0.20)
+xx=2;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(y,uv2d[i1,:],'b-',label="$x=2$")
+xx=10;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(y,uv2d[i1,:],'r-',label="$x=10$")
+plt.plot(y_DNS[::jDNS],uv_DNS[::jDNS],'o',label="DNS")
+plt.legend(loc='best',prop=dict(size=13))
+plt.ylabel(r"$\overline{u'v'}$")
+plt.xlabel("$y$")
+plt.axis([0, 1, -1, 0])
+plt.savefig('uv_5200-channel.png',bbox_inches='tight')
+
+
+########################################## u iteration
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(u5,'b-',label="$j=5$")
+plt.plot(u10,'r-',label="$j=10$")
+plt.plot(u20,'k-',label="$j=20$")
+plt.plot(u30,'b--',label="$j=30$")
+plt.plot(u40,'r--',label="$j=40$")
+plt.plot(u50,'k--',label="$j=50$")
+plt.plot(u60,'g-',label="$j=60$")
+plt.legend(loc='best',prop=dict(size=13))
+plt.xlabel('iteration')
+plt.ylabel('$U$')
+plt.savefig('u_vs_iteration.png',bbox_inches='tight')
+
+
+
+

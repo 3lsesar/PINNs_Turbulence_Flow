@@ -1,0 +1,224 @@
+import scipy.io as sio
+import sys
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+from IPython import display
+plt.rcParams.update({'font.size': 22})
+plt.rcParams.update({'figure.max_open_warning': 0})
+
+plt.interactive(True)
+plt.close('all')
+
+viscos=4/57000
+
+
+# makes sure figures are updated when using ipython
+display.clear_output(wait=True)
+
+datax= np.loadtxt("x2d.dat")
+x=datax[0:-1]
+ni=int(datax[-1])
+datay= np.loadtxt("y2d.dat")
+y=datay[0:-1]
+nj=int(datay[-1])
+
+x2d=np.zeros((ni+1,nj+1))
+y2d=np.zeros((ni+1,nj+1))
+
+x2d=np.reshape(x,(ni+1,nj+1))
+y2d=np.reshape(y,(ni+1,nj+1))
+
+# compute cell centers
+xp2d=0.25*(x2d[0:-1,0:-1]+x2d[0:-1,1:]+x2d[1:,0:-1]+x2d[1:,1:])
+yp2d=0.25*(y2d[0:-1,0:-1]+y2d[0:-1,1:]+y2d[1:,0:-1]+y2d[1:,1:])
+
+y=yp2d[0,:]
+
+
+u2d=np.load('u2d_saved.npy')
+p2d=np.load('p2d_saved.npy')
+v2d=np.load('v2d_saved.npy')
+k2d=np.load('k2d_saved.npy')
+om2d=np.load('om2d_saved.npy')
+vis2d=np.load('vis2d_saved.npy')
+
+dpdx=np.load('dpdx.npy')
+dpdx=dpdx[0]
+
+# average in x direction
+u=np.mean(u2d,axis=0)
+v=np.mean(v2d,axis=0)
+k=np.mean(k2d,axis=0)
+om=np.mean(om2d,axis=0)
+vis=np.mean(vis2d,axis=0)
+eps=0.09*k*om
+
+dudy=np.gradient(u,y)
+
+
+u_wall_s=0
+ustar_s=(viscos*abs(u[0]-u_wall_s)/y[0])**0.5
+yplus=y*ustar_s/viscos
+u_wall_n=2
+ustar_n=(viscos*abs(u_wall_n-u[-1])/y[0])**0.5
+
+delta_u=u_wall_n-u_wall_s
+
+print('ustar_s,ustar_n',ustar_s,ustar_n)
+print('tau_s,utau_n,dpdx',ustar_s**2,ustar_n**2,dpdx)
+print('p+_s,p+_n',dpdx/ustar_s**3*viscos,dpdx/ustar_n**3*viscos)
+
+yplus=y*ustar_s/viscos
+
+yplus_n=(2-y)*ustar_n/viscos
+
+nj2=int(nj/2)
+
+
+data  =np.genfromtxt("/chalmers/users/lada/tex/couette-poiseuille-experiments/fig3-bottom-case10.csv",comments="x",delimiter=',')
+yDNS_u=data[:,0]
+u_DNS=data[:,1]
+
+data  =np.genfromtxt("/chalmers/users/lada/tex/couette-poiseuille-experiments/fig2_top_case10.csv",comments="x",delimiter=',')
+yDNS_uv=data[:,0]
+uv_DNS=data[:,1]
+
+u_iter=np.loadtxt("u-iter.dat")
+
+u1=u_iter[:,0]
+u2=u_iter[:,1]
+u3=u_iter[:,2]
+u4=u_iter[:,3]
+
+u_reichard_s=1/0.4*np.log(1+0.4*yplus)+7.8*(1-np.exp(-yplus/11))-yplus*np.exp(-yplus/3);
+u_reichard_n=1/0.4*np.log(1+0.4*yplus_n)+7.8*(1-np.exp(-yplus_n/11))-yplus_n*np.exp(-yplus_n/3);
+
+
+dudy=np.gradient(u,y)
+uv=-(vis-viscos)*dudy
+
+
+
+
+np.savetxt('y_u_k_om_uv_channel-57000-couette-RANS-code.txt', np.c_[y,u,k,om,uv])
+
+
+
+
+
+########################################## U 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(y-1,u/delta_u,'b-')
+plt.plot(yDNS_u-1,u_DNS,'bo')
+plt.ylabel("$U$")
+plt.xlabel("$y$")
+plt.axis([-1, 1, -0.1, 1.2])
+plt.savefig('u_40000-coutte.png',bbox_inches='tight')
+
+
+########################################## U-U_wall
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(y,u-u_wall_s,'b-',label='south')
+plt.plot(2-y[-1:nj2-2:-1],u_wall_n-u[-1:nj2-2:-1],'r-',label='north')
+plt.ylabel("$U$")
+plt.xlabel("$y$")
+plt.legend(loc="best",prop=dict(size=18))
+plt.axis([0, 1, -0.5, 2])
+plt.savefig('u-u_wall-40000-coutte.png',bbox_inches='tight')
+
+
+
+########################################## U-U_wall
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(y,u-u_wall_s,'b-',label='south')
+plt.plot(2-y[-1:nj2-2:-1],u_wall_n-u[-1:nj2-2:-1],'r-',label='north')
+plt.ylabel("$U$")
+plt.xlabel("$y$")
+plt.legend(loc="best",prop=dict(size=18))
+plt.axis([0, 1, -2.0, 3.5])
+plt.savefig('u-u_wall-40000-coutte.png',bbox_inches='tight')
+
+
+########################################## U  south
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+nj2=int(nj/2)
+ax1.semilogx(yplus[0:nj2],(u[0:nj2]-u_wall_s)/ustar_s,'b-',label='DNS')
+ax1.semilogx(yplus[0:nj2],u_reichard_s[0:nj2],'k--',label="Reichardt's")
+plt.title('south')
+y_exp_s=yDNS_u*0.033
+ustar_exp=0.564
+uwall_exp=12.84
+nu_exp=1.486e-5
+yplus_exp_s=y_exp_s*ustar_exp/nu_exp
+ulog=5.1+2.55*np.log(yplus_exp_s)
+ax1.semilogx(yplus_exp_s,ulog,'r+',label="log-law")
+uplus_exp=u_DNS*uwall_exp/ustar_exp
+ax1.semilogx(yplus_exp_s,uplus_exp,'bo',label="Exp")
+# plt.plot(yDNS_u-1,u_DNS,'bo')
+plt.ylabel("$U^+$")
+plt.xlabel("$y^+$")
+ax1.set_xticks([1,10,100,1000])
+ax1.axis([1,4000,0,25])
+plt.legend(loc="best",prop=dict(size=18))
+
+plt.savefig('u_log_40000-python-south.png')
+
+
+########################################## U  north
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+nj2=int(nj/2)
+ax1.semilogx(yplus_n[-1:nj2-1:-1],abs(u_wall_n-u[-1:nj2-1:-1])/ustar_n,'b-',label='IDDES, north')
+ax1.semilogx(yplus_n[-1:nj2-1:-1],u_reichard_n[-1:nj2-1:-1],'k--',label="Reichardt's, north")
+plt.ylabel("$U^+$")
+plt.xlabel("$y^+$")
+ax1.set_xticks([1,10,100,1000])
+ax1.axis([0.1,1200,0,32])
+plt.legend(loc="best",prop=dict(size=18))
+
+plt.savefig('u_log_40000-python-north.png')
+
+########################################## uv 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.25,bottom=0.20)
+uv_model_visc=-vis*dudy
+vist=vis-viscos
+uv_model=-vist*dudy
+plt.plot(yDNS_uv-1,uv_DNS,'bo',label='DNS')
+plt.plot(y-1,-uv_model_visc/ustar_s**2,'r-',label='Total')
+plt.plot(y-1,-uv_model/ustar_s**2,'g-',label='Turb')
+tau_theor=ustar_s**2/ustar_s**2+dpdx*y/ustar_s**2
+plt.plot(y-1,tau_theor,'k--',linewidth=2,label='Theor')
+plt.legend(loc="best",prop=dict(size=18))
+plt.ylabel(r"$\overline{u'v'}/u_\tau^2$")
+plt.xlabel("$y$")
+plt.axis([-1,1 , -0.6,1.1])
+plt.savefig('uv_40000-coette.png',bbox_inches='tight')
+
+
+########################################## vis 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+i1 = 0
+plt.plot(y-1,vis/viscos,'b-')
+plt.ylabel(r"$\nu_t/\nu$")
+plt.xlabel("$y^+$")
+plt.axis([-1, 1, 0, 300])
+plt.savefig('vis_80000-coutte.png',bbox_inches='tight')
+
+########################################## u hist 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(u1,'b-')
+plt.plot(u2,'k-')
+plt.plot(u3,'k-')
+plt.plot(u4,'b--')
+plt.ylabel(r"$U$")
+plt.xlabel("iteration")
+plt.savefig('u-hist.png',bbox_inches='tight')
+

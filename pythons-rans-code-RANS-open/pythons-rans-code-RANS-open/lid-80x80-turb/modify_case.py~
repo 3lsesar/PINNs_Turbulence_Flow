@@ -1,0 +1,101 @@
+
+def modify_init(u2d,v2d,k2d,om2d,vis2d):
+
+   k2d=np.ones((ni,nj))*0.01
+   om2d=np.ones((ni,nj))*10
+   
+   return u2d,v2d,k2d,om2d,vis2d
+
+def modify_inlet():
+
+   global y_rans,y_rans,u_rans,v_rans,k_rans,om_rans,uv_rans,k_bc_west,eps_bc_west,om_bc_west
+
+   return u_bc_west,v_bc_west,k_bc_west,om_bc_west,u2d_face_w,convw
+
+def modify_conv(convw,convs):
+
+   convs[:,0,:]=0
+   convs[:,-1,:]=0
+
+   return convw,convs
+
+def modify_u(su2d,sp2d):
+
+   global file1
+
+   if iter == 0:
+      print('file1 opened')
+      l1=[iter,u2d[ni-5,5],u2d[ni-5,10],u2d[ni-5,20],\
+           u2d[ni-5,30],u2d[ni-5,40],u2d[ni-5,50]]
+      np.savetxt('u-iter-history.dat', l1, newline=" ")
+      file1=open('u-iter-history.dat','a') #append
+   else:
+      print('file1 printed')
+      file1.write("\n")
+      l1=[iter,u2d[ni-5,5],u2d[ni-5,10],u2d[ni-5,20],\
+           u2d[ni-5,30],u2d[ni-5,40],u2d[ni-5,50]]
+      np.savetxt(file1, l1, newline=" ")
+
+   return su2d,sp2d
+
+def modify_v(su2d,sp2d):
+
+   return su2d,sp2d
+
+def modify_k(su2d,sp2d):
+
+   return su2d,sp2d
+
+def modify_om(su2d,sp2d):
+
+   return su2d,sp2d
+
+def modify_outlet(convw):
+
+   return convw
+
+def fix_omega():
+
+   apmax=np.max(ap2d)
+# south wall
+   aw2d[:,0]=0
+   ae2d[:,0]=0
+   as2d[:,0]=0
+   an2d[:,0]=0
+   ap2d[:,0]=apmax
+   su2d[:,0]=om_bc_south*apmax
+
+# north wall
+   aw2d[:,-1]=0
+   ae2d[:,-1]=0
+   as2d[:,-1]=0
+   an2d[:,-1]=0
+   ap2d[:,-1]=apmax
+   su2d[:,-1]=om_bc_north*apmax
+
+# west wall
+   aw2d[0,:]=0
+   ae2d[0,:]=0
+   as2d[0,:]=0
+   an2d[0,:]=0
+   ap2d[0,:]=apmax
+   su2d[0,:]=om_bc_west*apmax
+
+# east wall
+   aw2d[-1,:]=0
+   ae2d[-1,:]=0
+   as2d[-1,:]=0
+   an2d[-1,:]=0
+   ap2d[-1,:]=apmax
+   su2d[-1,:]=om_bc_east*apmax
+
+
+   return aw2d,ae2d,as2d,an2d,ap2d,su2d,sp2d
+
+def modify_vis(vis2d):
+
+   return vis2d
+
+def fix_k():
+
+   return aw2d,ae2d,as2d,an2d,ap2d,su2d,sp2d

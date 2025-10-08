@@ -1,0 +1,134 @@
+import scipy.io as sio
+import sys
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+from IPython import display
+plt.rcParams.update({'font.size': 22})
+plt.rcParams.update({'figure.max_open_warning': 0})
+
+plt.interactive(True)
+plt.close('all')
+
+viscos=1/550
+
+
+# makes sure figures are updated when using ipython
+display.clear_output(wait=True)
+
+datax= np.loadtxt("x2d.dat")
+x=datax[0:-1]
+ni=int(datax[-1])
+datay= np.loadtxt("y2d.dat")
+y=datay[0:-1]
+nj=int(datay[-1])
+
+x2d=np.zeros((ni+1,nj+1))
+y2d=np.zeros((ni+1,nj+1))
+
+x2d=np.reshape(x,(ni+1,nj+1))
+y2d=np.reshape(y,(ni+1,nj+1))
+
+# compute cell centers
+xp2d=0.25*(x2d[0:-1,0:-1]+x2d[0:-1,1:]+x2d[1:,0:-1]+x2d[1:,1:])
+yp2d=0.25*(y2d[0:-1,0:-1]+y2d[0:-1,1:]+y2d[1:,0:-1]+y2d[1:,1:])
+
+y=yp2d[0,:]
+
+
+u2d=np.load('u2d_saved.npy')
+p2d=np.load('p2d_saved.npy')
+v2d=np.load('v2d_saved.npy')
+k2d=np.load('k2d_saved.npy')
+om2d=np.load('om2d_saved.npy')
+vis2d=np.load('vis2d_saved.npy')
+
+# average in x direction
+u=np.mean(u2d,axis=0)
+v=np.mean(v2d,axis=0)
+k=np.mean(k2d,axis=0)
+om=np.mean(om2d,axis=0)
+vis=np.mean(vis2d,axis=0)
+eps=0.09*k*om
+
+dudy=np.gradient(u,y)
+uv=-(vis-viscos)*dudy
+
+np.savetxt('y_u_k_eps_uv_550-RANS-code.txt', np.c_[y,u,k,eps,uv])
+
+
+ustar=(viscos*u[1]/y[1])**0.5
+yplus=y*ustar/viscos
+
+#      y/h             y+              U+             u'+             v'+             w'+           -Om_z+          om_x'+           om_y'+           om_z'+         uv'+             uw'+           vw'+             pr'+            ps'+          psto'+            p'
+# -----------------------------------------------------
+DNS_mean=np.genfromtxt("Re550.dat",comments="%")
+y_DNS=DNS_mean[:,0];
+yplus_DNS=DNS_mean[:,1];
+u_DNS=DNS_mean[:,2];
+u2_DNS=DNS_mean[:,3]**2;
+v2_DNS=DNS_mean[:,4]**2;
+w2_DNS=DNS_mean[:,5]**2;
+uv_DNS=DNS_mean[:,10];
+
+k_DNS=0.5*(u2_DNS+v2_DNS+w2_DNS)
+
+# find equi.distant DNS cells in log-scale
+xx=0.
+jDNS=[1]*40
+for i in range (0,40):
+   i1 = (np.abs(10.**xx-yplus_DNS)).argmin()
+   jDNS[i]=int(i1)
+   xx=xx+0.2
+
+
+
+
+########################################## U 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+i1 = 0
+plt.semilogx(yplus,u,'b-')
+plt.semilogx(yplus_DNS[jDNS],u_DNS[jDNS],'bo')
+plt.ylabel("$U^+$")
+plt.xlabel("$y^+$")
+plt.axis([1, 500, 0, 22])
+plt.savefig('u_log_500-channel.png',bbox_inches='tight')
+
+
+########################################## uv 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+i1 = 0
+# compute shear stress
+vist=vis-viscos
+dudy=np.gradient(u,y)
+uv=-vist*dudy
+plt.plot(yplus,uv,'b-')
+plt.plot(yplus_DNS[jDNS],uv_DNS[jDNS],'bo')
+plt.ylabel(r"$\overline{u'v'}$")
+plt.xlabel("$y^+$")
+plt.axis([1, 1100, -1, 1])
+plt.savefig('uv_500-channel.png',bbox_inches='tight')
+
+
+########################################## k 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+i1 = 0
+plt.plot(yplus,k,'b-')
+plt.ylabel(r"$k^+$")
+plt.xlabel("$y^+$")
+plt.axis([1, 1100, 0, 3])
+plt.savefig('k_500-channel.png',bbox_inches='tight')
+
+########################################## vis 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+i1 = 0
+plt.plot(yplus,vis/viscos,'b-')
+plt.ylabel(r"$\nu_t/\nu$")
+plt.xlabel("$y^+$")
+plt.axis([1, 1100, 0, 100])
+plt.savefig('vis_500-channel.png',bbox_inches='tight')
+

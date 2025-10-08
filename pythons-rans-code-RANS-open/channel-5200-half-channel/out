@@ -1,0 +1,178 @@
+////////////////// Start of input data ////////////////// 
+
+
+
+
+
+########### section 1 choice of differencing scheme ###########
+scheme:                         h
+scheme_turb:                    h
+
+
+########### section 2 turbulence models ###########
+cmu:                          0.09
+kom:                          True
+EARSM:                        False
+PINN:                         False
+c_omega_1:                    0.556
+c_omega_2:                    0.075
+prand_k:                      2.0
+prand_omega:                  2.0
+
+
+########### section 3 restart/save ###########
+restart:                      True
+save:                         True
+
+
+########### section 4 fluid properties ###########
+viscos:                       1.92e-04
+
+
+########### section 5 relaxation factors ###########
+urfvis:                       0.5
+
+
+########### section 6 number of iteration and convergence criterira ###########
+sormax:                       1e-08
+maxit:                        20000
+solver_pp:                    direct
+solver_vel:                   direct
+solver_turb:                  direct
+nsweep_vel:                   50
+nsweep_pp:                    50
+nsweep_kom:                   1
+convergence_limit_u:          1e-06
+convergence_limit_v:          1e-06
+convergence_limit_pp:         0.0005
+convergence_limit_k:          1e-06
+convergence_limit_om:         1e-06
+
+
+########### section 7 all variables are printed during the iteration at node ###########
+imon:                         0
+jmon:                         10
+
+
+########### section 8 time-averaging ###########
+
+
+########### section 9 residual scaling parameters ###########
+resnorm_p:                    20.0
+resnorm_vel:                  400.0
+
+
+########### Section 10 grid and boundary conditions ###########
+ni:                           1
+nj:                           70
+cyclic_x:                     False
+
+
+
+
+------boundary conditions for u
+     u_bc_west_type:               n
+     u_bc_east_type:               n
+     u_bc_south_type:              d
+     u_bc_north_type:              n
+     u_bc_south[0]:                0.0
+------boundary conditions for v
+     v_bc_west_type:               n
+     v_bc_east_type:               n
+     v_bc_south_type:              d
+     v_bc_north_type:              d
+     v_bc_south[0]:                0.0
+     v_bc_north[0]:                0.0
+------boundary conditions for k
+     k_bc_west_type:               n
+     k_bc_east_type:               n
+     k_bc_south_type:              d
+     k_bc_north_type:              n
+     k_bc_south[0]:                0.0
+------boundary conditions for omega
+     om_bc_west_type:              n
+     om_bc_east_type:              n
+     om_bc_south_type:             d
+     om_bc_north_type:             n
+     om_bc_south[0]:               98191697.5
+
+
+
+ ////////////////// End of input data //////////////////
+
+
+
+hostname:  lada-Alienware-x17-R1
+read_restart_data called
+vist_kom called
+hybrid scheme, prand= 1
+calcu called
+tau wall, south:  1.000,  tau wall, north:  0.086
+solve_2d called
+nmax 50
+solver in solve_2d: direct solver
+residual history in solve_2d: initial residual:  7.44e-12              final residual: 7.44e-12                    delta_phi: 3.58e-13
+time u: 7.72e-04
+calcv called
+solve_2d called
+nmax 50
+solver in solve_2d: direct solver
+residual history in solve_2d: initial residual:  4.23e-36              final residual: 4.23e-36                    delta_phi: 6.62e-37
+time v: 3.52e-04
+calcp called
+solve_2d called
+nmax 50
+solver in solve_2d: direct solver
+residual history in solve_2d: initial residual:  8.06e-37              final residual: 8.06e-37                    delta_phi: 9.44e-36
+correct_u_v_p called
+time pp: 6.06e-04
+vist_kom called
+hybrid scheme, prand= [[2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+  2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+  2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.]]
+calck_kom called
+solve_2d called
+nmax 1
+solver in solve_2d: direct solver
+residual history in solve_2d: initial residual:  1.22e-04              final residual: 1.22e-04                    delta_phi: 4.16e-07
+time k: 6.74e-04
+hybrid scheme, prand= 2.0
+calcom called
+solve_2d called
+nmax 1
+solver in solve_2d: direct solver
+residual history in solve_2d: initial residual:  1.34e-03              final residual: 1.34e-03                    delta_phi: 2.42e-05
+time omega: 3.96e-04
+
+--iter:0, max residual:1.86e-14, u:1.86e-14, v:1.06e-38, cont:4.03e-38, k:7.60e-10, om:3.35e-06
+
+
+monitor iteration:   0, u: 2.62e+00, v: 6.22e-39, p: 1.00e-20, k: 5.35e-02, om: 6.85e+04
+
+
+---iter:  0, umax: 2.58e+01,vismax: 6.04e+02, kmin: 5.84e-07, ommin: 7.20e+00
+
+time one iteration: 2.92e-03
+tau wall, south:  1.000,  tau wall, north:  0.086
+residual history in solve_2d: initial residual:  5.67e-12              final residual: 5.67e-12                    delta_phi: 2.72e-13
+time u: 4.22e-04
+residual history in solve_2d: initial residual:  5.32e-36              final residual: 5.32e-36                    delta_phi: 7.38e-37
+time v: 2.78e-04
+residual history in solve_2d: initial residual:  8.23e-37              final residual: 8.23e-37                    delta_phi: 6.27e-36
+time pp: 5.48e-04
+residual history in solve_2d: initial residual:  6.08e-05              final residual: 6.08e-05                    delta_phi: 2.08e-07
+time k: 3.94e-04
+residual history in solve_2d: initial residual:  6.94e-04              final residual: 6.94e-04                    delta_phi: 1.21e-05
+time omega: 3.59e-04
+
+--iter:1, max residual:1.42e-14, u:1.42e-14, v:1.33e-38, cont:4.12e-38, k:3.80e-10, om:1.74e-06
+
+
+monitor iteration:   1, u: 2.62e+00, v: 3.32e-39, p: 1.00e-20, k: 5.35e-02, om: 6.85e+04
+
+
+---iter:  1, umax: 2.58e+01,vismax: 6.04e+02, kmin: 3.77e-07, ommin: 7.20e+00
+
+time one iteration: 2.12e-03
+save_data called
+program reached normal stop

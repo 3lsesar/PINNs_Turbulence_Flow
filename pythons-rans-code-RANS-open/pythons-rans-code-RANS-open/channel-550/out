@@ -1,0 +1,182 @@
+////////////////// Start of input data ////////////////// 
+
+
+
+
+
+########### section 1 choice of differencing scheme ###########
+scheme:                         h
+scheme_turb:                    h
+
+
+########### section 2 turbulence models ###########
+cmu:                          0.09
+kom:                          True
+EARSM:                        False
+PINN:                         False
+c_omega_1:                    0.556
+c_omega_2:                    0.075
+prand_k:                      2.0
+prand_omega:                  2.0
+
+
+########### section 3 restart/save ###########
+restart:                      True
+save:                         True
+
+
+########### section 4 fluid properties ###########
+viscos:                       1.82e-03
+
+
+########### section 5 relaxation factors ###########
+urfvis:                       0.5
+
+
+########### section 6 number of iteration and convergence criterira ###########
+sormax:                       1e-07
+maxit:                        20000
+solver_pp:                    lgmres
+solver_vel:                   lgmres
+solver_turb:                  lgmres
+nsweep_vel:                   50
+nsweep_pp:                    50
+nsweep_kom:                   50
+convergence_limit_u:          -1e-06
+convergence_limit_v:          -1e-06
+convergence_limit_pp:         0.0005
+convergence_limit_k:          -1e-06
+convergence_limit_om:         -1e-06
+
+
+########### section 7 all variables are printed during the iteration at node ###########
+imon:                         0
+jmon:                         10
+
+
+########### section 8 time-averaging ###########
+
+
+########### section 9 residual scaling parameters ###########
+resnorm_p:                    40.0
+resnorm_vel:                  800.0
+
+
+########### Section 10 grid and boundary conditions ###########
+ni:                           1
+nj:                           96
+cyclic_x:                     False
+
+
+
+
+------boundary conditions for u
+     u_bc_west_type:               n
+     u_bc_east_type:               n
+     u_bc_south_type:              d
+     u_bc_north_type:              d
+     u_bc_south[0]:                0.0
+     u_bc_north[0]:                0.0
+------boundary conditions for v
+     v_bc_west_type:               n
+     v_bc_east_type:               n
+     v_bc_south_type:              d
+     v_bc_north_type:              d
+     v_bc_south[0]:                0.0
+     v_bc_north[0]:                0.0
+------boundary conditions for k
+     k_bc_west_type:               n
+     k_bc_east_type:               n
+     k_bc_south_type:              d
+     k_bc_north_type:              d
+     k_bc_south[0]:                0.0
+     k_bc_north[0]:                0.0
+------boundary conditions for omega
+     om_bc_west_type:              n
+     om_bc_east_type:              n
+     om_bc_south_type:             d
+     om_bc_north_type:             d
+     om_bc_south[0]:               1397699.1
+     om_bc_north[0]:               1397699.1
+
+
+
+ ////////////////// End of input data //////////////////
+
+
+
+hostname:  lada-Alienware-x17-R1
+read_restart_data called
+vist_kom called
+hybrid scheme, prand= 1
+calcu called
+tau wall, south:  0.999,  tau wall, north:  0.999
+solve_2d called
+nmax 50
+solver in solve_2d: lgmres
+residual history in solve_2d: initial residual:  7.98e-05              final residual: 7.05e-11                    delta_phi: 3.09e-06
+time u: 5.40e-03
+calcv called
+solve_2d called
+nmax 50
+solver in solve_2d: lgmres
+residual history in solve_2d: initial residual:  2.69e-23              final residual: 2.54e-29                    delta_phi: 1.06e-24
+time v: 9.19e-04
+calcp called
+solve_2d called
+nmax 50
+solver in solve_2d: lgmres
+residual history in solve_2d: initial residual:  6.34e-22              final residual: 6.34e-22                    delta_phi: 0.00e+00
+correct_u_v_p called
+time pp: 5.88e-04
+vist_kom called
+hybrid scheme, prand= [[2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+  2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+  2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+  2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.]]
+calck_kom called
+solve_2d called
+nmax 50
+solver in solve_2d: lgmres
+residual history in solve_2d: initial residual:  9.08e-06              final residual: 3.11e-12                    delta_phi: 8.24e-07
+time k: 1.11e-03
+hybrid scheme, prand= 2.0
+calcom called
+solve_2d called
+nmax 50
+solver in solve_2d: lgmres
+residual history in solve_2d: initial residual:  7.11e-04              final residual: 1.63e-10                    delta_phi: 1.44e-04
+time omega: 9.63e-04
+
+--iter:0, max residual:9.98e-08, u:9.98e-08, v:3.37e-26, cont:1.58e-23, k:1.42e-11, om:8.89e-07
+
+
+monitor iteration:   0, u: 1.11e+01, v: 2.19e-21, p: 1.00e-20, k: 2.36e+00, om: 4.20e+02
+
+
+---iter:  0, umax: 2.07e+01,vismax: 6.13e+01, kmin: 2.22e-04, ommin: 7.27e+00
+
+time one iteration: 9.10e-03
+tau wall, south:  0.999,  tau wall, north:  0.999
+residual history in solve_2d: initial residual:  7.98e-05              final residual: 7.82e-11                    delta_phi: 3.09e-06
+time u: 9.01e-04
+residual history in solve_2d: initial residual:  2.69e-23              final residual: 2.24e-29                    delta_phi: 1.06e-24
+time v: 7.63e-04
+residual history in solve_2d: initial residual:  6.33e-22              final residual: 6.33e-22                    delta_phi: 0.00e+00
+time pp: 5.57e-04
+residual history in solve_2d: initial residual:  8.95e-06              final residual: 3.28e-12                    delta_phi: 8.02e-07
+time k: 7.86e-04
+residual history in solve_2d: initial residual:  7.12e-04              final residual: 7.09e-10                    delta_phi: 1.44e-04
+time omega: 7.86e-04
+
+--iter:1, max residual:9.97e-08, u:9.97e-08, v:3.37e-26, cont:1.58e-23, k:1.40e-11, om:8.89e-07
+
+
+monitor iteration:   1, u: 1.11e+01, v: 2.19e-21, p: 1.00e-20, k: 2.36e+00, om: 4.20e+02
+
+
+---iter:  1, umax: 2.07e+01,vismax: 6.13e+01, kmin: 2.22e-04, ommin: 7.27e+00
+
+time one iteration: 3.91e-03
+save_data called
+program reached normal stop

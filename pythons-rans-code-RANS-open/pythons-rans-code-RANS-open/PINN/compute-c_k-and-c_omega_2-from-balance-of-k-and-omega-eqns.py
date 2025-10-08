@@ -1,0 +1,196 @@
+# in this script I compute c_k and C_omega_2 from balance of k and omega equations, respectively
+# tkaen from ~/noback/pycalc-les/pytorch-k-eq/pl_vist_ML-c_k-c_omega_2000_5200-plus-units.py
+
+
+# it is used in the paper 
+#L. Davidson<br>
+#"Using Physical Informed Neural Network (PINN) to Improve a k-omega Turbulence Model",
+#<i> ERCOFTAC Symposium on Engineering Turbulence Modelling and Measurements (ETMM-15)</i>, Dubrovnik on 22-24 September 2025.
+
+import numpy as np
+from numpy import linalg as LA
+import math as m
+import os
+import sys
+from matplotlib.image import imread
+import matplotlib.pyplot as plt
+from matplotlib import rcParams # for changing default values
+import scipy.io as sio
+from scipy.optimize import minimize
+import timeit
+import torch
+import random
+import torch.nn as nn
+import torch.optim as optim
+from scipy.integrate import odeint
+from torch.autograd import grad
+import torch.optim.lr_scheduler as lr_scheduler
+
+
+plt.close('all')
+plt.interactive(True)
+# set all fontsizes to 12
+rcParams["font.size"] = 16
+rcParams["axes.axisbelow"] = True # make sure grid is behind plots
+
+prand_om = 2
+c_omega_2=3./40.
+
+
+viscos_5200 = 1/5200
+# load k-omega grid 5200
+name = '../channel-5200-half-channel/'
+kom_data = np.loadtxt(str(name)+'y_u_k_om_uv_5200-RANS-half-channel.txt')
+y_kom_5200 = kom_data[:,0]
+u_kom_5200 = kom_data[:,1]
+k_kom_5200 = kom_data[:,2]
+om_kom_5200 = kom_data[:,3]
+vist= k_kom_5200/om_kom_5200
+vist_kom_5200 = vist
+y= y_kom_5200
+
+
+vist_ML_5200 = np.loadtxt('vist_pred-PINN-from-vist-diffusion-pinn-5200-plus-units-load-5-cells.txt')
+
+vist_ML_5200_org  = vist_ML_5200 
+
+# insert zeros
+j=5
+zeros_list = np.zeros(j,dtype=int).tolist()
+vist_ML_5200 = np.insert(vist_ML_5200[j-5:], zeros_list, j*[0])  # the length of c_omega_2 is nj-5
+# note that I interpolate at y NOT yplus, since prand_k, c_k, c_omega are functions of y/delta
+vist_ML_5200[0:j] = np.interp(y_kom_5200[0:j], [0,y_kom_5200[j]],[0,vist_ML_5200[j]])
+
+np.savetxt('vist_pred-PINN-from-vist-diffusion-pinn-5200-plus-units-load-5-cells-fixed.txt',vist_ML_5200)
+
+vist_ML_5200 = vist_ML_5200/5200
+
+
+
+prand_k_5200 = np.minimum(vist/vist_ML_5200,2)
+prand_k_5200_no_limit = vist/vist_ML_5200
+prand_k_5200[33:] = 2
+np.savetxt('prand_k_5200-plus-units-from-balance.txt',prand_k_5200)
+np.savetxt('prand_k_5200-plus-units-from-balance-no-limit.txt',prand_k_5200_no_limit)
+
+yplus_kom_5200 = y_kom_5200*5200
+
+# load DNS data
+# Re = 5200
+#  % % y/delta  y^+ U dU/dy W    P        
+DNS_mean=np.genfromtxt("LM_Channel_5200_mean_prof.dat",comments="%")
+y_DNS=DNS_mean[:,0];
+yplus_DNS=DNS_mean[:,1];
+u_DNS=DNS_mean[:,2];
+dudy_DNS=np.gradient(u_DNS,y_DNS)
+
+# Re = 5200
+DNS_stress=np.genfromtxt("LM_Channel_5200_vel_fluc_prof.dat",comments="%")
+y_DNS=DNS_stress[:,0];
+u2_DNS=DNS_stress[:,2];
+v2_DNS=DNS_stress[:,3];
+w2_DNS=DNS_stress[:,4];
+uv_DNS=DNS_stress[:,5];
+k_DNS=0.5*(u2_DNS+v2_DNS+w2_DNS)
+
+#y/delta y^+ Prod Turb_Transport Viscous_Transport Pressure_Strain Pressure_Transport Viscous_Dissipation  Balance
+DNS_k_terms=np.genfromtxt("LM_Channel_5200_RSTE_k_prof.dat",comments="%")
+
+diss_DNS=DNS_k_terms[:,7]/viscos_5200
+Pk_DNS=DNS_k_terms[:,2]/viscos_5200
+diff_DNS=DNS_k_terms[:,3]/viscos_5200
+
+k_DNS_5200 = np.interp(y_kom_5200, y_DNS, k_DNS)
+Pk_DNS_5200 = np.interp(y_kom_5200, y_DNS, Pk_DNS)
+diss_DNS_5200 = np.interp(y_kom_5200, y_DNS, diss_DNS)
+diff_DNS_5200 = np.interp(y_kom_5200, y_DNS, diff_DNS)
+
+## limit the ratio of k_DNS/k_kom. 
+k_ratio = np.minimum(k_DNS_5200/k_kom_5200,5)
+## new k_DNS
+k_DNS_5200 = k_ratio*k_kom_5200 # This avoids very large 0.09*k*omega = diss near the wall
+
+# set a new omega which satisfies vist_kom = k_om/om_kom with k=k_DNS
+om_kom_5200_DNS = k_DNS_5200/vist_kom_5200
+
+# balance k eq
+#        differential_equation_loss = diff_DNS  + (Pk_DNS - c_k_pred*0.09*k_DNS*om_kom
+c_k_pred_5200 = ( diff_DNS_5200  + Pk_DNS_5200)/(0.09*k_DNS_5200*om_kom_5200_DNS)
+
+c_k_pred_5200 = np.minimum(c_k_pred_5200,1)
+
+
+np.savetxt('c_k_pred_5200-plus-units-from-balance.txt',c_k_pred_5200)
+
+
+# balance om eq
+       #differential_equation_loss = diff_kom  + (prod_kom - c_omega_2_pred*destruction_om_kom)
+domdy_kom=np.gradient(om_kom_5200_DNS,y_kom_5200,edge_order=2)
+diff_kom_5200 =np.gradient((viscos_5200+vist_kom_5200/prand_om)*domdy_kom,y_kom_5200,edge_order=2)
+destruction_om_kom_5200   = om_kom_5200_DNS**2
+om_terms = np.loadtxt(str(name)+'terms_omega_eq.txt')
+prod_kom_5200  = om_terms[:,0]
+
+c_omega_2_pred_5200 = (diff_kom_5200   + prod_kom_5200)/destruction_om_kom_5200 
+
+c_omega_2_pred_5200 = np.minimum(c_omega_2_pred_5200,c_omega_2)
+
+np.savetxt('c_omega_2_pred_5200-plus-units-from-balance.txt',c_omega_2_pred_5200)
+
+
+
+################################# Plot ck
+fig, ax = plt.subplots(nrows=1, ncols=1) # Create a figure with one subplot
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(y_kom_5200,c_k_pred_5200,'r--',linewidth=2)
+plt.ylabel(r"$C_k$")
+plt.xlabel("$y$")
+plt.legend(loc="best",prop=dict(size=14))
+plt.savefig('c_k_ML-5200-plus-units.png',bbox_inches='tight')
+
+################################# Plot ck more zoom
+fig, ax = plt.subplots(nrows=1, ncols=1) # Create a figure with one subplot
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(y_kom_5200,c_k_pred_5200,'r--',linewidth=2, label=r'$Re_\tau = 5\, 200$')
+plt.ylabel(r"$C_k$")
+plt.xlabel("$y$")
+plt.xlim(0,0.05)
+plt.legend(loc="best",prop=dict(size=14))
+plt.savefig('c_k_ML_5200-plus-units-more-zoom.png',bbox_inches='tight')
+
+
+################################# Plot prand_k 
+fig, ax = plt.subplots(nrows=1, ncols=1) # Create a figure with one subplot
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(y_kom_5200,prand_k_5200,'r--',linewidth=2, label=r'$Re_\tau = 5\, 200$')
+plt.ylabel(r"$\sigma_{k, ML}$")
+plt.xlabel("$y$")
+plt.savefig('prand_k-5200-plus-units.png',bbox_inches='tight')
+
+################################# Plot prand_k zoom
+fig, ax = plt.subplots(nrows=1, ncols=1) # Create a figure with one subplot
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(y_kom_5200,prand_k_5200,'r--',linewidth=2, label=r'$Re_\tau = 5\, 200$')
+plt.ylabel(r"$\sigma_{k, ML}$")
+plt.xlabel("$y$")
+plt.xlim(0,0.05)
+plt.savefig('prand_k-5200-plus-units-zoom.png',bbox_inches='tight')
+
+################################# Plot c_omega_2 
+fig, ax = plt.subplots(nrows=1, ncols=1) # Create a figure with one subplot
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(y_kom_5200,c_omega_2_pred_5200,'r--',linewidth=2, label=r'$Re_\tau = 5\, 200$')
+plt.ylabel(r"$C_{\omega 2, ML}$")
+plt.xlabel("$y$")
+plt.savefig('c_omega_2-5200-plus-units.png',bbox_inches='tight')
+
+
+################################# Plot c_omega_2, zoom
+fig, ax = plt.subplots(nrows=1, ncols=1) # Create a figure with one subplot
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(y_kom_5200,c_omega_2_pred_5200,'r--',linewidth=2, label=r'$Re_\tau = 5\, 200$')
+plt.xlabel("$y$")
+plt.xlim(0,0.05)
+plt.ylabel(r"$C_{\omega 2, ML}$")
+plt.savefig('c_omega_2-5200-plus-units-zoom.png',bbox_inches='tight')
+

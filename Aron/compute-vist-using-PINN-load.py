@@ -177,24 +177,24 @@ def PDE(y, vist_pred):
 def loss_and_PDE(y_tensor):
     optimizer.zero_grad() # Clear gradients from the previous iteration
     outputs = model(y_tensor)  #get k 
-    loss_de,loss_bc, imbalance,mse_loss = PDE(y_tensor, outputs) # Compute the loss
-    loss = loss_de+1000.*loss_bc+mse_loss
+    loss_de,loss_bc, imbalance, mse_loss = PDE(y_tensor, outputs) # Compute the loss
+    loss = loss_de+100.*loss_bc+10*mse_loss
 # Calculate the L1 regularization term
     l1_regularization = torch.tensor(0.)
     for param in model.parameters():
         l1_regularization += torch.norm(param, p=1)
 
     # Add the L1 regularization term to the loss
-    lambda_l1=0.
+    lambda_l1=10
     loss += lambda_l1 * l1_regularization # Compute the loss
     
     loss += lambda_l1 * mse_loss
 
     loss.backward() # Compute gradients using backpropagation
-    return loss,loss_de,loss_bc, imbalance
+    return loss,loss_de,loss_bc, imbalance, mse_loss
 
 #%% training
-max_no_epoch=500000
+max_no_epoch=50000
 #max_no_epoch=2
 
 learning_rate = 0.2  #  4221.8496 milestones=[500000]
@@ -203,12 +203,15 @@ optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 #saving training result
 differential_equation_loss_history = np.zeros(max_no_epoch)
 boundary_condition_loss_history = np.zeros(max_no_epoch)
+mse_loss_history = np.zeros(max_no_epoch)
+
 loss_min = 1e30
 # Training loop
 for epoch in range(max_no_epoch):
-    loss,loss_de,loss_bc, imbalance = loss_and_PDE(x)
+    loss,loss_de,loss_bc, imbalance, mse_loss = loss_and_PDE(x)
     differential_equation_loss_history[epoch] += loss_de
     boundary_condition_loss_history[epoch] += loss_bc
+    mse_loss_history[epoch] += mse_loss
 
 # Define checkpoint
     if epoch == 0:
@@ -221,7 +224,7 @@ for epoch in range(max_no_epoch):
        optimizer = optim.Adam(model.parameters(), lr=learning_rate) # Initialize optimizer; Ensure it's the same optimizer type
        optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
 # change learning rata at the milestoned below
-       scheduler = optim.lr_scheduler.MultiStepLR(optimizer,  milestones=[6400*0.4,16700*0.4,19200*0.4,37500*0.4,38000*0.4,80000*0.4,94000*0.4], gamma=0.5)
+       scheduler = optim.lr_scheduler.MultiStepLR(optimizer,  milestones=[6400*max_no_epoch/1e5,16700*max_no_epoch/1e5,19200*max_no_epoch/1e5,37500*max_no_epoch/1e5,38000*max_no_epoch/1e5,80000*max_no_epoch/1e5,94000*max_no_epoch/1e5], gamma=0.5)
 
 # Retrieve the training epoch
        epoch = checkpoint['epoch']
@@ -249,6 +252,7 @@ for epoch in range(max_no_epoch):
 # Plot loss_function
 fig, ax = plt.subplots(nrows=1, ncols=1) # Create a figure with one subplot
 ax.semilogy(np.arange(len(boundary_condition_loss_history)), boundary_condition_loss_history,color='red', label='bc error')
+ax.semilogy(np.arange(len(boundary_condition_loss_history)), differential_equation_loss_history,color='blue',label="diff eq error")
 ax.semilogy(np.arange(len(boundary_condition_loss_history)), differential_equation_loss_history,color='blue',label="diff eq error")
 plt.xlabel(r'epochs')
 ax.set_title(r'Errors')
@@ -336,5 +340,27 @@ plt.xlabel('$y^+$')
 ax.grid(visible=True)
 plt.xlim(0,100)
 #plt.savefig('k-balance-PINN-5200-plus-units-load-5-cells-zoom-required-grad-false.png',bbox_inches='tight')
-plt.show(block=True) 
+plt.show() 
+#%%
+sigma_k=vist_kom/vist_pred_np
+
+sigma_k[5:7]=
+# sigma_k=(vist_pred*viscos*dkdy_DNS)/((Pk_DNS-diss_DNS)-viscos*d2kdy2_DNS)
+# sigma_k_np=sigma_k.detach().numpy()[:,0]
+
+fig, ax = plt.subplots(nrows=1, ncols=1) # Create a figure with one subplot
+plt.subplots_adjust(left=0.20,bottom=0.20)
+ax.plot(yplus_DNS_np, sigma_k,color='r',linestyle=':',linewidth=5, label='DNS')
+ax.legend(loc='best') 
+plt.xlabel('$y^+$')
+plt.ylabel(r'$\nu_t/\nu$')   
+ax.grid(visible=True)
+
+plt.show(block=True)
+
+np.savetxt('prandtl-y.txt',np.c_[sigma_k,y_DNS])
+
+# #####################################
+# another case = x
+# vist_pred=model(x)
 

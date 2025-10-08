@@ -1,0 +1,38 @@
+Download the report on pyCALC-RANS at
+
+https://www.tfd.chalmers.se/~lada/postscript_files/py-calc-rans.pdf
+
+
+For instructions how to run the code, see Section 7.3.
+
+
+***********
+
+The NN model for creating the NN model for EARSM is found in the folder NN/
+
+The NN model is incorporated in pyCALC-RANS in the folder channel-10000-earsm-NN/
+
+The work is presented in the paper 
+
+L. Davidson, "Using Neural Network for Improving an Explicit Algebraic Stress Model in 2D Flow",
+J. Tyacke and N. R. Vadlamani (eds.), Proceedings of the Cambridge Unsteady Flow
+Symposium 2024, pp. 37--53, 2025, 
+
+https://doi.org/10.1007/978-3-031-69035-8_2
+
+
+***********
+
+The PINN model for computing prand_k is located in folder  PINN/
+
+It is  used in the CFD code in folder channel-2000-half-channel-PINN/
+
+It is used in the paper
+
+ L. Davidson, 
+"Using Physical Informed Neural Network (PINN) to Improve a k-omega Turbulence Model",
+ERCOFTAC Symposium on Engineering Turbulence Modelling and Measurements (ETMM-15), Dubrovnik on 22-24 September 2025.
+https://www.tfd.chalmers.se/~lada/postscript_files/Using-Physical-Informed-Neural-Network-PINN-to-Improve-a-k-omega-Turbulence-Model.pdf
+
+https://www.tfd.chalmers.se/~lada/PINN-improve-a-k-omega-turbulence-model.html
+

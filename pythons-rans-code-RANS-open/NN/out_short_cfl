@@ -1,0 +1,8200 @@
+Epoch 1
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.32e-02 
+
+Epoch 2
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.66e-03 
+
+Epoch 3
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.46e-03 
+
+Epoch 4
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.49e-03 
+
+Epoch 5
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.46e-03 
+
+Epoch 6
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.26e-03 
+
+Epoch 7
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.01e-03 
+
+Epoch 8
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.76e-03 
+
+Epoch 9
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.50e-03 
+
+Epoch 10
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.27e-03 
+
+Epoch 11
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.06e-03 
+
+Epoch 12
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 1.88e-03 
+
+Epoch 13
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 1.74e-03 
+
+Epoch 14
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 1.62e-03 
+
+Epoch 15
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 1.51e-03 
+
+Epoch 16
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 1.42e-03 
+
+Epoch 17
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 1.35e-03 
+
+Epoch 18
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 1.29e-03 
+
+Epoch 19
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 1.23e-03 
+
+Epoch 20
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 1.19e-03 
+
+Epoch 21
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 1.14e-03 
+
+Epoch 22
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 1.11e-03 
+
+Epoch 23
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 1.08e-03 
+
+Epoch 24
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 1.05e-03 
+
+Epoch 25
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 1.03e-03 
+
+Epoch 26
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 1.01e-03 
+
+Epoch 27
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 9.92e-04 
+
+Epoch 28
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 9.73e-04 
+
+Epoch 29
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 9.56e-04 
+
+Epoch 30
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 9.37e-04 
+
+Epoch 31
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 9.18e-04 
+
+Epoch 32
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 9.02e-04 
+
+Epoch 33
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.88e-04 
+
+Epoch 34
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.76e-04 
+
+Epoch 35
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.64e-04 
+
+Epoch 36
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.52e-04 
+
+Epoch 37
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.42e-04 
+
+Epoch 38
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.31e-04 
+
+Epoch 39
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.21e-04 
+
+Epoch 40
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.11e-04 
+
+Epoch 41
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.04e-04 
+
+Epoch 42
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.97e-04 
+
+Epoch 43
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.90e-04 
+
+Epoch 44
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.83e-04 
+
+Epoch 45
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.78e-04 
+
+Epoch 46
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.71e-04 
+
+Epoch 47
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.65e-04 
+
+Epoch 48
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.59e-04 
+
+Epoch 49
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.53e-04 
+
+Epoch 50
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.48e-04 
+
+Epoch 51
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.43e-04 
+
+Epoch 52
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.39e-04 
+
+Epoch 53
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.34e-04 
+
+Epoch 54
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.29e-04 
+
+Epoch 55
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.25e-04 
+
+Epoch 56
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.20e-04 
+
+Epoch 57
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.16e-04 
+
+Epoch 58
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.12e-04 
+
+Epoch 59
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.08e-04 
+
+Epoch 60
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.04e-04 
+
+Epoch 61
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.00e-04 
+
+Epoch 62
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.96e-04 
+
+Epoch 63
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.92e-04 
+
+Epoch 64
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.89e-04 
+
+Epoch 65
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.86e-04 
+
+Epoch 66
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.83e-04 
+
+Epoch 67
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.79e-04 
+
+Epoch 68
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.76e-04 
+
+Epoch 69
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.72e-04 
+
+Epoch 70
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.69e-04 
+
+Epoch 71
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.66e-04 
+
+Epoch 72
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.63e-04 
+
+Epoch 73
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.59e-04 
+
+Epoch 74
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.56e-04 
+
+Epoch 75
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.52e-04 
+
+Epoch 76
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.49e-04 
+
+Epoch 77
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.45e-04 
+
+Epoch 78
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.42e-04 
+
+Epoch 79
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.39e-04 
+
+Epoch 80
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.36e-04 
+
+Epoch 81
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.33e-04 
+
+Epoch 82
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.30e-04 
+
+Epoch 83
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.26e-04 
+
+Epoch 84
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.23e-04 
+
+Epoch 85
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.20e-04 
+
+Epoch 86
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.17e-04 
+
+Epoch 87
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.15e-04 
+
+Epoch 88
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.12e-04 
+
+Epoch 89
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.09e-04 
+
+Epoch 90
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.06e-04 
+
+Epoch 91
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.03e-04 
+
+Epoch 92
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 6.00e-04 
+
+Epoch 93
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.98e-04 
+
+Epoch 94
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.95e-04 
+
+Epoch 95
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.92e-04 
+
+Epoch 96
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.90e-04 
+
+Epoch 97
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.87e-04 
+
+Epoch 98
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.84e-04 
+
+Epoch 99
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.82e-04 
+
+Epoch 100
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.79e-04 
+
+Epoch 101
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.76e-04 
+
+Epoch 102
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.74e-04 
+
+Epoch 103
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.71e-04 
+
+Epoch 104
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.68e-04 
+
+Epoch 105
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.66e-04 
+
+Epoch 106
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.63e-04 
+
+Epoch 107
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.61e-04 
+
+Epoch 108
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.58e-04 
+
+Epoch 109
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.56e-04 
+
+Epoch 110
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.53e-04 
+
+Epoch 111
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.50e-04 
+
+Epoch 112
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.48e-04 
+
+Epoch 113
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.45e-04 
+
+Epoch 114
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.43e-04 
+
+Epoch 115
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.40e-04 
+
+Epoch 116
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.37e-04 
+
+Epoch 117
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.35e-04 
+
+Epoch 118
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.33e-04 
+
+Epoch 119
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.30e-04 
+
+Epoch 120
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.28e-04 
+
+Epoch 121
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.26e-04 
+
+Epoch 122
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.23e-04 
+
+Epoch 123
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.21e-04 
+
+Epoch 124
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.20e-04 
+
+Epoch 125
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.18e-04 
+
+Epoch 126
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.17e-04 
+
+Epoch 127
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.15e-04 
+
+Epoch 128
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.13e-04 
+
+Epoch 129
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.11e-04 
+
+Epoch 130
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.10e-04 
+
+Epoch 131
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.08e-04 
+
+Epoch 132
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.06e-04 
+
+Epoch 133
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.05e-04 
+
+Epoch 134
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.03e-04 
+
+Epoch 135
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.01e-04 
+
+Epoch 136
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 5.00e-04 
+
+Epoch 137
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.98e-04 
+
+Epoch 138
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.96e-04 
+
+Epoch 139
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.95e-04 
+
+Epoch 140
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.93e-04 
+
+Epoch 141
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.91e-04 
+
+Epoch 142
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.90e-04 
+
+Epoch 143
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.88e-04 
+
+Epoch 144
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.86e-04 
+
+Epoch 145
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.84e-04 
+
+Epoch 146
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.83e-04 
+
+Epoch 147
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.81e-04 
+
+Epoch 148
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.80e-04 
+
+Epoch 149
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.78e-04 
+
+Epoch 150
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.76e-04 
+
+Epoch 151
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.75e-04 
+
+Epoch 152
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.73e-04 
+
+Epoch 153
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.72e-04 
+
+Epoch 154
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.70e-04 
+
+Epoch 155
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.68e-04 
+
+Epoch 156
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.67e-04 
+
+Epoch 157
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.65e-04 
+
+Epoch 158
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.64e-04 
+
+Epoch 159
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.62e-04 
+
+Epoch 160
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.60e-04 
+
+Epoch 161
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.59e-04 
+
+Epoch 162
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.57e-04 
+
+Epoch 163
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.56e-04 
+
+Epoch 164
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.54e-04 
+
+Epoch 165
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.53e-04 
+
+Epoch 166
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.51e-04 
+
+Epoch 167
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.50e-04 
+
+Epoch 168
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.48e-04 
+
+Epoch 169
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.46e-04 
+
+Epoch 170
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.45e-04 
+
+Epoch 171
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.43e-04 
+
+Epoch 172
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.42e-04 
+
+Epoch 173
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.40e-04 
+
+Epoch 174
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.39e-04 
+
+Epoch 175
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.37e-04 
+
+Epoch 176
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.36e-04 
+
+Epoch 177
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.34e-04 
+
+Epoch 178
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.33e-04 
+
+Epoch 179
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.31e-04 
+
+Epoch 180
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.30e-04 
+
+Epoch 181
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.29e-04 
+
+Epoch 182
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.27e-04 
+
+Epoch 183
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.26e-04 
+
+Epoch 184
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.24e-04 
+
+Epoch 185
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.23e-04 
+
+Epoch 186
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.22e-04 
+
+Epoch 187
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.20e-04 
+
+Epoch 188
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.19e-04 
+
+Epoch 189
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.17e-04 
+
+Epoch 190
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.16e-04 
+
+Epoch 191
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.15e-04 
+
+Epoch 192
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.14e-04 
+
+Epoch 193
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.12e-04 
+
+Epoch 194
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.11e-04 
+
+Epoch 195
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.10e-04 
+
+Epoch 196
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.08e-04 
+
+Epoch 197
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.07e-04 
+
+Epoch 198
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.06e-04 
+
+Epoch 199
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.04e-04 
+
+Epoch 200
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.03e-04 
+
+Epoch 201
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.01e-04 
+
+Epoch 202
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 4.00e-04 
+
+Epoch 203
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.99e-04 
+
+Epoch 204
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.98e-04 
+
+Epoch 205
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.96e-04 
+
+Epoch 206
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.95e-04 
+
+Epoch 207
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.94e-04 
+
+Epoch 208
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.92e-04 
+
+Epoch 209
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.91e-04 
+
+Epoch 210
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.90e-04 
+
+Epoch 211
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.89e-04 
+
+Epoch 212
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.87e-04 
+
+Epoch 213
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.86e-04 
+
+Epoch 214
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.85e-04 
+
+Epoch 215
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.84e-04 
+
+Epoch 216
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.83e-04 
+
+Epoch 217
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.81e-04 
+
+Epoch 218
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.80e-04 
+
+Epoch 219
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.79e-04 
+
+Epoch 220
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.78e-04 
+
+Epoch 221
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.76e-04 
+
+Epoch 222
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.75e-04 
+
+Epoch 223
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.74e-04 
+
+Epoch 224
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.73e-04 
+
+Epoch 225
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.72e-04 
+
+Epoch 226
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.70e-04 
+
+Epoch 227
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.69e-04 
+
+Epoch 228
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.68e-04 
+
+Epoch 229
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.67e-04 
+
+Epoch 230
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.66e-04 
+
+Epoch 231
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.65e-04 
+
+Epoch 232
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.63e-04 
+
+Epoch 233
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.62e-04 
+
+Epoch 234
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.61e-04 
+
+Epoch 235
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.60e-04 
+
+Epoch 236
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.59e-04 
+
+Epoch 237
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.58e-04 
+
+Epoch 238
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.57e-04 
+
+Epoch 239
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.56e-04 
+
+Epoch 240
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.55e-04 
+
+Epoch 241
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.54e-04 
+
+Epoch 242
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.53e-04 
+
+Epoch 243
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.51e-04 
+
+Epoch 244
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.50e-04 
+
+Epoch 245
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.49e-04 
+
+Epoch 246
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.48e-04 
+
+Epoch 247
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.47e-04 
+
+Epoch 248
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.46e-04 
+
+Epoch 249
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.45e-04 
+
+Epoch 250
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.44e-04 
+
+Epoch 251
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.43e-04 
+
+Epoch 252
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.42e-04 
+
+Epoch 253
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.41e-04 
+
+Epoch 254
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.40e-04 
+
+Epoch 255
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.39e-04 
+
+Epoch 256
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.38e-04 
+
+Epoch 257
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.37e-04 
+
+Epoch 258
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.36e-04 
+
+Epoch 259
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.35e-04 
+
+Epoch 260
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.34e-04 
+
+Epoch 261
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.33e-04 
+
+Epoch 262
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.32e-04 
+
+Epoch 263
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.31e-04 
+
+Epoch 264
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.30e-04 
+
+Epoch 265
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.29e-04 
+
+Epoch 266
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.28e-04 
+
+Epoch 267
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.27e-04 
+
+Epoch 268
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.26e-04 
+
+Epoch 269
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.25e-04 
+
+Epoch 270
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.24e-04 
+
+Epoch 271
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.23e-04 
+
+Epoch 272
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.22e-04 
+
+Epoch 273
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.21e-04 
+
+Epoch 274
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.20e-04 
+
+Epoch 275
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.20e-04 
+
+Epoch 276
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.18e-04 
+
+Epoch 277
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.18e-04 
+
+Epoch 278
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.17e-04 
+
+Epoch 279
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.16e-04 
+
+Epoch 280
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.15e-04 
+
+Epoch 281
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.14e-04 
+
+Epoch 282
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.13e-04 
+
+Epoch 283
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.12e-04 
+
+Epoch 284
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.11e-04 
+
+Epoch 285
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.10e-04 
+
+Epoch 286
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.09e-04 
+
+Epoch 287
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.09e-04 
+
+Epoch 288
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.08e-04 
+
+Epoch 289
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.07e-04 
+
+Epoch 290
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.06e-04 
+
+Epoch 291
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.05e-04 
+
+Epoch 292
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.04e-04 
+
+Epoch 293
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.03e-04 
+
+Epoch 294
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.02e-04 
+
+Epoch 295
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.02e-04 
+
+Epoch 296
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.01e-04 
+
+Epoch 297
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 3.00e-04 
+
+Epoch 298
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.99e-04 
+
+Epoch 299
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.98e-04 
+
+Epoch 300
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.97e-04 
+
+Epoch 301
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.97e-04 
+
+Epoch 302
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.96e-04 
+
+Epoch 303
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.95e-04 
+
+Epoch 304
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.94e-04 
+
+Epoch 305
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.93e-04 
+
+Epoch 306
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.92e-04 
+
+Epoch 307
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.91e-04 
+
+Epoch 308
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.91e-04 
+
+Epoch 309
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.90e-04 
+
+Epoch 310
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.89e-04 
+
+Epoch 311
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.88e-04 
+
+Epoch 312
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.87e-04 
+
+Epoch 313
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.87e-04 
+
+Epoch 314
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.86e-04 
+
+Epoch 315
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.85e-04 
+
+Epoch 316
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.84e-04 
+
+Epoch 317
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.83e-04 
+
+Epoch 318
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.83e-04 
+
+Epoch 319
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.82e-04 
+
+Epoch 320
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.81e-04 
+
+Epoch 321
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.80e-04 
+
+Epoch 322
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.80e-04 
+
+Epoch 323
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.79e-04 
+
+Epoch 324
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.78e-04 
+
+Epoch 325
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.77e-04 
+
+Epoch 326
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.77e-04 
+
+Epoch 327
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.76e-04 
+
+Epoch 328
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.75e-04 
+
+Epoch 329
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.75e-04 
+
+Epoch 330
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.74e-04 
+
+Epoch 331
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.73e-04 
+
+Epoch 332
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.72e-04 
+
+Epoch 333
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.72e-04 
+
+Epoch 334
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.71e-04 
+
+Epoch 335
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.70e-04 
+
+Epoch 336
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.70e-04 
+
+Epoch 337
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.69e-04 
+
+Epoch 338
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.68e-04 
+
+Epoch 339
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.68e-04 
+
+Epoch 340
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.67e-04 
+
+Epoch 341
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.66e-04 
+
+Epoch 342
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.65e-04 
+
+Epoch 343
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.65e-04 
+
+Epoch 344
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.64e-04 
+
+Epoch 345
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.64e-04 
+
+Epoch 346
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.63e-04 
+
+Epoch 347
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.62e-04 
+
+Epoch 348
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.62e-04 
+
+Epoch 349
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.61e-04 
+
+Epoch 350
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.61e-04 
+
+Epoch 351
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.60e-04 
+
+Epoch 352
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.59e-04 
+
+Epoch 353
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.59e-04 
+
+Epoch 354
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.58e-04 
+
+Epoch 355
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.57e-04 
+
+Epoch 356
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.57e-04 
+
+Epoch 357
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.56e-04 
+
+Epoch 358
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.55e-04 
+
+Epoch 359
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.55e-04 
+
+Epoch 360
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.55e-04 
+
+Epoch 361
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.54e-04 
+
+Epoch 362
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.53e-04 
+
+Epoch 363
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.53e-04 
+
+Epoch 364
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.52e-04 
+
+Epoch 365
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.52e-04 
+
+Epoch 366
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.51e-04 
+
+Epoch 367
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.51e-04 
+
+Epoch 368
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.50e-04 
+
+Epoch 369
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.49e-04 
+
+Epoch 370
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.49e-04 
+
+Epoch 371
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.48e-04 
+
+Epoch 372
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.48e-04 
+
+Epoch 373
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.47e-04 
+
+Epoch 374
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.46e-04 
+
+Epoch 375
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.46e-04 
+
+Epoch 376
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.46e-04 
+
+Epoch 377
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.45e-04 
+
+Epoch 378
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.44e-04 
+
+Epoch 379
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.44e-04 
+
+Epoch 380
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.44e-04 
+
+Epoch 381
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.43e-04 
+
+Epoch 382
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.42e-04 
+
+Epoch 383
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.42e-04 
+
+Epoch 384
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.41e-04 
+
+Epoch 385
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.41e-04 
+
+Epoch 386
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.40e-04 
+
+Epoch 387
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.40e-04 
+
+Epoch 388
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.39e-04 
+
+Epoch 389
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.39e-04 
+
+Epoch 390
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.38e-04 
+
+Epoch 391
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.38e-04 
+
+Epoch 392
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.37e-04 
+
+Epoch 393
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.36e-04 
+
+Epoch 394
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.36e-04 
+
+Epoch 395
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.35e-04 
+
+Epoch 396
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.35e-04 
+
+Epoch 397
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.34e-04 
+
+Epoch 398
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.34e-04 
+
+Epoch 399
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.33e-04 
+
+Epoch 400
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.33e-04 
+
+Epoch 401
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.32e-04 
+
+Epoch 402
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.32e-04 
+
+Epoch 403
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.31e-04 
+
+Epoch 404
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.31e-04 
+
+Epoch 405
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.30e-04 
+
+Epoch 406
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.30e-04 
+
+Epoch 407
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.29e-04 
+
+Epoch 408
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.28e-04 
+
+Epoch 409
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.28e-04 
+
+Epoch 410
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.28e-04 
+
+Epoch 411
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.27e-04 
+
+Epoch 412
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.26e-04 
+
+Epoch 413
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.26e-04 
+
+Epoch 414
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.26e-04 
+
+Epoch 415
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.25e-04 
+
+Epoch 416
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.25e-04 
+
+Epoch 417
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.24e-04 
+
+Epoch 418
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.24e-04 
+
+Epoch 419
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.24e-04 
+
+Epoch 420
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.23e-04 
+
+Epoch 421
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.23e-04 
+
+Epoch 422
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.22e-04 
+
+Epoch 423
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.22e-04 
+
+Epoch 424
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.22e-04 
+
+Epoch 425
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.21e-04 
+
+Epoch 426
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.20e-04 
+
+Epoch 427
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.20e-04 
+
+Epoch 428
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.20e-04 
+
+Epoch 429
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.19e-04 
+
+Epoch 430
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.19e-04 
+
+Epoch 431
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.19e-04 
+
+Epoch 432
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.18e-04 
+
+Epoch 433
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.18e-04 
+
+Epoch 434
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.18e-04 
+
+Epoch 435
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.17e-04 
+
+Epoch 436
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.17e-04 
+
+Epoch 437
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.16e-04 
+
+Epoch 438
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.16e-04 
+
+Epoch 439
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.16e-04 
+
+Epoch 440
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.15e-04 
+
+Epoch 441
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.15e-04 
+
+Epoch 442
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.15e-04 
+
+Epoch 443
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.14e-04 
+
+Epoch 444
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.14e-04 
+
+Epoch 445
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.14e-04 
+
+Epoch 446
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.14e-04 
+
+Epoch 447
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.14e-04 
+
+Epoch 448
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.13e-04 
+
+Epoch 449
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.13e-04 
+
+Epoch 450
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.13e-04 
+
+Epoch 451
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.12e-04 
+
+Epoch 452
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.12e-04 
+
+Epoch 453
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.11e-04 
+
+Epoch 454
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.11e-04 
+
+Epoch 455
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.11e-04 
+
+Epoch 456
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.10e-04 
+
+Epoch 457
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.10e-04 
+
+Epoch 458
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.10e-04 
+
+Epoch 459
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.10e-04 
+
+Epoch 460
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.09e-04 
+
+Epoch 461
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.09e-04 
+
+Epoch 462
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.09e-04 
+
+Epoch 463
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.09e-04 
+
+Epoch 464
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.09e-04 
+
+Epoch 465
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.08e-04 
+
+Epoch 466
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.08e-04 
+
+Epoch 467
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.08e-04 
+
+Epoch 468
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.08e-04 
+
+Epoch 469
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.08e-04 
+
+Epoch 470
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.08e-04 
+
+Epoch 471
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.07e-04 
+
+Epoch 472
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.07e-04 
+
+Epoch 473
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.07e-04 
+
+Epoch 474
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.06e-04 
+
+Epoch 475
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.06e-04 
+
+Epoch 476
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.06e-04 
+
+Epoch 477
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.06e-04 
+
+Epoch 478
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.06e-04 
+
+Epoch 479
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.06e-04 
+
+Epoch 480
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.06e-04 
+
+Epoch 481
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.05e-04 
+
+Epoch 482
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.05e-04 
+
+Epoch 483
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.05e-04 
+
+Epoch 484
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.05e-04 
+
+Epoch 485
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 486
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 487
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 488
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 489
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 490
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 491
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 492
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 493
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 494
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 495
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 496
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 497
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 498
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 499
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 500
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 501
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 502
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 503
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 504
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 505
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 506
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 507
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 508
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 509
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 510
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 511
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 512
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 513
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 514
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 515
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 516
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 517
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 518
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 519
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 520
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 521
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 522
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 523
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 524
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 525
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 526
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 527
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 528
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 529
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 530
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 531
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 532
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 533
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 534
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 535
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 536
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 537
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 538
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 539
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 540
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 541
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 542
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 543
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 544
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 545
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.02e-04 
+
+Epoch 546
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 547
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 548
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 549
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 550
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 551
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 552
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 553
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 554
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 555
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 556
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 557
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.03e-04 
+
+Epoch 558
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 559
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 560
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 561
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 562
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 563
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 564
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 565
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 566
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 567
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 568
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 569
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.05e-04 
+
+Epoch 570
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.04e-04 
+
+Epoch 571
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.05e-04 
+
+Epoch 572
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.05e-04 
+
+Epoch 573
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.05e-04 
+
+Epoch 574
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.05e-04 
+
+Epoch 575
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.05e-04 
+
+Epoch 576
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.06e-04 
+
+Epoch 577
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.06e-04 
+
+Epoch 578
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.05e-04 
+
+Epoch 579
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.06e-04 
+
+Epoch 580
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.06e-04 
+
+Epoch 581
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.06e-04 
+
+Epoch 582
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.06e-04 
+
+Epoch 583
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.07e-04 
+
+Epoch 584
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.07e-04 
+
+Epoch 585
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.07e-04 
+
+Epoch 586
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.07e-04 
+
+Epoch 587
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.07e-04 
+
+Epoch 588
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.07e-04 
+
+Epoch 589
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.08e-04 
+
+Epoch 590
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.07e-04 
+
+Epoch 591
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.08e-04 
+
+Epoch 592
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.08e-04 
+
+Epoch 593
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.08e-04 
+
+Epoch 594
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.08e-04 
+
+Epoch 595
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.09e-04 
+
+Epoch 596
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.09e-04 
+
+Epoch 597
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.09e-04 
+
+Epoch 598
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.09e-04 
+
+Epoch 599
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.09e-04 
+
+Epoch 600
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.10e-04 
+
+Epoch 601
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.09e-04 
+
+Epoch 602
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.10e-04 
+
+Epoch 603
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.10e-04 
+
+Epoch 604
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.10e-04 
+
+Epoch 605
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.10e-04 
+
+Epoch 606
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.10e-04 
+
+Epoch 607
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.11e-04 
+
+Epoch 608
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.11e-04 
+
+Epoch 609
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.11e-04 
+
+Epoch 610
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.11e-04 
+
+Epoch 611
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.11e-04 
+
+Epoch 612
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.12e-04 
+
+Epoch 613
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.12e-04 
+
+Epoch 614
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.12e-04 
+
+Epoch 615
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.12e-04 
+
+Epoch 616
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.12e-04 
+
+Epoch 617
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.13e-04 
+
+Epoch 618
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.13e-04 
+
+Epoch 619
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.13e-04 
+
+Epoch 620
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.13e-04 
+
+Epoch 621
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.13e-04 
+
+Epoch 622
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.14e-04 
+
+Epoch 623
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.14e-04 
+
+Epoch 624
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.13e-04 
+
+Epoch 625
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.15e-04 
+
+Epoch 626
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.14e-04 
+
+Epoch 627
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.15e-04 
+
+Epoch 628
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.14e-04 
+
+Epoch 629
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.15e-04 
+
+Epoch 630
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.15e-04 
+
+Epoch 631
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.16e-04 
+
+Epoch 632
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.15e-04 
+
+Epoch 633
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.16e-04 
+
+Epoch 634
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.17e-04 
+
+Epoch 635
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.16e-04 
+
+Epoch 636
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.16e-04 
+
+Epoch 637
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.17e-04 
+
+Epoch 638
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.17e-04 
+
+Epoch 639
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.17e-04 
+
+Epoch 640
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.17e-04 
+
+Epoch 641
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.17e-04 
+
+Epoch 642
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.18e-04 
+
+Epoch 643
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.18e-04 
+
+Epoch 644
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.19e-04 
+
+Epoch 645
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.18e-04 
+
+Epoch 646
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.18e-04 
+
+Epoch 647
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.19e-04 
+
+Epoch 648
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.19e-04 
+
+Epoch 649
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.19e-04 
+
+Epoch 650
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.19e-04 
+
+Epoch 651
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.19e-04 
+
+Epoch 652
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.20e-04 
+
+Epoch 653
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.20e-04 
+
+Epoch 654
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.20e-04 
+
+Epoch 655
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.21e-04 
+
+Epoch 656
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.21e-04 
+
+Epoch 657
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.21e-04 
+
+Epoch 658
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.21e-04 
+
+Epoch 659
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.21e-04 
+
+Epoch 660
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.21e-04 
+
+Epoch 661
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.22e-04 
+
+Epoch 662
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.22e-04 
+
+Epoch 663
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.22e-04 
+
+Epoch 664
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.22e-04 
+
+Epoch 665
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.23e-04 
+
+Epoch 666
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.23e-04 
+
+Epoch 667
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.23e-04 
+
+Epoch 668
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.24e-04 
+
+Epoch 669
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.23e-04 
+
+Epoch 670
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.24e-04 
+
+Epoch 671
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.24e-04 
+
+Epoch 672
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.24e-04 
+
+Epoch 673
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.25e-04 
+
+Epoch 674
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.25e-04 
+
+Epoch 675
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.26e-04 
+
+Epoch 676
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.26e-04 
+
+Epoch 677
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.26e-04 
+
+Epoch 678
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.27e-04 
+
+Epoch 679
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.27e-04 
+
+Epoch 680
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.26e-04 
+
+Epoch 681
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.27e-04 
+
+Epoch 682
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.28e-04 
+
+Epoch 683
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.28e-04 
+
+Epoch 684
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.28e-04 
+
+Epoch 685
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.29e-04 
+
+Epoch 686
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.29e-04 
+
+Epoch 687
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.29e-04 
+
+Epoch 688
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.29e-04 
+
+Epoch 689
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.29e-04 
+
+Epoch 690
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.30e-04 
+
+Epoch 691
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.30e-04 
+
+Epoch 692
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.30e-04 
+
+Epoch 693
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.31e-04 
+
+Epoch 694
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.31e-04 
+
+Epoch 695
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.31e-04 
+
+Epoch 696
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.31e-04 
+
+Epoch 697
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.32e-04 
+
+Epoch 698
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.32e-04 
+
+Epoch 699
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.33e-04 
+
+Epoch 700
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 2.32e-04 
+
+
+Epoch 19336
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.08e-05 
+
+Epoch 19337
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.64e-05 
+
+Epoch 19338
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.32e-05 
+
+Epoch 19339
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.05e-05 
+
+Epoch 19340
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.54e-05 
+
+Epoch 19341
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.07e-05 
+
+Epoch 19342
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.63e-05 
+
+Epoch 19343
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.32e-05 
+
+Epoch 19344
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.05e-05 
+
+Epoch 19345
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.56e-05 
+
+Epoch 19346
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.25e-05 
+
+Epoch 19347
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.74e-05 
+
+Epoch 19348
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.24e-05 
+
+Epoch 19349
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.07e-05 
+
+Epoch 19350
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.58e-05 
+
+Epoch 19351
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.27e-05 
+
+Epoch 19352
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.76e-05 
+
+Epoch 19353
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.42e-05 
+
+Epoch 19354
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.12e-05 
+
+Epoch 19355
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.53e-05 
+
+Epoch 19356
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.23e-05 
+
+Epoch 19357
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.73e-05 
+
+Epoch 19358
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.41e-05 
+
+Epoch 19359
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.11e-05 
+
+Epoch 19360
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.59e-05 
+
+Epoch 19361
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.26e-05 
+
+Epoch 19362
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.66e-05 
+
+Epoch 19363
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.35e-05 
+
+Epoch 19364
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.08e-05 
+
+Epoch 19365
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.55e-05 
+
+Epoch 19366
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.21e-05 
+
+Epoch 19367
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.53e-05 
+
+Epoch 19368
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.32e-05 
+
+Epoch 19369
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.06e-05 
+
+Epoch 19370
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.52e-05 
+
+Epoch 19371
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.21e-05 
+
+Epoch 19372
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.66e-05 
+
+Epoch 19373
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.32e-05 
+
+Epoch 19374
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.72e-05 
+
+Epoch 19375
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.40e-05 
+
+Epoch 19376
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.12e-05 
+
+Epoch 19377
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.59e-05 
+
+Epoch 19378
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.27e-05 
+
+Epoch 19379
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.73e-05 
+
+Epoch 19380
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.37e-05 
+
+Epoch 19381
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.05e-05 
+
+Epoch 19382
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.52e-05 
+
+Epoch 19383
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.21e-05 
+
+Epoch 19384
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.67e-05 
+
+Epoch 19385
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.33e-05 
+
+Epoch 19386
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.15e-05 
+
+Epoch 19387
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.53e-05 
+
+Epoch 19388
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.15e-05 
+
+Epoch 19389
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.61e-05 
+
+Epoch 19390
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.30e-05 
+
+Epoch 19391
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.03e-05 
+
+Epoch 19392
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.54e-05 
+
+Epoch 19393
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.16e-05 
+
+Epoch 19394
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.62e-05 
+
+Epoch 19395
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.30e-05 
+
+Epoch 19396
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.04e-05 
+
+Epoch 19397
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.54e-05 
+
+Epoch 19398
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.33e-05 
+
+Epoch 19399
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.71e-05 
+
+Epoch 19400
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.29e-05 
+
+Epoch 19401
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.04e-05 
+
+Epoch 19402
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.55e-05 
+
+Epoch 19403
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.26e-05 
+
+Epoch 19404
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.74e-05 
+
+Epoch 19405
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.51e-05 
+
+Epoch 19406
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.12e-05 
+
+Epoch 19407
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.53e-05 
+
+Epoch 19408
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.24e-05 
+
+Epoch 19409
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.98e-05 
+
+Epoch 19410
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.53e-05 
+
+Epoch 19411
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.13e-05 
+
+Epoch 19412
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.55e-05 
+
+Epoch 19413
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.25e-05 
+
+Epoch 19414
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.00e-05 
+
+Epoch 19415
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.56e-05 
+
+Epoch 19416
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.16e-05 
+
+Epoch 19417
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.71e-05 
+
+Epoch 19418
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.29e-05 
+
+Epoch 19419
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.69e-05 
+
+Epoch 19420
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19421
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.11e-05 
+
+Epoch 19422
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.67e-05 
+
+Epoch 19423
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.24e-05 
+
+Epoch 19424
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.80e-05 
+
+Epoch 19425
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.35e-05 
+
+Epoch 19426
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.00e-05 
+
+Epoch 19427
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.55e-05 
+
+Epoch 19428
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.17e-05 
+
+Epoch 19429
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.72e-05 
+
+Epoch 19430
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.29e-05 
+
+Epoch 19431
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.96e-05 
+
+Epoch 19432
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.52e-05 
+
+Epoch 19433
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.14e-05 
+
+Epoch 19434
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.69e-05 
+
+Epoch 19435
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.28e-05 
+
+Epoch 19436
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.83e-05 
+
+Epoch 19437
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19438
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.03e-05 
+
+Epoch 19439
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.60e-05 
+
+Epoch 19440
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.20e-05 
+
+Epoch 19441
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.75e-05 
+
+Epoch 19442
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.32e-05 
+
+Epoch 19443
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.14e-05 
+
+Epoch 19444
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.65e-05 
+
+Epoch 19445
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.15e-05 
+
+Epoch 19446
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.70e-05 
+
+Epoch 19447
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.29e-05 
+
+Epoch 19448
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.12e-05 
+
+Epoch 19449
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.53e-05 
+
+Epoch 19450
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.14e-05 
+
+Epoch 19451
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.70e-05 
+
+Epoch 19452
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.30e-05 
+
+Epoch 19453
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.12e-05 
+
+Epoch 19454
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.53e-05 
+
+Epoch 19455
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.32e-05 
+
+Epoch 19456
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.80e-05 
+
+Epoch 19457
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.29e-05 
+
+Epoch 19458
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.12e-05 
+
+Epoch 19459
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.54e-05 
+
+Epoch 19460
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.32e-05 
+
+Epoch 19461
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.82e-05 
+
+Epoch 19462
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.31e-05 
+
+Epoch 19463
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.16e-05 
+
+Epoch 19464
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.60e-05 
+
+Epoch 19465
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.37e-05 
+
+Epoch 19466
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.11e-05 
+
+Epoch 19467
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.58e-05 
+
+Epoch 19468
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.26e-05 
+
+Epoch 19469
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.57e-05 
+
+Epoch 19470
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.37e-05 
+
+Epoch 19471
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.01e-05 
+
+Epoch 19472
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.58e-05 
+
+Epoch 19473
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.27e-05 
+
+Epoch 19474
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.59e-05 
+
+Epoch 19475
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.37e-05 
+
+Epoch 19476
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.03e-05 
+
+Epoch 19477
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.59e-05 
+
+Epoch 19478
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.29e-05 
+
+Epoch 19479
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.73e-05 
+
+Epoch 19480
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19481
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.70e-05 
+
+Epoch 19482
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.47e-05 
+
+Epoch 19483
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.11e-05 
+
+Epoch 19484
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.67e-05 
+
+Epoch 19485
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.35e-05 
+
+Epoch 19486
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.80e-05 
+
+Epoch 19487
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.44e-05 
+
+Epoch 19488
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.99e-05 
+
+Epoch 19489
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.57e-05 
+
+Epoch 19490
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.27e-05 
+
+Epoch 19491
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.72e-05 
+
+Epoch 19492
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19493
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.95e-05 
+
+Epoch 19494
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.52e-05 
+
+Epoch 19495
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.14e-05 
+
+Epoch 19496
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.70e-05 
+
+Epoch 19497
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19498
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.84e-05 
+
+Epoch 19499
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.47e-05 
+
+Epoch 19500
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.02e-05 
+
+Epoch 19501
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.59e-05 
+
+Epoch 19502
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.29e-05 
+
+Epoch 19503
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.74e-05 
+
+Epoch 19504
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.41e-05 
+
+Epoch 19505
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 7.97e-05 
+
+Epoch 19506
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.54e-05 
+
+Epoch 19507
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.16e-05 
+
+Epoch 19508
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.72e-05 
+
+Epoch 19509
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19510
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.13e-05 
+
+Epoch 19511
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.63e-05 
+
+Epoch 19512
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.14e-05 
+
+Epoch 19513
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.71e-05 
+
+Epoch 19514
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.41e-05 
+
+Epoch 19515
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.14e-05 
+
+Epoch 19516
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.64e-05 
+
+Epoch 19517
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.16e-05 
+
+Epoch 19518
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.72e-05 
+
+Epoch 19519
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.41e-05 
+
+Epoch 19520
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.14e-05 
+
+Epoch 19521
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.65e-05 
+
+Epoch 19522
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.34e-05 
+
+Epoch 19523
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.83e-05 
+
+Epoch 19524
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.33e-05 
+
+Epoch 19525
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.15e-05 
+
+Epoch 19526
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.67e-05 
+
+Epoch 19527
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.36e-05 
+
+Epoch 19528
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.08e-05 
+
+Epoch 19529
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.56e-05 
+
+Epoch 19530
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.24e-05 
+
+Epoch 19531
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.65e-05 
+
+Epoch 19532
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.34e-05 
+
+Epoch 19533
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.08e-05 
+
+Epoch 19534
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.55e-05 
+
+Epoch 19535
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.24e-05 
+
+Epoch 19536
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.65e-05 
+
+Epoch 19537
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.34e-05 
+
+Epoch 19538
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.09e-05 
+
+Epoch 19539
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.56e-05 
+
+Epoch 19540
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.24e-05 
+
+Epoch 19541
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.72e-05 
+
+Epoch 19542
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.37e-05 
+
+Epoch 19543
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.78e-05 
+
+Epoch 19544
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.45e-05 
+
+Epoch 19545
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.18e-05 
+
+Epoch 19546
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.65e-05 
+
+Epoch 19547
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.32e-05 
+
+Epoch 19548
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.74e-05 
+
+Epoch 19549
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.43e-05 
+
+Epoch 19550
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.17e-05 
+
+Epoch 19551
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.63e-05 
+
+Epoch 19552
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.31e-05 
+
+Epoch 19553
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.78e-05 
+
+Epoch 19554
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.43e-05 
+
+Epoch 19555
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.11e-05 
+
+Epoch 19556
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.58e-05 
+
+Epoch 19557
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.28e-05 
+
+Epoch 19558
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.75e-05 
+
+Epoch 19559
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.41e-05 
+
+Epoch 19560
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.21e-05 
+
+Epoch 19561
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.62e-05 
+
+Epoch 19562
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.22e-05 
+
+Epoch 19563
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.69e-05 
+
+Epoch 19564
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.36e-05 
+
+Epoch 19565
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.19e-05 
+
+Epoch 19566
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.60e-05 
+
+Epoch 19567
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.22e-05 
+
+Epoch 19568
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.68e-05 
+
+Epoch 19569
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.38e-05 
+
+Epoch 19570
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.12e-05 
+
+Epoch 19571
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.63e-05 
+
+Epoch 19572
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.42e-05 
+
+Epoch 19573
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.81e-05 
+
+Epoch 19574
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19575
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.12e-05 
+
+Epoch 19576
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.63e-05 
+
+Epoch 19577
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.43e-05 
+
+Epoch 19578
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.06e-05 
+
+Epoch 19579
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.50e-05 
+
+Epoch 19580
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.22e-05 
+
+Epoch 19581
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.72e-05 
+
+Epoch 19582
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.51e-05 
+
+Epoch 19583
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.13e-05 
+
+Epoch 19584
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.70e-05 
+
+Epoch 19585
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.28e-05 
+
+Epoch 19586
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.70e-05 
+
+Epoch 19587
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19588
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.12e-05 
+
+Epoch 19589
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.68e-05 
+
+Epoch 19590
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.27e-05 
+
+Epoch 19591
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.69e-05 
+
+Epoch 19592
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19593
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.13e-05 
+
+Epoch 19594
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.68e-05 
+
+Epoch 19595
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.28e-05 
+
+Epoch 19596
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.83e-05 
+
+Epoch 19597
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.40e-05 
+
+Epoch 19598
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.04e-05 
+
+Epoch 19599
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.62e-05 
+
+Epoch 19600
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.22e-05 
+
+Epoch 19601
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.78e-05 
+
+Epoch 19602
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.36e-05 
+
+Epoch 19603
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.77e-05 
+
+Epoch 19604
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.55e-05 
+
+Epoch 19605
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.18e-05 
+
+Epoch 19606
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.75e-05 
+
+Epoch 19607
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.33e-05 
+
+Epoch 19608
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.90e-05 
+
+Epoch 19609
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.45e-05 
+
+Epoch 19610
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.10e-05 
+
+Epoch 19611
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.67e-05 
+
+Epoch 19612
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.27e-05 
+
+Epoch 19613
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.83e-05 
+
+Epoch 19614
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.40e-05 
+
+Epoch 19615
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.05e-05 
+
+Epoch 19616
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.63e-05 
+
+Epoch 19617
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.25e-05 
+
+Epoch 19618
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.80e-05 
+
+Epoch 19619
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.38e-05 
+
+Epoch 19620
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.20e-05 
+
+Epoch 19621
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.71e-05 
+
+Epoch 19622
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.22e-05 
+
+Epoch 19623
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.79e-05 
+
+Epoch 19624
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.37e-05 
+
+Epoch 19625
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.20e-05 
+
+Epoch 19626
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.71e-05 
+
+Epoch 19627
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.23e-05 
+
+Epoch 19628
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.79e-05 
+
+Epoch 19629
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19630
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.22e-05 
+
+Epoch 19631
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.63e-05 
+
+Epoch 19632
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.42e-05 
+
+Epoch 19633
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.90e-05 
+
+Epoch 19634
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19635
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.21e-05 
+
+Epoch 19636
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.64e-05 
+
+Epoch 19637
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.42e-05 
+
+Epoch 19638
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.91e-05 
+
+Epoch 19639
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.40e-05 
+
+Epoch 19640
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.25e-05 
+
+Epoch 19641
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.68e-05 
+
+Epoch 19642
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.47e-05 
+
+Epoch 19643
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.20e-05 
+
+Epoch 19644
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.66e-05 
+
+Epoch 19645
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.34e-05 
+
+Epoch 19646
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.65e-05 
+
+Epoch 19647
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.45e-05 
+
+Epoch 19648
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.18e-05 
+
+Epoch 19649
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.66e-05 
+
+Epoch 19650
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.34e-05 
+
+Epoch 19651
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.66e-05 
+
+Epoch 19652
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.46e-05 
+
+Epoch 19653
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.10e-05 
+
+Epoch 19654
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.69e-05 
+
+Epoch 19655
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.36e-05 
+
+Epoch 19656
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.68e-05 
+
+Epoch 19657
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.46e-05 
+
+Epoch 19658
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.12e-05 
+
+Epoch 19659
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.69e-05 
+
+Epoch 19660
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.38e-05 
+
+Epoch 19661
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.84e-05 
+
+Epoch 19662
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.49e-05 
+
+Epoch 19663
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.04e-05 
+
+Epoch 19664
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.63e-05 
+
+Epoch 19665
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.33e-05 
+
+Epoch 19666
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.78e-05 
+
+Epoch 19667
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.46e-05 
+
+Epoch 19668
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.02e-05 
+
+Epoch 19669
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.61e-05 
+
+Epoch 19670
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.22e-05 
+
+Epoch 19671
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.80e-05 
+
+Epoch 19672
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.46e-05 
+
+Epoch 19673
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.92e-05 
+
+Epoch 19674
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.56e-05 
+
+Epoch 19675
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.10e-05 
+
+Epoch 19676
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.67e-05 
+
+Epoch 19677
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.40e-05 
+
+Epoch 19678
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.87e-05 
+
+Epoch 19679
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.51e-05 
+
+Epoch 19680
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.07e-05 
+
+Epoch 19681
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.65e-05 
+
+Epoch 19682
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.36e-05 
+
+Epoch 19683
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.82e-05 
+
+Epoch 19684
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.48e-05 
+
+Epoch 19685
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.21e-05 
+
+Epoch 19686
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.72e-05 
+
+Epoch 19687
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.24e-05 
+
+Epoch 19688
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.81e-05 
+
+Epoch 19689
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.49e-05 
+
+Epoch 19690
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.21e-05 
+
+Epoch 19691
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.72e-05 
+
+Epoch 19692
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.23e-05 
+
+Epoch 19693
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.80e-05 
+
+Epoch 19694
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.48e-05 
+
+Epoch 19695
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.22e-05 
+
+Epoch 19696
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.72e-05 
+
+Epoch 19697
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.42e-05 
+
+Epoch 19698
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.91e-05 
+
+Epoch 19699
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.48e-05 
+
+Epoch 19700
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.22e-05 
+
+Epoch 19701
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.74e-05 
+
+Epoch 19702
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.44e-05 
+
+Epoch 19703
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.15e-05 
+
+Epoch 19704
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.50e-05 
+
+Epoch 19705
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.31e-05 
+
+Epoch 19706
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.84e-05 
+
+Epoch 19707
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.51e-05 
+
+Epoch 19708
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.22e-05 
+
+Epoch 19709
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.69e-05 
+
+Epoch 19710
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.36e-05 
+
+Epoch 19711
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.77e-05 
+
+Epoch 19712
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.45e-05 
+
+Epoch 19713
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.19e-05 
+
+Epoch 19714
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.67e-05 
+
+Epoch 19715
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.35e-05 
+
+Epoch 19716
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.76e-05 
+
+Epoch 19717
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.46e-05 
+
+Epoch 19718
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.20e-05 
+
+Epoch 19719
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.67e-05 
+
+Epoch 19720
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.36e-05 
+
+Epoch 19721
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.83e-05 
+
+Epoch 19722
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.48e-05 
+
+Epoch 19723
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.16e-05 
+
+Epoch 19724
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.63e-05 
+
+Epoch 19725
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.34e-05 
+
+Epoch 19726
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.80e-05 
+
+Epoch 19727
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.46e-05 
+
+Epoch 19728
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.13e-05 
+
+Epoch 19729
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.60e-05 
+
+Epoch 19730
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.30e-05 
+
+Epoch 19731
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.78e-05 
+
+Epoch 19732
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.44e-05 
+
+Epoch 19733
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 9.00e-05 
+
+Epoch 19734
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.54e-05 
+
+Epoch 19735
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.18e-05 
+
+Epoch 19736
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.66e-05 
+
+Epoch 19737
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.36e-05 
+
+Epoch 19738
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.91e-05 
+
+Epoch 19739
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.48e-05 
+
+Epoch 19740
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.14e-05 
+
+Epoch 19741
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.62e-05 
+
+Epoch 19742
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.33e-05 
+
+Epoch 19743
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.80e-05 
+
+Epoch 19744
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.46e-05 
+
+Epoch 19745
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.28e-05 
+
+Epoch 19746
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.68e-05 
+
+Epoch 19747
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.29e-05 
+
+Epoch 19748
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.77e-05 
+
+Epoch 19749
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.44e-05 
+
+Epoch 19750
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.27e-05 
+
+Epoch 19751
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.68e-05 
+
+Epoch 19752
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.29e-05 
+
+Epoch 19753
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.77e-05 
+
+Epoch 19754
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.45e-05 
+
+Epoch 19755
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.28e-05 
+
+Epoch 19756
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.69e-05 
+
+Epoch 19757
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.48e-05 
+
+Epoch 19758
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.88e-05 
+
+Epoch 19759
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.45e-05 
+
+Epoch 19760
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.29e-05 
+
+Epoch 19761
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.70e-05 
+
+Epoch 19762
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.50e-05 
+
+Epoch 19763
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.13e-05 
+
+Epoch 19764
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.58e-05 
+
+Epoch 19765
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.30e-05 
+
+Epoch 19766
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.82e-05 
+
+Epoch 19767
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.59e-05 
+
+Epoch 19768
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.21e-05 
+
+Epoch 19769
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.64e-05 
+
+Epoch 19770
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.36e-05 
+
+Epoch 19771
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.88e-05 
+
+Epoch 19772
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.64e-05 
+
+Epoch 19773
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.26e-05 
+
+Epoch 19774
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.82e-05 
+
+Epoch 19775
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.40e-05 
+
+Epoch 19776
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.82e-05 
+
+Epoch 19777
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.61e-05 
+
+Epoch 19778
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.24e-05 
+
+Epoch 19779
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.80e-05 
+
+Epoch 19780
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.38e-05 
+
+Epoch 19781
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.79e-05 
+
+Epoch 19782
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.59e-05 
+
+Epoch 19783
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.22e-05 
+
+Epoch 19784
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.80e-05 
+
+Epoch 19785
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19786
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.23e-05 
+
+Epoch 19787
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.74e-05 
+
+Epoch 19788
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.25e-05 
+
+Epoch 19789
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.83e-05 
+
+Epoch 19790
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.41e-05 
+
+Epoch 19791
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.25e-05 
+
+Epoch 19792
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.76e-05 
+
+Epoch 19793
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.28e-05 
+
+Epoch 19794
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.85e-05 
+
+Epoch 19795
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.44e-05 
+
+Epoch 19796
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.27e-05 
+
+Epoch 19797
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.70e-05 
+
+Epoch 19798
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.30e-05 
+
+Epoch 19799
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.88e-05 
+
+Epoch 19800
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.46e-05 
+
+Epoch 19801
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.29e-05 
+
+Epoch 19802
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.71e-05 
+
+Epoch 19803
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.49e-05 
+
+Epoch 19804
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.97e-05 
+
+Epoch 19805
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.45e-05 
+
+Epoch 19806
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.32e-05 
+
+Epoch 19807
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.75e-05 
+
+Epoch 19808
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.53e-05 
+
+Epoch 19809
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.26e-05 
+
+Epoch 19810
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.59e-05 
+
+Epoch 19811
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19812
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.80e-05 
+
+Epoch 19813
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.58e-05 
+
+Epoch 19814
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.30e-05 
+
+Epoch 19815
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.63e-05 
+
+Epoch 19816
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.43e-05 
+
+Epoch 19817
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.10e-05 
+
+Epoch 19818
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.68e-05 
+
+Epoch 19819
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.37e-05 
+
+Epoch 19820
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.85e-05 
+
+Epoch 19821
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.50e-05 
+
+Epoch 19822
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.82e-05 
+
+Epoch 19823
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.60e-05 
+
+Epoch 19824
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.24e-05 
+
+Epoch 19825
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.81e-05 
+
+Epoch 19826
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.48e-05 
+
+Epoch 19827
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.80e-05 
+
+Epoch 19828
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.58e-05 
+
+Epoch 19829
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.22e-05 
+
+Epoch 19830
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.79e-05 
+
+Epoch 19831
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.47e-05 
+
+Epoch 19832
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.78e-05 
+
+Epoch 19833
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.58e-05 
+
+Epoch 19834
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.22e-05 
+
+Epoch 19835
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.80e-05 
+
+Epoch 19836
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.48e-05 
+
+Epoch 19837
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.21e-05 
+
+Epoch 19838
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.72e-05 
+
+Epoch 19839
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.25e-05 
+
+Epoch 19840
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.83e-05 
+
+Epoch 19841
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.51e-05 
+
+Epoch 19842
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.24e-05 
+
+Epoch 19843
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.76e-05 
+
+Epoch 19844
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.28e-05 
+
+Epoch 19845
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.86e-05 
+
+Epoch 19846
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.57e-05 
+
+Epoch 19847
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.31e-05 
+
+Epoch 19848
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.81e-05 
+
+Epoch 19849
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.33e-05 
+
+Epoch 19850
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.91e-05 
+
+Epoch 19851
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.60e-05 
+
+Epoch 19852
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.32e-05 
+
+Epoch 19853
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.83e-05 
+
+Epoch 19854
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.35e-05 
+
+Epoch 19855
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.20e-05 
+
+Epoch 19856
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.74e-05 
+
+Epoch 19857
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.44e-05 
+
+Epoch 19858
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.94e-05 
+
+Epoch 19859
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.62e-05 
+
+Epoch 19860
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.32e-05 
+
+Epoch 19861
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.66e-05 
+
+Epoch 19862
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.46e-05 
+
+Epoch 19863
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.98e-05 
+
+Epoch 19864
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.65e-05 
+
+Epoch 19865
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.35e-05 
+
+Epoch 19866
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.68e-05 
+
+Epoch 19867
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.48e-05 
+
+Epoch 19868
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.23e-05 
+
+Epoch 19869
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.71e-05 
+
+Epoch 19870
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19871
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.87e-05 
+
+Epoch 19872
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.51e-05 
+
+Epoch 19873
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.18e-05 
+
+Epoch 19874
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.65e-05 
+
+Epoch 19875
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.36e-05 
+
+Epoch 19876
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.84e-05 
+
+Epoch 19877
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.50e-05 
+
+Epoch 19878
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.92e-05 
+
+Epoch 19879
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.59e-05 
+
+Epoch 19880
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.32e-05 
+
+Epoch 19881
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.81e-05 
+
+Epoch 19882
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.48e-05 
+
+Epoch 19883
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.81e-05 
+
+Epoch 19884
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.60e-05 
+
+Epoch 19885
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.33e-05 
+
+Epoch 19886
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.81e-05 
+
+Epoch 19887
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.49e-05 
+
+Epoch 19888
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.96e-05 
+
+Epoch 19889
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.59e-05 
+
+Epoch 19890
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.26e-05 
+
+Epoch 19891
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.75e-05 
+
+Epoch 19892
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.44e-05 
+
+Epoch 19893
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.92e-05 
+
+Epoch 19894
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.56e-05 
+
+Epoch 19895
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.22e-05 
+
+Epoch 19896
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.70e-05 
+
+Epoch 19897
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.40e-05 
+
+Epoch 19898
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.89e-05 
+
+Epoch 19899
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.54e-05 
+
+Epoch 19900
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.37e-05 
+
+Epoch 19901
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.78e-05 
+
+Epoch 19902
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.38e-05 
+
+Epoch 19903
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.87e-05 
+
+Epoch 19904
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.54e-05 
+
+Epoch 19905
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.29e-05 
+
+Epoch 19906
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.79e-05 
+
+Epoch 19907
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.41e-05 
+
+Epoch 19908
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.88e-05 
+
+Epoch 19909
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.56e-05 
+
+Epoch 19910
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.29e-05 
+
+Epoch 19911
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.81e-05 
+
+Epoch 19912
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.42e-05 
+
+Epoch 19913
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.16e-05 
+
+Epoch 19914
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.70e-05 
+
+Epoch 19915
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.41e-05 
+
+Epoch 19916
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.92e-05 
+
+Epoch 19917
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.68e-05 
+
+Epoch 19918
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.30e-05 
+
+Epoch 19919
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.73e-05 
+
+Epoch 19920
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.43e-05 
+
+Epoch 19921
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.18e-05 
+
+Epoch 19922
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.75e-05 
+
+Epoch 19923
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.34e-05 
+
+Epoch 19924
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.77e-05 
+
+Epoch 19925
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.49e-05 
+
+Epoch 19926
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.23e-05 
+
+Epoch 19927
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.81e-05 
+
+Epoch 19928
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19929
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.82e-05 
+
+Epoch 19930
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.53e-05 
+
+Epoch 19931
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.26e-05 
+
+Epoch 19932
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.84e-05 
+
+Epoch 19933
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.43e-05 
+
+Epoch 19934
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.85e-05 
+
+Epoch 19935
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.56e-05 
+
+Epoch 19936
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.28e-05 
+
+Epoch 19937
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.85e-05 
+
+Epoch 19938
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.45e-05 
+
+Epoch 19939
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 9.01e-05 
+
+Epoch 19940
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.56e-05 
+
+Epoch 19941
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.22e-05 
+
+Epoch 19942
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.79e-05 
+
+Epoch 19943
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19944
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.96e-05 
+
+Epoch 19945
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.53e-05 
+
+Epoch 19946
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.19e-05 
+
+Epoch 19947
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.78e-05 
+
+Epoch 19948
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19949
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.96e-05 
+
+Epoch 19950
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.52e-05 
+
+Epoch 19951
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.21e-05 
+
+Epoch 19952
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.81e-05 
+
+Epoch 19953
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.42e-05 
+
+Epoch 19954
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.99e-05 
+
+Epoch 19955
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.57e-05 
+
+Epoch 19956
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19957
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.90e-05 
+
+Epoch 19958
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.40e-05 
+
+Epoch 19959
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.98e-05 
+
+Epoch 19960
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.56e-05 
+
+Epoch 19961
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.38e-05 
+
+Epoch 19962
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.90e-05 
+
+Epoch 19963
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.40e-05 
+
+Epoch 19964
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.98e-05 
+
+Epoch 19965
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.55e-05 
+
+Epoch 19966
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.39e-05 
+
+Epoch 19967
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.90e-05 
+
+Epoch 19968
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.41e-05 
+
+Epoch 19969
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.26e-05 
+
+Epoch 19970
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.70e-05 
+
+Epoch 19971
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.49e-05 
+
+Epoch 19972
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 9.01e-05 
+
+Epoch 19973
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.50e-05 
+
+Epoch 19974
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.34e-05 
+
+Epoch 19975
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.78e-05 
+
+Epoch 19976
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.57e-05 
+
+Epoch 19977
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.31e-05 
+
+Epoch 19978
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.65e-05 
+
+Epoch 19979
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.47e-05 
+
+Epoch 19980
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.89e-05 
+
+Epoch 19981
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.68e-05 
+
+Epoch 19982
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.30e-05 
+
+Epoch 19983
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.88e-05 
+
+Epoch 19984
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.54e-05 
+
+Epoch 19985
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.85e-05 
+
+Epoch 19986
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.64e-05 
+
+Epoch 19987
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.26e-05 
+
+Epoch 19988
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.86e-05 
+
+Epoch 19989
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.53e-05 
+
+Epoch 19990
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.85e-05 
+
+Epoch 19991
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.64e-05 
+
+Epoch 19992
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.27e-05 
+
+Epoch 19993
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.86e-05 
+
+Epoch 19994
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.53e-05 
+
+Epoch 19995
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.87e-05 
+
+Epoch 19996
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.64e-05 
+
+Epoch 19997
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.28e-05 
+
+Epoch 19998
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.87e-05 
+
+Epoch 19999
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.55e-05 
+
+Epoch 20000
+-------------------------------
+in train_loop: len(dataloader) 40
+in test_loop: len(dataloader) 10
+Avg loss: 8.88e-05 
+
+Done!
+time ML: 2.86e+02
+
+b1_error_std 0.013316380309066966
+
+b2_error_std 0.031376264644825604
+
+b4_error_std 0.025151999212251412
+largest_error_percent in uplus -0.025883925566191134

@@ -1,0 +1,3108 @@
+////////////////// Start of input data ////////////////// 
+
+
+
+
+
+########### section 1 choice of differencing scheme ###########
+scheme:                         h
+scheme_turb:                    h
+
+
+########### section 2 turbulence models ###########
+cmu:                          0.09
+kom:                          True
+EARSM:                        True
+PINN:                         False
+c_omega_1:                    0.560
+c_omega_2:                    0.075
+prand_k:                      2.0
+prand_omega:                  2.0
+
+
+########### section 3 restart/save ###########
+restart:                      True
+save:                         True
+
+
+########### section 4 fluid properties ###########
+viscos:                       1.00e-04
+
+
+########### section 5 relaxation factors ###########
+urfvis:                       0.5
+
+
+########### section 6 number of iteration and convergence criterira ###########
+sormax:                       1e-06
+maxit:                        5000
+solver_pp:                    lgmres
+solver_vel:                   lgmres
+solver_turb:                  lgmres
+nsweep_vel:                   50
+nsweep_pp:                    50
+nsweep_kom:                   50
+convergence_limit_u:          1e-06
+convergence_limit_v:          1e-06
+convergence_limit_pp:         5e-06
+convergence_limit_k:          -1e-06
+convergence_limit_om:         -1e-06
+
+
+########### section 7 all variables are printed during the iteration at node ###########
+imon:                         0
+jmon:                         10
+
+
+########### section 8 time-averaging ###########
+
+
+########### section 9 residual scaling parameters ###########
+resnorm_p:                    40.0
+resnorm_vel:                  800.0
+
+
+########### Section 10 grid and boundary conditions ###########
+ni:                           1
+nj:                           110
+cyclic_x:                     False
+
+
+
+
+------boundary conditions for u
+     u_bc_west_type:               n
+     u_bc_east_type:               n
+     u_bc_south_type:              d
+     u_bc_north_type:              d
+     u_bc_south[0]:                0.0
+     u_bc_north[0]:                0.0
+------boundary conditions for v
+     v_bc_west_type:               n
+     v_bc_east_type:               n
+     v_bc_south_type:              d
+     v_bc_north_type:              d
+     v_bc_south[0]:                0.0
+     v_bc_north[0]:                0.0
+------boundary conditions for k
+     k_bc_west_type:               n
+     k_bc_east_type:               n
+     k_bc_south_type:              d
+     k_bc_north_type:              d
+     k_bc_south[0]:                0.0
+     k_bc_north[0]:                0.0
+------boundary conditions for omega
+     om_bc_west_type:              n
+     om_bc_east_type:              n
+     om_bc_south_type:             d
+     om_bc_north_type:             d
+     om_bc_south[0]:               2963350.9
+     om_bc_north[0]:               2963350.9
+
+
+
+ ////////////////// End of input data //////////////////
+
+
+
+hostname:  lada-Alienware-x17-R1
+read_restart_data called
+vist_kom called
+NN calc_earsm called
+model ThePredictionMachine(
+  (input): Linear(in_features=2, out_features=50, bias=True)
+  (hidden1): Linear(in_features=50, out_features=50, bias=True)
+  (hidden2): Linear(in_features=50, out_features=3, bias=True)
+)
+pk_min, pk_max 2.7967790526750053e-05 0.23803300798810909 5.991420132584976 8231.991207723158
+beta1_min, beta1_max -0.18317577242851257 -0.17545586824417114
+beta2_min, beta2_max 0.265034019947052 0.6331854462623596
+beta4_min, beta4_max -0.1542988419532776 -0.07528325915336609
+pk_min_number 6
+pk_max_number 0
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 10
+beta1_max_number 26
+beta4_min_number 28
+beta4_max_number 4
+hybrid scheme, prand= 1
+calcu called
+tau wall, south:  1.006,  tau wall, north:  1.006
+solve_2d called
+nmax 50
+solver in solve_2d: lgmres
+residual history in solve_2d: initial residual:  1.03e-01              final residual: 2.86e-04                    delta_phi: 2.81e-02
+time u: 1.66e-02
+calcv called
+solve_2d called
+nmax 50
+solver in solve_2d: lgmres
+residual history in solve_2d: initial residual:  2.12e-01              final residual: 1.63e-07                    delta_phi: 5.29e-02
+time v: 1.17e-03
+calcp called
+solve_2d called
+nmax 50
+solver in solve_2d: lgmres
+residual history in solve_2d: initial residual:  5.18e-02              final residual: 2.46e-07                    delta_phi: 4.45e-01
+correct_u_v_p called
+time pp: 1.26e-02
+hybrid scheme, prand= [[2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+  2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+  2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+  2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+  2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.]]
+calck_kom called
+solve_2d called
+nmax 50
+solver in solve_2d: lgmres
+residual history in solve_2d: initial residual:  2.80e-01              final residual: 2.56e-07                    delta_phi: 6.63e-02
+time k: 1.39e-03
+hybrid scheme, prand= 2.0
+calcom called
+solve_2d called
+nmax 50
+solver in solve_2d: lgmres
+residual history in solve_2d: initial residual:  2.87e+05              final residual: 1.10e-01                    delta_phi: 2.65e+04
+time omega: 8.41e-04
+
+--iter:0, max residual:1.29e-03, u:1.28e-04, v:2.65e-04, cont:1.29e-03, k:4.38e-07, om:3.59e+02
+
+
+monitor iteration:   0, u: 1.10e+01, v:-9.77e-04, p: 3.95e-01, k: 2.56e+00, om: 6.71e+03
+
+
+---iter:  0, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.40e-04, ommin: 7.24e+00
+
+time one iteration: 3.28e-02
+pk_min_number 4
+pk_max_number 0
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 4
+beta1_max_number 32
+beta4_min_number 32
+beta4_max_number 4
+tau wall, south:  1.000,  tau wall, north:  1.000
+residual history in solve_2d: initial residual:  1.31e-01              final residual: 3.71e-04                    delta_phi: 3.44e-02
+time u: 1.40e-03
+residual history in solve_2d: initial residual:  1.21e-01              final residual: 9.06e-08                    delta_phi: 3.60e-02
+time v: 9.33e-04
+residual history in solve_2d: initial residual:  5.06e-02              final residual: 1.05e-07                    delta_phi: 1.09e-01
+time pp: 1.01e-02
+residual history in solve_2d: initial residual:  4.67e-02              final residual: 3.98e-08                    delta_phi: 1.07e-02
+time k: 1.02e-03
+residual history in solve_2d: initial residual:  1.45e+05              final residual: 8.99e-02                    delta_phi: 1.41e+04
+time omega: 7.72e-04
+
+--iter:1, max residual:1.26e-03, u:1.64e-04, v:1.51e-04, cont:1.26e-03, k:7.30e-08, om:1.81e+02
+
+
+monitor iteration:   1, u: 1.11e+01, v: 4.00e-03, p: 3.81e-01, k: 2.55e+00, om: 6.66e+03
+
+
+---iter:  1, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.29e-04, ommin: 7.24e+00
+
+time one iteration: 1.44e-02
+pk_min_number 4
+pk_max_number 0
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 32
+beta4_min_number 30
+beta4_max_number 4
+tau wall, south:  1.001,  tau wall, north:  1.004
+residual history in solve_2d: initial residual:  5.85e-02              final residual: 5.05e-04                    delta_phi: 1.88e-02
+time u: 1.30e-03
+residual history in solve_2d: initial residual:  1.08e-01              final residual: 1.20e-07                    delta_phi: 2.66e-02
+time v: 8.85e-04
+residual history in solve_2d: initial residual:  3.62e-02              final residual: 1.79e-07                    delta_phi: 3.30e-01
+time pp: 1.12e-02
+residual history in solve_2d: initial residual:  7.58e-02              final residual: 5.24e-08                    delta_phi: 2.15e-02
+time k: 1.01e-03
+residual history in solve_2d: initial residual:  1.06e+05              final residual: 6.39e-02                    delta_phi: 1.02e+04
+time omega: 7.94e-04
+
+--iter:2, max residual:9.04e-04, u:7.31e-05, v:1.35e-04, cont:9.04e-04, k:1.18e-07, om:1.33e+02
+
+
+monitor iteration:   2, u: 1.11e+01, v: 8.53e-03, p: 6.52e-01, k: 2.54e+00, om: 6.64e+03
+
+
+---iter:  2, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.28e-04, ommin: 7.24e+00
+
+time one iteration: 1.53e-02
+pk_min_number 4
+pk_max_number 4
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 24
+beta4_max_number 4
+tau wall, south:  1.001,  tau wall, north:  1.003
+residual history in solve_2d: initial residual:  1.10e-01              final residual: 5.06e-04                    delta_phi: 3.35e-02
+time u: 1.28e-03
+residual history in solve_2d: initial residual:  1.35e-01              final residual: 4.64e-08                    delta_phi: 3.08e-02
+time v: 9.35e-04
+residual history in solve_2d: initial residual:  1.80e-02              final residual: 8.87e-08                    delta_phi: 2.28e-01
+time pp: 1.21e-02
+residual history in solve_2d: initial residual:  1.08e-01              final residual: 8.08e-08                    delta_phi: 3.28e-02
+time k: 9.86e-04
+residual history in solve_2d: initial residual:  2.44e+04              final residual: 7.53e-03                    delta_phi: 2.45e+03
+time omega: 8.21e-04
+
+--iter:3, max residual:4.49e-04, u:1.37e-04, v:1.68e-04, cont:4.49e-04, k:1.69e-07, om:3.05e+01
+
+
+monitor iteration:   3, u: 1.11e+01, v: 8.02e-03, p: 8.35e-01, k: 2.54e+00, om: 6.65e+03
+
+
+---iter:  3, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.27e-04, ommin: 7.23e+00
+
+time one iteration: 1.63e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 24
+beta4_max_number 4
+tau wall, south:  0.997,  tau wall, north:  0.997
+residual history in solve_2d: initial residual:  8.86e-02              final residual: 2.57e-04                    delta_phi: 2.45e-02
+time u: 1.31e-03
+residual history in solve_2d: initial residual:  1.28e-01              final residual: 8.27e-08                    delta_phi: 2.95e-02
+time v: 8.97e-04
+residual history in solve_2d: initial residual:  3.88e-02              final residual: 1.91e-07                    delta_phi: 1.16e-01
+time pp: 9.95e-03
+residual history in solve_2d: initial residual:  9.50e-02              final residual: 7.44e-08                    delta_phi: 2.52e-02
+time k: 9.62e-04
+residual history in solve_2d: initial residual:  6.70e+03              final residual: 1.92e-03                    delta_phi: 7.39e+02
+time omega: 8.17e-04
+
+--iter:4, max residual:9.71e-04, u:1.11e-04, v:1.60e-04, cont:9.71e-04, k:1.48e-07, om:8.38e+00
+
+
+monitor iteration:   4, u: 1.11e+01, v: 3.30e-03, p: 8.24e-01, k: 2.54e+00, om: 6.68e+03
+
+
+---iter:  4, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.28e-04, ommin: 7.23e+00
+
+time one iteration: 1.41e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 23
+beta4_max_number 4
+tau wall, south:  0.993,  tau wall, north:  0.992
+residual history in solve_2d: initial residual:  8.29e-02              final residual: 2.25e-04                    delta_phi: 2.49e-02
+time u: 1.30e-03
+residual history in solve_2d: initial residual:  7.40e-02              final residual: 8.71e-08                    delta_phi: 1.70e-02
+time v: 8.81e-04
+residual history in solve_2d: initial residual:  3.64e-02              final residual: 1.68e-07                    delta_phi: 1.31e-01
+time pp: 1.02e-02
+residual history in solve_2d: initial residual:  8.51e-02              final residual: 5.94e-08                    delta_phi: 2.06e-02
+time k: 1.01e-03
+residual history in solve_2d: initial residual:  4.05e+03              final residual: 1.35e-03                    delta_phi: 5.77e+02
+time omega: 8.15e-04
+
+--iter:5, max residual:9.09e-04, u:1.04e-04, v:9.25e-05, cont:9.09e-04, k:1.33e-07, om:5.06e+00
+
+
+monitor iteration:   5, u: 1.11e+01, v:-3.77e-04, p: 7.51e-01, k: 2.55e+00, om: 6.70e+03
+
+
+---iter:  5, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.33e-04, ommin: 7.23e+00
+
+time one iteration: 1.43e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 22
+beta4_max_number 4
+tau wall, south:  0.992,  tau wall, north:  0.992
+residual history in solve_2d: initial residual:  6.14e-02              final residual: 4.80e-04                    delta_phi: 2.18e-02
+time u: 1.28e-03
+residual history in solve_2d: initial residual:  3.07e-02              final residual: 8.28e-08                    delta_phi: 5.43e-03
+time v: 8.61e-04
+residual history in solve_2d: initial residual:  2.45e-02              final residual: 1.19e-07                    delta_phi: 4.79e-02
+time pp: 9.24e-03
+residual history in solve_2d: initial residual:  6.60e-02              final residual: 4.36e-08                    delta_phi: 1.27e-02
+time k: 9.98e-04
+residual history in solve_2d: initial residual:  6.89e+03              final residual: 2.36e-03                    delta_phi: 6.17e+02
+time omega: 8.18e-04
+
+--iter:6, max residual:6.12e-04, u:7.67e-05, v:3.84e-05, cont:6.12e-04, k:1.03e-07, om:8.61e+00
+
+
+monitor iteration:   6, u: 1.11e+01, v:-5.38e-04, p: 7.36e-01, k: 2.56e+00, om: 6.71e+03
+
+
+---iter:  6, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.39e-04, ommin: 7.23e+00
+
+time one iteration: 1.33e-02
+pk_min_number 4
+pk_max_number 4
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 22
+beta4_max_number 4
+tau wall, south:  0.992,  tau wall, north:  0.993
+residual history in solve_2d: initial residual:  3.37e-02              final residual: 2.52e-04                    delta_phi: 8.51e-03
+time u: 1.33e-03
+residual history in solve_2d: initial residual:  2.05e-02              final residual: 1.31e-07                    delta_phi: 5.64e-03
+time v: 8.24e-04
+residual history in solve_2d: initial residual:  1.29e-02              final residual: 6.39e-08                    delta_phi: 4.07e-02
+time pp: 1.03e-02
+residual history in solve_2d: initial residual:  4.03e-02              final residual: 2.46e-08                    delta_phi: 7.49e-03
+time k: 9.91e-04
+residual history in solve_2d: initial residual:  1.89e+03              final residual: 9.60e-04                    delta_phi: 4.23e+02
+time omega: 8.13e-04
+
+--iter:7, max residual:3.22e-04, u:4.21e-05, v:2.56e-05, cont:3.22e-04, k:6.30e-08, om:2.37e+00
+
+
+monitor iteration:   7, u: 1.11e+01, v: 1.29e-03, p: 7.72e-01, k: 2.56e+00, om: 6.73e+03
+
+
+---iter:  7, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.45e-04, ommin: 7.23e+00
+
+time one iteration: 1.44e-02
+pk_min_number 4
+pk_max_number 8
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  0.993,  tau wall, north:  0.993
+residual history in solve_2d: initial residual:  3.34e-02              final residual: 4.42e-04                    delta_phi: 8.00e-03
+time u: 1.25e-03
+residual history in solve_2d: initial residual:  1.30e-02              final residual: 1.04e-07                    delta_phi: 2.21e-03
+time v: 8.13e-04
+residual history in solve_2d: initial residual:  5.81e-03              final residual: 2.88e-08                    delta_phi: 3.99e-02
+time pp: 1.27e-02
+residual history in solve_2d: initial residual:  2.10e-02              final residual: 5.81e-09                    delta_phi: 3.89e-03
+time k: 1.03e-03
+residual history in solve_2d: initial residual:  5.51e+03              final residual: 1.18e-03                    delta_phi: 4.94e+02
+time omega: 8.37e-04
+
+--iter:8, max residual:1.45e-04, u:4.18e-05, v:1.63e-05, cont:1.45e-04, k:3.27e-08, om:6.89e+00
+
+
+monitor iteration:   8, u: 1.11e+01, v: 3.01e-03, p: 8.01e-01, k: 2.56e+00, om: 6.74e+03
+
+
+---iter:  8, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.51e-04, ommin: 7.23e+00
+
+time one iteration: 1.68e-02
+pk_min_number 4
+pk_max_number 8
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  0.993,  tau wall, north:  0.993
+residual history in solve_2d: initial residual:  2.84e-02              final residual: 3.28e-04                    delta_phi: 6.86e-03
+time u: 1.24e-03
+residual history in solve_2d: initial residual:  1.43e-02              final residual: 7.05e-08                    delta_phi: 2.64e-03
+time v: 8.13e-04
+residual history in solve_2d: initial residual:  3.49e-03              final residual: 1.63e-08                    delta_phi: 6.79e-03
+time pp: 9.38e-03
+residual history in solve_2d: initial residual:  1.59e-02              final residual: 6.14e-09                    delta_phi: 3.38e-03
+time k: 1.02e-03
+residual history in solve_2d: initial residual:  4.25e+03              final residual: 9.18e-04                    delta_phi: 4.31e+02
+time omega: 8.19e-04
+
+--iter:9, max residual:8.73e-05, u:3.55e-05, v:1.79e-05, cont:8.73e-05, k:2.48e-08, om:5.31e+00
+
+
+monitor iteration:   9, u: 1.10e+01, v: 3.84e-03, p: 7.97e-01, k: 2.56e+00, om: 6.75e+03
+
+
+---iter:  9, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.56e-04, ommin: 7.23e+00
+
+time one iteration: 1.34e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  0.993,  tau wall, north:  0.994
+residual history in solve_2d: initial residual:  2.12e-02              final residual: 3.37e-04                    delta_phi: 5.55e-03
+time u: 1.25e-03
+residual history in solve_2d: initial residual:  1.35e-02              final residual: 1.11e-07                    delta_phi: 2.59e-03
+time v: 8.02e-04
+residual history in solve_2d: initial residual:  3.98e-03              final residual: 1.89e-08                    delta_phi: 1.92e-02
+time pp: 1.09e-02
+residual history in solve_2d: initial residual:  1.50e-02              final residual: 1.45e-08                    delta_phi: 3.23e-03
+time k: 9.99e-04
+residual history in solve_2d: initial residual:  1.70e+03              final residual: 1.00e-03                    delta_phi: 2.29e+02
+time omega: 7.89e-04
+
+--iter:10, max residual:9.95e-05, u:2.65e-05, v:1.69e-05, cont:9.95e-05, k:2.35e-08, om:2.13e+00
+
+
+monitor iteration:  10, u: 1.10e+01, v: 4.12e-03, p: 7.79e-01, k: 2.56e+00, om: 6.75e+03
+
+
+---iter: 10, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.61e-04, ommin: 7.23e+00
+
+time one iteration: 1.49e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  0.995,  tau wall, north:  0.995
+residual history in solve_2d: initial residual:  1.72e-02              final residual: 3.07e-04                    delta_phi: 5.97e-03
+time u: 1.26e-03
+residual history in solve_2d: initial residual:  9.91e-03              final residual: 6.98e-08                    delta_phi: 1.44e-03
+time v: 8.28e-04
+residual history in solve_2d: initial residual:  3.83e-03              final residual: 1.83e-08                    delta_phi: 1.09e-02
+time pp: 1.02e-02
+residual history in solve_2d: initial residual:  1.29e-02              final residual: 9.36e-09                    delta_phi: 2.36e-03
+time k: 9.91e-04
+residual history in solve_2d: initial residual:  3.07e+03              final residual: 2.99e-03                    delta_phi: 3.00e+02
+time omega: 7.69e-04
+
+--iter:11, max residual:9.58e-05, u:2.15e-05, v:1.24e-05, cont:9.58e-05, k:2.01e-08, om:3.83e+00
+
+
+monitor iteration:  11, u: 1.10e+01, v: 4.22e-03, p: 7.69e-01, k: 2.56e+00, om: 6.75e+03
+
+
+---iter: 11, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.67e-04, ommin: 7.23e+00
+
+time one iteration: 1.41e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  0.996,  tau wall, north:  0.996
+residual history in solve_2d: initial residual:  1.23e-02              final residual: 4.72e-04                    delta_phi: 4.10e-03
+time u: 1.24e-03
+residual history in solve_2d: initial residual:  7.14e-03              final residual: 6.10e-08                    delta_phi: 1.37e-03
+time v: 8.08e-04
+residual history in solve_2d: initial residual:  3.08e-03              final residual: 1.12e-08                    delta_phi: 7.34e-03
+time pp: 9.11e-03
+residual history in solve_2d: initial residual:  1.01e-02              final residual: 7.52e-09                    delta_phi: 1.70e-03
+time k: 9.90e-04
+residual history in solve_2d: initial residual:  1.85e+03              final residual: 1.63e-03                    delta_phi: 1.93e+02
+time omega: 7.55e-04
+
+--iter:12, max residual:7.69e-05, u:1.54e-05, v:8.93e-06, cont:7.69e-05, k:1.57e-08, om:2.31e+00
+
+
+monitor iteration:  12, u: 1.10e+01, v: 4.21e-03, p: 7.71e-01, k: 2.56e+00, om: 6.75e+03
+
+
+---iter: 12, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.71e-04, ommin: 7.23e+00
+
+time one iteration: 1.30e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  0.998,  tau wall, north:  0.998
+residual history in solve_2d: initial residual:  9.26e-03              final residual: 4.24e-04                    delta_phi: 2.72e-03
+time u: 1.22e-03
+residual history in solve_2d: initial residual:  3.97e-03              final residual: 7.31e-08                    delta_phi: 6.98e-04
+time v: 7.89e-04
+residual history in solve_2d: initial residual:  2.13e-03              final residual: 1.02e-08                    delta_phi: 8.03e-03
+time pp: 1.11e-02
+residual history in solve_2d: initial residual:  7.23e-03              final residual: 3.30e-09                    delta_phi: 1.46e-03
+time k: 9.96e-04
+residual history in solve_2d: initial residual:  2.54e+02              final residual: 2.50e-04                    delta_phi: 2.41e+01
+time omega: 7.77e-04
+
+--iter:13, max residual:5.31e-05, u:1.16e-05, v:4.96e-06, cont:5.31e-05, k:1.13e-08, om:3.17e-01
+
+
+monitor iteration:  13, u: 1.10e+01, v: 4.07e-03, p: 7.76e-01, k: 2.56e+00, om: 6.75e+03
+
+
+---iter: 13, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.75e-04, ommin: 7.23e+00
+
+time one iteration: 1.50e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  0.999,  tau wall, north:  0.999
+residual history in solve_2d: initial residual:  7.99e-03              final residual: 3.38e-04                    delta_phi: 2.14e-03
+time u: 1.21e-03
+residual history in solve_2d: initial residual:  2.42e-03              final residual: 9.20e-08                    delta_phi: 3.34e-04
+time v: 7.73e-04
+residual history in solve_2d: initial residual:  1.28e-03              final residual: 6.26e-09                    delta_phi: 2.35e-03
+time pp: 1.01e-02
+residual history in solve_2d: initial residual:  5.04e-03              final residual: 4.28e-09                    delta_phi: 1.07e-03
+time k: 9.95e-04
+residual history in solve_2d: initial residual:  9.21e+02              final residual: 5.46e-04                    delta_phi: 9.41e+01
+time omega: 7.84e-04
+
+--iter:14, max residual:3.21e-05, u:9.98e-06, v:3.02e-06, cont:3.21e-05, k:7.87e-09, om:1.15e+00
+
+
+monitor iteration:  14, u: 1.10e+01, v: 3.89e-03, p: 7.77e-01, k: 2.56e+00, om: 6.76e+03
+
+
+---iter: 14, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.78e-04, ommin: 7.23e+00
+
+time one iteration: 1.40e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.000,  tau wall, north:  1.000
+residual history in solve_2d: initial residual:  6.90e-03              final residual: 3.09e-04                    delta_phi: 2.06e-03
+time u: 1.22e-03
+residual history in solve_2d: initial residual:  3.01e-03              final residual: 1.04e-07                    delta_phi: 3.52e-04
+time v: 7.64e-04
+residual history in solve_2d: initial residual:  8.37e-04              final residual: 4.12e-09                    delta_phi: 3.76e-03
+time pp: 9.73e-03
+residual history in solve_2d: initial residual:  3.87e-03              final residual: 1.82e-09                    delta_phi: 7.78e-04
+time k: 1.03e-03
+residual history in solve_2d: initial residual:  4.67e+02              final residual: 3.86e-04                    delta_phi: 5.48e+01
+time omega: 8.08e-04
+
+--iter:15, max residual:2.09e-05, u:8.62e-06, v:3.77e-06, cont:2.09e-05, k:6.04e-09, om:5.84e-01
+
+
+monitor iteration:  15, u: 1.10e+01, v: 3.77e-03, p: 7.75e-01, k: 2.56e+00, om: 6.76e+03
+
+
+---iter: 15, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.81e-04, ommin: 7.23e+00
+
+time one iteration: 1.37e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.001,  tau wall, north:  1.001
+residual history in solve_2d: initial residual:  6.01e-03              final residual: 2.60e-04                    delta_phi: 1.95e-03
+time u: 1.22e-03
+residual history in solve_2d: initial residual:  3.00e-03              final residual: 7.10e-08                    delta_phi: 3.90e-04
+time v: 7.54e-04
+residual history in solve_2d: initial residual:  7.35e-04              final residual: 3.54e-09                    delta_phi: 3.97e-03
+time pp: 9.97e-03
+residual history in solve_2d: initial residual:  3.57e-03              final residual: 1.59e-09                    delta_phi: 8.91e-04
+time k: 1.03e-03
+residual history in solve_2d: initial residual:  4.06e+02              final residual: 1.67e-04                    delta_phi: 3.59e+01
+time omega: 8.03e-04
+
+--iter:16, max residual:1.84e-05, u:7.51e-06, v:3.75e-06, cont:1.84e-05, k:5.58e-09, om:5.07e-01
+
+
+monitor iteration:  16, u: 1.10e+01, v: 3.74e-03, p: 7.74e-01, k: 2.56e+00, om: 6.76e+03
+
+
+---iter: 16, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.83e-04, ommin: 7.23e+00
+
+time one iteration: 1.39e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.002,  tau wall, north:  1.002
+residual history in solve_2d: initial residual:  5.10e-03              final residual: 4.10e-04                    delta_phi: 1.58e-03
+time u: 1.19e-03
+residual history in solve_2d: initial residual:  2.23e-03              final residual: 7.28e-08                    delta_phi: 2.83e-04
+time v: 7.55e-04
+residual history in solve_2d: initial residual:  6.23e-04              final residual: 3.00e-09                    delta_phi: 1.71e-03
+time pp: 6.93e-03
+residual history in solve_2d: initial residual:  3.56e-03              final residual: 1.61e-09                    delta_phi: 9.15e-04
+time k: 1.03e-03
+residual history in solve_2d: initial residual:  6.00e+02              final residual: 3.58e-04                    delta_phi: 5.50e+01
+time omega: 7.56e-04
+
+--iter:17, max residual:1.56e-05, u:6.37e-06, v:2.79e-06, cont:1.56e-05, k:5.57e-09, om:7.50e-01
+
+
+monitor iteration:  17, u: 1.10e+01, v: 3.75e-03, p: 7.74e-01, k: 2.56e+00, om: 6.76e+03
+
+
+---iter: 17, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.08e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.003,  tau wall, north:  1.003
+residual history in solve_2d: initial residual:  4.34e-03              final residual: 4.04e-04                    delta_phi: 1.18e-03
+time u: 1.18e-03
+residual history in solve_2d: initial residual:  1.12e-03              final residual: 5.91e-08                    delta_phi: 1.36e-04
+time v: 7.68e-04
+residual history in solve_2d: initial residual:  3.90e-04              final residual: 1.92e-09                    delta_phi: 1.39e-03
+time pp: 1.09e-02
+residual history in solve_2d: initial residual:  3.46e-03              final residual: 2.63e-09                    delta_phi: 8.79e-04
+time k: 9.84e-04
+residual history in solve_2d: initial residual:  4.85e+02              final residual: 2.24e-04                    delta_phi: 4.56e+01
+time omega: 7.52e-04
+
+--iter:18, max residual:9.74e-06, u:5.43e-06, v:1.40e-06, cont:9.74e-06, k:5.41e-09, om:6.06e-01
+
+
+monitor iteration:  18, u: 1.10e+01, v: 3.75e-03, p: 7.75e-01, k: 2.56e+00, om: 6.76e+03
+
+
+---iter: 18, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.47e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.004,  tau wall, north:  1.004
+residual history in solve_2d: initial residual:  3.78e-03              final residual: 3.03e-04                    delta_phi: 9.19e-04
+time u: 1.19e-03
+residual history in solve_2d: initial residual:  1.48e-03              final residual: 7.20e-08                    delta_phi: 2.13e-04
+time v: 7.31e-04
+residual history in solve_2d: initial residual:  2.42e-04              final residual: 1.20e-09                    delta_phi: 1.11e-03
+time pp: 9.99e-03
+residual history in solve_2d: initial residual:  3.28e-03              final residual: 2.69e-09                    delta_phi: 8.21e-04
+time k: 9.95e-04
+residual history in solve_2d: initial residual:  3.78e+02              final residual: 2.36e-04                    delta_phi: 3.47e+01
+time omega: 7.62e-04
+
+--iter:19, max residual:6.05e-06, u:4.72e-06, v:1.86e-06, cont:6.05e-06, k:5.13e-09, om:4.72e-01
+
+
+monitor iteration:  19, u: 1.10e+01, v: 3.72e-03, p: 7.76e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 19, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.87e-04, ommin: 7.23e+00
+
+time one iteration: 1.38e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.005,  tau wall, north:  1.005
+residual history in solve_2d: initial residual:  3.27e-03              final residual: 2.86e-04                    delta_phi: 7.66e-04
+time u: 1.21e-03
+residual history in solve_2d: initial residual:  2.26e-03              final residual: 6.52e-08                    delta_phi: 3.10e-04
+time v: 7.52e-04
+residual history in solve_2d: initial residual:  4.20e-04              final residual: 2.06e-09                    delta_phi: 1.13e-03
+time pp: 9.26e-03
+residual history in solve_2d: initial residual:  3.14e-03              final residual: 2.75e-09                    delta_phi: 7.47e-04
+time k: 9.91e-04
+residual history in solve_2d: initial residual:  3.74e+02              final residual: 2.42e-04                    delta_phi: 3.56e+01
+time omega: 7.56e-04
+
+--iter:20, max residual:1.05e-05, u:4.09e-06, v:2.83e-06, cont:1.05e-05, k:4.90e-09, om:4.67e-01
+
+
+monitor iteration:  20, u: 1.10e+01, v: 3.67e-03, p: 7.75e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 20, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.88e-04, ommin: 7.23e+00
+
+time one iteration: 1.31e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.005,  tau wall, north:  1.005
+residual history in solve_2d: initial residual:  2.89e-03              final residual: 4.25e-04                    delta_phi: 6.37e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  2.17e-03              final residual: 9.75e-08                    delta_phi: 3.10e-04
+time v: 7.32e-04
+residual history in solve_2d: initial residual:  5.22e-04              final residual: 2.50e-09                    delta_phi: 1.29e-03
+time pp: 9.66e-03
+residual history in solve_2d: initial residual:  3.05e-03              final residual: 2.48e-09                    delta_phi: 6.84e-04
+time k: 9.99e-04
+residual history in solve_2d: initial residual:  4.01e+02              final residual: 2.12e-04                    delta_phi: 3.78e+01
+time omega: 7.64e-04
+
+--iter:21, max residual:1.30e-05, u:3.61e-06, v:2.72e-06, cont:1.30e-05, k:4.76e-09, om:5.01e-01
+
+
+monitor iteration:  21, u: 1.10e+01, v: 3.62e-03, p: 7.75e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 21, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.89e-04, ommin: 7.23e+00
+
+time one iteration: 1.34e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  2.65e-03              final residual: 2.18e-04                    delta_phi: 5.63e-04
+time u: 1.19e-03
+residual history in solve_2d: initial residual:  1.25e-03              final residual: 7.48e-08                    delta_phi: 1.78e-04
+time v: 7.39e-04
+residual history in solve_2d: initial residual:  4.29e-04              final residual: 1.56e-09                    delta_phi: 1.07e-03
+time pp: 9.10e-03
+residual history in solve_2d: initial residual:  2.97e-03              final residual: 2.04e-09                    delta_phi: 6.39e-04
+time k: 1.01e-03
+residual history in solve_2d: initial residual:  4.22e+02              final residual: 1.89e-04                    delta_phi: 3.90e+01
+time omega: 7.65e-04
+
+--iter:22, max residual:1.07e-05, u:3.32e-06, v:1.57e-06, cont:1.07e-05, k:4.64e-09, om:5.28e-01
+
+
+monitor iteration:  22, u: 1.10e+01, v: 3.59e-03, p: 7.74e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 22, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.89e-04, ommin: 7.23e+00
+
+time one iteration: 1.29e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  2.45e-03              final residual: 4.41e-04                    delta_phi: 4.15e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  5.79e-04              final residual: 9.95e-08                    delta_phi: 7.92e-05
+time v: 6.88e-04
+residual history in solve_2d: initial residual:  2.22e-04              final residual: 1.06e-09                    delta_phi: 3.37e-04
+time pp: 9.30e-03
+residual history in solve_2d: initial residual:  2.83e-03              final residual: 1.63e-09                    delta_phi: 5.96e-04
+time k: 9.98e-04
+residual history in solve_2d: initial residual:  3.54e+02              final residual: 1.72e-04                    delta_phi: 3.25e+01
+time omega: 7.62e-04
+
+--iter:23, max residual:5.54e-06, u:3.06e-06, v:7.23e-07, cont:5.54e-06, k:4.42e-09, om:4.42e-01
+
+
+monitor iteration:  23, u: 1.10e+01, v: 3.58e-03, p: 7.74e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 23, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.89e-04, ommin: 7.23e+00
+
+time one iteration: 1.30e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  2.18e-03              final residual: 5.16e-04                    delta_phi: 3.86e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  1.45e-03              final residual: 7.58e-08                    delta_phi: 2.11e-04
+time v: 7.29e-04
+residual history in solve_2d: initial residual:  1.81e-04              final residual: 4.73e-10                    delta_phi: 8.60e-04
+time pp: 1.02e-02
+residual history in solve_2d: initial residual:  2.66e-03              final residual: 1.68e-09                    delta_phi: 5.60e-04
+time k: 1.01e-03
+residual history in solve_2d: initial residual:  2.91e+02              final residual: 1.34e-04                    delta_phi: 2.69e+01
+time omega: 7.66e-04
+
+--iter:24, max residual:4.52e-06, u:2.72e-06, v:1.81e-06, cont:4.52e-06, k:4.16e-09, om:3.64e-01
+
+
+monitor iteration:  24, u: 1.10e+01, v: 3.60e-03, p: 7.74e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 24, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.89e-04, ommin: 7.23e+00
+
+time one iteration: 1.40e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.90e-03              final residual: 4.21e-04                    delta_phi: 3.77e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  2.03e-03              final residual: 9.79e-08                    delta_phi: 2.99e-04
+time v: 7.42e-04
+residual history in solve_2d: initial residual:  3.66e-04              final residual: 1.45e-09                    delta_phi: 1.48e-03
+time pp: 9.08e-03
+residual history in solve_2d: initial residual:  2.51e-03              final residual: 1.50e-09                    delta_phi: 5.32e-04
+time k: 1.00e-03
+residual history in solve_2d: initial residual:  2.62e+02              final residual: 1.32e-04                    delta_phi: 2.43e+01
+time omega: 7.62e-04
+
+--iter:25, max residual:9.14e-06, u:2.38e-06, v:2.54e-06, cont:9.14e-06, k:3.92e-09, om:3.27e-01
+
+
+monitor iteration:  25, u: 1.10e+01, v: 3.64e-03, p: 7.74e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 25, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.89e-04, ommin: 7.23e+00
+
+time one iteration: 1.29e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.77e-03              final residual: 4.74e-04                    delta_phi: 3.25e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  1.59e-03              final residual: 8.60e-08                    delta_phi: 2.44e-04
+time v: 7.42e-04
+residual history in solve_2d: initial residual:  3.98e-04              final residual: 1.95e-09                    delta_phi: 1.45e-03
+time pp: 9.32e-03
+residual history in solve_2d: initial residual:  2.38e-03              final residual: 1.33e-09                    delta_phi: 5.07e-04
+time k: 1.01e-03
+residual history in solve_2d: initial residual:  2.47e+02              final residual: 1.20e-04                    delta_phi: 2.29e+01
+time omega: 7.58e-04
+
+--iter:26, max residual:9.96e-06, u:2.22e-06, v:1.99e-06, cont:9.96e-06, k:3.72e-09, om:3.09e-01
+
+
+monitor iteration:  26, u: 1.10e+01, v: 3.68e-03, p: 7.74e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 26, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.89e-04, ommin: 7.23e+00
+
+time one iteration: 1.31e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.74e-03              final residual: 5.23e-04                    delta_phi: 2.86e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  5.70e-04              final residual: 6.00e-08                    delta_phi: 6.34e-05
+time v: 7.43e-04
+residual history in solve_2d: initial residual:  2.37e-04              final residual: 1.15e-09                    delta_phi: 5.77e-04
+time pp: 8.32e-03
+residual history in solve_2d: initial residual:  2.27e-03              final residual: 1.22e-09                    delta_phi: 4.80e-04
+time k: 9.89e-04
+residual history in solve_2d: initial residual:  2.32e+02              final residual: 1.10e-04                    delta_phi: 2.14e+01
+time omega: 7.71e-04
+
+--iter:27, max residual:5.92e-06, u:2.17e-06, v:7.13e-07, cont:5.92e-06, k:3.54e-09, om:2.90e-01
+
+
+monitor iteration:  27, u: 1.10e+01, v: 3.72e-03, p: 7.74e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 27, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.89e-04, ommin: 7.23e+00
+
+time one iteration: 1.21e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.68e-03              final residual: 4.89e-04                    delta_phi: 2.72e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  1.19e-03              final residual: 6.82e-08                    delta_phi: 1.74e-04
+time v: 7.26e-04
+residual history in solve_2d: initial residual:  1.28e-04              final residual: 4.94e-10                    delta_phi: 7.36e-04
+time pp: 1.03e-02
+residual history in solve_2d: initial residual:  2.15e-03              final residual: 1.10e-09                    delta_phi: 4.55e-04
+time k: 1.00e-03
+residual history in solve_2d: initial residual:  2.16e+02              final residual: 1.22e-04                    delta_phi: 1.98e+01
+time omega: 7.69e-04
+
+--iter:28, max residual:3.21e-06, u:2.10e-06, v:1.48e-06, cont:3.21e-06, k:3.37e-09, om:2.70e-01
+
+
+monitor iteration:  28, u: 1.10e+01, v: 3.72e-03, p: 7.74e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 28, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.89e-04, ommin: 7.23e+00
+
+time one iteration: 1.41e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.58e-03              final residual: 3.77e-04                    delta_phi: 2.82e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  1.82e-03              final residual: 6.91e-08                    delta_phi: 2.62e-04
+time v: 7.25e-04
+residual history in solve_2d: initial residual:  3.05e-04              final residual: 1.02e-09                    delta_phi: 1.25e-03
+time pp: 1.02e-02
+residual history in solve_2d: initial residual:  2.05e-03              final residual: 1.12e-09                    delta_phi: 4.30e-04
+time k: 1.01e-03
+residual history in solve_2d: initial residual:  2.00e+02              final residual: 1.28e-04                    delta_phi: 1.82e+01
+time omega: 7.78e-04
+
+--iter:29, max residual:7.63e-06, u:1.98e-06, v:2.28e-06, cont:7.63e-06, k:3.21e-09, om:2.50e-01
+
+
+monitor iteration:  29, u: 1.10e+01, v: 3.68e-03, p: 7.74e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 29, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.89e-04, ommin: 7.23e+00
+
+time one iteration: 1.40e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.53e-03              final residual: 3.97e-04                    delta_phi: 2.66e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  1.64e-03              final residual: 6.49e-08                    delta_phi: 2.49e-04
+time v: 7.36e-04
+residual history in solve_2d: initial residual:  3.78e-04              final residual: 1.89e-09                    delta_phi: 1.35e-03
+time pp: 8.80e-03
+residual history in solve_2d: initial residual:  1.95e-03              final residual: 1.95e-09                    delta_phi: 4.05e-04
+time k: 9.57e-04
+residual history in solve_2d: initial residual:  1.83e+02              final residual: 1.32e-04                    delta_phi: 1.67e+01
+time omega: 7.69e-04
+
+--iter:30, max residual:9.46e-06, u:1.92e-06, v:2.05e-06, cont:9.46e-06, k:3.05e-09, om:2.29e-01
+
+
+monitor iteration:  30, u: 1.10e+01, v: 3.64e-03, p: 7.74e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 30, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.89e-04, ommin: 7.23e+00
+
+time one iteration: 1.26e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.51e-03              final residual: 4.57e-04                    delta_phi: 2.44e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  7.67e-04              final residual: 8.61e-08                    delta_phi: 1.10e-04
+time v: 6.87e-04
+residual history in solve_2d: initial residual:  2.79e-04              final residual: 9.38e-10                    delta_phi: 7.78e-04
+time pp: 9.12e-03
+residual history in solve_2d: initial residual:  1.85e-03              final residual: 9.14e-10                    delta_phi: 3.81e-04
+time k: 1.00e-03
+residual history in solve_2d: initial residual:  1.68e+02              final residual: 1.45e-04                    delta_phi: 1.53e+01
+time omega: 7.66e-04
+
+--iter:31, max residual:6.98e-06, u:1.89e-06, v:9.59e-07, cont:6.98e-06, k:2.89e-09, om:2.10e-01
+
+
+monitor iteration:  31, u: 1.10e+01, v: 3.60e-03, p: 7.74e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 31, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.89e-04, ommin: 7.23e+00
+
+time one iteration: 1.28e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.44e-03              final residual: 4.55e-04                    delta_phi: 2.22e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  6.88e-04              final residual: 8.88e-08                    delta_phi: 1.09e-04
+time v: 6.93e-04
+residual history in solve_2d: initial residual:  1.11e-04              final residual: 4.47e-10                    delta_phi: 4.17e-04
+time pp: 1.02e-02
+residual history in solve_2d: initial residual:  1.74e-03              final residual: 7.43e-10                    delta_phi: 3.61e-04
+time k: 9.88e-04
+residual history in solve_2d: initial residual:  1.54e+02              final residual: 3.55e-05                    delta_phi: 1.39e+01
+time omega: 7.84e-04
+
+--iter:32, max residual:2.77e-06, u:1.80e-06, v:8.60e-07, cont:2.77e-06, k:2.72e-09, om:1.93e-01
+
+
+monitor iteration:  32, u: 1.10e+01, v: 3.59e-03, p: 7.74e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 32, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.89e-04, ommin: 7.23e+00
+
+time one iteration: 1.40e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.30e-03              final residual: 3.81e-04                    delta_phi: 2.28e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  1.34e-03              final residual: 1.05e-07                    delta_phi: 1.90e-04
+time v: 7.00e-04
+residual history in solve_2d: initial residual:  1.89e-04              final residual: 9.17e-10                    delta_phi: 8.36e-04
+time pp: 9.25e-03
+residual history in solve_2d: initial residual:  1.63e-03              final residual: 9.24e-10                    delta_phi: 3.45e-04
+time k: 9.90e-04
+residual history in solve_2d: initial residual:  1.41e+02              final residual: 3.65e-05                    delta_phi: 1.27e+01
+time omega: 7.94e-04
+
+--iter:33, max residual:4.72e-06, u:1.63e-06, v:1.67e-06, cont:4.72e-06, k:2.55e-09, om:1.76e-01
+
+
+monitor iteration:  33, u: 1.10e+01, v: 3.61e-03, p: 7.74e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 33, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.89e-04, ommin: 7.23e+00
+
+time one iteration: 1.30e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.24e-03              final residual: 3.49e-04                    delta_phi: 2.23e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  1.39e-03              final residual: 9.70e-08                    delta_phi: 2.14e-04
+time v: 6.90e-04
+residual history in solve_2d: initial residual:  2.85e-04              final residual: 1.19e-09                    delta_phi: 1.09e-03
+time pp: 9.10e-03
+residual history in solve_2d: initial residual:  1.54e-03              final residual: 7.64e-10                    delta_phi: 3.31e-04
+time k: 1.09e-03
+residual history in solve_2d: initial residual:  1.27e+02              final residual: 3.20e-05                    delta_phi: 1.14e+01
+time omega: 7.91e-04
+
+--iter:34, max residual:7.12e-06, u:1.55e-06, v:1.74e-06, cont:7.12e-06, k:2.41e-09, om:1.58e-01
+
+
+monitor iteration:  34, u: 1.10e+01, v: 3.64e-03, p: 7.74e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 34, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.89e-04, ommin: 7.23e+00
+
+time one iteration: 1.29e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.27e-03              final residual: 3.88e-04                    delta_phi: 1.98e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  7.61e-04              final residual: 8.24e-08                    delta_phi: 1.18e-04
+time v: 7.07e-04
+residual history in solve_2d: initial residual:  2.37e-04              final residual: 1.18e-09                    delta_phi: 7.36e-04
+time pp: 8.63e-03
+residual history in solve_2d: initial residual:  1.46e-03              final residual: 6.79e-10                    delta_phi: 3.15e-04
+time k: 9.89e-04
+residual history in solve_2d: initial residual:  1.15e+02              final residual: 3.02e-05                    delta_phi: 1.03e+01
+time omega: 8.01e-04
+
+--iter:35, max residual:5.92e-06, u:1.58e-06, v:9.51e-07, cont:5.92e-06, k:2.28e-09, om:1.43e-01
+
+
+monitor iteration:  35, u: 1.10e+01, v: 3.68e-03, p: 7.74e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 35, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.88e-04, ommin: 7.23e+00
+
+time one iteration: 1.24e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.30e-03              final residual: 4.15e-04                    delta_phi: 1.83e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  5.32e-04              final residual: 7.08e-08                    delta_phi: 8.74e-05
+time v: 6.96e-04
+residual history in solve_2d: initial residual:  1.06e-04              final residual: 4.87e-10                    delta_phi: 3.31e-04
+time pp: 9.26e-03
+residual history in solve_2d: initial residual:  1.38e-03              final residual: 6.47e-10                    delta_phi: 2.98e-04
+time k: 1.01e-03
+residual history in solve_2d: initial residual:  1.04e+02              final residual: 2.89e-05                    delta_phi: 9.30e+00
+time omega: 7.88e-04
+
+--iter:36, max residual:2.64e-06, u:1.62e-06, v:6.65e-07, cont:2.64e-06, k:2.16e-09, om:1.30e-01
+
+
+monitor iteration:  36, u: 1.10e+01, v: 3.69e-03, p: 7.74e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 36, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.88e-04, ommin: 7.23e+00
+
+time one iteration: 1.30e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.27e-03              final residual: 3.78e-04                    delta_phi: 1.85e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  1.15e-03              final residual: 8.76e-08                    delta_phi: 1.56e-04
+time v: 7.11e-04
+residual history in solve_2d: initial residual:  1.57e-04              final residual: 7.72e-10                    delta_phi: 7.47e-04
+time pp: 9.97e-03
+residual history in solve_2d: initial residual:  1.30e-03              final residual: 6.64e-10                    delta_phi: 2.81e-04
+time k: 1.01e-03
+residual history in solve_2d: initial residual:  9.36e+01              final residual: 2.70e-05                    delta_phi: 8.34e+00
+time omega: 7.81e-04
+
+--iter:37, max residual:3.93e-06, u:1.59e-06, v:1.43e-06, cont:3.93e-06, k:2.04e-09, om:1.17e-01
+
+
+monitor iteration:  37, u: 1.10e+01, v: 3.68e-03, p: 7.74e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 37, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.88e-04, ommin: 7.23e+00
+
+time one iteration: 1.38e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.24e-03              final residual: 3.50e-04                    delta_phi: 1.85e-04
+time u: 1.18e-03
+residual history in solve_2d: initial residual:  1.37e-03              final residual: 8.32e-08                    delta_phi: 2.08e-04
+time v: 6.97e-04
+residual history in solve_2d: initial residual:  2.66e-04              final residual: 5.59e-10                    delta_phi: 1.06e-03
+time pp: 1.02e-02
+residual history in solve_2d: initial residual:  1.24e-03              final residual: 5.81e-10                    delta_phi: 2.63e-04
+time k: 1.00e-03
+residual history in solve_2d: initial residual:  8.37e+01              final residual: 2.49e-05                    delta_phi: 7.43e+00
+time omega: 7.79e-04
+
+--iter:38, max residual:6.66e-06, u:1.55e-06, v:1.71e-06, cont:6.66e-06, k:1.93e-09, om:1.05e-01
+
+
+monitor iteration:  38, u: 1.10e+01, v: 3.65e-03, p: 7.74e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 38, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.88e-04, ommin: 7.23e+00
+
+time one iteration: 1.39e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.24e-03              final residual: 3.80e-04                    delta_phi: 1.82e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  9.70e-04              final residual: 7.89e-08                    delta_phi: 1.55e-04
+time v: 6.91e-04
+residual history in solve_2d: initial residual:  2.62e-04              final residual: 3.80e-10                    delta_phi: 9.19e-04
+time pp: 6.83e-03
+residual history in solve_2d: initial residual:  1.17e-03              final residual: 5.51e-10                    delta_phi: 2.45e-04
+time k: 1.02e-03
+residual history in solve_2d: initial residual:  7.56e+01              final residual: 2.55e-05                    delta_phi: 6.71e+00
+time omega: 8.02e-04
+
+--iter:39, max residual:6.55e-06, u:1.55e-06, v:1.21e-06, cont:6.55e-06, k:1.83e-09, om:9.45e-02
+
+
+monitor iteration:  39, u: 1.10e+01, v: 3.62e-03, p: 7.74e-01, k: 2.56e+00, om: 6.77e+03
+
+
+---iter: 39, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.88e-04, ommin: 7.23e+00
+
+time one iteration: 1.06e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.24e-03              final residual: 4.12e-04                    delta_phi: 1.70e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  3.81e-04              final residual: 1.01e-07                    delta_phi: 3.75e-05
+time v: 6.86e-04
+residual history in solve_2d: initial residual:  1.54e-04              final residual: 7.68e-10                    delta_phi: 3.71e-04
+time pp: 9.27e-03
+residual history in solve_2d: initial residual:  1.10e-03              final residual: 5.68e-10                    delta_phi: 2.30e-04
+time k: 1.01e-03
+residual history in solve_2d: initial residual:  6.92e+01              final residual: 2.76e-05                    delta_phi: 6.13e+00
+time omega: 7.87e-04
+
+--iter:40, max residual:3.86e-06, u:1.55e-06, v:4.76e-07, cont:3.86e-06, k:1.73e-09, om:8.65e-02
+
+
+monitor iteration:  40, u: 1.10e+01, v: 3.60e-03, p: 7.74e-01, k: 2.55e+00, om: 6.77e+03
+
+
+---iter: 40, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.88e-04, ommin: 7.23e+00
+
+time one iteration: 1.30e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.18e-03              final residual: 3.92e-04                    delta_phi: 1.58e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  7.05e-04              final residual: 6.71e-08                    delta_phi: 1.00e-04
+time v: 7.08e-04
+residual history in solve_2d: initial residual:  7.84e-05              final residual: 3.88e-10                    delta_phi: 4.23e-04
+time pp: 9.27e-03
+residual history in solve_2d: initial residual:  1.03e-03              final residual: 5.82e-10                    delta_phi: 2.17e-04
+time k: 1.01e-03
+residual history in solve_2d: initial residual:  6.19e+01              final residual: 2.81e-05                    delta_phi: 5.46e+00
+time omega: 7.82e-04
+
+--iter:41, max residual:1.96e-06, u:1.47e-06, v:8.81e-07, cont:1.96e-06, k:1.60e-09, om:7.74e-02
+
+
+monitor iteration:  41, u: 1.10e+01, v: 3.60e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 41, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.88e-04, ommin: 7.23e+00
+
+time one iteration: 1.31e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.11e-03              final residual: 3.48e-04                    delta_phi: 1.63e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  1.02e-03              final residual: 6.55e-08                    delta_phi: 1.56e-04
+time v: 7.04e-04
+residual history in solve_2d: initial residual:  1.70e-04              final residual: 8.47e-10                    delta_phi: 7.19e-04
+time pp: 9.55e-03
+residual history in solve_2d: initial residual:  9.56e-04              final residual: 5.80e-10                    delta_phi: 2.06e-04
+time k: 9.96e-04
+residual history in solve_2d: initial residual:  5.38e+01              final residual: 2.56e-05                    delta_phi: 4.73e+00
+time omega: 7.84e-04
+
+--iter:42, max residual:4.25e-06, u:1.39e-06, v:1.28e-06, cont:4.25e-06, k:1.49e-09, om:6.73e-02
+
+
+monitor iteration:  42, u: 1.10e+01, v: 3.62e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 42, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.87e-04, ommin: 7.23e+00
+
+time one iteration: 1.33e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.10e-03              final residual: 3.52e-04                    delta_phi: 1.55e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  8.41e-04              final residual: 5.59e-08                    delta_phi: 1.37e-04
+time v: 7.02e-04
+residual history in solve_2d: initial residual:  1.98e-04              final residual: 4.01e-10                    delta_phi: 7.34e-04
+time pp: 9.13e-03
+residual history in solve_2d: initial residual:  9.00e-04              final residual: 3.95e-10                    delta_phi: 1.96e-04
+time k: 9.94e-04
+residual history in solve_2d: initial residual:  4.72e+01              final residual: 2.06e-05                    delta_phi: 4.13e+00
+time omega: 7.84e-04
+
+--iter:43, max residual:4.96e-06, u:1.38e-06, v:1.05e-06, cont:4.96e-06, k:1.41e-09, om:5.91e-02
+
+
+monitor iteration:  43, u: 1.10e+01, v: 3.65e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 43, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.87e-04, ommin: 7.23e+00
+
+time one iteration: 1.29e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.13e-03              final residual: 3.76e-04                    delta_phi: 1.47e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  3.66e-04              final residual: 8.90e-08                    delta_phi: 4.28e-05
+time v: 6.65e-04
+residual history in solve_2d: initial residual:  1.30e-04              final residual: 6.41e-10                    delta_phi: 3.31e-04
+time pp: 6.03e-03
+residual history in solve_2d: initial residual:  8.51e-04              final residual: 4.12e-10                    delta_phi: 1.85e-04
+time k: 9.84e-04
+residual history in solve_2d: initial residual:  4.24e+01              final residual: 1.98e-05                    delta_phi: 3.70e+00
+time omega: 8.01e-04
+
+--iter:44, max residual:3.25e-06, u:1.42e-06, v:4.57e-07, cont:3.25e-06, k:1.33e-09, om:5.30e-02
+
+
+monitor iteration:  44, u: 1.10e+01, v: 3.67e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 44, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.87e-04, ommin: 7.23e+00
+
+time one iteration: 9.76e-03
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.14e-03              final residual: 3.73e-04                    delta_phi: 1.44e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  6.10e-04              final residual: 1.01e-07                    delta_phi: 9.46e-05
+time v: 6.71e-04
+residual history in solve_2d: initial residual:  7.27e-05              final residual: 3.11e-10                    delta_phi: 4.45e-04
+time pp: 9.10e-03
+residual history in solve_2d: initial residual:  8.01e-04              final residual: 4.10e-10                    delta_phi: 1.73e-04
+time k: 9.93e-04
+residual history in solve_2d: initial residual:  3.73e+01              final residual: 1.86e-05                    delta_phi: 3.24e+00
+time omega: 7.99e-04
+
+--iter:45, max residual:1.82e-06, u:1.42e-06, v:7.62e-07, cont:1.82e-06, k:1.25e-09, om:4.66e-02
+
+
+monitor iteration:  45, u: 1.10e+01, v: 3.67e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 45, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.87e-04, ommin: 7.23e+00
+
+time one iteration: 1.28e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.12e-03              final residual: 3.45e-04                    delta_phi: 1.43e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  9.68e-04              final residual: 5.86e-08                    delta_phi: 1.43e-04
+time v: 7.01e-04
+residual history in solve_2d: initial residual:  1.59e-04              final residual: 7.97e-10                    delta_phi: 6.85e-04
+time pp: 9.44e-03
+residual history in solve_2d: initial residual:  7.56e-04              final residual: 4.21e-10                    delta_phi: 1.61e-04
+time k: 9.88e-04
+residual history in solve_2d: initial residual:  3.15e+01              final residual: 1.67e-05                    delta_phi: 2.76e+00
+time omega: 7.93e-04
+
+--iter:46, max residual:3.98e-06, u:1.40e-06, v:1.21e-06, cont:3.98e-06, k:1.18e-09, om:3.94e-02
+
+
+monitor iteration:  46, u: 1.10e+01, v: 3.66e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 46, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.87e-04, ommin: 7.23e+00
+
+time one iteration: 1.32e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.11e-03              final residual: 3.48e-04                    delta_phi: 1.38e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  9.19e-04              final residual: 5.48e-08                    delta_phi: 1.48e-04
+time v: 7.06e-04
+residual history in solve_2d: initial residual:  2.05e-04              final residual: 9.46e-10                    delta_phi: 8.03e-04
+time pp: 7.98e-03
+residual history in solve_2d: initial residual:  7.19e-04              final residual: 3.20e-10                    delta_phi: 1.48e-04
+time k: 1.00e-03
+residual history in solve_2d: initial residual:  2.72e+01              final residual: 1.48e-05                    delta_phi: 2.47e+00
+time omega: 7.86e-04
+
+--iter:47, max residual:5.12e-06, u:1.39e-06, v:1.15e-06, cont:5.12e-06, k:1.12e-09, om:3.40e-02
+
+
+monitor iteration:  47, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 47, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.87e-04, ommin: 7.23e+00
+
+time one iteration: 1.18e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.12e-03              final residual: 3.71e-04                    delta_phi: 1.37e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  5.01e-04              final residual: 8.67e-08                    delta_phi: 7.98e-05
+time v: 6.74e-04
+residual history in solve_2d: initial residual:  1.63e-04              final residual: 8.12e-10                    delta_phi: 5.40e-04
+time pp: 8.21e-03
+residual history in solve_2d: initial residual:  6.81e-04              final residual: 3.71e-10                    delta_phi: 1.37e-04
+time k: 1.01e-03
+residual history in solve_2d: initial residual:  2.44e+01              final residual: 1.63e-05                    delta_phi: 2.26e+00
+time omega: 7.84e-04
+
+--iter:48, max residual:4.06e-06, u:1.40e-06, v:6.26e-07, cont:4.06e-06, k:1.06e-09, om:3.05e-02
+
+
+monitor iteration:  48, u: 1.10e+01, v: 3.61e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 48, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.87e-04, ommin: 7.23e+00
+
+time one iteration: 1.20e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.10e-03              final residual: 3.73e-04                    delta_phi: 1.29e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  3.31e-04              final residual: 7.23e-08                    delta_phi: 5.32e-05
+time v: 6.72e-04
+residual history in solve_2d: initial residual:  7.28e-05              final residual: 1.89e-10                    delta_phi: 1.86e-04
+time pp: 9.15e-03
+residual history in solve_2d: initial residual:  6.35e-04              final residual: 3.48e-10                    delta_phi: 1.27e-04
+time k: 1.01e-03
+residual history in solve_2d: initial residual:  2.15e+01              final residual: 1.75e-05                    delta_phi: 2.06e+00
+time omega: 7.85e-04
+
+--iter:49, max residual:1.82e-06, u:1.37e-06, v:4.13e-07, cont:1.82e-06, k:9.93e-10, om:2.68e-02
+
+
+monitor iteration:  49, u: 1.10e+01, v: 3.60e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 49, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.87e-04, ommin: 7.23e+00
+
+time one iteration: 1.29e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.05e-03              final residual: 3.47e-04                    delta_phi: 1.32e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  6.59e-04              final residual: 8.92e-08                    delta_phi: 9.55e-05
+time v: 6.78e-04
+residual history in solve_2d: initial residual:  8.72e-05              final residual: 4.29e-10                    delta_phi: 3.86e-04
+time pp: 9.38e-03
+residual history in solve_2d: initial residual:  5.87e-04              final residual: 3.91e-10                    delta_phi: 1.20e-04
+time k: 1.00e-03
+residual history in solve_2d: initial residual:  1.73e+01              final residual: 1.68e-05                    delta_phi: 1.80e+00
+time omega: 7.96e-04
+
+--iter:50, max residual:2.18e-06, u:1.31e-06, v:8.24e-07, cont:2.18e-06, k:9.17e-10, om:2.16e-02
+
+
+monitor iteration:  50, u: 1.10e+01, v: 3.61e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 50, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.87e-04, ommin: 7.23e+00
+
+time one iteration: 1.31e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.03e-03              final residual: 3.30e-04                    delta_phi: 1.34e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  7.21e-04              final residual: 8.70e-08                    delta_phi: 1.18e-04
+time v: 6.69e-04
+residual history in solve_2d: initial residual:  1.41e-04              final residual: 6.79e-10                    delta_phi: 5.79e-04
+time pp: 1.02e-02
+residual history in solve_2d: initial residual:  5.48e-04              final residual: 3.21e-10                    delta_phi: 1.13e-04
+time k: 9.94e-04
+residual history in solve_2d: initial residual:  1.34e+01              final residual: 1.25e-05                    delta_phi: 1.52e+00
+time omega: 7.86e-04
+
+--iter:51, max residual:3.53e-06, u:1.28e-06, v:9.01e-07, cont:3.53e-06, k:8.57e-10, om:1.67e-02
+
+
+monitor iteration:  51, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 51, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.87e-04, ommin: 7.23e+00
+
+time one iteration: 1.39e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.03e-03              final residual: 3.40e-04                    delta_phi: 1.31e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  4.39e-04              final residual: 6.66e-08                    delta_phi: 7.30e-05
+time v: 6.87e-04
+residual history in solve_2d: initial residual:  1.25e-04              final residual: 6.23e-10                    delta_phi: 4.28e-04
+time pp: 8.06e-03
+residual history in solve_2d: initial residual:  5.20e-04              final residual: 2.43e-10                    delta_phi: 1.06e-04
+time k: 9.98e-04
+residual history in solve_2d: initial residual:  1.08e+01              final residual: 9.98e-06                    delta_phi: 1.27e+00
+time omega: 7.89e-04
+
+--iter:52, max residual:3.13e-06, u:1.29e-06, v:5.48e-07, cont:3.13e-06, k:8.12e-10, om:1.35e-02
+
+
+monitor iteration:  52, u: 1.10e+01, v: 3.65e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 52, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.87e-04, ommin: 7.23e+00
+
+time one iteration: 1.18e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.04e-03              final residual: 3.47e-04                    delta_phi: 1.28e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  3.01e-04              final residual: 5.72e-08                    delta_phi: 5.25e-05
+time v: 6.71e-04
+residual history in solve_2d: initial residual:  6.27e-05              final residual: 3.06e-10                    delta_phi: 2.21e-04
+time pp: 9.34e-03
+residual history in solve_2d: initial residual:  4.93e-04              final residual: 2.41e-10                    delta_phi: 9.86e-05
+time k: 9.94e-04
+residual history in solve_2d: initial residual:  8.82e+00              final residual: 3.68e-06                    delta_phi: 1.07e+00
+time omega: 8.17e-04
+
+--iter:53, max residual:1.57e-06, u:1.30e-06, v:3.76e-07, cont:1.57e-06, k:7.70e-10, om:1.10e-02
+
+
+monitor iteration:  53, u: 1.10e+01, v: 3.66e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 53, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.31e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.03e-03              final residual: 3.32e-04                    delta_phi: 1.30e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  6.15e-04              final residual: 7.96e-08                    delta_phi: 8.43e-05
+time v: 6.68e-04
+residual history in solve_2d: initial residual:  8.50e-05              final residual: 2.99e-10                    delta_phi: 4.19e-04
+time pp: 9.16e-03
+residual history in solve_2d: initial residual:  4.66e-04              final residual: 2.63e-10                    delta_phi: 9.04e-05
+time k: 9.99e-04
+residual history in solve_2d: initial residual:  6.30e+00              final residual: 3.20e-06                    delta_phi: 8.59e-01
+time omega: 8.17e-04
+
+--iter:54, max residual:2.13e-06, u:1.29e-06, v:7.68e-07, cont:2.13e-06, k:7.28e-10, om:7.88e-03
+
+
+monitor iteration:  54, u: 1.10e+01, v: 3.66e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 54, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.29e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.02e-03              final residual: 5.24e-04                    delta_phi: 9.30e-05
+time u: 1.14e-03
+residual history in solve_2d: initial residual:  7.35e-04              final residual: 7.97e-08                    delta_phi: 1.17e-04
+time v: 6.90e-04
+residual history in solve_2d: initial residual:  1.42e-04              final residual: 4.89e-10                    delta_phi: 5.98e-04
+time pp: 1.02e-02
+residual history in solve_2d: initial residual:  4.51e-04              final residual: 3.19e-10                    delta_phi: 8.29e-05
+time k: 1.00e-03
+residual history in solve_2d: initial residual:  1.21e+01              final residual: 4.11e-06                    delta_phi: 1.05e+00
+time omega: 8.19e-04
+
+--iter:55, max residual:3.55e-06, u:1.28e-06, v:9.19e-07, cont:3.55e-06, k:7.05e-10, om:1.51e-02
+
+
+monitor iteration:  55, u: 1.10e+01, v: 3.64e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 55, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.39e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.03e-03              final residual: 3.41e-04                    delta_phi: 1.25e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  5.06e-04              final residual: 7.76e-08                    delta_phi: 8.50e-05
+time v: 6.79e-04
+residual history in solve_2d: initial residual:  1.36e-04              final residual: 4.98e-10                    delta_phi: 5.07e-04
+time pp: 6.91e-03
+residual history in solve_2d: initial residual:  4.34e-04              final residual: 2.52e-10                    delta_phi: 7.48e-05
+time k: 9.98e-04
+residual history in solve_2d: initial residual:  4.19e+00              final residual: 3.11e-06                    delta_phi: 6.71e-01
+time omega: 8.25e-04
+
+--iter:56, max residual:3.41e-06, u:1.29e-06, v:6.32e-07, cont:3.41e-06, k:6.79e-10, om:5.24e-03
+
+
+monitor iteration:  56, u: 1.10e+01, v: 3.62e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 56, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.07e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  1.01e-03              final residual: 3.36e-04                    delta_phi: 1.24e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  2.31e-04              final residual: 5.64e-08                    delta_phi: 2.74e-05
+time v: 6.77e-04
+residual history in solve_2d: initial residual:  8.04e-05              final residual: 3.99e-10                    delta_phi: 1.96e-04
+time pp: 9.44e-03
+residual history in solve_2d: initial residual:  4.12e-04              final residual: 2.54e-10                    delta_phi: 6.82e-05
+time k: 9.98e-04
+residual history in solve_2d: initial residual:  3.31e+00              final residual: 2.75e-06                    delta_phi: 4.61e-01
+time omega: 8.20e-04
+
+--iter:57, max residual:2.01e-06, u:1.26e-06, v:2.89e-07, cont:2.01e-06, k:6.44e-10, om:4.14e-03
+
+
+monitor iteration:  57, u: 1.10e+01, v: 3.61e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 57, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.32e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  9.86e-04              final residual: 5.34e-04                    delta_phi: 8.35e-05
+time u: 1.18e-03
+residual history in solve_2d: initial residual:  3.78e-04              final residual: 6.03e-08                    delta_phi: 5.35e-05
+time v: 6.73e-04
+residual history in solve_2d: initial residual:  4.62e-05              final residual: 2.26e-10                    delta_phi: 2.37e-04
+time pp: 9.63e-03
+residual history in solve_2d: initial residual:  3.90e-04              final residual: 3.60e-10                    delta_phi: 6.44e-05
+time k: 1.01e-03
+residual history in solve_2d: initial residual:  7.91e+00              final residual: 3.56e-06                    delta_phi: 7.12e-01
+time omega: 8.18e-04
+
+--iter:58, max residual:1.23e-06, u:1.23e-06, v:4.72e-07, cont:1.15e-06, k:6.09e-10, om:9.88e-03
+
+
+monitor iteration:  58, u: 1.10e+01, v: 3.61e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 58, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.34e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  9.74e-04              final residual: 3.18e-04                    delta_phi: 1.24e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  5.26e-04              final residual: 7.62e-08                    delta_phi: 8.39e-05
+time v: 6.76e-04
+residual history in solve_2d: initial residual:  8.84e-05              final residual: 2.48e-10                    delta_phi: 3.85e-04
+time pp: 1.01e-02
+residual history in solve_2d: initial residual:  3.67e-04              final residual: 2.30e-10                    delta_phi: 5.97e-05
+time k: 9.93e-04
+residual history in solve_2d: initial residual:  4.57e+00              final residual: 1.87e-06                    delta_phi: 3.50e-01
+time omega: 8.25e-04
+
+--iter:59, max residual:2.21e-06, u:1.22e-06, v:6.57e-07, cont:2.21e-06, k:5.73e-10, om:5.71e-03
+
+
+monitor iteration:  59, u: 1.10e+01, v: 3.62e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 59, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.39e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  9.60e-04              final residual: 4.98e-04                    delta_phi: 8.74e-05
+time u: 1.13e-03
+residual history in solve_2d: initial residual:  4.14e-04              final residual: 5.74e-08                    delta_phi: 7.20e-05
+time v: 6.70e-04
+residual history in solve_2d: initial residual:  9.86e-05              final residual: 4.92e-10                    delta_phi: 3.84e-04
+time pp: 7.15e-03
+residual history in solve_2d: initial residual:  3.56e-04              final residual: 2.46e-10                    delta_phi: 5.66e-05
+time k: 9.97e-04
+residual history in solve_2d: initial residual:  3.45e+00              final residual: 2.41e-06                    delta_phi: 4.47e-01
+time omega: 8.16e-04
+
+--iter:60, max residual:2.46e-06, u:1.20e-06, v:5.18e-07, cont:2.46e-06, k:5.57e-10, om:4.31e-03
+
+
+monitor iteration:  60, u: 1.10e+01, v: 3.64e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 60, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.09e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  9.72e-04              final residual: 3.22e-04                    delta_phi: 1.20e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  2.09e-04              final residual: 4.97e-08                    delta_phi: 2.55e-05
+time v: 6.77e-04
+residual history in solve_2d: initial residual:  6.43e-05              final residual: 2.67e-10                    delta_phi: 1.69e-04
+time pp: 6.92e-03
+residual history in solve_2d: initial residual:  3.43e-04              final residual: 1.97e-10                    delta_phi: 5.25e-05
+time k: 9.98e-04
+residual history in solve_2d: initial residual:  7.01e+00              final residual: 4.39e-06                    delta_phi: 6.25e-01
+time omega: 7.85e-04
+
+--iter:61, max residual:1.61e-06, u:1.22e-06, v:2.62e-07, cont:1.61e-06, k:5.36e-10, om:8.77e-03
+
+
+monitor iteration:  61, u: 1.10e+01, v: 3.65e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 61, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.07e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  9.63e-04              final residual: 4.99e-04                    delta_phi: 8.52e-05
+time u: 1.14e-03
+residual history in solve_2d: initial residual:  3.56e-04              final residual: 6.26e-08                    delta_phi: 5.43e-05
+time v: 6.62e-04
+residual history in solve_2d: initial residual:  4.56e-05              final residual: 2.22e-10                    delta_phi: 2.65e-04
+time pp: 9.31e-03
+residual history in solve_2d: initial residual:  3.34e-04              final residual: 2.82e-10                    delta_phi: 4.86e-05
+time k: 1.00e-03
+residual history in solve_2d: initial residual:  1.56e+00              final residual: 6.53e-07                    delta_phi: 2.30e-01
+time omega: 8.36e-04
+
+--iter:62, max residual:1.20e-06, u:1.20e-06, v:4.46e-07, cont:1.14e-06, k:5.21e-10, om:1.95e-03
+
+
+monitor iteration:  62, u: 1.10e+01, v: 3.65e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 62, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.31e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  9.66e-04              final residual: 3.07e-04                    delta_phi: 1.20e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  4.93e-04              final residual: 6.45e-08                    delta_phi: 7.64e-05
+time v: 6.68e-04
+residual history in solve_2d: initial residual:  8.51e-05              final residual: 4.19e-10                    delta_phi: 3.71e-04
+time pp: 9.35e-03
+residual history in solve_2d: initial residual:  3.22e-04              final residual: 1.89e-10                    delta_phi: 4.32e-05
+time k: 9.96e-04
+residual history in solve_2d: initial residual:  9.48e+00              final residual: 8.33e-06                    delta_phi: 8.73e-01
+time omega: 7.62e-04
+
+--iter:63, max residual:2.13e-06, u:1.21e-06, v:6.17e-07, cont:2.13e-06, k:5.03e-10, om:1.19e-02
+
+
+monitor iteration:  63, u: 1.10e+01, v: 3.64e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 63, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.30e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  9.51e-04              final residual: 4.83e-04                    delta_phi: 8.58e-05
+time u: 1.13e-03
+residual history in solve_2d: initial residual:  4.47e-04              final residual: 9.87e-08                    delta_phi: 7.60e-05
+time v: 6.34e-04
+residual history in solve_2d: initial residual:  1.02e-04              final residual: 5.10e-10                    delta_phi: 4.19e-04
+time pp: 8.50e-03
+residual history in solve_2d: initial residual:  3.17e-04              final residual: 2.44e-10                    delta_phi: 3.90e-05
+time k: 9.96e-04
+residual history in solve_2d: initial residual:  2.83e+00              final residual: 1.14e-06                    delta_phi: 2.56e-01
+time omega: 8.15e-04
+
+--iter:64, max residual:2.55e-06, u:1.19e-06, v:5.59e-07, cont:2.55e-06, k:4.96e-10, om:3.54e-03
+
+
+monitor iteration:  64, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 64, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.22e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  9.53e-04              final residual: 3.12e-04                    delta_phi: 1.15e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  2.29e-04              final residual: 8.06e-08                    delta_phi: 3.49e-05
+time v: 6.58e-04
+residual history in solve_2d: initial residual:  7.53e-05              final residual: 1.61e-10                    delta_phi: 2.51e-04
+time pp: 9.13e-03
+residual history in solve_2d: initial residual:  3.09e-04              final residual: 2.05e-10                    delta_phi: 3.53e-05
+time k: 1.01e-03
+residual history in solve_2d: initial residual:  1.05e+01              final residual: 8.89e-06                    delta_phi: 9.70e-01
+time omega: 7.62e-04
+
+--iter:65, max residual:1.88e-06, u:1.19e-06, v:2.86e-07, cont:1.88e-06, k:4.83e-10, om:1.31e-02
+
+
+monitor iteration:  65, u: 1.10e+01, v: 3.62e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 65, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.28e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  9.30e-04              final residual: 4.82e-04                    delta_phi: 8.15e-05
+time u: 1.14e-03
+residual history in solve_2d: initial residual:  2.00e-04              final residual: 7.55e-08                    delta_phi: 3.24e-05
+time v: 6.57e-04
+residual history in solve_2d: initial residual:  3.54e-05              final residual: 1.27e-10                    delta_phi: 1.30e-04
+time pp: 9.06e-03
+residual history in solve_2d: initial residual:  3.00e-04              final residual: 2.83e-10                    delta_phi: 3.50e-05
+time k: 1.02e-03
+residual history in solve_2d: initial residual:  3.66e+00              final residual: 1.21e-06                    delta_phi: 3.39e-01
+time omega: 8.24e-04
+
+--iter:66, max residual:1.16e-06, u:1.16e-06, v:2.49e-07, cont:8.86e-07, k:4.68e-10, om:4.58e-03
+
+
+monitor iteration:  66, u: 1.10e+01, v: 3.61e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 66, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.28e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  9.21e-04              final residual: 2.98e-04                    delta_phi: 1.15e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  3.38e-04              final residual: 1.02e-07                    delta_phi: 5.23e-05
+time v: 6.41e-04
+residual history in solve_2d: initial residual:  4.87e-05              final residual: 1.83e-10                    delta_phi: 2.18e-04
+time pp: 1.02e-02
+residual history in solve_2d: initial residual:  2.87e-04              final residual: 1.89e-10                    delta_phi: 3.50e-05
+time k: 1.01e-03
+residual history in solve_2d: initial residual:  1.19e+01              final residual: 1.09e-05                    delta_phi: 1.10e+00
+time omega: 7.55e-04
+
+--iter:67, max residual:1.22e-06, u:1.15e-06, v:4.23e-07, cont:1.22e-06, k:4.49e-10, om:1.49e-02
+
+
+monitor iteration:  67, u: 1.10e+01, v: 3.62e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 67, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.39e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  9.04e-04              final residual: 4.57e-04                    delta_phi: 8.28e-05
+time u: 1.13e-03
+residual history in solve_2d: initial residual:  3.18e-04              final residual: 9.95e-08                    delta_phi: 5.59e-05
+time v: 6.57e-04
+residual history in solve_2d: initial residual:  6.62e-05              final residual: 1.76e-10                    delta_phi: 2.78e-04
+time pp: 1.01e-02
+residual history in solve_2d: initial residual:  2.82e-04              final residual: 2.25e-10                    delta_phi: 3.49e-05
+time k: 1.00e-03
+residual history in solve_2d: initial residual:  5.73e+00              final residual: 4.31e-06                    delta_phi: 5.23e-01
+time omega: 7.91e-04
+
+--iter:68, max residual:1.66e-06, u:1.13e-06, v:3.97e-07, cont:1.66e-06, k:4.40e-10, om:7.16e-03
+
+
+monitor iteration:  68, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 68, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.38e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.007
+residual history in solve_2d: initial residual:  9.12e-04              final residual: 2.95e-04                    delta_phi: 1.11e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  1.88e-04              final residual: 8.30e-08                    delta_phi: 2.89e-05
+time v: 6.64e-04
+residual history in solve_2d: initial residual:  5.34e-05              final residual: 1.15e-10                    delta_phi: 1.74e-04
+time pp: 9.03e-03
+residual history in solve_2d: initial residual:  2.76e-04              final residual: 1.48e-10                    delta_phi: 3.48e-05
+time k: 9.95e-04
+residual history in solve_2d: initial residual:  1.30e+01              final residual: 7.55e-06                    delta_phi: 1.19e+00
+time omega: 7.78e-04
+
+--iter:69, max residual:1.33e-06, u:1.14e-06, v:2.35e-07, cont:1.33e-06, k:4.32e-10, om:1.62e-02
+
+
+monitor iteration:  69, u: 1.10e+01, v: 3.64e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 69, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.27e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.007,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  9.03e-04              final residual: 4.56e-04                    delta_phi: 8.02e-05
+time u: 1.13e-03
+residual history in solve_2d: initial residual:  2.10e-04              final residual: 9.18e-08                    delta_phi: 3.61e-05
+time v: 6.52e-04
+residual history in solve_2d: initial residual:  3.17e-05              final residual: 1.56e-10                    delta_phi: 1.79e-04
+time pp: 9.28e-03
+residual history in solve_2d: initial residual:  2.72e-04              final residual: 2.14e-10                    delta_phi: 3.46e-05
+time k: 9.94e-04
+residual history in solve_2d: initial residual:  6.82e+00              final residual: 3.05e-06                    delta_phi: 6.19e-01
+time omega: 7.78e-04
+
+--iter:70, max residual:1.13e-06, u:1.13e-06, v:2.62e-07, cont:7.91e-07, k:4.25e-10, om:8.53e-03
+
+
+monitor iteration:  70, u: 1.10e+01, v: 3.64e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 70, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.30e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  9.07e-04              final residual: 2.86e-04                    delta_phi: 1.10e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  3.31e-04              final residual: 9.75e-08                    delta_phi: 4.85e-05
+time v: 6.60e-04
+residual history in solve_2d: initial residual:  5.24e-05              final residual: 2.37e-10                    delta_phi: 2.29e-04
+time pp: 9.13e-03
+residual history in solve_2d: initial residual:  2.66e-04              final residual: 1.50e-10                    delta_phi: 3.42e-05
+time k: 1.00e-03
+residual history in solve_2d: initial residual:  1.39e+01              final residual: 1.03e-05                    delta_phi: 1.28e+00
+time omega: 7.70e-04
+
+--iter:71, max residual:1.31e-06, u:1.13e-06, v:4.14e-07, cont:1.31e-06, k:4.16e-10, om:1.74e-02
+
+
+monitor iteration:  71, u: 1.10e+01, v: 3.64e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 71, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.28e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.94e-04              final residual: 4.42e-04                    delta_phi: 8.00e-05
+time u: 1.14e-03
+residual history in solve_2d: initial residual:  3.52e-04              final residual: 7.24e-08                    delta_phi: 5.90e-05
+time v: 6.46e-04
+residual history in solve_2d: initial residual:  7.29e-05              final residual: 3.64e-10                    delta_phi: 3.16e-04
+time pp: 8.88e-03
+residual history in solve_2d: initial residual:  2.64e-04              final residual: 1.97e-10                    delta_phi: 3.40e-05
+time k: 9.95e-04
+residual history in solve_2d: initial residual:  8.01e+00              final residual: 5.43e-06                    delta_phi: 7.27e-01
+time omega: 7.99e-04
+
+--iter:72, max residual:1.82e-06, u:1.12e-06, v:4.40e-07, cont:1.82e-06, k:4.12e-10, om:1.00e-02
+
+
+monitor iteration:  72, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 72, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.26e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.95e-04              final residual: 5.33e-04                    delta_phi: 6.30e-05
+time u: 1.14e-03
+residual history in solve_2d: initial residual:  2.24e-04              final residual: 6.00e-08                    delta_phi: 3.80e-05
+time v: 6.47e-04
+residual history in solve_2d: initial residual:  6.36e-05              final residual: 3.17e-10                    delta_phi: 2.44e-04
+time pp: 6.35e-03
+residual history in solve_2d: initial residual:  2.61e-04              final residual: 2.22e-10                    delta_phi: 3.33e-05
+time k: 9.98e-04
+residual history in solve_2d: initial residual:  4.25e+00              final residual: 1.03e-06                    delta_phi: 3.77e-01
+time omega: 8.06e-04
+
+--iter:73, max residual:1.59e-06, u:1.12e-06, v:2.80e-07, cont:1.59e-06, k:4.08e-10, om:5.31e-03
+
+
+monitor iteration:  73, u: 1.10e+01, v: 3.62e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 73, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.01e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.94e-04              final residual: 2.87e-04                    delta_phi: 1.04e-04
+time u: 1.17e-03
+residual history in solve_2d: initial residual:  1.20e-04              final residual: 5.19e-08                    delta_phi: 1.83e-05
+time v: 6.40e-04
+residual history in solve_2d: initial residual:  3.53e-05              final residual: 6.98e-11                    delta_phi: 6.87e-05
+time pp: 9.08e-03
+residual history in solve_2d: initial residual:  2.56e-04              final residual: 1.68e-10                    delta_phi: 3.29e-05
+time k: 9.95e-04
+residual history in solve_2d: initial residual:  1.40e+01              final residual: 9.36e-06                    delta_phi: 1.28e+00
+time omega: 7.57e-04
+
+--iter:74, max residual:1.12e-06, u:1.12e-06, v:1.49e-07, cont:8.82e-07, k:4.00e-10, om:1.75e-02
+
+
+monitor iteration:  74, u: 1.10e+01, v: 3.62e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 74, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.28e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.67e-04              final residual: 4.42e-04                    delta_phi: 7.48e-05
+time u: 1.13e-03
+residual history in solve_2d: initial residual:  2.02e-04              final residual: 6.15e-08                    delta_phi: 2.91e-05
+time v: 6.48e-04
+residual history in solve_2d: initial residual:  2.58e-05              final residual: 7.80e-11                    delta_phi: 1.12e-04
+time pp: 1.01e-02
+residual history in solve_2d: initial residual:  2.51e-04              final residual: 2.23e-10                    delta_phi: 3.26e-05
+time k: 9.98e-04
+residual history in solve_2d: initial residual:  8.57e+00              final residual: 4.15e-06                    delta_phi: 7.71e-01
+time omega: 7.82e-04
+
+--iter:75, max residual:1.08e-06, u:1.08e-06, v:2.53e-07, cont:6.46e-07, k:3.92e-10, om:1.07e-02
+
+
+monitor iteration:  75, u: 1.10e+01, v: 3.62e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 75, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.86e-04, ommin: 7.23e+00
+
+time one iteration: 1.38e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.66e-04              final residual: 5.23e-04                    delta_phi: 5.97e-05
+time u: 1.13e-03
+residual history in solve_2d: initial residual:  2.43e-04              final residual: 7.90e-08                    delta_phi: 4.19e-05
+time v: 6.47e-04
+residual history in solve_2d: initial residual:  4.37e-05              final residual: 5.93e-11                    delta_phi: 1.93e-04
+time pp: 1.01e-02
+residual history in solve_2d: initial residual:  2.46e-04              final residual: 1.98e-10                    delta_phi: 3.19e-05
+time k: 1.00e-03
+residual history in solve_2d: initial residual:  5.37e+00              final residual: 4.41e-06                    delta_phi: 4.77e-01
+time omega: 7.93e-04
+
+--iter:76, max residual:1.09e-06, u:1.08e-06, v:3.03e-07, cont:1.09e-06, k:3.84e-10, om:6.71e-03
+
+
+monitor iteration:  76, u: 1.10e+01, v: 3.62e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 76, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.38e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.70e-04              final residual: 2.75e-04                    delta_phi: 1.02e-04
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  1.68e-04              final residual: 5.85e-08                    delta_phi: 2.90e-05
+time v: 6.61e-04
+residual history in solve_2d: initial residual:  4.31e-05              final residual: 7.71e-11                    delta_phi: 1.60e-04
+time pp: 6.89e-03
+residual history in solve_2d: initial residual:  2.44e-04              final residual: 1.37e-10                    delta_phi: 3.16e-05
+time k: 1.00e-03
+residual history in solve_2d: initial residual:  1.50e+01              final residual: 1.37e-05                    delta_phi: 1.36e+00
+time omega: 7.59e-04
+
+--iter:77, max residual:1.09e-06, u:1.09e-06, v:2.09e-07, cont:1.08e-06, k:3.81e-10, om:1.87e-02
+
+
+monitor iteration:  77, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 77, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.06e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.56e-04              final residual: 4.29e-04                    delta_phi: 7.30e-05
+time u: 1.14e-03
+residual history in solve_2d: initial residual:  1.23e-04              final residual: 6.00e-08                    delta_phi: 2.21e-05
+time v: 6.51e-04
+residual history in solve_2d: initial residual:  2.52e-05              final residual: 1.25e-10                    delta_phi: 1.03e-04
+time pp: 9.29e-03
+residual history in solve_2d: initial residual:  2.41e-04              final residual: 1.74e-10                    delta_phi: 3.13e-05
+time k: 9.96e-04
+residual history in solve_2d: initial residual:  9.88e+00              final residual: 8.62e-06                    delta_phi: 8.91e-01
+time omega: 7.78e-04
+
+--iter:78, max residual:1.07e-06, u:1.07e-06, v:1.54e-07, cont:6.31e-07, k:3.77e-10, om:1.23e-02
+
+
+monitor iteration:  78, u: 1.10e+01, v: 3.64e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 78, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.30e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.61e-04              final residual: 5.11e-04                    delta_phi: 5.88e-05
+time u: 1.14e-03
+residual history in solve_2d: initial residual:  2.19e-04              final residual: 7.80e-08                    delta_phi: 3.01e-05
+time v: 6.42e-04
+residual history in solve_2d: initial residual:  3.14e-05              final residual: 1.06e-10                    delta_phi: 1.64e-04
+time pp: 9.10e-03
+residual history in solve_2d: initial residual:  2.36e-04              final residual: 1.79e-10                    delta_phi: 3.08e-05
+time k: 1.00e-03
+residual history in solve_2d: initial residual:  6.71e+00              final residual: 1.53e-06                    delta_phi: 5.99e-01
+time omega: 8.11e-04
+
+--iter:79, max residual:1.08e-06, u:1.08e-06, v:2.74e-07, cont:7.85e-07, k:3.69e-10, om:8.39e-03
+
+
+monitor iteration:  79, u: 1.10e+01, v: 3.64e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 79, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.28e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.64e-04              final residual: 2.67e-04                    delta_phi: 9.85e-05
+time u: 1.16e-03
+residual history in solve_2d: initial residual:  2.34e-04              final residual: 9.40e-08                    delta_phi: 3.69e-05
+time v: 6.28e-04
+residual history in solve_2d: initial residual:  4.61e-05              final residual: 2.29e-10                    delta_phi: 1.95e-04
+time pp: 9.07e-03
+residual history in solve_2d: initial residual:  2.34e-04              final residual: 1.50e-10                    delta_phi: 3.04e-05
+time k: 9.98e-04
+residual history in solve_2d: initial residual:  1.55e+01              final residual: 4.37e-06                    delta_phi: 1.41e+00
+time omega: 8.09e-04
+
+--iter:80, max residual:1.15e-06, u:1.08e-06, v:2.93e-07, cont:1.15e-06, k:3.66e-10, om:1.93e-02
+
+
+monitor iteration:  80, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 80, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.28e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.45e-04              final residual: 4.18e-04                    delta_phi: 7.11e-05
+time u: 1.13e-03
+residual history in solve_2d: initial residual:  2.06e-04              final residual: 8.13e-08                    delta_phi: 3.54e-05
+time v: 6.32e-04
+residual history in solve_2d: initial residual:  4.95e-05              final residual: 2.45e-10                    delta_phi: 2.01e-04
+time pp: 6.61e-03
+residual history in solve_2d: initial residual:  2.33e-04              final residual: 1.80e-10                    delta_phi: 3.01e-05
+time k: 1.00e-03
+residual history in solve_2d: initial residual:  1.05e+01              final residual: 9.68e-06                    delta_phi: 9.45e-01
+time omega: 7.91e-04
+
+--iter:81, max residual:1.24e-06, u:1.06e-06, v:2.57e-07, cont:1.24e-06, k:3.64e-10, om:1.31e-02
+
+
+monitor iteration:  81, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 81, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.03e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.46e-04              final residual: 4.98e-04                    delta_phi: 5.69e-05
+time u: 1.14e-03
+residual history in solve_2d: initial residual:  1.07e-04              final residual: 7.73e-08                    delta_phi: 1.49e-05
+time v: 6.25e-04
+residual history in solve_2d: initial residual:  3.48e-05              final residual: 1.71e-10                    delta_phi: 1.19e-04
+time pp: 9.17e-03
+residual history in solve_2d: initial residual:  2.30e-04              final residual: 2.09e-10                    delta_phi: 2.95e-05
+time k: 9.88e-04
+residual history in solve_2d: initial residual:  7.18e+00              final residual: 1.64e-06                    delta_phi: 6.37e-01
+time omega: 8.32e-04
+
+--iter:82, max residual:1.06e-06, u:1.06e-06, v:1.34e-07, cont:8.70e-07, k:3.59e-10, om:8.97e-03
+
+
+monitor iteration:  82, u: 1.10e+01, v: 3.62e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 82, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.29e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.45e-04              final residual: 5.28e-04                    delta_phi: 5.05e-05
+time u: 1.13e-03
+residual history in solve_2d: initial residual:  9.45e-05              final residual: 7.36e-08                    delta_phi: 1.46e-05
+time v: 6.20e-04
+residual history in solve_2d: initial residual:  1.71e-05              final residual: 5.32e-11                    delta_phi: 5.80e-05
+time pp: 9.08e-03
+residual history in solve_2d: initial residual:  2.25e-04              final residual: 2.23e-10                    delta_phi: 2.90e-05
+time k: 9.93e-04
+residual history in solve_2d: initial residual:  5.85e+00              final residual: 1.55e-06                    delta_phi: 5.20e-01
+time omega: 8.09e-04
+
+--iter:83, max residual:1.06e-06, u:1.06e-06, v:1.18e-07, cont:4.28e-07, k:3.51e-10, om:7.31e-03
+
+
+monitor iteration:  83, u: 1.10e+01, v: 3.62e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 83, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.27e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.38e-04              final residual: 5.20e-04                    delta_phi: 5.09e-05
+time u: 1.13e-03
+residual history in solve_2d: initial residual:  1.35e-04              final residual: 8.37e-08                    delta_phi: 2.18e-05
+time v: 6.33e-04
+residual history in solve_2d: initial residual:  2.03e-05              final residual: 1.01e-10                    delta_phi: 8.97e-05
+time pp: 9.61e-03
+residual history in solve_2d: initial residual:  2.20e-04              final residual: 2.14e-10                    delta_phi: 2.84e-05
+time k: 9.92e-04
+residual history in solve_2d: initial residual:  6.18e+00              final residual: 1.48e-06                    delta_phi: 5.53e-01
+time omega: 8.10e-04
+
+--iter:84, max residual:1.05e-06, u:1.05e-06, v:1.68e-07, cont:5.09e-07, k:3.44e-10, om:7.72e-03
+
+
+monitor iteration:  84, u: 1.10e+01, v: 3.62e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 84, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.33e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.34e-04              final residual: 5.18e-04                    delta_phi: 5.02e-05
+time u: 1.13e-03
+residual history in solve_2d: initial residual:  1.32e-04              final residual: 8.61e-08                    delta_phi: 2.36e-05
+time v: 8.21e-04
+residual history in solve_2d: initial residual:  2.71e-05              final residual: 7.75e-11                    delta_phi: 1.17e-04
+time pp: 1.03e-02
+residual history in solve_2d: initial residual:  2.17e-04              final residual: 1.85e-10                    delta_phi: 2.78e-05
+time k: 9.96e-04
+residual history in solve_2d: initial residual:  6.61e+00              final residual: 1.48e-06                    delta_phi: 5.93e-01
+time omega: 8.15e-04
+
+--iter:85, max residual:1.04e-06, u:1.04e-06, v:1.65e-07, cont:6.78e-07, k:3.39e-10, om:8.26e-03
+
+
+monitor iteration:  85, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 85, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.42e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.33e-04              final residual: 5.16e-04                    delta_phi: 4.98e-05
+time u: 1.14e-03
+residual history in solve_2d: initial residual:  8.83e-05              final residual: 7.60e-08                    delta_phi: 1.37e-05
+time v: 6.32e-04
+residual history in solve_2d: initial residual:  2.36e-05              final residual: 1.17e-10                    delta_phi: 7.86e-05
+time pp: 6.27e-03
+residual history in solve_2d: initial residual:  2.14e-04              final residual: 1.55e-10                    delta_phi: 2.74e-05
+time k: 9.92e-04
+residual history in solve_2d: initial residual:  6.96e+00              final residual: 1.50e-06                    delta_phi: 6.26e-01
+time omega: 8.19e-04
+
+--iter:86, max residual:1.04e-06, u:1.04e-06, v:1.10e-07, cont:5.90e-07, k:3.34e-10, om:8.69e-03
+
+
+monitor iteration:  86, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 86, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 9.96e-03
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.32e-04              final residual: 5.15e-04                    delta_phi: 4.94e-05
+time u: 1.14e-03
+residual history in solve_2d: initial residual:  7.62e-05              final residual: 7.58e-08                    delta_phi: 1.33e-05
+time v: 6.25e-04
+residual history in solve_2d: initial residual:  1.52e-05              final residual: 7.79e-11                    delta_phi: 6.80e-05
+time pp: 9.02e-03
+residual history in solve_2d: initial residual:  2.10e-04              final residual: 1.71e-10                    delta_phi: 2.67e-05
+time k: 9.92e-04
+residual history in solve_2d: initial residual:  7.27e+00              final residual: 1.52e-06                    delta_phi: 6.55e-01
+time omega: 8.14e-04
+
+--iter:87, max residual:1.04e-06, u:1.04e-06, v:9.53e-08, cont:3.79e-07, k:3.29e-10, om:9.09e-03
+
+
+monitor iteration:  87, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 87, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.27e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.31e-04              final residual: 5.14e-04                    delta_phi: 4.92e-05
+time u: 1.12e-03
+residual history in solve_2d: initial residual:  1.18e-04              final residual: 7.83e-08                    delta_phi: 1.60e-05
+time v: 6.41e-04
+residual history in solve_2d: initial residual:  1.85e-05              final residual: 3.87e-11                    delta_phi: 8.35e-05
+time pp: 1.01e-02
+residual history in solve_2d: initial residual:  2.07e-04              final residual: 1.77e-10                    delta_phi: 2.64e-05
+time k: 9.95e-04
+residual history in solve_2d: initial residual:  7.45e+00              final residual: 1.55e-06                    delta_phi: 6.74e-01
+time omega: 8.17e-04
+
+--iter:88, max residual:1.04e-06, u:1.04e-06, v:1.48e-07, cont:4.62e-07, k:3.23e-10, om:9.31e-03
+
+
+monitor iteration:  88, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 88, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.38e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.29e-04              final residual: 5.13e-04                    delta_phi: 4.88e-05
+time u: 1.21e-03
+residual history in solve_2d: initial residual:  1.36e-04              final residual: 6.25e-08                    delta_phi: 2.22e-05
+time v: 6.28e-04
+residual history in solve_2d: initial residual:  2.66e-05              final residual: 9.84e-11                    delta_phi: 1.15e-04
+time pp: 6.89e-03
+residual history in solve_2d: initial residual:  2.04e-04              final residual: 1.67e-10                    delta_phi: 2.59e-05
+time k: 9.90e-04
+residual history in solve_2d: initial residual:  7.60e+00              final residual: 7.49e-06                    delta_phi: 6.88e-01
+time omega: 7.92e-04
+
+--iter:89, max residual:1.04e-06, u:1.04e-06, v:1.70e-07, cont:6.64e-07, k:3.18e-10, om:9.49e-03
+
+
+monitor iteration:  89, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 89, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.06e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.26e-04              final residual: 5.10e-04                    delta_phi: 4.84e-05
+time u: 1.15e-03
+residual history in solve_2d: initial residual:  1.11e-04              final residual: 1.05e-07                    delta_phi: 1.88e-05
+time v: 5.97e-04
+residual history in solve_2d: initial residual:  2.73e-05              final residual: 9.35e-11                    delta_phi: 1.10e-04
+time pp: 6.91e-03
+residual history in solve_2d: initial residual:  2.01e-04              final residual: 1.67e-10                    delta_phi: 2.55e-05
+time k: 1.00e-03
+residual history in solve_2d: initial residual:  7.62e+00              final residual: 7.01e-06                    delta_phi: 6.88e-01
+time omega: 8.06e-04
+
+--iter:90, max residual:1.03e-06, u:1.03e-06, v:1.38e-07, cont:6.82e-07, k:3.14e-10, om:9.53e-03
+
+
+monitor iteration:  90, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 90, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.06e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.23e-04              final residual: 5.07e-04                    delta_phi: 4.80e-05
+time u: 1.14e-03
+residual history in solve_2d: initial residual:  6.19e-05              final residual: 9.48e-08                    delta_phi: 8.59e-06
+time v: 6.01e-04
+residual history in solve_2d: initial residual:  1.99e-05              final residual: 2.39e-11                    delta_phi: 6.52e-05
+time pp: 9.05e-03
+residual history in solve_2d: initial residual:  1.98e-04              final residual: 1.88e-10                    delta_phi: 2.50e-05
+time k: 9.99e-04
+residual history in solve_2d: initial residual:  7.71e+00              final residual: 6.38e-06                    delta_phi: 6.93e-01
+time omega: 7.89e-04
+
+--iter:91, max residual:1.03e-06, u:1.03e-06, v:7.74e-08, cont:4.99e-07, k:3.10e-10, om:9.64e-03
+
+
+monitor iteration:  91, u: 1.10e+01, v: 3.62e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 91, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.27e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.18e-04              final residual: 5.03e-04                    delta_phi: 4.78e-05
+time u: 1.13e-03
+residual history in solve_2d: initial residual:  4.50e-05              final residual: 8.75e-08                    delta_phi: 6.72e-06
+time v: 5.95e-04
+residual history in solve_2d: initial residual:  9.99e-06              final residual: 7.37e-11                    delta_phi: 2.36e-05
+time pp: 9.11e-03
+residual history in solve_2d: initial residual:  1.95e-04              final residual: 1.91e-10                    delta_phi: 2.47e-05
+time k: 9.92e-04
+residual history in solve_2d: initial residual:  7.78e+00              final residual: 6.11e-06                    delta_phi: 7.00e-01
+time omega: 7.76e-04
+
+--iter:92, max residual:1.02e-06, u:1.02e-06, v:5.62e-08, cont:2.50e-07, k:3.05e-10, om:9.72e-03
+
+
+monitor iteration:  92, u: 1.10e+01, v: 3.62e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 92, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.27e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.15e-04              final residual: 5.00e-04                    delta_phi: 4.75e-05
+time u: 1.14e-03
+residual history in solve_2d: initial residual:  6.53e-05              final residual: 9.95e-08                    delta_phi: 1.08e-05
+time v: 5.95e-04
+residual history in solve_2d: initial residual:  9.35e-06              final residual: 6.97e-11                    delta_phi: 3.93e-05
+time pp: 9.04e-03
+residual history in solve_2d: initial residual:  1.92e-04              final residual: 1.79e-10                    delta_phi: 2.40e-05
+time k: 9.90e-04
+residual history in solve_2d: initial residual:  7.84e+00              final residual: 6.23e-06                    delta_phi: 7.04e-01
+time omega: 8.03e-04
+
+--iter:93, max residual:1.02e-06, u:1.02e-06, v:8.16e-08, cont:2.34e-07, k:3.00e-10, om:9.81e-03
+
+
+monitor iteration:  93, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 93, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.27e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.12e-04              final residual: 4.98e-04                    delta_phi: 4.73e-05
+time u: 1.13e-03
+residual history in solve_2d: initial residual:  6.47e-05              final residual: 5.26e-08                    delta_phi: 1.15e-05
+time v: 6.18e-04
+residual history in solve_2d: initial residual:  1.27e-05              final residual: 9.85e-11                    delta_phi: 5.18e-05
+time pp: 7.63e-03
+residual history in solve_2d: initial residual:  1.89e-04              final residual: 1.50e-10                    delta_phi: 2.38e-05
+time k: 9.98e-04
+residual history in solve_2d: initial residual:  7.89e+00              final residual: 6.43e-06                    delta_phi: 7.07e-01
+time omega: 7.84e-04
+
+--iter:94, max residual:1.01e-06, u:1.01e-06, v:8.09e-08, cont:3.18e-07, k:2.96e-10, om:9.86e-03
+
+
+monitor iteration:  94, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 94, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.13e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.10e-04              final residual: 4.97e-04                    delta_phi: 4.70e-05
+time u: 1.14e-03
+residual history in solve_2d: initial residual:  4.66e-05              final residual: 1.02e-07                    delta_phi: 5.87e-06
+time v: 5.97e-04
+residual history in solve_2d: initial residual:  1.13e-05              final residual: 9.96e-11                    delta_phi: 3.00e-05
+time pp: 5.81e-03
+residual history in solve_2d: initial residual:  1.86e-04              final residual: 1.32e-10                    delta_phi: 2.31e-05
+time k: 9.98e-04
+residual history in solve_2d: initial residual:  7.95e+00              final residual: 6.42e-06                    delta_phi: 7.17e-01
+time omega: 7.89e-04
+
+--iter:95, max residual:1.01e-06, u:1.01e-06, v:5.82e-08, cont:2.82e-07, k:2.91e-10, om:9.94e-03
+
+
+monitor iteration:  95, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 95, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 9.45e-03
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.09e-04              final residual: 4.95e-04                    delta_phi: 4.68e-05
+time u: 1.13e-03
+residual history in solve_2d: initial residual:  5.20e-05              final residual: 5.20e-08                    delta_phi: 9.07e-06
+time v: 6.34e-04
+residual history in solve_2d: initial residual:  9.03e-06              final residual: 9.93e-11                    delta_phi: 5.11e-05
+time pp: 9.23e-03
+residual history in solve_2d: initial residual:  1.83e-04              final residual: 1.34e-10                    delta_phi: 2.30e-05
+time k: 1.01e-03
+residual history in solve_2d: initial residual:  7.91e+00              final residual: 6.03e-06                    delta_phi: 7.11e-01
+time omega: 7.90e-04
+
+--iter:96, max residual:1.01e-06, u:1.01e-06, v:6.50e-08, cont:2.26e-07, k:2.87e-10, om:9.89e-03
+
+
+monitor iteration:  96, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 96, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.29e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.08e-04              final residual: 4.93e-04                    delta_phi: 4.65e-05
+time u: 1.14e-03
+residual history in solve_2d: initial residual:  7.65e-05              final residual: 5.49e-08                    delta_phi: 1.06e-05
+time v: 6.42e-04
+residual history in solve_2d: initial residual:  1.29e-05              final residual: 5.58e-11                    delta_phi: 5.81e-05
+time pp: 9.02e-03
+residual history in solve_2d: initial residual:  1.80e-04              final residual: 1.30e-10                    delta_phi: 2.24e-05
+time k: 9.87e-04
+residual history in solve_2d: initial residual:  7.92e+00              final residual: 5.04e-06                    delta_phi: 7.10e-01
+time omega: 8.06e-04
+
+--iter:97, max residual:1.01e-06, u:1.01e-06, v:9.56e-08, cont:3.22e-07, k:2.82e-10, om:9.90e-03
+
+
+monitor iteration:  97, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 97, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.27e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.06e-04              final residual: 4.92e-04                    delta_phi: 4.62e-05
+time u: 1.14e-03
+residual history in solve_2d: initial residual:  8.48e-05              final residual: 9.79e-08                    delta_phi: 1.38e-05
+time v: 5.95e-04
+residual history in solve_2d: initial residual:  1.73e-05              final residual: 9.90e-11                    delta_phi: 7.65e-05
+time pp: 9.33e-03
+residual history in solve_2d: initial residual:  1.78e-04              final residual: 1.28e-10                    delta_phi: 2.21e-05
+time k: 1.00e-03
+residual history in solve_2d: initial residual:  7.86e+00              final residual: 3.62e-06                    delta_phi: 7.12e-01
+time omega: 7.84e-04
+
+--iter:98, max residual:1.01e-06, u:1.01e-06, v:1.06e-07, cont:4.32e-07, k:2.77e-10, om:9.83e-03
+
+
+monitor iteration:  98, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 98, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.30e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.03e-04              final residual: 4.89e-04                    delta_phi: 4.58e-05
+time u: 1.14e-03
+residual history in solve_2d: initial residual:  6.94e-05              final residual: 7.60e-08                    delta_phi: 1.17e-05
+time v: 6.00e-04
+residual history in solve_2d: initial residual:  1.73e-05              final residual: 8.81e-11                    delta_phi: 7.25e-05
+time pp: 6.89e-03
+residual history in solve_2d: initial residual:  1.75e-04              final residual: 1.34e-10                    delta_phi: 2.16e-05
+time k: 9.98e-04
+residual history in solve_2d: initial residual:  7.87e+00              final residual: 3.34e-06                    delta_phi: 7.05e-01
+time omega: 8.09e-04
+
+--iter:99, max residual:1.00e-06, u:1.00e-06, v:8.68e-08, cont:4.34e-07, k:2.73e-10, om:9.83e-03
+
+
+monitor iteration:  99, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 99, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 1.06e-02
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  8.00e-04              final residual: 4.87e-04                    delta_phi: 4.55e-05
+time u: 1.42e-03
+residual history in solve_2d: initial residual:  4.01e-05              final residual: 6.53e-08                    delta_phi: 5.89e-06
+time v: 6.07e-04
+residual history in solve_2d: initial residual:  1.29e-05              final residual: 9.95e-11                    delta_phi: 4.70e-05
+time pp: 4.87e-03
+residual history in solve_2d: initial residual:  1.72e-04              final residual: 1.46e-10                    delta_phi: 2.13e-05
+time k: 9.91e-04
+residual history in solve_2d: initial residual:  7.83e+00              final residual: 4.12e-06                    delta_phi: 7.02e-01
+time omega: 8.01e-04
+
+--iter:100, max residual:1.00e-06, u:1.00e-06, v:5.01e-08, cont:3.24e-07, k:2.69e-10, om:9.79e-03
+
+
+monitor iteration: 100, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 100, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 8.80e-03
+pk_min_number 4
+pk_max_number 6
+yplus_min_number 9
+yplus_max_number 2
+beta1_min_number 2
+beta1_max_number 34
+beta4_min_number 20
+beta4_max_number 4
+tau wall, south:  1.006,  tau wall, north:  1.006
+residual history in solve_2d: initial residual:  7.97e-04              final residual: 4.84e-04                    delta_phi: 4.53e-05
+time u: 1.14e-03
+residual history in solve_2d: initial residual:  2.12e-05              final residual: 5.82e-08                    delta_phi: 2.89e-06
+time v: 6.09e-04
+residual history in solve_2d: initial residual:  6.62e-06              final residual: 9.71e-11                    delta_phi: 1.39e-05
+time pp: 5.65e-03
+residual history in solve_2d: initial residual:  1.70e-04              final residual: 1.50e-10                    delta_phi: 2.09e-05
+time k: 9.85e-04
+residual history in solve_2d: initial residual:  7.79e+00              final residual: 4.60e-06                    delta_phi: 6.99e-01
+time omega: 7.98e-04
+
+--iter:101, max residual:9.96e-07, u:9.96e-07, v:2.65e-08, cont:1.66e-07, k:2.65e-10, om:9.73e-03
+
+
+monitor iteration: 101, u: 1.10e+01, v: 3.63e-03, p: 7.74e-01, k: 2.55e+00, om: 6.78e+03
+
+
+---iter: 101, umax: 2.77e+01,vismax: 1.16e+03, kmin: 4.85e-04, ommin: 7.23e+00
+
+time one iteration: 9.29e-03
+save_data called
+program reached normal stop

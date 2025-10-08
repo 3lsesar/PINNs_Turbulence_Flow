@@ -1,0 +1,480 @@
+////////////////// Start of input data ////////////////// 
+
+
+
+
+
+########### section 1 choice of differencing scheme ###########
+scheme:                         h
+scheme_turb:                    h
+
+
+########### section 2 turbulence models ###########
+cmu:                          0.09
+kom:                          True
+EARSM:                        False
+PINN:                         True
+c_omega_1:                    0.556
+c_omega_2:                    0.075
+prand_k:                      2.0
+prand_omega:                  2.0
+
+
+########### section 3 restart/save ###########
+restart:                      True
+save:                         True
+
+
+########### section 4 fluid properties ###########
+viscos:                       5.00e-04
+
+
+########### section 5 relaxation factors ###########
+urfvis:                       0.5
+
+
+########### section 6 number of iteration and convergence criterira ###########
+sormax:                       1e-08
+maxit:                        20000
+solver_pp:                    direct
+solver_vel:                   lgmres
+solver_turb:                  direct
+nsweep_vel:                   50
+nsweep_pp:                    50
+nsweep_kom:                   50
+convergence_limit_u:          -1e-06
+convergence_limit_v:          1e-06
+convergence_limit_pp:         0.0005
+convergence_limit_k:          -1e-10
+convergence_limit_om:         -1e-10
+
+
+########### section 7 all variables are printed during the iteration at node ###########
+imon:                         0
+jmon:                         30
+
+
+########### section 8 time-averaging ###########
+
+
+########### section 9 residual scaling parameters ###########
+resnorm_p:                    20.0
+resnorm_vel:                  400.0
+
+
+########### Section 10 grid and boundary conditions ###########
+ni:                           1
+nj:                           60
+cyclic_x:                     False
+
+
+
+
+------boundary conditions for u
+     u_bc_west_type:               n
+     u_bc_east_type:               n
+     u_bc_south_type:              d
+     u_bc_north_type:              n
+     u_bc_south[0]:                0.0
+------boundary conditions for v
+     v_bc_west_type:               n
+     v_bc_east_type:               n
+     v_bc_south_type:              d
+     v_bc_north_type:              d
+     v_bc_south[0]:                0.0
+     v_bc_north[0]:                0.0
+------boundary conditions for k
+     k_bc_west_type:               n
+     k_bc_east_type:               n
+     k_bc_south_type:              d
+     k_bc_north_type:              n
+     k_bc_south[0]:                0.0
+------boundary conditions for omega
+     om_bc_west_type:              n
+     om_bc_east_type:              n
+     om_bc_south_type:             d
+     om_bc_north_type:             n
+     om_bc_south[0]:               3617704.2
+
+
+
+ ////////////////// End of input data //////////////////
+
+
+
+hostname:  tfd117.am.chalmers.se
+prand_k_ML_5200 [2.24675805e-07 6.77050638e-06 1.05282006e-04 7.47275240e-04
+ 3.44625734e-03 1.22422829e-02 5.17426715e-03 7.20362128e-03
+ 1.17189876e-02 2.00050582e-02 3.46533238e-02 5.97270368e-02
+ 1.00604763e-01 1.62801024e-01 2.49194615e-01 3.56634628e-01
+ 4.74726717e-01 5.88973180e-01 6.86696182e-01 7.61403216e-01
+ 8.13340085e-01 8.47569483e-01 8.71542066e-01 8.93344490e-01
+ 9.20666416e-01 9.60449834e-01 1.01886310e+00 1.10141574e+00
+ 1.21309686e+00 1.35834730e+00 1.54103708e+00 1.76435135e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00]
+vist_ML [1.43314182e-07 7.89301901e-06 2.92460548e-05 5.93349915e-05
+ 1.02823343e-04 1.66360924e-04 2.56231081e-04 3.76758117e-04
+ 5.26344001e-04 6.98918523e-04 8.80579944e-04 1.05600492e-03
+ 1.21104583e-03 1.33607871e-03 1.42804086e-03 1.48978965e-03
+ 1.52772584e-03 1.54909043e-03 1.56014789e-03 1.56540508e-03
+ 1.56773468e-03 1.56892065e-03 1.57158347e-03 1.59752007e-03
+ 2.04642626e-03 1.43576678e-02 4.26008382e-02 6.59682773e-02
+ 6.59683814e-02 6.59683814e-02 6.59683814e-02 6.59683814e-02
+ 6.59683814e-02 6.59683814e-02 6.59683814e-02 6.59683814e-02
+ 6.59683814e-02 6.59683814e-02 6.59683814e-02 6.59683814e-02
+ 6.59683814e-02 6.59683814e-02 6.59683814e-02 6.59683814e-02
+ 6.59683814e-02 6.59683814e-02 6.59683814e-02 6.59683814e-02
+ 6.59683814e-02 6.59683814e-02 6.59683814e-02 6.59683814e-02
+ 6.59683814e-02 6.59683814e-02 6.59683814e-02 6.59683814e-02
+ 6.59683814e-02 6.59683814e-02 6.59683814e-02 6.59683814e-02]
+prand_k [[8.73601302e-04 9.87422861e-03 5.39570417e-02 1.85758960e-01
+  3.99114751e-01 6.08075480e-01 7.49591666e-01 8.25046150e-01
+  8.65418161e-01 8.95213654e-01 9.32943518e-01 9.89720666e-01
+  1.07266720e+00 1.18693325e+00 1.33620885e+00 1.52301498e+00
+  1.74885165e+00 1.98549671e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00]]
+read_restart_data called
+vist_kom called
+hybrid scheme, prand= 1
+calcu called
+tau wall, south:  1.000,  tau wall, north:  0.239
+solve_2d called
+nmax 50
+solver in solve_2d: lgmres
+residual history in solve_2d: initial residual:  6.76e-07              final residual: 3.74e-13                    delta_phi: 3.56e-08
+time u: 4.04e-03
+calcv called
+solve_2d called
+nmax 50
+solver in solve_2d: lgmres
+residual history in solve_2d: initial residual:  6.64e-34              final residual: 6.64e-34                    delta_phi: 0.00e+00
+time v: 4.53e-04
+calcp called
+solve_2d called
+nmax 50
+solver in solve_2d: direct solver
+residual history in solve_2d: initial residual:  4.37e-41              final residual: 4.37e-41                    delta_phi: 2.02e-41
+correct_u_v_p called
+time pp: 7.97e-04
+vist_kom called
+hybrid scheme, prand= [[8.73601302e-04 9.87422861e-03 5.39570417e-02 1.85758960e-01
+  3.99114751e-01 6.08075480e-01 7.49591666e-01 8.25046150e-01
+  8.65418161e-01 8.95213654e-01 9.32943518e-01 9.89720666e-01
+  1.07266720e+00 1.18693325e+00 1.33620885e+00 1.52301498e+00
+  1.74885165e+00 1.98549671e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00]]
+calck_kom called
+solve_2d called
+nmax 50
+solver in solve_2d: direct solver
+residual history in solve_2d: initial residual:  1.42e-07              final residual: 1.42e-07                    delta_phi: 1.73e-08
+time k: 4.65e-03
+hybrid scheme, prand= 2.0
+calcom called
+solve_2d called
+nmax 50
+solver in solve_2d: direct solver
+residual history in solve_2d: initial residual:  1.66e-02              final residual: 1.66e-02                    delta_phi: 2.78e-03
+time omega: 5.24e-04
+
+--iter:0, max residual:1.69e-09, u:1.69e-09, v:1.66e-36, cont:2.19e-42, k:8.89e-13, om:4.16e-05
+
+
+monitor iteration:   0, u: 1.56e+01, v:-2.13e-36, p: 1.00e-20, k: 4.49e+00, om: 2.88e+02
+
+
+---iter:  0, umax: 2.37e+01,vismax: 1.72e+02, kmin: 1.49e-02, ommin: 8.23e+00
+
+time one iteration: 1.06e-02
+tau wall, south:  1.000,  tau wall, north:  0.239
+residual history in solve_2d: initial residual:  6.76e-07              final residual: 3.69e-13                    delta_phi: 3.56e-08
+time u: 1.27e-03
+residual history in solve_2d: initial residual:  6.64e-34              final residual: 6.64e-34                    delta_phi: 0.00e+00
+time v: 3.93e-04
+residual history in solve_2d: initial residual:  4.37e-41              final residual: 4.37e-41                    delta_phi: 2.02e-41
+time pp: 7.08e-04
+residual history in solve_2d: initial residual:  1.29e-07              final residual: 1.29e-07                    delta_phi: 1.52e-08
+time k: 2.46e-03
+residual history in solve_2d: initial residual:  9.51e-03              final residual: 9.51e-03                    delta_phi: 1.71e-03
+time omega: 4.78e-04
+
+--iter:1, max residual:1.69e-09, u:1.69e-09, v:1.66e-36, cont:2.19e-42, k:8.03e-13, om:2.38e-05
+
+
+monitor iteration:   1, u: 1.56e+01, v:-2.13e-36, p: 1.00e-20, k: 4.49e+00, om: 2.88e+02
+
+
+---iter:  1, umax: 2.37e+01,vismax: 1.72e+02, kmin: 1.49e-02, ommin: 8.23e+00
+
+time one iteration: 5.47e-03
+save_data called
+program reached normal stop
+0.16user 0.01system 0:00.46elapsed 38%CPU (0avgtext+0avgdata 84864maxresident)k
+0inputs+152outputs (0major+10861minor)pagefaults 0swaps
+////////////////// Start of input data ////////////////// 
+
+
+
+
+
+########### section 1 choice of differencing scheme ###########
+scheme:                         h
+scheme_turb:                    h
+
+
+########### section 2 turbulence models ###########
+cmu:                          0.09
+kom:                          True
+EARSM:                        False
+PINN:                         True
+c_omega_1:                    0.556
+c_omega_2:                    0.075
+prand_k:                      2.0
+prand_omega:                  2.0
+
+
+########### section 3 restart/save ###########
+restart:                      True
+save:                         True
+
+
+########### section 4 fluid properties ###########
+viscos:                       5.00e-04
+
+
+########### section 5 relaxation factors ###########
+urfvis:                       0.5
+
+
+########### section 6 number of iteration and convergence criterira ###########
+sormax:                       1e-08
+maxit:                        20000
+solver_pp:                    direct
+solver_vel:                   lgmres
+solver_turb:                  direct
+nsweep_vel:                   50
+nsweep_pp:                    50
+nsweep_kom:                   50
+convergence_limit_u:          -1e-06
+convergence_limit_v:          1e-06
+convergence_limit_pp:         0.0005
+convergence_limit_k:          -1e-10
+convergence_limit_om:         -1e-10
+
+
+########### section 7 all variables are printed during the iteration at node ###########
+imon:                         0
+jmon:                         30
+
+
+########### section 8 time-averaging ###########
+
+
+########### section 9 residual scaling parameters ###########
+resnorm_p:                    20.0
+resnorm_vel:                  400.0
+
+
+########### Section 10 grid and boundary conditions ###########
+ni:                           1
+nj:                           60
+cyclic_x:                     False
+
+
+
+
+------boundary conditions for u
+     u_bc_west_type:               n
+     u_bc_east_type:               n
+     u_bc_south_type:              d
+     u_bc_north_type:              n
+     u_bc_south[0]:                0.0
+------boundary conditions for v
+     v_bc_west_type:               n
+     v_bc_east_type:               n
+     v_bc_south_type:              d
+     v_bc_north_type:              d
+     v_bc_south[0]:                0.0
+     v_bc_north[0]:                0.0
+------boundary conditions for k
+     k_bc_west_type:               n
+     k_bc_east_type:               n
+     k_bc_south_type:              d
+     k_bc_north_type:              n
+     k_bc_south[0]:                0.0
+------boundary conditions for omega
+     om_bc_west_type:              n
+     om_bc_east_type:              n
+     om_bc_south_type:             d
+     om_bc_north_type:             n
+     om_bc_south[0]:               3617704.2
+
+
+
+ ////////////////// End of input data //////////////////
+
+
+
+hostname:  tfd117.am.chalmers.se
+prand_k_ML_5200 [2.24675805e-07 6.77050638e-06 1.05282006e-04 7.47275240e-04
+ 3.44625734e-03 1.22422829e-02 5.17426715e-03 7.20362128e-03
+ 1.17189876e-02 2.00050582e-02 3.46533238e-02 5.97270368e-02
+ 1.00604763e-01 1.62801024e-01 2.49194615e-01 3.56634628e-01
+ 4.74726717e-01 5.88973180e-01 6.86696182e-01 7.61403216e-01
+ 8.13340085e-01 8.47569483e-01 8.71542066e-01 8.93344490e-01
+ 9.20666416e-01 9.60449834e-01 1.01886310e+00 1.10141574e+00
+ 1.21309686e+00 1.35834730e+00 1.54103708e+00 1.76435135e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00]
+vist_ML [1.43314182e-07 7.89301901e-06 2.92460548e-05 5.93349915e-05
+ 1.02823343e-04 1.66360924e-04 2.56231081e-04 3.76758117e-04
+ 5.26344001e-04 6.98918523e-04 8.80579944e-04 1.05600492e-03
+ 1.21104583e-03 1.33607871e-03 1.42804086e-03 1.48978965e-03
+ 1.52772584e-03 1.54909043e-03 1.56014789e-03 1.56540508e-03
+ 1.56773468e-03 1.56892065e-03 1.57158347e-03 1.59752007e-03
+ 2.04642626e-03 1.43576678e-02 4.26008382e-02 6.59682773e-02
+ 6.59683814e-02 6.59683814e-02 6.59683814e-02 6.59683814e-02
+ 6.59683814e-02 6.59683814e-02 6.59683814e-02 6.59683814e-02
+ 6.59683814e-02 6.59683814e-02 6.59683814e-02 6.59683814e-02
+ 6.59683814e-02 6.59683814e-02 6.59683814e-02 6.59683814e-02
+ 6.59683814e-02 6.59683814e-02 6.59683814e-02 6.59683814e-02
+ 6.59683814e-02 6.59683814e-02 6.59683814e-02 6.59683814e-02
+ 6.59683814e-02 6.59683814e-02 6.59683814e-02 6.59683814e-02
+ 6.59683814e-02 6.59683814e-02 6.59683814e-02 6.59683814e-02]
+prand_k [[8.73601302e-04 9.87422861e-03 5.39570417e-02 1.85758960e-01
+  3.99114751e-01 6.08075480e-01 7.49591666e-01 8.25046150e-01
+  8.65418161e-01 8.95213654e-01 9.32943518e-01 9.89720666e-01
+  1.07266720e+00 1.18693325e+00 1.33620885e+00 1.52301498e+00
+  1.74885165e+00 1.98549671e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00]]
+read_restart_data called
+vist_kom called
+hybrid scheme, prand= 1
+calcu called
+tau wall, south:  1.000,  tau wall, north:  0.239
+solve_2d called
+nmax 50
+solver in solve_2d: lgmres
+residual history in solve_2d: initial residual:  6.76e-07              final residual: 3.74e-13                    delta_phi: 3.56e-08
+time u: 4.04e-03
+calcv called
+solve_2d called
+nmax 50
+solver in solve_2d: lgmres
+residual history in solve_2d: initial residual:  6.64e-34              final residual: 6.64e-34                    delta_phi: 0.00e+00
+time v: 4.53e-04
+calcp called
+solve_2d called
+nmax 50
+solver in solve_2d: direct solver
+residual history in solve_2d: initial residual:  4.37e-41              final residual: 4.37e-41                    delta_phi: 2.02e-41
+correct_u_v_p called
+time pp: 7.97e-04
+vist_kom called
+hybrid scheme, prand= [[8.73601302e-04 9.87422861e-03 5.39570417e-02 1.85758960e-01
+  3.99114751e-01 6.08075480e-01 7.49591666e-01 8.25046150e-01
+  8.65418161e-01 8.95213654e-01 9.32943518e-01 9.89720666e-01
+  1.07266720e+00 1.18693325e+00 1.33620885e+00 1.52301498e+00
+  1.74885165e+00 1.98549671e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+  2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00]]
+calck_kom called
+solve_2d called
+nmax 50
+solver in solve_2d: direct solver
+residual history in solve_2d: initial residual:  1.42e-07              final residual: 1.42e-07                    delta_phi: 1.73e-08
+time k: 4.65e-03
+hybrid scheme, prand= 2.0
+calcom called
+solve_2d called
+nmax 50
+solver in solve_2d: direct solver
+residual history in solve_2d: initial residual:  1.66e-02              final residual: 1.66e-02                    delta_phi: 2.78e-03
+time omega: 5.24e-04
+
+--iter:0, max residual:1.69e-09, u:1.69e-09, v:1.66e-36, cont:2.19e-42, k:8.89e-13, om:4.16e-05
+
+
+monitor iteration:   0, u: 1.56e+01, v:-2.13e-36, p: 1.00e-20, k: 4.49e+00, om: 2.88e+02
+
+
+---iter:  0, umax: 2.37e+01,vismax: 1.72e+02, kmin: 1.49e-02, ommin: 8.23e+00
+
+time one iteration: 1.06e-02
+tau wall, south:  1.000,  tau wall, north:  0.239
+residual history in solve_2d: initial residual:  6.76e-07              final residual: 3.69e-13                    delta_phi: 3.56e-08
+time u: 1.27e-03
+residual history in solve_2d: initial residual:  6.64e-34              final residual: 6.64e-34                    delta_phi: 0.00e+00
+time v: 3.93e-04
+residual history in solve_2d: initial residual:  4.37e-41              final residual: 4.37e-41                    delta_phi: 2.02e-41
+time pp: 7.08e-04
+residual history in solve_2d: initial residual:  1.29e-07              final residual: 1.29e-07                    delta_phi: 1.52e-08
+time k: 2.46e-03
+residual history in solve_2d: initial residual:  9.51e-03              final residual: 9.51e-03                    delta_phi: 1.71e-03
+time omega: 4.78e-04
+
+--iter:1, max residual:1.69e-09, u:1.69e-09, v:1.66e-36, cont:2.19e-42, k:8.03e-13, om:2.38e-05
+
+
+monitor iteration:   1, u: 1.56e+01, v:-2.13e-36, p: 1.00e-20, k: 4.49e+00, om: 2.88e+02
+
+
+---iter:  1, umax: 2.37e+01,vismax: 1.72e+02, kmin: 1.49e-02, ommin: 8.23e+00
+
+time one iteration: 5.47e-03
+save_data called
+program reached normal stop
+0.16user 0.01system 0:00.46elapsed 38%CPU (0avgtext+0avgdata 84864maxresident)k
+0inputs+152outputs (0major+10861minor)pagefaults 0swaps

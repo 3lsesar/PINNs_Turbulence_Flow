@@ -1,0 +1,263 @@
+import scipy.io as sio
+import sys
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+
+plt.rcParams.update({'font.size': 22})
+plt.rcParams.update({'figure.max_open_warning': 0})
+
+plt.interactive(True)
+plt.close('all')
+
+viscos=1/2000
+
+datax= np.loadtxt("x2d.dat")
+x=datax[0:-1]
+ni=int(datax[-1])
+datay= np.loadtxt("y2d.dat")
+y=datay[0:-1]
+nj=int(datay[-1])
+
+x2d=np.zeros((ni+1,nj+1))
+y2d=np.zeros((ni+1,nj+1))
+
+x2d=np.reshape(x,(ni+1,nj+1))
+y2d=np.reshape(y,(ni+1,nj+1))
+
+# compute cell centers
+xp2d=0.25*(x2d[0:-1,0:-1]+x2d[0:-1,1:]+x2d[1:,0:-1]+x2d[1:,1:])
+yp2d=0.25*(y2d[0:-1,0:-1]+y2d[0:-1,1:]+y2d[1:,0:-1]+y2d[1:,1:])
+
+x=xp2d[:,0]
+y=yp2d[0,:]
+
+
+u2d=np.load('u2d_saved.npy')
+p2d=np.load('p2d_saved.npy')
+v2d=np.load('v2d_saved.npy')
+k2d=np.load('k2d_saved.npy')
+om2d=np.load('om2d_saved.npy')
+vis2d=np.load('vis2d_saved.npy')
+
+ubulk = np.trapz(u2d[0,:],yp2d[0,:])/max(y2d[0,:])
+
+xwall_s=0.5*(x2d[0:-1,0]+x2d[1:,0])
+ywall_s=0.5*(y2d[0:-1,0]+y2d[1:,0])
+dist=yp2d[:,0]-ywall_s
+
+ustar2d=(viscos*abs(u2d[:,0])/dist)**0.5
+yplus2d=np.zeros((ni,nj))
+for i in range(0,ni):
+  yplus2d[i,:]=yp2d[i,:]*ustar2d[i]/viscos
+
+cf=ustar2d**2*np.sign(u2d[:,0])/0.5/u2d[:,-1]**2
+
+#load iteration history
+u_iter= np.loadtxt("u-iteratiom.dat")
+u5=u_iter[:,1]
+u10=u_iter[:,2]
+u20=u_iter[:,3]
+u30=u_iter[:,4]
+u40=u_iter[:,5]
+u50=u_iter[:,6]
+
+
+#
+# compute re_delta1 for boundary layer flow
+dx=x[3]-x[2]
+re_disp_bl=np.zeros(ni)
+delta_disp=np.zeros(ni)
+for i in range (0,ni-1):
+   d_disp=0
+   for j in range (1,nj-1):
+      up=u2d[i,j]/u2d[i,-1]
+      dy=y2d[i,j]-y2d[i,j-1]
+      d_disp=d_disp+(1.-min(up,1.))*dy
+
+   delta_disp[i]=d_disp
+   re_disp_bl[i]=d_disp*u2d[i,-1]/viscos
+
+re_disp_bl[-1]=re_disp_bl[-1-1]
+delta_disp[-1]=delta_disp[-1-1]
+
+
+##########################################  displacement thickness
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.25,bottom=0.20)
+plt.plot(xp2d[:,1],delta_disp,'b-')
+plt.ylabel("$\delta^*$")
+plt.xlabel("$x$")
+plt.axis([xp2d[0,0],xp2d[-1,0],0,0.35])
+plt.savefig('delta_disp.png',bbox_inches='tight')
+
+##########################################  Clauser beta 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.25,bottom=0.20)
+dpdx=np.gradient(p2d[:,-1],xp2d[:,1])
+beta=delta_disp*dpdx/ustar2d**2
+plt.plot(xp2d[:,1],beta,'b-')
+plt.ylabel(r"$\beta$")
+plt.xlabel("$x$")
+plt.axis([xp2d[0,0],xp2d[-1,0],-150,50])
+plt.savefig('beta-dpdx.png',bbox_inches='tight')
+
+
+##########################################  P+
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.30,bottom=0.20)
+dpdx=np.gradient(p2d[:,-1],xp2d[:,1])
+p_plus=viscos*dpdx/ustar2d**3
+plt.plot(xp2d[:,1],p_plus,'b-')
+plt.ylabel(r"$P^+$")
+plt.xlabel("$x$")
+plt.axis([xp2d[0,0],xp2d[-1,0],-7,0.23])
+plt.savefig('p-plus.png',bbox_inches='tight')
+
+
+##########################################  cf
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.25,bottom=0.20)
+plt.plot(xp2d[:,1],cf,'b-')
+plt.ylabel("$C_f$")
+plt.xlabel("$x$")
+plt.axis([xp2d[0,0],xp2d[-1,0],-0.0015,0.009])
+plt.savefig('cf.png',bbox_inches='tight')
+
+
+
+
+########################################## U 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+i1=0
+plt.plot(yp2d[i1,:],u2d[i1,:],'b-',label="inlet")
+xx=1;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(yp2d[i1,:],u2d[i1,:],'r-',label="$x=$"+str(xx))
+xx=2;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(yp2d[i1,:],u2d[i1,:],'k-',label="$x=$"+str(xx))
+xx=3;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(yp2d[i1,:],u2d[i1,:],'g-',label="$x=$"+str(xx))
+plt.legend(loc='best',prop=dict(size=13))
+plt.ylabel("$U$")
+plt.xlabel("$y$")
+plt.axis([0, 1, -6, 30])
+plt.savefig('u.png',bbox_inches='tight')
+
+########################################## V 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+i1=0
+plt.plot(yp2d[i1,:],v2d[i1,:],'b-',label="inlet")
+xx=1;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(yp2d[i1,:],v2d[i1,:],'r-',label="$x=$"+str(xx))
+xx=2;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(yp2d[i1,:],v2d[i1,:],'k-',label="$x=$"+str(xx))
+xx=3;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(yp2d[i1,:],v2d[i1,:],'g-',label="$x=$"+str(xx))
+plt.legend(loc='best',prop=dict(size=13))
+plt.ylabel("$V$")
+plt.xlabel("$y$")
+plt.axis([0, 1, -2, 2])
+plt.savefig('v.png',bbox_inches='tight')
+
+########################################## vis 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+i1 = 0
+plt.plot(yp2d[i1,:],vis2d[i1,:]/viscos,'b-',label="inlet")
+xx=1;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(yp2d[i1,:],vis2d[i1,:]/viscos,'r-',label="$x=$"+str(xx))
+xx=2;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(yp2d[i1,:],vis2d[i1,:]/viscos,'k-',label="$x=$"+str(xx))
+xx=3;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(yp2d[i1,:],vis2d[i1,:]/viscos,'g-',label="$x=$"+str(xx))
+plt.legend(loc='best',prop=dict(size=13))
+plt.ylabel(r"$\nu_t/\nu$")
+plt.xlabel("$y$")
+plt.axis([0, 1.3, 0,1100])
+plt.savefig('vis.png',bbox_inches='tight')
+
+########################################## k 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+i1 = 0
+plt.plot(yp2d[i1,:],k2d[i1,:],'b-',label="inlet")
+xx=1;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(yp2d[i1,:],k2d[i1,:],'r-',label="$x=$"+str(xx))
+xx=2;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(yp2d[i1,:],k2d[i1,:],'k-',label="$x=$"+str(xx))
+xx=3;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(yp2d[i1,:],k2d[i1,:],'g-',label="$x=$"+str(xx))
+plt.legend(loc='best',prop=dict(size=13))
+plt.ylabel("$k$")
+plt.xlabel("$y$")
+plt.axis([0, 1.3, 0, 40])
+plt.savefig('k.png',bbox_inches='tight')
+
+########################################## om 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+i1 = 0
+plt.plot(yp2d[i1,:],om2d[i1,:],'b-',label="inlet")
+xx=1;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(yp2d[i1,:],om2d[i1,:],'r-',label="$x=$"+str(xx))
+xx=2;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(yp2d[i1,:],om2d[i1,:],'k-',label="$x=$"+str(xx))
+xx=3;
+i1 = (np.abs(xx-xp2d[:,1])).argmin()  # find index which closest fits xx
+plt.plot(yp2d[i1,:],om2d[i1,:],'g-',label="$x=$"+str(xx))
+plt.legend(loc='best',prop=dict(size=13))
+plt.ylabel(r"$\omega$")
+plt.xlabel("$y$")
+plt.axis([0, 1.3, 0, 3000])
+plt.savefig('om.png',bbox_inches='tight')
+
+
+
+########################################## u iteration
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(u5,'b-',label="$j=5$")
+plt.plot(u10,'r-',label="$j=10$")
+plt.plot(u20,'k-',label="$j=20$")
+plt.plot(u30,'b--',label="$j=30$")
+plt.plot(u40,'r--',label="$j=40$")
+plt.plot(u50,'k--',label="$j=50$")
+plt.legend(loc='best',prop=dict(size=13))
+plt.xlabel('iteration')
+plt.ylabel('$U$')
+plt.savefig('u_vs_iteration.png',bbox_inches='tight')
+
+
+
+##########################################  grid contour
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.25,bottom=0.20)
+plt.plot(x2d[::5,0],y2d[::5,0],'b-')
+
+plt.plot(x2d[::5,-1],y2d[::5,-1],'b-')
+
+plt.plot(x2d[0,::5],y2d[0,::5],'b-')
+
+plt.plot(x2d[-1,::5],y2d[-1,::5],'b-')
+plt.axis('equal')
+
+plt.ylabel("$y$")
+plt.xlabel("$x$")
+plt.savefig('grid-contour-hill.png',bbox_inches='tight')
+

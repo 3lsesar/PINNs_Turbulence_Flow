@@ -1,0 +1,74 @@
+
+c iddes lengthscale
+          rl_dist=0.15*dist3d
+          rl_max=0.15*delta_max
+          rl_iddes=min(max(rl_dist,rl_max,dy),delta_max)
+
+          ueps=(eps3d*viscos)**0.25
+          ystar=ueps*dist3d/viscos
+          rt=phi(i,j,k,te)**2/phi(i,j,k,ed)/viscos
+          fdampf2=((1.-exp(-ystar/3.1))**2)*(1.-0.3*exp(-(rt/6.5)**2))
+          fmu=((1.-exp(-ystar/14.))**2)*
+     &       (1.+5./rt**0.75*exp(-(rt/200.)**2))
+          fmu=min(fmu,1.)
+
+          psi=min(10.,(fdampf2*fmu)**(-0.75))
+
+          rl_c=psi*cdes*rl_iddes  !eq. 9
+
+c---------calculate S
+          dudx= dphidx(i,j,k,u)
+          dvdy= dphidy(i,j,k,v)
+          dwdz= dphidz(i,j,k,w)
+          dudy= dphidy(i,j,k,u)
+          dvdx= dphidx(i,j,k,v)
+          dudz= dphidz(i,j,k,u)
+          dvdz= dphidz(i,j,k,v)
+          dwdx= dphidx(i,j,k,w)
+          dwdy= dphidy(i,j,k,w)
+          s2= (dudx**2+dudy**2+dudz**2+
+     .            dvdx**2+dvdy**2+dvdz**2+
+     .            dwdx**2+dwdy**2+dwdz**2)
+
+          vist=vis(i,j,k)-viscos
+          denom=cappa**2*dist**2*s2**0.5
+c         denom=cappa**2*dist**2*s2
+          denom_old=cappa**2*dist**2*s2
+          r_dt=vist/denom  !eq. 22
+          r_dl=viscos/denom  !eq. 23
+
+          r_dt_old=vist/denom_old
+          r_dl_old=viscos/denom_old
+
+          f_t_old=tanh((c_t**2*r_dt_old)**3)
+          f_l_old=tanh((c_l**2*r_dt_old)**10)
+
+          f_t=tanh((c_t**2*r_dt)**3)
+          f_l=tanh((c_l**2*r_dt)**10)
+
+          f_e2=1.-max(f_t,f_l) !eq. 19
+          f_e2_old=1.-max(f_t_old,f_l_old) !eq. 19
+
+          alpha=0.25-dist/delta_max
+
+          if (alpha.le.0.) then
+             f_e1=2.*exp(-9*alpha**2)
+          else
+             f_e1=2.*exp(-11.09*alpha**2)
+          end if
+
+          f_b=  min(2.*exp(-9*alpha**2),1.)
+
+          f_dt=1.-tanh((8.*r_dt)**3)
+
+          f_e=max(f_e1-1.,0.)*psi*f_e2
+          f_e_old=max(f_e1-1.,0.)*psi*f_e2_old
+
+          f_d=max((1.-f_dt),f_b)
+
+          rl_u=rk**1.5/diss
+
+         
+          rl_tilde=f_d*(1.+f_e)*rl_u+(1.-f_d)*rl_c
+          fk3d=max(1.,rl_u/rl_tilde)
+

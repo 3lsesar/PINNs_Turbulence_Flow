@@ -1,0 +1,87 @@
+import scipy.io as sio
+import numpy as np
+import matplotlib.pyplot as plt
+plt.rcParams.update({'font.size': 22})
+
+
+# read data file
+tec=np.genfromtxt("tec.dat", dtype=None,comments="%")
+
+#text='VARIABLES = X Y P U V u2 v2 w2 uv mu_sgs prod'
+
+x=tec[:,0]
+y=tec[:,1]
+p=tec[:,2]
+u=tec[:,3]
+v=tec[:,4]
+uu=tec[:,5]
+vv=tec[:,6]
+ww=tec[:,7]
+uv=tec[:,8]
+k=0.5*(uu+vv+ww)
+
+if max(y) == 1.:
+   ni=170
+   nj=194
+   nu=1./10000.
+else:
+   nu=1./10595.
+   if max(x) > 8.:
+     nj=162
+     ni=162
+   else:
+     ni=402
+     nj=162
+
+viscos=nu
+
+u2d=np.reshape(u,(nj,ni))
+v2d=np.reshape(v,(nj,ni))
+p2d=np.reshape(p,(nj,ni))
+x2d=np.reshape(x,(nj,ni))
+y2d=np.reshape(y,(nj,ni))
+uu2d=np.reshape(uu,(nj,ni)) #=mean{v'_1v'_1}
+uv2d=np.reshape(uv,(nj,ni)) #=mean{v'_1v'_2}
+vv2d=np.reshape(vv,(nj,ni)) #=mean{v'_2v'_2}
+k2d=np.reshape(k,(nj,ni))
+
+u2d=np.transpose(u2d)
+v2d=np.transpose(v2d)
+p2d=np.transpose(p2d)
+x2d=np.transpose(x2d)
+y2d=np.transpose(y2d)
+uu2d=np.transpose(uu2d)
+vv2d=np.transpose(vv2d)
+uv2d=np.transpose(uv2d)
+k2d=np.transpose(k2d)
+
+
+# set periodic b.c on west boundary
+#u2d[0,:]=u2d[-1,:]
+#v2d[0,:]=v2d[-1,:]
+#p2d[0,:]=p2d[-1,:]
+#uu2d[0,:]=uu2d[-1,:]
+
+
+# x and y are fo the cell centers. The dphidx_dy routine needs the face coordinate, xf2d, yf2d
+# load them
+xc_yc = np.loadtxt("xc_yc.dat")
+xf=xc_yc[:,0]
+yf=xc_yc[:,1]
+xf2d=np.reshape(xf,(nj,ni))
+yf2d=np.reshape(yf,(nj,ni))
+xf2d=np.transpose(xf2d)
+yf2d=np.transpose(yf2d)
+
+# delete last row
+xf2d = np.delete(xf2d, -1, 0)
+yf2d = np.delete(yf2d, -1, 0)
+# delete last columns
+xf2d = np.delete(xf2d, -1, 1)
+yf2d = np.delete(yf2d, -1, 1)
+
+xf2d=np.append(xf2d,ni-1)
+np.savetxt('x2d.dat', xf2d)
+
+yf2d=np.append(yf2d,nj-1)
+np.savetxt('y2d.dat', yf2d)

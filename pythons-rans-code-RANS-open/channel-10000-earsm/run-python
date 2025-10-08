@@ -1,0 +1,7 @@
+#!/bin/bash
+# delete forst line
+sed  '/setup_case()/d' setup_case.py > temp_file
+# add new first line plus global declarations
+cat  ../global temp_file  modify_case.py  \
+calc_earsm.py ../pyCALC-RANS.py  > exec-pyCALC-RANS.py;
+~/anaconda3/bin/python  -u  exec-pyCALC-RANS.py > out

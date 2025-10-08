@@ -1,0 +1,2764 @@
+from scipy import sparse
+import numpy as np
+import sys
+import time
+import pyamg
+from scipy.sparse import spdiags,linalg,eye
+
+def setup_case():
+   global  acrank,acrank_conv, acrank_conv_keps, acrank_conv_kom,\
+   amg_relax, amg_relax_phi, blend,cdes,c_eps_1,c_eps_2, c_l,c_omega_1, c_omega_2, cmu,c_t, \
+   convergence_limit_eps, convergence_limit_k, convergence_limit_om, convergence_limit_p, convergence_limit_u, \
+   convergence_limit_v, convergence_limit_w,amg_cycle, amg_cycle_phi, \
+   cyclic_x, cyclic_z, dt, dist3d,dz, dmin_synt,eps_bc_east, eps_bc_east_type, eps_bc_north, eps_bc_north_type, eps_bc_south, \
+   eps_bc_south_type, eps_bc_west, eps_bc_west_type, eps_bc_z, eps_bc_z_type,fkmin_limit,fx, fy, gen, imon, itstep_stats, \
+   itstep_save,itstep_start,jl0,jmirror_synt,jmon,kappa,k_bc_east,k_bc_east_type,k_bc_north,k_bc_north_type,k_bc_south,\
+   k_bc_south_type,k_bc_west,k_bc_west_type,k_bc_z,k_bc_z_type,keps,keps_des,kmon,kom,kom_peng,kom_des,launder,L_t_synt,\
+   maxit,min_iter,\
+   ni,nj,nk,nmodes_synt,nsweep_keps,nsweep_kom, nsweep_vel, ntstep, om_bc_east, om_bc_east_type, om_bc_north, om_bc_north_type, \
+   om_bc_south, om_bc_south_type, om_bc_west, om_bc_west_type, om_bc_z, om_bc_z_type, p_bc_east, p_bc_east_type, \
+   p_bc_north, p_bc_north_type, p_bc_south, p_bc_south_type, p_bc_west, p_bc_west_type, p_bc_z, p_bc_z_type, pans, prand_eps,\
+   prand_k,prand_omega,resnorm_p,resnorm_vel,restart,save,save_vtk_movie,scheme,scheme_turb,smag,solver_vel,solver_turb,sormax, \
+   s2,sst,u_bc_east, u_bc_east_type, u_bc_north, u_bc_north_type, u_bc_south, u_bc_south_type, u_bc_west, u_bc_west_type, \
+   u_bc_z, u_bc_z_type, urfvis, v_bc_east, v_bc_east_type, v_bc_north, v_bc_north_type, v_bc_south, v_bc_south_type,v_bc_west,\
+   v_bc_west_type,v_bc_z,v_bc_z_type,viscos, vol,vtk,vtk_save,vtk_file_name,w_bc_east,w_bc_east_type,w_bc_north,w_bc_north_type,\
+   w_bc_south, w_bc_south_type, w_bc_west, w_bc_west_type, w_bc_z, w_bc_z_type, wale, x2d, xp2d, y2d, yp2d, zmax
+
+
+   import numpy as np
+   import sys
+
+# N.B. All variables that are set in this module must be included in the 'return' statement at the last line
+
+########### section 1 choice of differencing scheme ###########
+   scheme='c'  #hybrid
+   scheme_turb='u'  #hybrid upwind-central 
+   acrank=1.0  # for pressure gradient
+   acrank_conv=0.5  # for convection-diffusion
+   acrank_conv_kom=1  # for convection-diffusion
+   acrank_conv_keps=1.0  # for convection-diffusion
+#  scheme_turb='h'  #hybrid upwind-central 
+
+
+########### section 2 turbulence models ###########
+   cmu=0.09
+   pans = False
+   fkmin_limit=0.
+   keps = False
+   kom_des = True
+   keps_des = False
+   kom = False
+   wale = False
+   smag = False
+   launder = False
+   c_eps_1=1.5
+   c_eps_2=1.9
+   cdes=0.67
+   kappa=0.4
+   c_t=1.87
+   c_l=5
+   cmu=0.09
+   c_omega_1= 5./9.
+   c_omega_2=3./40.
+   prand_omega=2.0
+   prand_eps=1.4
+   prand_k=1.4
+   jl0=0
+
+   if keps:
+      prand_k=1.4 
+
+   if pans: # i.e. PITM
+      prand_k=1.4
+      prand_eps=1.4 
+
+   if kom or kom_des:
+      prand_k=2.0
+   if smag:
+      cmu=0.1
+
+########### section 3 restart/save ###########
+   restart = True
+   save = True
+   vtk = False
+
+########### section 4 fluid properties ###########
+   viscos=1/5200
+
+########### section 5 relaxation factors ###########
+   urfvis=0.5
+
+########### section 6 number of iteration and convergence criterira ###########
+   maxit=5
+   min_iter=1
+   sormax=1e-3
+
+   amg_relax='default'
+   solver_vel='lgmres'
+   solver_turb='tdma'
+   amg_relax='default'
+   amg_cycle='V'
+   nsweep_vel=50
+   nsweep_keps=1
+   nsweep_kom=50
+   convergence_limit_u=1e-6
+   convergence_limit_v=1e-6
+   convergence_limit_w=1e-6
+   convergence_limit_eps=1e-4
+   convergence_limit_k=1e-4
+   convergence_limit_om=1e-8
+   convergence_limit_p=5e-4
+
+########### section 7 all variables are printed during the iteration at node ###########
+   imon=0
+   jmon=0
+   kmon=0
+
+########### section 8 time-averaging ###########
+   ntstep=15000
+   uin=20
+   dt=0.25*(x2d[1,0]-x2d[0,0])*np.ones(ntstep)/uin
+   itstep_start=7500
+   itstep_save=2000  # save every itstep_save timestep
+   itstep_stats=1 # time average every itstep_stats timestep
+
+
+########### section 9 residual scaling parameters ###########
+   resnorm_p=uin*zmax*y2d[1,-1]
+   resnorm_vel=uin**2*zmax*y2d[1,-1]
+
+
+########### Section 10 boundary conditions ###########
+   cyclic_x = True
+   cyclic_z = True
+
+# synthetic inlet fluct
+   L_t_synt=0.2
+   nmodes_synt=150
+   dmin_synt=150
+   jmirror_synt=np.int(nj/2) # mirror vsynt at node jmirror; jmirror=0 means no mirroring
+
+# boundary conditions for u
+   u_bc_west=np.zeros((nj,nk))
+   u_bc_east=np.zeros((nj,nk))
+   u_bc_south=np.zeros((ni,nk))
+   u_bc_north=np.zeros((ni,nk))
+   u_bc_z=0
+
+   u_bc_west_type='d' 
+   u_bc_east_type='n' 
+   u_bc_south_type='d'
+   u_bc_north_type='d'
+   u_bc_z_type='n'
+
+# boundary conditions for v
+   v_bc_west=np.zeros((nj,nk))
+   v_bc_east=np.zeros((nj,nk))
+   v_bc_south=np.zeros((ni,nk))
+   v_bc_north=np.zeros((ni,nk))
+   v_bc_z=0
+
+   v_bc_west_type='d' 
+   v_bc_east_type='n' 
+   v_bc_south_type='d'
+   v_bc_north_type='d'
+   v_bc_z_type='n'
+
+# boundary conditions for w
+   w_bc_west=np.zeros((nj,nk))
+   w_bc_east=np.zeros((nj,nk))
+   w_bc_south=np.zeros((ni,nk))
+   w_bc_north=np.zeros((ni,nk))
+   w_bc_z=0
+
+   w_bc_west_type='d' 
+   w_bc_east_type='n' 
+   w_bc_south_type='d'
+   w_bc_north_type='d'
+   w_bc_z_type='d'
+
+# boundary conditions for p
+   p_bc_west=np.zeros((nj,nk))
+   p_bc_east=np.zeros((nj,nk))
+   p_bc_south=np.zeros((ni,nk))
+   p_bc_north=np.zeros((ni,nk))
+   p_bc_z=0
+
+   p_bc_west_type='n'
+   p_bc_east_type='n'
+   p_bc_south_type='n'
+   p_bc_north_type='n'
+   p_bc_z_type='n'
+
+# boundary conditions for k
+   k_bc_west=np.zeros((nj,nk))
+   k_bc_east=np.zeros((nj,nk))
+   k_bc_south=np.zeros((ni,nk))
+   k_bc_north=np.zeros((ni,nk))
+   k_bc_z=0
+
+   k_bc_west_type='d'
+   k_bc_east_type='d'
+   k_bc_south_type='d'
+   k_bc_north_type='d'
+   k_bc_z_type='n'
+
+# boundary conditions for eps
+   eps_bc_west=np.zeros((nj,nk))
+   eps_bc_east=np.zeros((nj,nk))
+   eps_bc_south=np.ones((ni,nk))*1e-6
+   eps_bc_south=np.zeros((ni,nk))
+   eps_bc_north=np.zeros((ni,nk))
+   eps_bc_z=0
+
+   eps_bc_west_type='d'
+   eps_bc_east_type='d'
+   eps_bc_south_type='d' 
+   eps_bc_north_type='d' 
+   eps_bc_z_type='n'
+
+# boundary conditions for omega
+   om_bc_west=np.zeros((nj,nk))
+   om_bc_east=np.zeros((nj,nk))
+   om_bc_south=np.zeros((ni,nk))
+   om_bc_north=np.zeros((ni,nk))
+
+   xwall_s=0.5*(x2d[0:-1,0]+x2d[1:,0])
+   ywall_s=0.5*(y2d[0:-1,0]+y2d[1:,0])
+   dist2_s=(yp2d[:,0]-ywall_s)**2+(xp2d[:,0]-xwall_s)**2
+   om_bc_south=6*viscos/c_omega_2/dist2_s
+
+# make it 2D
+   om_bc_south=np.repeat(om_bc_south[:,None], repeats=nk, axis=1)
+
+   xwall_n=0.5*(x2d[0:-1,-1]+x2d[1:,-1])
+   ywall_n=0.5*(y2d[0:-1,-1]+y2d[1:,-1])
+   dist2_n=(yp2d[:,-1]-ywall_n)**2+(xp2d[:,-1]-xwall_n)**2
+   om_bc_north=6*viscos/c_omega_2/dist2_n
+
+# make it 2D
+   om_bc_north=np.repeat(om_bc_north[:,None], repeats=nk, axis=1)
+   om_bc_z=0
+
+   om_bc_west_type='d'
+   om_bc_east_type='n'
+   om_bc_south_type='d'
+   om_bc_north_type='d'
+   om_bc_z_type='n'
+
+   return 
+
+
+
+def modify_init(u3d,v3d,w3d,k3d,om3d,eps3d,vis3d):
+   
+   return u3d,v3d,w3d,k3d,om3d,eps3d,vis3d
+
+def modify_inlet():
+   return u_bc_west,v_bc_west,w_bc_west,k_bc_west,eps_bc_west,om_bc_west,u3d_face_w,convw
+
+def modify_conv(convw,convs,convl):
+
+   return convw,convs,convl
+
+def modify_u(su3d,sp3d):
+
+   global file1
+
+   su3d= su3d+vol
+
+   area=x2d[-1,1]*zmax
+   taus=np.sum(viscos*as_bound*u3d[:,0,:])/area
+   taun=np.sum(viscos*an_bound*u3d[:,-1,:])/area
+   sumvol=np.sum(vol)
+   uin=np.sum(convw[0,:,:])/(y2d[0,-1]-y2d[0,0])/zmax
+   total_forces=taus+taun
+
+   sumsu=np.sum(su3d)
+   sumsp=np.sum(sp3d)
+
+
+   print('area',area)
+
+   dpp=sumvol-(taus+taun)*area
+
+   print('uin=%7.3E,taus=%7.3E,taan=%7.3E,sumvol=%7.3E,dodx-tau=%7.3E,sumsu=%7.3E,sumsp=%7.3E' %(uin,taus,taun,sumvol,dpp,sumsu,sumsp))
+
+
+
+   return su3d,sp3d
+
+
+def modify_v(su3d,sp3d):
+
+   return su3d,sp3d
+
+
+def modify_w(su3d,sp3d):
+
+   return su3d,sp3d
+
+
+def modify_k(su3d,sp3d,gen):
+
+   comm_term=np.zeros((ni,nj,nk))
+
+   return su3d,sp3d,comm_term
+
+
+def modify_eps(su3d,sp3d):
+
+   return su3d,sp3d
+
+def modify_om(su3d,sp3d,comm_term):
+
+   return su3d,sp3d
+
+def modify_outlet(convw):
+
+   return convw,u_bc_east
+
+def modify_fk(fk3d):
+
+   global l_dist,l_max,l_iddes,rt,fmu,l_c,f_t,f_l,f_e1,l_u,l_tilde,f_d,f_e,f_b,f_dt,r_dt,r_dl,denom,s2
+
+   l_dist=0.15*dist3d
+   l_max=0.15*delta_max
+   dy=np.diff(y2d[1:,:],axis=1)
+# make it 3d
+   dy=np.repeat(dy[:,:,None],repeats=nk,axis=2)
+ 
+   l_temp=np.maximum(l_dist,l_max)
+   l_temp=np.maximum(l_temp,dy)
+   l_iddes=np.minimum(l_temp,delta_max)
+#  l_iddes=np.minimum(np.maximum(l_dist,l_max,dy),delta_max)
+
+   ueps=(eps3d*viscos)**0.25
+   ystar=ueps*dist3d/viscos
+   rt=k3d**2/eps3d/viscos
+   fdampf2=((1.-np.exp(-ystar/3.1))**2)*(1.-0.3*np.exp(-(rt/6.5)**2))
+   fmu=((1.-np.exp(-ystar/14.))**2)*(1.+5./rt**0.75*np.exp(-(rt/200.)**2))
+   fmu=np.minimum(fmu,1.)
+
+   l_c=cdes*l_iddes  #eq. 9
+
+   vist=vis3d-viscos
+   denom=kappa**2*dist3d**2*s2**0.5
+
+   r_dt=vist/denom  #eq. 22
+   r_dl=viscos/denom  #eq. 23
+
+   f_t=np.tanh((c_t**2*r_dt)**3)
+   f_l=np.tanh((c_l**2*r_dl)**10)
+
+   f_e2=1.-np.maximum(f_t,f_l) #eq. 19
+
+   alpha=0.25-dist3d/delta_max
+
+   f_e1=np.where(alpha <= 0,2*np.exp(-9*alpha**2),2*np.exp(-11.09*alpha**2))
+#  if alpha <= 0:
+#     f_e1=2.*np.exp(-9*alpha**2)
+#  else:
+#     f_e1=2.*np.exp(-11.09*alpha**2)
+
+   f_b=  np.minimum(2.*np.exp(-9*alpha**2),1.)
+
+   f_dt=1.-np.tanh((8.*r_dt)**3)
+
+   f_e=np.maximum(f_e1-1.,0.)
+
+   f_d=np.maximum((1.-f_dt),f_b)
+
+   l_u=k3d**0.5/cmu/om3d
+
+   l_tilde=f_d*(1+f_e)*l_u+(1-f_d)*l_c
+
+   fk3d=np.maximum(1,l_u/l_tilde)
+
+   return fk3d
+
+def fix_omega():
+
+# south wall
+   aw3d[:,0,:]=0
+   ae3d[:,0,:]=0
+   as3d[:,0,:]=0
+   an3d[:,0,:]=0
+   al3d[:,0,:]=0
+   ah3d[:,0,:]=0
+   ap_max=np.max(ap3d)
+   ap3d[:,0,:]=ap_max
+   su3d[:,0,:]=ap_max*om_bc_south
+
+
+# north wall
+   aw3d[:,-1,:]=0
+   ae3d[:,-1,:]=0
+   as3d[:,-1,:]=0
+   an3d[:,-1,:]=0
+   al3d[:,-1,:]=0
+   ah3d[:,-1,:]=0
+   ap_max=np.max(ap3d)
+   ap3d[:,-1,:]=ap_max
+   su3d[:,-1,:]=ap_max*om_bc_north
+
+   return aw3d,ae3d,as3d,an3d,al3d,ah3d,ap3d,su3d,sp3d
+
+
+def modify_vis(vis3d):
+
+   return vis3d
+
+import numpy as np
+import time,random,sys
+from scipy.signal import welch, hann
+import matplotlib.pyplot as plt
+import math
+
+
+def synt_fluct(nmodes,it,sli,yp,zp,uv_rans,visc,jmirror,dmin_synt):
+#=========================== chapter 1 ============================================
+
+#!!!  number of modes                        = nmodes
+#!!!  smallest wavenumber                    = dxmin
+#!!!  ratio  of ke and kmin (in wavenumber)  = wew1fct
+#!!!  turb. velocity scale                   = up
+#!!!  diss. rate.                            = epsm
+#!!!  kinetic viscosity                      = visc
+#!!!  length scale                           = sli
+#!!!  mirror vfluct at j > jmirror
+
+   global dxmin,amp,epsm,epsm,wnr1,wew1fct,xp,yp2d_synt,zp2d_synt,xp2d_synt,nj,up
+   global e,kxio,kyio,kyio,sxio,syio,syio,utn,tfunk,wnre,dkn,arg1,arg2,arg3,arg,fi,psi,teta,alfa,wnr,kx,ky,kz,wnrn,\
+          r11,r12,r13,r21,r22,r23,r31,r32,r33,a11,a22,a33,wnreta,uv_synt_mean,uvmean_check,a11i,a22i,a33i,\
+          xp2d_wave,yp2d_wave,zp2d_wave,uv_rans_non,uv_rans_max
+   global utn,tfunk,sx,e,rk,kxi,usynt_wave,usynt1,usynt,sy,vsynt,yp2d_org,usynt_aniso,scale_2
+
+   uv_rans=np.abs(uv_rans)
+   if it == 0:
+
+      uvmean_check=0
+      uv_synt_mean=0
+# anisotropix fluctuations
+#     R=np.loadtxt('R.dat')
+      R=np.genfromtxt("R.dat", dtype=None,comments="%")
+      r11=R[0,0]
+      r12=R[0,1]
+      r13=R[0,2]
+      r21=R[1,0]
+      r22=R[1,1]
+      r23=R[1,2]
+      r31=R[2,0]
+      r32=R[2,1]
+      r33=R[2,2]
+
+#     A=np.loadtxt('a.dat')
+      A=np.genfromtxt("a.dat", dtype=None,comments="%")
+      a11=A[0]
+      a22=A[1]
+      a33=A[2]
+
+      amp=1.452762113
+      wew1fct=2
+
+# in log region:  k/uvmax=3.3  => up=(3.3*uvmax)**0.5
+      up=(3.3*np.max(uv_rans))**0.5
+      epsm=up**3/sli
+#
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#     number of  grid points in y, z
+      nj=len(yp)
+      nk=len(zp)
+
+# make it 2D
+      zp2d_synt=np.repeat(zp[None,:], repeats=nj, axis=0)
+
+# make it 2D
+      yp2d_synt=np.repeat(yp[:,None], repeats=nk, axis=1)
+
+
+      xp=0.5
+# make it 2D
+      xp2d_synt=np.ones((nj,nk))*xp
+
+      yp2d_org=yp2d_synt
+# transform to principal coord. directions
+      xp2d_synt=r11*xp+r21*yp2d_org+r31*zp2d_synt
+      yp2d_synt=r12*xp+r22*yp2d_synt+r32*zp2d_synt
+      zp2d_synt=r13*xp+r23*yp2d_synt+r33*zp2d_synt
+
+# search min grid step
+      dminy=np.min(np.diff(yp))
+      dminz=np.min(np.diff(zp))
+      dxmin=min(dminy,dminz)
+
+# don't let is be smaller than dmin_synt
+      dxmin=max(dxmin,dmin_synt)
+
+
+
+# create a seed from time 
+      np.random.seed()
+      np.random.seed(2)
+
+# zero all arrays to zero
+      wnr=np.zeros(nmodes+2)
+      fi=np.zeros(nmodes+2)
+      teta=np.zeros(nmodes+2)
+      psi=np.zeros(nmodes+2)
+      wnr=np.zeros(nmodes+2)
+      kxio=np.zeros((nj,nk,nmodes+2))
+      kyio=np.zeros((nj,nk,nmodes+2))
+      kzio=np.zeros((nj,nk,nmodes+2))
+      sxio=np.zeros((nj,nk,nmodes+2))
+      syio=np.zeros((nj,nk,nmodes+2))
+      szio=np.zeros((nj,nk,nmodes+2))
+#  yp2d_wave=np.zeros((nj,nk,nmodes+2))
+      zp2d_wave=np.zeros((nj,nk,nmodes+2))
+      u=np.zeros((nj,nk))
+      v=np.zeros((nj,nk))
+      w=np.zeros((nj,nk))
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+#     highest wave number
+      wnrn=2.*math.pi/dxmin
+#
+#     k_e (related to peak energy wave number)
+      wnre=9.*math.pi*amp/(55.*sli)
+#
+# wavenumber used in the viscous expression (high wavenumbers) in the von Karman spectrum
+      wnreta=(epsm/visc**3)**0.25
+
+#     smallest wavenumber 
+      wnr1=wnre/wew1fct
+
+# wavenumber step
+      dkn=(wnrn-wnr1)/nmodes
+
+# wavenumers
+      wnr=np.linspace(wnr1,wnrn,nmodes)
+
+# invert the eigenvalue matrix (anisotropic)
+      a11i=1/a11
+      a22i=1/a22
+      a33i=1/a33
+
+# make a non-dimensional uv_rans profile
+      uv_rans_max=np.max(uv_rans)
+      uv_rans_non=(uv_rans/uv_rans_max)**0.5
+# make it 2D
+      uv_rans_non=np.repeat(uv_rans_non[:,None], repeats=nk, axis=1)
+
+
+      print(f"\n{'sli: '} {sli}, {'visc: '}{visc:.2e}, {'nmodes: '}{nmodes}, {'dxmin: '}{dxmin:.3e}, {'dkn: '}{dkn:.3e}, {'dmin_synt: '}{dmin_synt:.3e}")
+
+      print(f"\n{'wnre: '} {wnre:.2e}, {'wnr1: '}{wnr1:.2e}, {'epsm: '}{epsm:.3e}, {'wnrn: '}{wnrn:.3e}")
+
+      print(f"\n{'eigenvalue 1, 2 and 3: '}{a11:.3e}, {a22:.3e}, {a33:.3e}")
+      print(f"\n{'eigenvector R11, R12 and R13: '}{r11:.3e}, {r12:.3e}, {r13:.3e}")
+      print(f"\n{'eigenvector R21, R22 and R23: '}{r21:.3e}, {r22:.3e}, {r23:.3e}")
+      print(f"\n{'eigenvector R31, R32 and R33: '}{r31:.3e}, {r32:.3e}, {r33:.3e}\n")
+
+      
+
+#
+#=========================== chapter 2 ============================================
+#
+
+# compute random angles
+   fi = np.random.uniform(0.,2.*math.pi,nmodes)
+   psi = np.random.uniform(0.,2.*math.pi,nmodes)
+   alfa = np.random.uniform(0.,2.*math.pi,nmodes)
+   ang = np.random.uniform(0.,1,nmodes)
+   teta=np.arccos(1.-ang/0.5) 
+
+   print('time step no,',it)
+
+
+#   wavenumber vector from random angles
+   kxio=np.sin(teta)*np.cos(fi)
+   kyio=np.sin(teta)*np.sin(fi)
+   kzio=np.cos(teta)
+#
+# sigma (s=sigma) from random angles. sigma is the unit direction which gives the direction
+# of the synthetic velocity vector (u, v, w)
+   sxio=np.cos(fi)*np.cos(teta)*np.cos(alfa)-np.sin(fi)*np.sin(alfa)
+   syio=np.sin(fi)*np.cos(teta)*np.cos(alfa)+np.cos(fi)*np.sin(alfa)
+   szio=-np.sin(teta)*np.cos(alfa)
+   
+#
+#=========================== chapter 3 ============================================
+#
+# loop over all wavenumbers
+   kxi=r11*kxio+r21*kyio+r31*kzio
+   kyi=r12*kxio+r22*kyio+r32*kzio
+   kzi=r13*kxio+r23*kyio+r33*kzio
+
+   sxi=r11*sxio+r21*syio+r31*szio
+   syi=r12*sxio+r22*syio+r32*szio
+   szi=r13*sxio+r23*syio+r33*szio
+
+   sx=a11**0.5*sxi
+   sy=a22**0.5*syi
+   sz=a33**0.5*szi
+
+   kx=kxi*wnr*a11i**0.5
+   ky=kyi*wnr*a22i**0.5
+   kz=kzi*wnr*a33i**0.5
+   rk=np.sqrt(kx**2+ky**2+kz**2)
+
+
+
+   xp2d_wave=np.repeat(xp2d_synt[:,:,None], repeats=nmodes, axis=2)
+   arg1=xp2d_wave*kx
+
+
+   yp2d_wave=np.repeat(yp2d_synt[:,:,None], repeats=nmodes, axis=2)
+   arg2=yp2d_wave*ky
+
+   zp2d_wave=np.repeat(zp2d_synt[:,:,None], repeats=nmodes, axis=2)
+   arg3=zp2d_wave*kz
+
+   arg=arg1+arg2+arg3+psi
+
+   tfunk=np.cos(arg)
+
+# von Karman spectrum
+   e=amp/wnre*(wnr/wnre)**4/((1.+(wnr/wnre)**2)**(17./6.))*np.exp(-2*(wnr/wnreta)**2)
+
+# include only wavenumber for which rk < wnrn
+   e=np.where(rk < wnrn,e,0)
+
+   utn=np.sqrt(e*up**2*dkn)
+
+# sum over all wavenumbers => synthetic velocity field 
+   usynt=np.sum(2.*utn*tfunk*sx,axis=2)
+   vsynt=np.sum(2.*utn*tfunk*sy,axis=2)
+   wsynt=np.sum(2.*utn*tfunk*sz,axis=2)
+   
+# transform back to x-y-z  => anjsotropic fluct
+   usynt_aniso=r11*usynt+r12*vsynt+r13*wsynt
+   vsynt_aniso=r21*usynt+r22*vsynt+r23*wsynt
+   wsynt_aniso=r31*usynt+r32*vsynt+r33*wsynt
+
+# mean shear stress (must be computed before mirroring)
+   uv=np.mean(usynt_aniso*vsynt_aniso)
+
+# mirror vfluct
+   if jmirror > 0:
+      vsynt_aniso[jmirror:,:]=-vsynt_aniso[jmirror:,:]
+
+# sum over timesteps
+   uv_synt_mean=uv_synt_mean+uv
+
+# compute average
+   uvmean_time=np.abs(uv_synt_mean)/(it+1)
+   print('uvmean_time',uvmean_time)
+
+   scale_2=(uv_rans_max/uvmean_time)**0.5*uv_rans_non
+
+# scale all fluctuations with uv_rans
+   usynt_aniso=usynt_aniso*scale_2
+   vsynt_aniso=vsynt_aniso*scale_2
+   wsynt_aniso=wsynt_aniso*scale_2
+
+
+# compute mean of synt fluct
+   uvmean_check=uvmean_check+np.mean(usynt_aniso*vsynt_aniso,axis=1)
+
+# peak of uv_rans
+   j=np.where(uv_rans == np.amax(uv_rans))
+
+# check peak
+   print('synt: uvmean',np.abs(uvmean_check[j])/(it+1),'uv_rans_max=',np.max(np.abs(uv_rans)),'at j=',j)
+ 
+   return usynt_aniso,vsynt_aniso,wsynt_aniso
+from scipy import sparse
+import numpy as np
+import sys
+import time
+import pyamg
+from scipy.sparse import spdiags,linalg,eye
+import socket
+
+def init():
+   print('hostname: ',socket.gethostname())
+
+# distance to nearest wall
+   ywall_s=0.5*(y2d[0:-1,0]+y2d[1:,0])
+   dist_s=yp2d-ywall_s[:,None]
+   ywall_n=0.5*(y2d[0:-1,-1]+y2d[1:,-1])
+   dist_n=ywall_n[:,None] -yp2d
+   dist=np.minimum(dist_s,dist_n)
+   dist3d=np.repeat(dist[:,:,None], repeats=nk, axis=2)
+
+#  west face coordinate
+   xw=0.5*(x2d[0:-1,0:-1]+x2d[0:-1,1:])
+   yw=0.5*(y2d[0:-1,0:-1]+y2d[0:-1,1:])
+
+   del1x=((xw-xp2d)**2+(yw-yp2d)**2)**0.5
+   del2x=((xw-np.roll(xp2d,1,axis=0))**2+(yw-np.roll(yp2d,1,axis=0))**2)**0.5
+   fx=del2x/(del1x+del2x)
+   fx = np.dstack([fx]*nk)
+
+   if cyclic_x:
+     fx[0,:,:]=0.5
+
+#  south face coordinate
+   xs=0.5*(x2d[0:-1,0:-1]+x2d[1:,0:-1])
+   ys=0.5*(y2d[0:-1,0:-1]+y2d[1:,0:-1])
+
+   del1y=((xs-xp2d)**2+(ys-yp2d)**2)**0.5
+   del2y=((xs-np.roll(xp2d,1,axis=1))**2+(ys-np.roll(yp2d,1,axis=1))**2)**0.5
+   fy=del2y/(del1y+del2y)
+   fy = np.dstack([fy]*nk)
+
+   areawy=np.diff(x2d,axis=1)*dz
+   areawx=-np.diff(y2d,axis=1)*dz
+
+# make them 3d
+   areawx= np.dstack([areawx]*nk)
+   areawy= np.dstack([areawy]*nk)
+
+   areasy=-np.diff(x2d,axis=0)*dz
+   areasx=np.diff(y2d,axis=0)*dz
+# make them 3d
+   areasx= np.dstack([areasx]*nk)
+   areasy= np.dstack([areasy]*nk)
+
+#  areaz=np.zeros((ni,nj,nk+1))
+
+   areaw=(areawx**2+areawy**2)**0.5
+   areas=(areasx**2+areasy**2)**0.5
+
+# volume approaximated as the vector product of two triangles for cells
+   ax=np.diff(x2d,axis=1)
+   ay=np.diff(y2d,axis=1)
+   bx=np.diff(x2d,axis=0)
+   by=np.diff(y2d,axis=0)
+
+   areaz_1=0.5*np.absolute(ax[0:-1,:]*by[:,0:-1]-ay[0:-1,:]*bx[:,0:-1])
+
+   ax=np.diff(x2d,axis=1)
+   ay=np.diff(y2d,axis=1)
+   areaz_2=0.5*np.absolute(ax[1:,:]*by[:,0:-1]-ay[1:,:]*bx[:,0:-1])
+
+   areaz=areaz_1+areaz_2
+# make it 3d
+   vol=areaz*dz
+   vol= np.dstack([vol]*nk)
+#  vol= np.loadtxt("vol.dat")
+#  vol=np.reshape(vol,(ni,nj))
+#  vol= np.dstack([vol]*nk)
+
+# make it 3d
+   areaz= np.dstack([areaz]*(nk+1))
+
+# coeff at south wall (without viscosity)
+   as_bound=areas[:,0,:]**2/(0.5*vol[:,0,:])
+
+# coeff at north wall (without viscosity)
+   an_bound=areas[:,-1,:]**2/(0.5*vol[:,-1,:])
+
+# coeff at west wall (without viscosity)
+   aw_bound=areaw[0,:,:]**2/(0.5*vol[0,:,:])
+   if cyclic_x:
+      aw_bound=areaw[0,:,:]**2/(0.5*(vol[0,:,:]+vol[-1,:,:]))
+
+# coeff at east wall (without viscosity) N.B: which cyclic_x
+# this is never used 
+   ae_bound=areaw[-1,:,:]**2/(0.5*vol[-1,:,:])
+
+# make it 2d
+   az_bound=areaz[:,:,0]/(0.5*dz)  # wall node located AT fhe boudary 
+
+   return areaw,areawx,areawy,areas,areasx,areasy,areaz,vol,fx,fy,aw_bound,ae_bound,as_bound,an_bound,az_bound,dist3d
+
+   return 
+
+def print_indata():
+
+   print('////////////////// Start of input data ////////////////// \n\n\n')
+
+   print('\n\n########### section 1 choice of differencing scheme ###########')
+   print(f"{'scheme: ':<29}   {scheme}")
+   print(f"{'scheme_turb: ':<29}   {scheme_turb}")
+   print(f"{'acrank: ':<29}   {acrank}")
+   print(f"{'acrank_conv: ':<29}   {acrank_conv}")
+   print(f"{'acrank_conv_keps: ':<29}   {acrank_conv_keps}")
+   print(f"{'acrank_conv_kom: ':<29}   {acrank_conv_kom}")
+
+   print('\n\n########### section 2 turbulence models ###########')
+
+   print(f"{'cmu: ':<29} {cmu}")
+   print(f"{'pans: ':<29} {pans}")
+   print(f"{'launder: ':<29} {launder}")
+   print(f"{'keps: ':<29} {keps}")
+   print(f"{'kom_des: ':<29} {kom_des}")
+   print(f"{'keps_des: ':<29} {keps_des}")
+   if jl0 < 0:
+      print(f"{'jl0: ':<29} {jl0}")
+   print(f"{'kom: ':<29} {kom}")
+   print(f"{'wale: ':<29} {wale}")
+   print(f"{'smag: ':<29} {smag}")
+   if pans:
+      print(f"{'fkmin_limit: ':<29} {fkmin_limit}")
+   if keps or pans or keps_des:
+      print(f"{'c_eps_1: ':<29} {c_eps_1}")
+      print(f"{'c_eps_2: ':<29} {c_eps_2}")
+      print(f"{'prand_k: ':<29} {prand_k}")
+   print(f"{'prand_eps: ':<29} {prand_eps}")
+   if kom or kom_des:
+      print(f"{'c_omega_1: ':<29} {c_omega_1:.3f}")
+      print(f"{'c_omega_2: ':<29} {c_omega_2}")
+      print(f"{'prand_k: ':<29} {prand_k}")
+      print(f"{'prand_omega: ':<29} {prand_omega}")
+
+
+   print('\n\n########### section 3 restart/save ###########')
+   print(f"{'restart: ':<29} {restart}")
+   print(f"{'save: ':<29} {save}")
+
+
+   print('\n\n########### section 4 fluid properties ###########')
+   print(f"{'viscos: ':<29} {viscos:.2e}")
+
+   print('\n\n########### section 5 relaxation factors ###########')
+   print(f"{'urfvis: ':<29} {urfvis}")
+
+
+   print('\n\n########### section 6 number of iteration and convergence criterira ###########')
+   print(f"{'sormax: ':<29} {sormax}")
+   print(f"{'maxit: ':<29} {maxit}")
+   print(f"{'min_iter: ':<29} {min_iter}")
+   print(f"{'solver_vel: ':<29} {solver_vel}")
+   print(f"{'solver_turb: ':<29} {solver_turb}")
+   print(f"{'amg_relax: ':<29} {amg_relax}")
+   print(f"{'amg_cycle: ':<29} {amg_cycle}")
+   if solver_vel == 'pyamg' or solver_turb == 'pyamg':
+      if amg_relax_phi != 'default':
+         print(f"{'amg_relax_phi: ':<29} {amg_relax_phi}")
+         print(f"{'amg_cycle_phi: ':<29} {amg_cycle_phi}")
+   print(f"{'nsweep_vel: ':<29} {nsweep_vel}")
+   print(f"{'nsweep_keps: ':<29} {nsweep_keps}")
+   print(f"{'nsweep_kom: ':<29} {nsweep_kom}")
+   if solver_vel != 'tdma':
+      print(f"{'convergence_limit_u: ':<29} {convergence_limit_u}")
+      print(f"{'convergence_limit_v: ':<29} {convergence_limit_v}")
+      print(f"{'convergence_limit_w: ':<29} {convergence_limit_w}")
+   print(f"{'convergence_limit_p: ':<29} {convergence_limit_p}")
+   if keps or pans or kom or kom_des or keps_des:
+      if solver_turb != 'tdma':
+         print(f"{'convergence_limit_k: ':<29} {convergence_limit_k}")
+   if keps or pans or keps_des:
+      if solver_turb != 'tdma':
+         print(f"{'convergence_limit_eps: ':<29} {convergence_limit_eps}")
+   if kom or kom_des:
+      if solver_turb != 'tdma':
+         print(f"{'convergence_limit_om: ':<29} {convergence_limit_om}")
+
+
+   print('\n\n########### section 7 all variables are printed during the iteration at node ###########')
+   print(f"{'imon: ':<29} {imon}")
+   print(f"{'jmon: ':<29} {jmon}")
+   print(f"{'kmon: ':<29} {kmon}")
+
+
+   print('\n\n########### section 8 time-averaging ###########')
+   print(f"{'ntstep: ':<29} {ntstep}")
+   print(f"{'dt[0]: ':<29} {dt[0]:.2e}")
+   print(f"{'itstep_start: ':<29} {itstep_start}")
+   print(f"{'itstep_save: ':<29} {itstep_save}")
+   print(f"{'itstep_stats: ':<29} {itstep_stats}")
+
+
+   print('\n\n########### section 9 residual scaling parameters ###########')
+   print(f"{'resnorm_p: ':<29} {resnorm_p:.1f}")
+   print(f"{'resnorm_vel: ':<29} {resnorm_vel:.1f}")
+
+
+   print('\n\n########### Section 10 grid and boundary conditions ###########')
+   print(f"{'ni: ':<29} {ni}")
+   print(f"{'nj: ':<29} {nj}")
+   print(f"{'nk: ':<29} {nk}")
+   print(f"{'dz: ':<29} {dz:.2e}")
+   print('\n')
+   print(f"{'cyclic_x: ':<29} {cyclic_x}")
+   print(f"{'cyclic_z: ':<29} {cyclic_z}")
+   print('\n')
+   print(f"{'L_t_synt: ':<29} {L_t_synt}")
+   print(f"{'nmodes_synt: ':<29} {nmodes_synt}")
+   print(f"{'dmin_synt: ':<29} {dmin_synt}")
+   print(f"{'jmirror_synt: ':<29} {jmirror_synt}")
+   print('\n')
+
+   print('------boundary conditions for u')
+   if not cyclic_x:
+      print(f"{' ':<5}{'u_bc_west_type: ':<29} {u_bc_west_type}")
+      print(f"{' ':<5}{'u_bc_east_type: ':<29} {u_bc_east_type}")
+      if u_bc_west_type == 'd':
+         print(f"{' ':<5}{'u_bc_west[0,0]: ':<29} {u_bc_west[0,0]}")
+      if u_bc_east_type == 'd':
+         print(f"{' ':<5}{'u_bc_east[0,0]: ':<29} {u_bc_east[0,0]}")
+
+
+   print(f"{' ':<5}{'u_bc_south_type: ':<29} {u_bc_south_type}")
+   print(f"{' ':<5}{'u_bc_north_type: ':<29} {u_bc_north_type}")
+
+   if u_bc_south_type == 'd':
+      print(f"{' ':<5}{'u_bc_south[0,0]: ':<29} {u_bc_south[0,0]}")
+   if u_bc_north_type == 'd':
+      print(f"{' ':<5}{'u_bc_north[0,0]: ':<29} {u_bc_north[0,0]}")
+
+   if not cyclic_z:
+      print(f"{' ':<5}{'u_bc_z_type: ':<29} {u_bc_z_type}")
+      if u_bc_z_type == 'd':
+         print(f"{' ':<5}{'u_bc_z: ':<29} {u_bc_z}")
+
+   print('------boundary conditions for v')
+   if not cyclic_x:
+      print(f"{' ':<5}{'v_bc_west_type: ':<29} {v_bc_west_type}")
+      print(f"{' ':<5}{'v_bc_east_type: ':<29} {v_bc_east_type}")
+      if v_bc_west_type == 'd':
+         print(f"{' ':<5}{'v_bc_west[0,0]: ':<29} {v_bc_west[0,0]}")
+      if v_bc_east_type == 'd':
+         print(f"{' ':<5}{'v_bc_east[0,0]: ':<29} {v_bc_east[0,0]}")
+
+
+   print(f"{' ':<5}{'v_bc_south_type: ':<29} {v_bc_south_type}")
+   print(f"{' ':<5}{'v_bc_north_type: ':<29} {v_bc_north_type}")
+
+   if v_bc_south_type == 'd':
+      print(f"{' ':<5}{'v_bc_south[0,0]: ':<29} {v_bc_south[0,0]}")
+   if v_bc_north_type == 'd':
+      print(f"{' ':<5}{'v_bc_north[0,0]: ':<29} {v_bc_north[0,0]}")
+
+   if not cyclic_z:
+      print(f"{' ':<5}{'v_bc_z_type: ':<29} {v_bc_z_type}")
+      if v_bc_z_type == 'd':
+         print(f"{' ':<5}{'v_bc_z: ':<29} {v_bc_z}")
+
+   print('------boundary conditions for w')
+   if not cyclic_x:
+      print(f"{' ':<5}{'w_bc_west_type: ':<29} {w_bc_west_type}")
+      print(f"{' ':<5}{'w_bc_east_type: ':<29} {w_bc_east_type}")
+      if w_bc_west_type == 'd':
+         print(f"{' ':<5}{'w_bc_west[0,0]: ':<29} {w_bc_west[0,0]}")
+      if w_bc_east_type == 'd':
+         print(f"{' ':<5}{'w_bc_east[0,0]: ':<29} {w_bc_east[0,0]}")
+
+
+   print(f"{' ':<5}{'w_bc_south_type: ':<29} {w_bc_south_type}")
+   print(f"{' ':<5}{'w_bc_north_type: ':<29} {w_bc_north_type}")
+
+   if w_bc_south_type == 'd':
+      print(f"{' ':<5}{'w_bc_south[0,0]: ':<29} {w_bc_south[0,0]}")
+   if w_bc_north_type == 'd':
+      print(f"{' ':<5}{'w_bc_north[0,0]: ':<29} {w_bc_north[0,0]}")
+
+   if not cyclic_z:
+      print(f"{' ':<5}{'w_bc_z_type: ':<29} {w_bc_z_type}")
+      if w_bc_z_type == 'd':
+         print(f"{' ':<5}{'w_bc_z: ':<29} {w_bc_z}")
+
+   print('------boundary conditions for p')
+   if not cyclic_x:
+      print(f"{' ':<5}{'p_bc_west_type: ':<29} {p_bc_west_type}")
+      print(f"{' ':<5}{'p_bc_east_type: ':<29} {p_bc_east_type}")
+      if p_bc_west_type == 'd':
+         print(f"{' ':<5}{'p_bc_west[0,0]: ':<29} {p_bc_west[0,0]}")
+      if p_bc_east_type == 'd':
+         print(f"{' ':<5}{'p_bc_east[0,0]: ':<29} {p_bc_east[0,0]}")
+
+
+   print(f"{' ':<5}{'p_bc_south_type: ':<29} {p_bc_south_type}")
+   print(f"{' ':<5}{'p_bc_north_type: ':<29} {p_bc_north_type}")
+
+   if p_bc_south_type == 'd':
+      print(f"{' ':<5}{'p_bc_south[0,0]: ':<29} {p_bc_south[0,0]}")
+   if p_bc_north_type == 'd':
+      print(f"{' ':<5}{'p_bc_north[0,0]: ':<29} {p_bc_north[0,0]}")
+
+   if not cyclic_z:
+      print(f"{' ':<5}{'p_bc_z_type: ':<29} {p_bc_z_type}")
+      if p_bc_z_type == 'd':
+         print(f"{' ':<5}{'p_bc_z: ':<29} {p_bc_z}")
+
+   print('------boundary conditions for k')
+   if kom or kom_des or keps or pans or keps_des:
+      if not cyclic_x:
+         print(f"{' ':<5}{'k_bc_west_type: ':<29} {k_bc_west_type}")
+         print(f"{' ':<5}{'k_bc_east_type: ':<29} {k_bc_east_type}")
+         if k_bc_west_type == 'd':
+            print(f"{' ':<5}{'k_bc_west[0,0]: ':<29} {k_bc_west[0,0]}")
+         if k_bc_east_type == 'd':
+            print(f"{' ':<5}{'k_bc_east[0,0]: ':<29} {k_bc_east[0,0]}")
+   
+   
+      print(f"{' ':<5}{'k_bc_south_type: ':<29} {k_bc_south_type}")
+      print(f"{' ':<5}{'k_bc_north_type: ':<29} {k_bc_north_type}")
+   
+      if k_bc_south_type == 'd':
+         print(f"{' ':<5}{'k_bc_south[0,0]: ':<29} {k_bc_south[0,0]}")
+      if k_bc_north_type == 'd':
+         print(f"{' ':<5}{'k_bc_north[0,0]: ':<29} {k_bc_north[0,0]}")
+   
+      if not cyclic_z:
+         print(f"{' ':<5}{'k_bc_z_type: ':<29} {k_bc_z_type}")
+         if k_bc_z_type == 'd':
+            print(f"{' ':<5}{'k_bc_z: ':<29} {k_bc_z}")
+
+
+   if keps or pans or keps_des:
+      print('------boundary conditions for eps')
+      if not cyclic_x:
+         print(f"{' ':<5}{'eps_bc_west_type: ':<29} {eps_bc_west_type}")
+         print(f"{' ':<5}{'eps_bc_east_type: ':<29} {eps_bc_east_type}")
+         if eps_bc_west_type == 'd':
+            print(f"{' ':<5}{'eps_bc_west[0,0]: ':<29} {eps_bc_west[0,0]}")
+         if eps_bc_east_type == 'd':
+            print(f"{' ':<5}{'eps_bc_east[0,0]: ':<29} {eps_bc_east[0,0]}")
+   
+   
+      print(f"{' ':<5}{'eps_bc_south_type: ':<29} {eps_bc_south_type}")
+      print(f"{' ':<5}{'eps_bc_north_type: ':<29} {eps_bc_north_type}")
+   
+      if eps_bc_south_type == 'd':
+         print(f"{' ':<5}{'eps_bc_south[0,0]: ':<29} {eps_bc_south[0,0]}")
+      if eps_bc_north_type == 'd':
+         print(f"{' ':<5}{'eps_bc_north[0,0]: ':<29} {eps_bc_north[0,0]}")
+   
+      if not cyclic_z:
+         print(f"{' ':<5}{'eps_bc_z_type: ':<29} {eps_bc_z_type}")
+         if eps_bc_z_type == 'd':
+            print(f"{' ':<5}{'eps_bc_z: ':<29} {eps_bc_z:.1f}")
+
+   if kom or kom_des:
+      print('------boundary conditions for omega')
+      if not cyclic_x:
+         print(f"{' ':<5}{'om_bc_west_type: ':<29} {om_bc_west_type}")
+         print(f"{' ':<5}{'om_bc_east_type: ':<29} {om_bc_east_type}")
+         if om_bc_west_type == 'd':
+            print(f"{' ':<5}{'om_bc_west[0,0]: ':<29} {om_bc_west[0,0]:.1f}")
+         if om_bc_east_type == 'd':
+            print(f"{' ':<5}{'om_bc_east[0,0]: ':<29} {om_bc_east[0,0]:.1f}")
+   
+   
+      print(f"{' ':<5}{'om_bc_south_type: ':<29} {om_bc_south_type}")
+      print(f"{' ':<5}{'om_bc_north_type: ':<29} {om_bc_north_type}")
+   
+      if om_bc_south_type == 'd':
+         print(f"{' ':<5}{'om_bc_south[0,0]: ':<29} {om_bc_south[0,0]:.1f}")
+      if om_bc_north_type == 'd':
+         print(f"{' ':<5}{'om_bc_north[0,0]: ':<29} {om_bc_north[0,0]:.1f}")
+   
+      if not cyclic_z:
+         print(f"{' ':<5}{'om_bc_z_type: ':<29} {om_bc_z_type}")
+         if om_bc_z_type == 'd':
+            print(f"{' ':<5}{'om_bc_z: ':<29} {om_bc_z:.1f}")
+
+
+   print('\n\n\n ////////////////// End of input data //////////////////\n\n\n')
+
+
+
+   return 
+
+def compute_face_phi(phi3d,phi_bc_west,phi_bc_east,phi_bc_south,phi_bc_north,phi_bc_z,\
+    phi_bc_west_type,phi_bc_east_type,phi_bc_south_type,phi_bc_north_type,phi_bc_z_type):
+   import numpy as np
+
+   phi3d_face_w=np.empty((ni+1,nj,nk))
+   phi3d_face_s=np.empty((ni,nj+1,nk))
+   phi3d_face_l=np.empty((ni,nj,nk+1))
+   phi3d_face_w[0:-1,:,:]=fx*phi3d+(1-fx)*np.roll(phi3d,1,axis=0)
+   phi3d_face_s[:,0:-1,:]=fy*phi3d+(1-fy)*np.roll(phi3d,1,axis=1)
+   phi3d_face_l[:,:,0:-1]=0.5*np.roll(phi3d,1,axis=2)+0.5*phi3d
+
+
+# west boundary 
+   phi3d_face_w[0,:,:]=phi_bc_west
+   if phi_bc_west_type == 'n': 
+# neumann
+      phi3d_face_w[0,:,:]=phi3d[0,:,:]
+   if cyclic_x:
+      phi3d_face_w[0,:,:]=0.5*(phi3d[0,:,:]+phi3d[-1,:,:])
+
+# east boundary 
+   phi3d_face_w[-1,:,:]=phi_bc_east
+   if phi_bc_east_type == 'n': 
+# neumann
+      phi3d_face_w[-1,:,:]=phi3d[-1,:,:]
+   if cyclic_x:
+      phi3d_face_w[-1,:,:]=0.5*(phi3d[0,:,:]+phi3d[-1,:,:])
+
+# south boundary 
+   phi3d_face_s[:,0,:]=phi_bc_south
+   if phi_bc_south_type == 'n': 
+# neumann
+      phi3d_face_s[:,0,:]=phi3d[:,0,:]
+# d2phidy2=0
+   if phi_bc_south_type == '2': 
+      phi3d_face_s[:,0,:]=1.5*phi3d[:,0,:]-0.5*phi3d[:,1,:]
+
+# north boundary 
+   phi3d_face_s[:,-1,:]=phi_bc_north
+   if phi_bc_north_type == 'n': 
+# neumann
+      phi3d_face_s[:,-1,:]=phi3d[:,-1,:]
+   if phi_bc_north_type == '2': 
+# d2phidy2=0
+      phi3d_face_s[:,-1,:]=1.5*phi3d[:,-1,:]-0.5*phi3d[:,-2,:]
+
+# low boundary 
+   phi3d_face_l[:,:,0]=phi_bc_z
+# high boundary 
+   phi3d_face_l[:,:,-1]=phi_bc_z
+   if phi_bc_z_type == 'n': 
+# neumann
+# low boundary 
+      phi3d_face_l[:,:,0]= phi3d[:,:,0]
+# high boundary 
+      phi3d_face_l[:,:,-1]= phi3d[:,:,-1]
+   if cyclic_z:
+# low boundary 
+      phi3d_face_l[:,:,0]= 0.5*(phi3d[:,:,-1]+phi3d[:,:,0])
+# high boundary 
+      phi3d_face_l[:,:,-1]= 0.5*(phi3d[:,:,-1]+phi3d[:,:,0])
+   
+   return phi3d_face_w,phi3d_face_s,phi3d_face_l
+
+def dphidx(phi_face_w,phi_face_s):
+
+   phi_w=phi_face_w[0:-1,:,:]*areawx[0:-1,:,:]
+   phi_e=-phi_face_w[1:,:,:]*areawx[1:,:,:]
+   phi_s=phi_face_s[:,0:-1,:]*areasx[:,0:-1,:]
+   phi_n=-phi_face_s[:,1:,:]*areasx[:,1:,:]
+   return (phi_w+phi_e+phi_s+phi_n)/vol
+
+def dphidy(phi_face_w,phi_face_s):
+
+   phi_w=phi_face_w[0:-1,:,:]*areawy[0:-1,:,:]
+   phi_e=-phi_face_w[1:,:,:]*areawy[1:,:,:]
+   phi_s=phi_face_s[:,0:-1,:]*areasy[:,0:-1,:]
+   phi_n=-phi_face_s[:,1:,:]*areasy[:,1:,:]
+   return (phi_w+phi_e+phi_s+phi_n)/vol
+
+def dphidz(phi_face_l):
+
+   phi_l=phi_face_l[:,:,0:-1]
+   phi_h=phi_face_l[:,:,1:]
+   return (phi_h-phi_l)/dz
+
+def coeff(convw,convs,convl,vis3d,prand,scheme_local):
+
+   visw=np.zeros((ni+1,nj,nk))
+   viss=np.zeros((ni,nj+1,nk))
+   visl=np.zeros((ni,nj,nk+1))
+   if prand > 0:
+      vis_turb=(vis3d-viscos)/prand
+   else:
+      fk3d_local=np.maximum(fk3d,fkmin_limit)  #this limit is used only in the diffusion
+      vis_turb=(vis3d-viscos)/np.abs(prand)/fk3d_local**2
+      
+
+   visw[0:-1,:,:]=fx*vis_turb+(1-fx)*np.roll(vis_turb,1,axis=0)+viscos
+   viss[:,0:-1,:]=fy*vis_turb+(1-fy)*np.roll(vis_turb,1,axis=1)+viscos
+   visl[:,:,0:-1]=0.5*vis_turb+0.5*np.roll(vis_turb,1,axis=2)+viscos
+
+   if cyclic_z:
+      visl[:,:,0]=0.5*(vis_turb[:,:,0]+vis_turb[:,:,-1])+viscos
+
+   volw=np.ones((ni+1,nj,nk))*1e-10
+   vols=np.ones((ni,nj+1,nk))*1e-10
+   volw[1:,:,:]=0.5*np.roll(vol,-1,axis=0)+0.5*vol
+   diffw=visw[0:-1,:,:]*areaw[0:-1,:,:]**2/volw[0:-1,:,:]
+   vols[:,1:,:]=0.5*np.roll(vol,-1,axis=1)+0.5*vol
+   diffs=viss[:,0:-1,:]*areas[:,0:-1,:]**2/vols[:,0:-1,:]
+   diffl=visl[:,:,0:-1]*areaz[:,:,0:-1]/dz
+
+   if cyclic_x:
+      visw[0,:,:]=0.5*(vis_turb[0,:,:]+vis_turb[-1,:,:])+viscos
+      diffw[0,:,:]=visw[0,:,:]*areaw[0,:,:]**2/(0.5*(vol[0,:,:]+vol[-1,:,:]))
+
+   if scheme_local == 'h':
+      if itstep == 0 and iter == 0:
+         print('hybrid scheme, prand=',prand)
+
+      aw3d=np.maximum(convw[0:-1,:,:],diffw+(1-fx)*convw[0:-1,:,:])
+      aw3d=np.maximum(aw3d,0.)
+
+      ae3d=np.maximum(-convw[1:,:,:],np.roll(diffw,-1,axis=0)-np.roll(fx,-1,axis=0)*convw[1:,:,:])
+      ae3d=np.maximum(ae3d,0.)
+
+      as3d=np.maximum(convs[:,0:-1,:],diffs+(1-fy)*convs[:,0:-1,:])
+      as3d=np.maximum(as3d,0.)
+
+      an3d=np.maximum(-convs[:,1:,:],np.roll(diffs,-1,axis=1)-np.roll(fy,-1,axis=1)*convs[:,1:,:])
+      an3d=np.maximum(an3d,0.)
+
+      al3d=np.maximum(convl[:,:,0:-1],diffl+0.5*convl[:,:,0:-1])
+      al3d=np.maximum(al3d,0.)
+
+      ah3d=np.maximum(-convl[:,:,1:],np.roll(diffl,-1,axis=2)-0.5*convl[:,:,1:])
+      ah3d=np.maximum(ah3d,0.)
+
+   if scheme_local == 'u':
+      if itstep == 0 and iter == 0:
+         print('upwind scheme, prand=',prand)
+
+      aw3d=np.maximum(convw[0:-1,:,:],0)+diffw
+      ae3d=np.maximum(-convw[1:,:,:],-0)+np.roll(diffw,-1,axis=0)
+      as3d=np.maximum(convs[:,0:-1,:],0)+diffs
+      an3d=np.maximum(-convs[:,1:,:],0)+np.roll(diffs,-1,axis=1)
+      al3d=np.maximum(convl[:,:,0:-1],0)+diffl
+      ah3d=np.maximum(-convl[:,:,1:],0)+np.roll(diffl,-1,axis=2)
+
+   if scheme_local == 'c':
+      if itstep == 0 and iter == 0:
+         print('CDS scheme, prand=',prand)
+      aw3d=diffw+(1-fx)*convw[0:-1,:,:]
+      ae3d=np.roll(diffw,-1,axis=0)-np.roll(fx,-1,axis=0)*convw[1:,:,:]
+
+      as3d=diffs+(1-fy)*convs[:,0:-1,:]
+      an3d=np.roll(diffs,-1,axis=1)-np.roll(fy,-1,axis=1)*convs[:,1:,:]
+
+      al3d=diffl+0.5*convl[:,:,0:-1]
+      ah3d=np.roll(diffl,-1,axis=2)-0.5*convl[:,:,1:]
+
+   apo3d=vol/dt[itstep]
+
+   if not cyclic_x:
+      aw3d[0,:,:]=0
+      ae3d[-1,:,:]=0
+   as3d[:,0,:]=0
+   an3d[:,-1,:]=0
+   if not cyclic_z:
+      al3d[:,:,0]=0
+      ah3d[:,:,-1]=0
+
+   return aw3d,ae3d,as3d,an3d,al3d,ah3d,apo3d,su3d,sp3d
+
+def bc(su3d,sp3d,phi_bc_west,phi_bc_east,phi_bc_south,phi_bc_north,phi_bc_z\
+     ,phi_bc_west_type,phi_bc_east_type,phi_bc_south_type,phi_bc_north_type,phi_bc_z_type):
+   su3d=np.zeros((ni,nj,nk))
+   sp3d=np.zeros((ni,nj,nk))
+
+#south
+   if phi_bc_south_type == 'd':
+      sp3d[:,0,:]=sp3d[:,0,:]-viscos*as_bound
+      su3d[:,0,:]=su3d[:,0,:]+viscos*as_bound*phi_bc_south
+
+#north
+   if phi_bc_north_type == 'd':
+      sp3d[:,-1,:]=sp3d[:,-1,:]-viscos*an_bound
+      su3d[:,-1,:]=su3d[:,-1,:]+viscos*an_bound*phi_bc_north
+
+#west
+   if phi_bc_west_type == 'd' and not cyclic_x:
+      sp3d[0,:,:]=sp3d[0,:,:]-viscos*aw_bound
+      su3d[0,:,:]=su3d[0,:,:]+viscos*aw_bound*phi_bc_west
+#east
+   if phi_bc_east_type == 'd' and not cyclic_x:
+      sp3d[-1,:,:]=sp3d[-1,:,:]-viscos*ae_bound
+      su3d[-1,:,:]=su3d[-1,:,:]+viscos*ae_bound*phi_bc_east
+
+#low & high
+   if phi_bc_z_type == 'd' and not cyclic_z:
+      sp3d[:,:,0]=sp3d[:,:,0]-viscos*az_bound
+      sp3d[:,:,-1]=sp3d[:,:,-1]-viscos*az_bound
+      su3d[:,:,0]=su3d[:,:,0]+viscos*az_bound*phi_bc_z
+      su3d[:,:,-1]=su3d[:,:,-1]+viscos*az_bound*phi_bc_z
+
+   return su3d,sp3d
+
+def conv(u3d,v3d,w3d,p3d_face_w,p3d_face_s,p3d_face_l):
+#compute convection
+   
+   dtt=dt[itstep]*acrank
+   u3d_star=u3d+dphidx(p3d_face_w,p3d_face_s)*dtt
+   v3d_star=v3d+dphidy(p3d_face_w,p3d_face_s)*dtt
+   w3d_star=w3d+dphidz(p3d_face_l)*dtt
+
+   u3d_face_w,u3d_face_s,u3d_face_l=compute_face_phi(u3d_star,u_bc_west,u_bc_east,u_bc_south,u_bc_north,u_bc_z,\
+    u_bc_west_type,u_bc_east_type,u_bc_south_type,u_bc_north_type,u_bc_z_type)
+   v3d_face_w,v3d_face_s,v3d_face_l=compute_face_phi(v3d_star,v_bc_west,v_bc_east,v_bc_south,v_bc_north,v_bc_z,\
+    v_bc_west_type,v_bc_east_type,v_bc_south_type,v_bc_north_type,v_bc_z_type)
+   w3d_face_w,w3d_face_s,w3d_face_l=compute_face_phi(w3d_star,w_bc_west,w_bc_east,w_bc_south,w_bc_north,w_bc_z,\
+    w_bc_west_type,w_bc_east_type,w_bc_south_type,w_bc_north_type,w_bc_z_type)
+
+   convw=-u3d_face_w*areawx-v3d_face_w*areawy
+   convs=-u3d_face_s*areasx-v3d_face_s*areasy
+   convl=w3d_face_l*areaz
+
+   convw,convs,convl=modify_conv(convw,convs,convl)
+
+   return convw,convs,convl
+
+def solve_gs(phi3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,tol_conv,nmax,acrank_conv_local):
+   if itstep == 0 and iter == 0:
+      print('solve_3d gs called,nmax=',nmax)
+   aw3d_cyc=np.copy(aw3d)
+   ae3d_cyc=np.copy(ae3d)
+   al3d_cyc=np.copy(al3d)
+   ah3d_cyc=np.copy(ah3d)
+   su3d_cyc=np.copy(su3d)
+   if cyclic_x:
+      aw3d_cyc[0,:,:]=0
+      ae3d_cyc[-1,:,:]=0
+      su3d_cyc[0,:,:]=su3d[0,:,:]+aw3d[0,:,:]*phi3d[-1,:,:]
+      su3d_cyc[-1,:,:]=su3d[-1,:,:]+ae3d[-1,:,:]*phi3d[0,:,:]
+   if cyclic_z:
+      al3d_cyc[:,:,0]=0
+      ah3d_cyc[:,:,-1]=0
+      su3d_cyc[:,:,0]=su3d[:,:,0]+al3d[:,:,0]*phi3d[:,:,-1]
+      su3d_cyc[:,:,-1]=su3d[:,:,-1]+ah3d[:,:,-1]*phi3d[:,:,0]
+   for n in range(0,nmax):
+      phi3d=((ae3d_cyc*np.roll(phi3d,-1,axis=0)+aw3d_cyc*np.roll(phi3d,1,axis=0) \
+      +an3d*np.roll(phi3d,-1,axis=1)+as3d*np.roll(phi3d,1,axis=1) \
+      +ah3d_cyc*np.roll(phi3d,-1,axis=2)+al3d_cyc*np.roll(phi3d,1,axis=2))*acrank_conv+su3d_cyc)/ap3d
+      if cyclic_x:
+         su3d_cyc[0,:,:]=su3d[0,:,:]+aw3d[0,:,:]*phi3d[-1,:,:]
+         su3d_cyc[-1,:,:]=su3d[-1,:,:]+ae3d[-1,:,:]*phi3d[0,:,:]
+      if cyclic_z:
+         su3d_cyc[:,:,0]=su3d[:,:,0]+al3d[:,:,0]*phi3d[:,:,-1]
+         su3d_cyc[:,:,-1]=su3d[:,:,-1]+ah3d[:,:,-1]*phi3d[:,:,0]
+   res= ap3d*phi3d-\
+     ((ae3d_cyc*np.roll(phi3d,-1,axis=0)+aw3d_cyc*np.roll(phi3d,1,axis=0) \
+      +an3d*np.roll(phi3d,-1,axis=1)+as3d*np.roll(phi3d,1,axis=1) \
+      +ah3d_cyc*np.roll(phi3d,-1,axis=2)+al3d_cyc*np.roll(phi3d,1,axis=2))*acrank_conv+su3d_cyc)
+   resid=np.sum(np.abs(res.flatten()))
+   return resid,phi3d
+
+   
+def solve_tdma(phi3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,tol_conv,nmax,acrank_conv_local,solver_local):
+
+   if itstep == 0 and iter == 0:
+      print('solve_tdma called')
+      print('nmax,acrank_conv_local',nmax,acrank_conv_local)
+
+   su3d_tdma=np.zeros((ni,nj,nk))
+
+   as1=as3d.swapaxes(1,2).flatten()*acrank_conv_local
+   an=an3d.swapaxes(1,2).flatten()*acrank_conv_local
+   ap_j_dir=ap3d.swapaxes(1,2).flatten()
+
+   A = sparse.diags([ap_j_dir, -an, -as1[1:]], [0, 1, -1], format='csc')
+
+   for n in range(0,nmax):
+# \\\\\\\\\\\\\\\\ tdma in j direction \\\\\\\\\\\\\\\\\\\\\\\
+# put i and k direction in su
+      su3d_tdma=su3d+(al3d*np.roll(phi3d,1,axis=2)+ah3d*np.roll(phi3d,-1,axis=2) \
+                      +aw3d*np.roll(phi3d,1,axis=0)+ae3d*np.roll(phi3d,-1,axis=0))*acrank_conv_local
+      su=su3d_tdma.swapaxes(1,2).flatten()
+
+      phi = linalg.spsolve(A,su)
+
+      phi3d=np.reshape(phi,(ni,nk,nj)).swapaxes(1,2)
+
+# compute residual
+   su3d_tdma=su3d+(al3d*np.roll(phi3d,1,axis=2)+ah3d*np.roll(phi3d,-1,axis=2) \
+                  +aw3d*np.roll(phi3d,1,axis=0)+ae3d*np.roll(phi3d,-1,axis=0))*acrank_conv_local
+   su=su3d_tdma.swapaxes(1,2).flatten()
+   resid=np.linalg.norm(A*phi - su)
+
+   return phi3d,resid
+
+def solve_3d(phi3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,tol_conv,nmax,acrank_conv_local,solver_local):
+   if itstep == 0 and iter == 0:
+      print('solve_3d called')
+      print('nmax,acrank_conv_local',nmax,acrank_conv_local)
+
+   aw=np.matrix.flatten(aw3d)*acrank_conv_local
+   ae=np.matrix.flatten(ae3d)*acrank_conv_local
+   as1=np.matrix.flatten(as3d)*acrank_conv_local
+   an=np.matrix.flatten(an3d)*acrank_conv_local
+   al=np.matrix.flatten(al3d)*acrank_conv_local
+   ah=np.matrix.flatten(ah3d)*acrank_conv_local
+   ap=np.matrix.flatten(ap3d)
+  
+   m=ni*nj*nk
+
+
+
+   if cyclic_x and cyclic_z:
+      al_cyc=np.zeros(m)
+      al_cyc[0:-1:nk]= al[0:-1:nk]
+      al[0:-1:nk]=0
+      ah_cyc=np.zeros(m)
+      ah_cyc[nk-1::nk]=ah[nk-1::nk]
+      ah[nk-1:-1:nk]=0
+      ah[-1]=0
+      A = sparse.diags([ap, -ah[:-1], -al[1:], -al_cyc, -ah_cyc[nk-1:], -an[0:-nk], -as1[nk:], -ae, -aw[nj*nk:],-aw,-ae[nj*nk*(ni-1):]], \
+            [0, 1, -1, nk-1, -(nk-1), nk, -nk, nk*nj, -nk*nj, nj*nk*(ni-1), -nj*nk*(ni-1)], format='csr') 
+   elif not cyclic_z and cyclic_x:
+      A = sparse.diags([ap, -ah[:-1], -al[1:], -an[0:-nk], -as1[nk:], -ae, -aw[nj*nk:],-aw,-ae[nj*nk*(ni-1):]], \
+            [0, 1, -1, nk,-nk, nk*nj, -nk*nj, nj*nk*(ni-1), -nj*nk*(ni-1)], format='csr') 
+   elif cyclic_z and not cyclic_x:
+      al_cyc=np.zeros(m)
+      al_cyc[0:-1:nk]= al[0:-1:nk]
+      al[0:-1:nk]=0
+      ah_cyc=np.zeros(m)
+      ah_cyc[nk-1::nk]=ah[nk-1::nk]
+      ah[nk-1::nk]=0
+      A= sparse.diags([ap,-ah[:-1],-al[1:],-al_cyc, -ah_cyc[nk-1:], -an[0:-nk], -as1[nk:], -ae, -aw[nj*nk:]], \
+         [0, 1, -1, nk-1, -(nk-1), nk, -nk, nk*nj, -nk*nj], format='csr')
+   elif not cyclic_z and not cyclic_x:
+      A = sparse.diags([ap, -ah[:-1], -al[1:], -an[0:-nk], -as1[nk:], -ae, -aw[nj*nk:]], [0, 1, -1, nk, -nk, nk*nj, -nk*nj], format='csr') 
+
+   su=np.matrix.flatten(su3d)
+   phi=np.matrix.flatten(phi3d)
+
+   res_su=np.linalg.norm(su)
+   resid_orig=np.linalg.norm(A*phi - su)
+
+   phi_org=phi
+
+# bicg (BIConjugate Gradient)
+# bicgstab (BIConjugate Gradient STABilized)
+# cg (Conjugate Gradient) - symmetric positive definite matrices only
+# cgs (Conjugate Gradient Squared)
+# gmres (Generalized Minimal RESidual)
+# minres (MINimum RESidual)
+# qmr (Quasi
+   if solver_local == 'cgs':
+      if itstep == 0 and iter == 0:
+         print('solver in solve_3d: cgs')
+      phi,info=linalg.cgs(A,su,x0=phi, atol=tol_conv,  maxiter=nmax)  # good
+   if solver_local == 'cg':
+      if itstep == 0 and iter == 0:
+         print('solver in solve_3d: cg')
+      phi,info=linalg.cg(A,su,x0=phi, atol=tol_conv,  maxiter=nmax)  # good
+   if solver_local == 'gmres':
+      if itstep == 0 and iter == 0:
+         print('solver in solve_3d: gmres')
+      phi,info=linalg.gmres(A,su,x0=phi, atol=tol_conv,  maxiter=nmax)  # good
+   if solver_local == 'qmr':
+      if itstep == 0 and iter == 0:
+         print('solver in solve_3d: qmr')
+      phi,info=linalg.qmr(A,su,x0=phi, atol=tol_conv,  maxiter=nmax)  # good
+   if solver_local == 'lgmres':
+      if itstep == 0 and iter == 0:
+         print('solver in solve_3d: lgmres')
+      phi,info=linalg.lgmres(A,su,x0=phi, atol=tol_conv,  maxiter=nmax)  # good
+   if info > 0:
+      print('warning in module solve_3d: convergence in sparse matrix solver not reached')
+# compute residual without normalizing with |b|=|su3d|
+   resid=np.linalg.norm(A*phi - su)
+
+   delta_phi=np.max(np.abs(phi-phi_org))
+
+   phi3d=np.reshape(phi,(ni,nj,nk))
+   phi3d_org=np.reshape(phi_org,(ni,nj,nk))
+
+   print(f"{'residual history in solve_3d: initial residual: '} {resid_orig:.2e}{'final residual: ':>30}{resid:.2e}\
+      {'delta_phi: ':>25}{delta_phi:.2e}")
+
+
+   return phi3d,resid
+
+def solve_pyamg(phi3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,tol_conv,acrank_conv_local):
+
+   if itstep == 0 and iter == 0:
+      print('solve_pyamg called,tol_conv=',tol_conv,'acrank_conv_local=',acrank_conv_local)
+      print('relation method_phi, amg_cycle_phi=',amg_relax_phi,amg_cycle_phi)
+
+   aw=np.matrix.flatten(aw3d)*acrank_conv_local
+   ae=np.matrix.flatten(ae3d)*acrank_conv_local
+   as1=np.matrix.flatten(as3d)*acrank_conv_local
+   an=np.matrix.flatten(an3d)*acrank_conv_local
+   al=np.matrix.flatten(al3d)*acrank_conv_local
+   ah=np.matrix.flatten(ah3d)*acrank_conv_local
+   ap=np.matrix.flatten(ap3d)
+
+   m=ni*nj*nk
+
+
+
+   if cyclic_x and cyclic_z:
+      print('cyclic_x cyclic_z')
+      al_cyc=np.zeros(m)
+      al_cyc[0:-1:nk]= al[0:-1:nk]
+      al[0:-1:nk]=0
+      ah_cyc=np.zeros(m)
+      ah_cyc[nk-1::nk]=ah[nk-1::nk]
+      ah[nk-1:-1:nk]=0
+      ah[-1]=0
+      A = sparse.diags([ap, -ah[:-1], -al[1:], -al_cyc, -ah_cyc[nk-1:], -an[0:-nk], -as1[nk:], -ae, -aw[nj*nk:],-aw,-ae[nj*nk*(ni-1):]], \
+         [0, 1, -1, nk-1, -(nk-1), nk, -nk, nk*nj, -nk*nj, nj*nk*(ni-1), -nj*nk*(ni-1)], format='csr')
+   elif not cyclic_z and cyclic_x:
+      print('cyclic_x and not cyclic_z')
+      A = sparse.diags([ap, -ah[:-1], -al[1:], -an[0:-nk], -as1[nk:], -ae, -aw[nj*nk:],-aw,-ae[nj*nk*(ni-1):]], \
+            [0, 1, -1, nk,-nk, nk*nj, -nk*nj, nj*nk*(ni-1), -nj*nk*(ni-1)], format='csr')
+   elif cyclic_z and not cyclic_x:
+      al_cyc=np.zeros(m)
+      al_cyc[0:-1:nk]= al[0:-1:nk]
+      al[0:-1:nk]=0
+      ah_cyc=np.zeros(m)
+      ah_cyc[nk-1::nk]=ah[nk-1::nk]
+#       ah[nk-1:-1:nk]=0
+      ah[nk-1::nk]=0
+      A= sparse.diags([ap,-ah[:-1],-al[1:],-al_cyc, -ah_cyc[nk-1:], -an[0:-nk], -as1[nk:], -ae, -aw[nj*nk:]], \
+         [0, 1, -1, nk-1, -(nk-1), nk, -nk, nk*nj, -nk*nj], format='csr')
+   elif not cyclic_z and not cyclic_x:
+      print('not cyclic_z and not cyclic_x')
+      A = sparse.diags([ap, -ah[:-1], -al[1:], -an[0:-nk], -as1[nk:], -ae, -aw[nj*nk:]], [0, 1, -1, nk, -nk, nk*nj, -nk*nj], format='csr')
+  
+
+
+   App = pyamg.ruge_stuben_solver(A)                    # construct the multigrid hierarchy
+#     Ap = pyamg.classical.ruge_stuben_solver(Ap) 
+
+   print('in solve_pyamg')
+
+   phi=np.matrix.flatten(phi3d)
+   su=np.matrix.flatten(su3d)
+   phi_org=phi
+   res_amg = []
+   if amg_relax_phi == 'default':
+      phi = App.solve(su, tol=tol_conv, x0=phi, residuals=res_amg)
+   else:
+      phi = App.solve(su, tol=tol_conv, x0=phi,accel=amg_relax_phi,cycle=amg_cycle_phi, residuals=res_amg)
+
+   print('Residual history in pyAMG', ["%0.4e" % i for i in res_amg])
+
+#  index_phi=np.argmax(np.abs(phi-phi_org))
+   delta_phi=np.max(np.abs(phi-phi_org))
+
+   print(f"{'Residual history in solve_pyAMG: delta_phi: ':>25}{delta_phi:.2e}")
+
+   phi3d=np.reshape(phi,(ni,nj,nk))
+
+   return phi3d,res_amg[-1]
+
+def solve_p(phi3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,tol_conv):
+   global Ap,Mp
+   if itstep == 0 and iter == 0:
+      print('solve_p called')
+      print('relation method=',amg_relax)
+
+   if iter == 0 and itstep == 0:
+      print('A and M computed,tol_conv=',tol_conv)
+      aw=np.matrix.flatten(aw3d)
+      ae=np.matrix.flatten(ae3d)
+      as1=np.matrix.flatten(as3d)
+      an=np.matrix.flatten(an3d)
+      al=np.matrix.flatten(al3d)
+      ah=np.matrix.flatten(ah3d)
+      ap=np.matrix.flatten(ap3d)
+
+      m=ni*nj*nk
+
+
+
+      if cyclic_x and cyclic_z:
+         print('cyclic_x cyclic_z')
+         al_cyc=np.zeros(m)
+         al_cyc[0:-1:nk]= al[0:-1:nk]
+         al[0:-1:nk]=0
+         ah_cyc=np.zeros(m)
+         ah_cyc[nk-1::nk]=ah[nk-1::nk]
+         ah[nk-1:-1:nk]=0
+         ah[-1]=0
+         Ap = sparse.diags([ap, -ah[:-1], -al[1:], -al_cyc, -ah_cyc[nk-1:], -an[0:-nk], -as1[nk:], -ae, -aw[nj*nk:],-aw,-ae[nj*nk*(ni-1):]], \
+            [0, 1, -1, nk-1, -(nk-1), nk, -nk, nk*nj, -nk*nj, nj*nk*(ni-1), -nj*nk*(ni-1)], format='csr')
+      elif not cyclic_z and cyclic_x:
+         print('cyclic_x and not cyclic_z')
+         Ap = sparse.diags([ap, -ah[:-1], -al[1:], -an[0:-nk], -as1[nk:], -ae, -aw[nj*nk:],-aw,-ae[nj*nk*(ni-1):]], \
+               [0, 1, -1, nk,-nk, nk*nj, -nk*nj, nj*nk*(ni-1), -nj*nk*(ni-1)], format='csr')
+      elif cyclic_z and not cyclic_x:
+         al_cyc=np.zeros(m)
+         al_cyc[0:-1:nk]= al[0:-1:nk]
+         al[0:-1:nk]=0
+         ah_cyc=np.zeros(m)
+         ah_cyc[nk-1::nk]=ah[nk-1::nk]
+#        ah[nk-1:-1:nk]=0
+         ah[nk-1::nk]=0
+         Ap= sparse.diags([ap,-ah[:-1],-al[1:],-al_cyc, -ah_cyc[nk-1:], -an[0:-nk], -as1[nk:], -ae, -aw[nj*nk:]], \
+            [0, 1, -1, nk-1, -(nk-1), nk, -nk, nk*nj, -nk*nj], format='csr')
+      elif not cyclic_z and not cyclic_x:
+         print('not cyclic_z and not cyclic_x')
+         Ap = sparse.diags([ap, -ah[:-1], -al[1:], -an[0:-nk], -as1[nk:], -ae, -aw[nj*nk:]], [0, 1, -1, nk, -nk, nk*nj, -nk*nj], format='csr')
+   
+
+
+      Ap = pyamg.ruge_stuben_solver(Ap)                    # construct the multigrid hierarchy
+#     Ap = pyamg.classical.ruge_stuben_solver(Ap) 
+
+   print('in solve_p')
+
+   phi=np.matrix.flatten(phi3d)
+   su=np.matrix.flatten(su3d)
+   if amg_relax == 'default':
+      phi = Ap.solve(su, tol=tol_conv, x0=phi)
+   else:
+      phi = Ap.solve(su, tol=tol_conv, x0=phi,accel=amg_relax,cycle=amg_cycle)
+
+   phi3d=np.reshape(phi,(ni,nj,nk))
+
+   return phi3d
+
+
+def calcu(su3d,sp3d,dpdx_old,p3d_face_w,p3d_face_s):
+   if itstep == 0 and iter == 0:
+      print('calcu called')
+# b.c., sources, coefficients
+
+# presssure gradient
+   dpdx=acrank*dphidx(p3d_face_w,p3d_face_s)+(1-acrank)*dpdx_old
+   su3d=su3d-dpdx*vol
+
+# modify su & sp
+   su3d,sp3d=modify_u(su3d,sp3d)
+# unsteady term added in crank_nicol
+
+   return su3d,sp3d
+
+def calcv(su3d,sp3d,dpdy_old,p3d_face_w,p3d_face_s):
+   if itstep == 0 and iter == 0:
+      print('calcv called')
+# b.c., sources, coefficients 
+
+# presssure gradient
+   dpdy=acrank*dphidy(p3d_face_w,p3d_face_s)+(1-acrank)*dpdy_old
+   su3d=su3d-dpdy*vol
+
+# modify su & sp
+   su3d,sp3d=modify_v(su3d,sp3d)
+# unsteady term added in crank_nicol
+
+   return su3d,sp3d
+
+def compute_fk(k3d,eps3d,fk3d):
+
+   if itstep == 0 and iter == 0:
+      print('compute_fk called')
+
+   if pans:
+      L_t=k3d**1.5/eps3d
+      psi=np.maximum(1,L_t/(cdes*delta_max))
+
+      fk3d=np.maximum(1.-(psi-1.)/(c_eps_2-c_eps_1),0)
+#     fk3d=np.maximum(1.-(psi-1.)/(c_eps_2-c_eps_1),fkmin_limit)
+
+   if keps_des:
+      rl=k3d**1.5/eps3d
+      fk3d=np.maximum(1.,rl/(0.67*delta_max))
+   if jl0 < 0:
+      jl=np.abs(jl0)
+      fk3d[:,0:jl,:]=1
+
+   fk3d=modify_fk(fk3d)
+
+   return fk3d
+
+
+def calck_ls(su3d,sp3d,k3d,eps3d,vis3d,u3d_face_w,u3d_face_s,v3d_face_w,v3d_face_s,w3d_face_l):
+# b.c., sources, coefficients 
+   if itstep == 0 and iter == 0:
+      print('calck_ls called')
+
+# production term
+   dudx=dphidx(u3d_face_w,u3d_face_s)
+   dvdx=dphidx(v3d_face_w,v3d_face_s)
+   dwdx=dphidx(w3d_face_w,w3d_face_s)
+
+   dudy=dphidy(u3d_face_w,u3d_face_s)
+   dvdy=dphidy(v3d_face_w,v3d_face_s)
+   dwdy=dphidy(w3d_face_w,w3d_face_s)
+
+   dudz=dphidz(u3d_face_l)
+   dvdz=dphidz(v3d_face_l)
+   dwdz=dphidz(w3d_face_l)
+
+   gen= (2.*(dudx**2+dvdy**2+dwdz**2)+(dudz+dwdx)**2+(dvdz+dwdy)**2+(dudy+dvdx)**2)
+   vist=np.maximum(vis3d-viscos,1e-10)
+   su3d=su3d+vist*gen*vol
+
+# dissipation term
+   if keps_des:
+      sp3d=sp3d-fk3d*eps3d/k3d*vol
+   else:
+      sp3d=sp3d-eps3d/k3d*vol
+
+# D term
+# compute gradient of k**0.5
+   k05=k3d**0.5
+   k05_face_w,k05_face_s,k05_face_l=compute_face_phi(k05,k_bc_west,k_bc_east,k_bc_south,k_bc_north,k_bc_z,\
+     k_bc_west_type,k_bc_east_type,k_bc_south_type,k_bc_north_type,k_bc_z_type)
+   dk05dy=dphidy(k05_face_w,k05_face_s)
+   dterm=2.*viscos*dk05dy**2
+   sp3d=sp3d-dterm/k3d*vol
+
+# modify su & sp
+   su3d,sp3d,comm_term=modify_k(su3d,sp3d,gen)
+
+# unsteady term added in crank_nicol
+
+   return su3d,sp3d,gen,dudx,dudy
+
+def calceps_ls(su3d,sp3d,k3d,eps3d,vis3d,gen,dudx,dudy):
+   if itstep == 0 and iter == 0:
+      print('calceps_ls called')
+
+# b.c., sources, coefficients 
+   rt=k3d**2/eps3d/viscos
+   fdampf2=1.-0.3*np.exp(-rt**2)
+   fmu3d=np.exp(-3.4/(1.+rt/50.)**2)
+   fmu3d=np.minimum(fmu3d,1.)
+
+#--------production term
+   su3d=su3d+c_eps_1*cmu*fmu3d*gen*k3d*vol
+
+#--------dissipation term
+   sp3d=sp3d-fdampf2*c_eps_2*eps3d*vol/k3d
+
+#--- E term (note that u_bc_west,u_bc_east ... are not used since Neumann bc are prescribed) 
+   dudy_face_w,dudy_face_s,dudy_face_l=compute_face_phi(dudy,u_bc_west,u_bc_east,u_bc_south,u_bc_north,u_bc_z,\
+     'n','n','n','n','n')
+   dudx_face_w,dudx_face_s,dudx_face_l=compute_face_phi(dudx,u_bc_west,u_bc_east,u_bc_south,u_bc_north,u_bc_z,\
+     'n','n','n','n','n')
+   d2udy2=dphidy(dudy_face_w,dudy_face_s)
+   d2udx2=dphidx(dudx_face_w,dudx_face_s)
+   vist=vis3d-viscos
+   eterm=2.*viscos*vist*(d2udx2**2+d2udy2**2)
+#  eterm=2.*viscos*vist*d2udy2**2
+   su3d=su3d+eterm*vol
+
+# modify su & sp
+   su3d,sp3d=modify_eps(su3d,sp3d)
+
+   return su3d,sp3d,fmu3d
+
+def calck_kom(su3d,sp3d,k3d,om3d,vis3d,u3d_face_w,u3d_face_s,v3d_face_w,v3d_face_s,w3d_face_l):
+# b.c., sources, coefficients 
+   if itstep == 0 and iter == 0:
+      print('calck_kom called')
+
+# production term
+   dudx=dphidx(u3d_face_w,u3d_face_s)
+   dvdx=dphidx(v3d_face_w,v3d_face_s)
+   dwdx=dphidx(w3d_face_w,w3d_face_s)
+
+   dudy=dphidy(u3d_face_w,u3d_face_s)
+   dvdy=dphidy(v3d_face_w,v3d_face_s)
+   dwdy=dphidy(w3d_face_w,w3d_face_s)
+
+   dudz=dphidz(u3d_face_l)
+   dvdz=dphidz(v3d_face_l)
+   dwdz=dphidz(w3d_face_l)
+
+   gen= (2.*(dudx**2+dvdy**2+dwdz**2)+(dudz+dwdx)**2+(dvdz+dwdy)**2+(dudy+dvdx)**2)
+   vist=np.maximum(vis3d-viscos,1e-10)
+   su3d=su3d+vist*gen*vol
+
+# dissipation term
+   if kom_des:
+      sp3d=sp3d-fk3d*cmu*om3d*vol
+   else:
+      sp3d=sp3d-cmu*om3d*vol
+
+# modify su & sp
+   su3d,sp3d,comm_term=modify_k(su3d,sp3d,gen)
+
+# unsteady term added in crank_nicol
+
+   return su3d,sp3d,gen,comm_term
+
+def calcom(su3d,sp3d,om3d,gen,comm_term):
+   if itstep == 0 and iter == 0:
+      print('calcom called')
+
+
+#--------production term
+   su3d=su3d+c_omega_1*gen*vol
+
+#--------dissipation term
+   sp3d=sp3d-c_omega_2*om3d*vol
+
+# modify su & sp
+   su3d,sp3d=modify_om(su3d,sp3d,comm_term)
+
+   return su3d,sp3d
+
+def calck(su3d,sp3d,k3d,eps3d,vis3d,u3d_face_w,u3d_face_s,v3d_face_w,v3d_face_s,w3d_face_l):
+# b.c., sources, coefficients 
+   if itstep == 0 and iter == 0:
+      print('calck called')
+
+# production term
+   dudx=dphidx(u3d_face_w,u3d_face_s)
+   dvdx=dphidx(v3d_face_w,v3d_face_s)
+   dwdx=dphidx(w3d_face_w,w3d_face_s)
+
+   dudy=dphidy(u3d_face_w,u3d_face_s)
+   dvdy=dphidy(v3d_face_w,v3d_face_s)
+   dwdy=dphidy(w3d_face_w,w3d_face_s)
+
+   dudz=dphidz(u3d_face_l)
+   dvdz=dphidz(v3d_face_l)
+   dwdz=dphidz(w3d_face_l)
+
+   gen= (2.*(dudx**2+dvdy**2+dwdz**2)+(dudz+dwdx)**2+(dvdz+dwdy)**2+(dudy+dvdx)**2)
+   s2= dudx**2+dvdy**2+dwdz**2+dudz**2+dwdx**2+dvdz**2+dwdy**2+dudy**2+dvdx**2
+   vist=np.maximum(vis3d-viscos,1e-10)
+   su3d=su3d+vist*gen*vol
+
+# dissipation term
+   if keps_des:
+      sp3d=sp3d-fk3d*eps3d/k3d*vol
+   else:
+      sp3d=sp3d-eps3d/k3d*vol
+
+# modify su & sp
+   su3d,sp3d,comm_term=modify_k(su3d,sp3d,gen)
+
+# unsteady term added in crank_nicol
+
+   return su3d,sp3d,gen,dudx,dudy,s2
+
+def calceps(su3d,sp3d,k3d,eps3d,vis3d,gen):
+   if itstep == 0 and iter == 0:
+      print('calceps called')
+
+# b.c., sources, coefficients 
+   ueps=(eps3d*viscos)**0.25
+   ystar=ueps*dist3d/viscos
+   rt=k3d**2/eps3d/viscos
+   fdampf2=((1.-np.exp(-ystar/3.1))**2)*(1.-0.3*np.exp(-(rt/6.5)**2))
+   fmu3d=((1.-np.exp(-ystar/14.))**2)*(1.+5./rt**0.75*np.exp(-(rt/200.)**2))
+   fmu3d=np.minimum(fmu3d,1.)
+
+#--------production term
+   su3d=su3d+c_eps_1*cmu*fmu3d*gen*k3d*vol
+   if pans:
+      c2u=c_eps_1+fk3d*(fdampf2*c_eps_2-c_eps_1)
+   else:
+      c2u=fdampf2*c_eps_2
+
+#--------dissipation term
+   sp3d=sp3d-c2u*eps3d*vol/k3d
+
+# modify su & sp
+   su3d,sp3d=modify_eps(su3d,sp3d)
+
+   return su3d,sp3d,fmu3d
+
+def calcw(su3d,sp3d,dpdz_old,p3d_face_l):
+# b.c., sources, coefficients 
+   if itstep == 0 and iter == 0:
+      print('calcw called')
+
+# presssure gradient
+   dpdz=acrank*dphidz(p3d_face_l)+(1-acrank)*dpdz_old
+   su3d=su3d-dpdz*vol
+
+# modify su & sp
+   su3d,sp3d=modify_w(su3d,sp3d)
+
+# unsteady term added in crank_nicol
+   return su3d,sp3d
+
+def calcp(convw,convs,convl):
+   if itstep == 0 and iter == 0:
+      print('calcp called')
+# b.c., sources, coefficients
+   volw=np.ones((ni+1,nj,nk))*1e-10
+   vols=np.ones((ni,nj+1,nk))*1e-10
+   volw[1:,:,:]=0.5*np.roll(vol,-1,axis=0)+0.5*vol
+   aw3d=areaw[0:-1,:,:]**2/volw[0:-1,:,:]
+   vols[:,1:,:]=0.5*np.roll(vol,-1,axis=1)+0.5*vol
+   as3d=areas[:,0:-1,:]**2/vols[:,0:-1,:]
+   al3d=areaz[:,:,0:-1]/dz
+
+   ae3d=np.roll(aw3d,-1,axis=0)
+   an3d=np.roll(as3d,-1,axis=1)
+   ah3d=np.roll(al3d,-1,axis=2)
+
+
+   if cyclic_x:
+      aw3d[0,:,:]=areaw[0,:,:]**2/(0.5*(vol[0,:,:]+vol[-1,:,:]))
+      ae3d[-1,:,:]=aw3d[0,:,:]
+   else:
+      aw3d[0,:,:]=0
+      ae3d[-1,:,:]=0
+   
+   if not cyclic_z:
+      al3d[:,:,0]=0
+      ah3d[:,:,-1]=0
+
+   as3d[:,0,:]=0
+   an3d[:,-1,:]=0
+
+
+
+   ap3d=aw3d+ae3d+as3d+an3d+al3d+ah3d
+
+# set p3d=0 in [0,0,0] to make it non-singular
+   ap3d[0,0,0]=1e10
+
+   return aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d
+
+
+def correct_conv(u3d,v3d,w3d,p3d,aw3d_p,as3d_p,al3d_p):
+# correct convections
+# create ghost cells at east & west boundaries with Neumann b.c.
+   p3d_w=p3d
+   p3d_s=p3d
+   p3d_l=p3d
+   dtt=dt[itstep]*acrank
+#\\\\\\\\\\\\\ west face
+# set zeros and put if before row 0
+   p3d_w=np.insert(p3d_w,0,np.zeros((nj,nk)),axis=0)
+   if cyclic_x:
+      convw[1:-1,:,:]=convw[1:-1,:,:]+aw3d_p[1:,:,:]*(p3d_w[1:-1,:,:]-p3d[1:,:,:])*dtt
+      convw[0,:,:]=convw[0,:,:]+aw3d_p[0,:,:]*(p3d[-1,:,:]-p3d[0,:,:])*dtt
+      convw[-1,:,:]=convw[0,:,:]
+   else:
+      convw[0:-1,:,:]=convw[0:-1,:,:]+aw3d_p*(p3d_w[0:-1,:,:]-p3d)*dtt
+
+
+#\\\\\\\\\\\\\ south face
+# set zeros and put it before column 0
+   p3d_s=np.insert(p3d_s,0,np.zeros((ni,nk)),axis=1)
+   convs[:,0:-1,:]=convs[:,0:-1,:]+as3d_p*(p3d_s[:,0:-1,:]-p3d)*dtt
+
+#\\\\\\\\\\\\\ low face
+# set zeros and put it before column 0
+   p3d_l=np.insert(p3d_l,0,np.zeros((ni,nj)),axis=2)
+   if cyclic_z:
+      convl[:,:,1:-1]=convl[:,:,1:-1]+al3d_p[:,:,1:]*(p3d_l[:,:,1:-1]-p3d[:,:,1:])*dtt
+      convl[:,:,-1]=convl[:,:,-1]+al3d_p[:,:,-1]*(p3d[:,:,-1]-p3d[:,:,0])*dtt
+      convl[:,:,0]=convl[:,:,-1]
+   else:
+      convl[:,:,0:-1]=convl[:,:,0:-1]+al3d_p*(p3d_l[:,:,0:-1]-p3d)*dtt
+# boundary
+      convl[:,:,0]=w3d_face_l[:,:,0]*areaz[:,:,0]
+
+# continuity error
+   su3d=convw[0:-1,:,:]-convw[1:,:,:]\
+       +convs[:,0:-1,:]-convs[:,1:,:]\
+       +convl[:,:,0:-1]-convl[:,:,1:]
+
+   return convw,convs,convl,p3d,u3d,v3d,w3d,su3d
+
+
+def update(u3d,v3d,w3d,k3d,eps3d,om3d,p3d_face_w,p3d_face_s,p3d_face_l):
+    u3d_old=u3d
+    v3d_old=v3d
+    w3d_old=w3d
+    k3d_old=k3d
+    eps3d_old=eps3d
+    om3d_old=om3d
+    dpdx_old=dphidx(p3d_face_w,p3d_face_s)
+    dpdy_old=dphidy(p3d_face_w,p3d_face_s)
+    dpdz_old=dphidz(p3d_face_l)
+
+    return u3d_old,v3d_old,w3d_old,k3d_old,eps3d_old,om3d_old,dpdx_old,dpdy_old,dpdz_old
+
+def time_stats(u3d_mean,v3d_mean,w3d_mean,p3d_mean,k3d_mean,eps3d_mean,om3d_mean,uu3d_stress,vv3d_stress,ww3d_stress,uv3d_stress,\
+                fk3d_mean,vis3d_mean):
+
+    global itstep_stats_counter
+
+    itstep_stats_counter=itstep_stats_counter+1
+    u3d_mean=u3d_mean+u3d
+    v3d_mean=v3d_mean+v3d
+    w3d_mean=w3d_mean+w3d
+    p3d_mean=p3d_mean+p3d
+    k3d_mean=k3d_mean+k3d
+    fk3d_mean=fk3d_mean+fk3d
+    om3d_mean=om3d_mean+om3d
+    eps3d_mean=eps3d_mean+eps3d
+    vis3d_mean=vis3d_mean+vis3d
+    uu3d_stress=uu3d_stress+u3d**2
+    vv3d_stress=vv3d_stress+v3d**2
+    ww3d_stress=ww3d_stress+w3d**2
+    uv3d_stress=uv3d_stress+u3d*v3d
+
+
+ 
+    return u3d_mean,v3d_mean,w3d_mean,p3d_mean,k3d_mean,eps3d_mean,om3d_mean,uu3d_stress,vv3d_stress,ww3d_stress,uv3d_stress,\
+           fk3d_mean,vis3d_mean
+
+def crank_nicol(phi3d_old,aw3d,ae3d,as3d,an3d,al3d,ah3d,apo3d,su3d,sp3d,acrank_conv_local):
+    ap3d=aw3d+ae3d+as3d+an3d+al3d+ah3d
+    su3d=su3d+(apo3d-(1-acrank_conv_local)*ap3d)*phi3d_old
+    ap3d=apo3d+acrank_conv_local*ap3d-sp3d
+    su3d=su3d+(1-acrank_conv_local)*\
+      (ae3d*np.roll(phi3d_old,-1,axis=0)+aw3d*np.roll(phi3d_old,1,axis=0) \
+      +an3d*np.roll(phi3d_old,-1,axis=1)+as3d*np.roll(phi3d_old,1,axis=1) \
+      +ah3d*np.roll(phi3d_old,-1,axis=2)+al3d*np.roll(phi3d_old,1,axis=2))
+    return ap3d,su3d
+
+def vist_kom(vis3d,k3d,om3d):
+   if itstep == 0 and iter == 0:
+      print('vist_kom called')
+
+   visold= vis3d
+   vis3d= k3d/om3d+viscos
+
+# modify viscosity
+   vis3d=modify_vis(vis3d)
+
+#            under-relax viscosity
+   vis3d= urfvis*vis3d+(1.-urfvis)*visold
+
+   return vis3d
+
+def vist_pans(vis3d,k3d,eps3d,fmu3d):
+   if itstep == 0 and iter == 0:
+      print('vist_pans called')
+
+   visold= vis3d
+   vis3d= cmu*fmu3d*k3d**2/eps3d+viscos
+#            under-relax viscosity
+
+# modify viscosity
+   vis3d=modify_vis(vis3d)
+
+   vis3d= urfvis*vis3d+(1.-urfvis)*visold
+ 
+   
+
+   return vis3d
+
+def vist_smag(u3d_face_w,u3d_face_s,u3d_face_l,v3d_face_w,v3d_face_s,v3d_face_l,w3d_face_w,w3d_face_s,w3d_face_l,vis3d):
+   if itstep == 0 and iter == 0:
+      print('vist_smag called')
+   dudx=dphidx(u3d_face_w,u3d_face_s)
+   dvdx=dphidx(v3d_face_w,v3d_face_s)
+   dwdx=dphidx(w3d_face_w,w3d_face_s)
+
+   dudy=dphidy(u3d_face_w,u3d_face_s)
+   dvdy=dphidy(v3d_face_w,v3d_face_s)
+   dwdy=dphidy(w3d_face_w,w3d_face_s)
+
+   dudz=dphidz(u3d_face_l)
+   dvdz=dphidz(v3d_face_l)
+   dwdz=dphidz(w3d_face_l)
+
+   gen= (2.*(dudx**2+dvdy**2+dwdz**2)+(dudz+dwdx)**2+(dvdz+dwdy)**2+(dudy+dvdx)**2)
+
+# RANS lengthscale
+   rl_rans=0.41*np.minimum(yp2d,yp2d[1,-1]-yp2d)
+# make it 3d
+   rl_rans_3d= np.dstack([rl_rans]*nk)
+   rl_les=cmu*vol**0.3333333
+   rl=np.minimum(rl_rans_3d,rl_les)
+   visold= vis3d
+   vis3d= rl**2*gen**0.5+viscos
+
+# modify viscosity
+   vis3d=modify_vis(vis3d)
+
+#            under-relax viscosity
+   vis3d= urfvis*vis3d+(1.-urfvis)*visold
+   return vis3d
+
+def save_vtk():
+   scalar_names = ['pressure']
+   scalar_variables = [p3d]
+   if keps or pans or keps_des:
+      scalar_names.append('turb_kin')
+      scalar_names.append('epsilon')
+      scalar_variables.append(k3d)
+      scalar_variables.append(eps3d)
+   if kom or kom_des:
+      scalar_names.append('turb_kin')
+      scalar_names.append('omega')
+      scalar_variables.append(k3d)
+      scalar_variables.append(om3d)
+
+   if save_vtk_movie:
+      file_name = '%s.%d.vtk' % (vtk_file_name, itstep)
+   else:
+      file_name = '%s.vtk' % (vtk_file_name)
+
+   f = open(file_name,'w')
+   f.write('# vtk DataFile Version 3.0\npyCALC-LES Data\nASCII\nDATASET STRUCTURED_GRID\n')
+   f.write('DIMENSIONS %d %d %d\nPOINTS %d double\n' % (nk+1,nj+1,ni+1,(ni+1)*(nj+1)*(nk+1)))
+   for i in range(ni+1):
+      for j in range(nj+1):
+         for k in range(nk+1):
+            f.write('%.5f %.5f %.5f\n' % (x2d[i,j],y2d[i,j],dz*k))
+   f.write('\nCELL_DATA %d\n' % (ni*nj*nk))
+
+   f.write('\nVECTORS velocity double\n')
+   for i in range(ni):
+      for j in range(nj):
+         for k in range(nk):
+            f.write('%.12e %.12e %.12e\n' % (u3d[i,j,k],v3d[i,j,k],w3d[i,j,k]))
+
+   for v in range(len(scalar_names)):
+      var_name = scalar_names[v]
+      var = scalar_variables[v]
+      f.write('\nSCALARS %s double 1\nLOOKUP_TABLE default\n' % (var_name))
+      for i in range(ni):
+         for j in range(nj):
+            for k in range(nk):
+               f.write('%.10e\n' % (var[i,j,k]))
+   f.close()
+
+   print('Flow state save into VTK format to file %s\n' % (file_name))
+
+def save_time_aver_data(u3d_mean,v3d_mean,w3d_mean,p3d_mean,eps3d_mean,om3d_mean,fk3d_mean,vis3d_mean,k3d_mean,uu3d_stress, \
+                        vv3d_stress,ww3d_stress,uv3d_stress):
+
+   print('save_time_aver_data called')
+# save time-averaged data to disk
+   np.save('u_averaged', np.mean(u3d_mean,axis=2))
+   np.save('v_averaged', np.mean(v3d_mean,axis=2))
+   np.save('w_averaged', np.mean(w3d_mean,axis=2))
+   np.save('p_averaged', np.mean(p3d_mean,axis=2))
+   np.save('k_averaged', np.mean(k3d_mean,axis=2))
+   np.save('fk_averaged', np.mean(fk3d_mean,axis=2))
+   np.save('k_averaged', np.mean(k3d_mean,axis=2))
+   np.save('om_averaged', np.mean(om3d_mean,axis=2))
+   np.save('vis_averaged', np.mean(vis3d_mean,axis=2))
+   np.save('eps_averaged', np.mean(eps3d_mean,axis=2))
+   np.save('k3d_averaged', np.mean(k3d_mean,axis=2))
+   np.save('uu_stress', np.mean(uu3d_stress,axis=2))
+   np.save('vv_stress', np.mean(vv3d_stress,axis=2))
+   np.save('ww_stress', np.mean(ww3d_stress,axis=2))
+   np.save('uv_stress', np.mean(uv3d_stress,axis=2))
+   np.save('itstep',[itstep_stats_counter,nk,dz])
+   print('itstep_stats_counter,nk,dz',itstep_stats_counter,nk,dz)
+ 
+   return
+
+def read_restart_data(u3d,v3d,w3d,p3d,k3d,eps3d,om3d):
+
+   print('read_restart_data called')
+
+   u3d=np.load('u3d_saved.npy')
+   v3d=np.load('v3d_saved.npy')
+   w3d=np.load('w3d_saved.npy')
+   p3d=np.load('p3d_saved.npy')
+   if keps or pans or keps_des:
+      k3d=np.load('k3d_saved.npy')
+      eps3d=np.load('eps3d_saved.npy')
+   if kom or kom_des:
+      k3d=np.load('k3d_saved.npy')
+      om3d=np.load('om3d_saved.npy')
+
+   return u3d,v3d,w3d,p3d,k3d,eps3d,om3d
+
+def save_data(u3d,v3d,w3d,p3d,k3d,eps3d,om3d):
+
+   print('save_data called')
+   np.save('u3d_saved', u3d)
+   np.save('v3d_saved', v3d)
+   np.save('w3d_saved', w3d)
+   np.save('p3d_saved', p3d)
+   if keps or pans or keps_des:
+      np.save('k3d_saved', k3d)
+      np.save('eps3d_saved', eps3d)
+   if kom or kom_des:
+      np.save('k3d_saved', k3d)
+      np.save('om3d_saved', om3d)
+
+   return 
+
+def vist_wale(u3d_face_w,u3d_face_s,u3d_face_l,v3d_face_w,v3d_face_s,v3d_face_l,w3d_face_w,w3d_face_s,w3d_face_l,vis3d):
+   if itstep == 0 and iter == 0:
+      print('vist_wale called')
+
+   dudx=dphidx(u3d_face_w,u3d_face_s)
+   dvdx=dphidx(v3d_face_w,v3d_face_s)
+   dwdx=dphidx(w3d_face_w,w3d_face_s)
+
+   dudy=dphidy(u3d_face_w,u3d_face_s)
+   dvdy=dphidy(v3d_face_w,v3d_face_s)
+   dwdy=dphidy(w3d_face_w,w3d_face_s)
+
+   dudz=dphidz(u3d_face_l)
+   dvdz=dphidz(v3d_face_l)
+   dwdz=dphidz(w3d_face_l)
+
+   s11=dudx
+   s12=0.5*(dudy+dvdx)
+   s13=0.5*(dudz+dwdx)
+
+   s21=s12
+   s22=dvdy
+   s23=0.5*(dvdz+dwdy)
+
+   s31=s13
+   s32=s23
+   s33=dwdz
+
+   g11=dudx
+   g12=dudy
+   g13=dudz
+
+   g21=dvdx
+   g22=dvdy
+   g23=dvdz
+      
+   g31=dwdx
+   g32=dwdy
+   g33=dwdz
+
+#square of g_ij = g_ik g_kj
+   g11_2=g11*g11+g12*g21+g13*g31
+   g12_2=g11*g12+g12*g22+g13*g32
+   g13_2=g11*g13+g12*g23+g13*g33
+
+   g21_2=g21*g11+g22*g21+g23*g31
+   g22_2=g21*g12+g22*g22+g23*g32
+   g23_2=g21*g13+g22*g23+g23*g33
+
+   g31_2=g31*g11+g32*g21+g33*g31
+   g32_2=g31*g12+g32*g22+g33*g32
+   g33_2=g31*g13+g32*g23+g33*g33
+
+   gkk_2=(g11_2+g22_2+g33_2)/3.
+
+   sd11=g11_2-gkk_2
+   sd12=0.5*(g12_2+g21_2)
+   sd13=0.5*(g13_2+g31_2)
+   sd21=sd12
+   sd22=g22_2-gkk_2
+   sd23=0.5*(g23_2+g32_2)
+
+   sd31=sd13
+   sd32=sd23
+   sd33=g33_2-gkk_2
+
+   sijsij=s11*s11+s12*s12+s13*s13+\
+          s21*s21+s22*s22+s23*s23+\
+          s31*s31+s32*s32+s33*s33
+
+   sdijsdij=sd11*sd11+sd12*sd12+sd13*sd13+\
+          sd21*sd21+sd22*sd22+sd23*sd23+\
+          sd31*sd31+sd32*sd32+sd33*sd33
+
+   cm=(10.6*0.1**2)**0.5
+
+   term1=sdijsdij**1.5/(sijsij**2.5+sdijsdij**1.25)
+
+   visold= vis3d
+   delta=vol**0.333333
+   vis3d= (cm*delta)**2*term1+viscos
+
+# modify viscosity
+   vis3d=modify_vis(vis3d)
+
+#            under-relax viscosity
+   vis3d= urfvis*vis3d+(1.-urfvis)*visold
+   return vis3d
+
+######################### the execution of the code starts here #############################
+
+########### grid specification ###########
+datax= np.loadtxt("x2d.dat")
+x=datax[0:-1]
+ni=int(datax[-1])
+datay= np.loadtxt("y2d.dat")
+y=datay[0:-1]
+nj=int(datay[-1])
+
+x2d=np.zeros((ni+1,nj+1))
+y2d=np.zeros((ni+1,nj+1))
+
+x2d=np.reshape(x,(ni+1,nj+1))
+y2d=np.reshape(y,(ni+1,nj+1))
+
+# compute cell centers
+xp2d=0.25*(x2d[0:-1,0:-1]+x2d[0:-1,1:]+x2d[1:,0:-1]+x2d[1:,1:])
+yp2d=0.25*(y2d[0:-1,0:-1]+y2d[0:-1,1:]+y2d[1:,0:-1]+y2d[1:,1:])
+
+zmax, nk=np.loadtxt('z.dat')
+nk=np.int(nk)
+dz=zmax/nk
+
+# initialize geometric arrays
+
+vol=np.zeros((ni,nj,nk))
+areas=np.zeros((ni,nj+1,nk))
+areasx=np.zeros((ni,nj+1,nk))
+areasy=np.zeros((ni,nj+1,nk))
+areaw=np.zeros((ni+1,nj,nk))
+areawx=np.zeros((ni+1,nj,nk))
+areawy=np.zeros((ni+1,nj,nk))
+areaz=np.zeros((ni,nj,nk+1))
+as_bound=np.zeros((ni,nk))
+an_bound=np.zeros((ni,nk))
+aw_bound=np.zeros((nj,nk))
+ae_bound=np.zeros((nj,nk))
+az_bound=np.zeros((ni,nj))
+fx=np.zeros((ni,nj,nk))
+fy=np.zeros((ni,nj,nk))
+
+setup_case()
+
+print_indata()
+
+areaw,areawx,areawy,areas,areasx,areasy,areaz,vol,fx,fy,aw_bound,ae_bound,as_bound,an_bound,az_bound,dist3d=init()
+
+
+# initialization
+itstep_stats_counter=0 # counter for timeaveraging
+u3d=np.ones((ni,nj,nk))*1e-20
+v3d=np.ones((ni,nj,nk))*1e-20
+w3d=np.ones((ni,nj,nk))*1e-20
+p3d=np.ones((ni,nj,nk))*1e-20
+k3d=np.ones((ni,nj,nk))*1
+eps3d=np.ones((ni,nj,nk))*1
+om3d=np.ones((ni,nj,nk))*1
+vis3d=np.ones((ni,nj,nk))*viscos
+
+fk3d=np.ones((ni,nj,nk))
+gen=np.ones((ni,nj,nk))
+s2=np.ones((ni,nj,nk))
+
+dpdx_old=np.ones((ni,nj,nk))*1e-20
+dpdy_old=np.ones((ni,nj,nk))*1e-20
+dpdz_old=np.ones((ni,nj,nk))*1e-20
+
+convw=np.ones((ni+1,nj,nk))*1e-20
+convs=np.ones((ni,nj+1,nk))*1e-20
+convl=np.ones((ni,nj,nk+1))*1e-20
+
+u3d_mean=np.ones((ni,nj,nk))*1e-20
+v3d_mean=np.ones((ni,nj,nk))*1e-20
+w3d_mean=np.ones((ni,nj,nk))*1e-20
+p3d_mean=np.ones((ni,nj,nk))*1e-20
+k3d_mean=np.ones((ni,nj,nk))*1e-20
+om3d_mean=np.ones((ni,nj,nk))*1e-20
+eps3d_mean=np.ones((ni,nj,nk))*1e-20
+uu3d_stress=np.ones((ni,nj,nk))*1e-20
+vv3d_stress=np.ones((ni,nj,nk))*1e-20
+ww3d_stress=np.ones((ni,nj,nk))*1e-20
+uv3d_stress=np.ones((ni,nj,nk))*1e-20
+fk3d_mean=np.ones((ni,nj,nk))*1e-20
+vis3d_mean=np.ones((ni,nj,nk))*1e-20
+
+aw3d=np.ones((ni,nj,nk))*1e-20
+ae3d=np.ones((ni,nj,nk))*1e-20
+as3d=np.ones((ni,nj,nk))*1e-20
+an3d=np.ones((ni,nj,nk))*1e-20
+al3d=np.ones((ni,nj,nk))*1e-20
+ah3d=np.ones((ni,nj,nk))*1e-20
+ap3d=np.ones((ni,nj,nk))*1e-20
+apo3d=np.ones((ni,nj,nk))*1e-20
+su3d=np.ones((ni,nj,nk))*1e-20
+sp3d=np.ones((ni,nj,nk))*1e-20
+dudx=np.ones((ni,nj,nk))*1e-20
+dudy=np.ones((ni,nj,nk))*1e-20
+usynt_inlet=np.ones((nj,nk))*1e-20
+vsynt_inlet=np.ones((nj,nk))*1e-20
+wsynt_inlet=np.ones((nj,nk))*1e-20
+
+# comute Delta_max for LES/DES/PANS models
+delta_max=np.maximum(vol/areas[:,1:],vol/areaw[1:,:])
+delta_max=np.maximum(delta_max,dz)
+
+
+itstep=0
+iter=0
+
+
+
+# initialize
+u3d,v3d,w3d,k3d,om3d,eps3d,vis3d=modify_init(u3d,v3d,w3d,k3d,om3d,eps3d,vis3d)
+
+
+# read data for restart
+if restart: 
+   u3d,v3d,w3d,p3d,k3d,eps3d,om3d= read_restart_data(u3d,v3d,w3d,p3d,k3d,eps3d,om3d)
+
+eps3d=np.maximum(eps3d,1e-6)
+k3d=np.maximum(k3d,1e-6)
+
+u3d_face_w,u3d_face_s,u3d_face_l=compute_face_phi(u3d,u_bc_west,u_bc_east,u_bc_south,u_bc_north,u_bc_z,\
+    u_bc_west_type,u_bc_east_type,u_bc_south_type,u_bc_north_type,u_bc_z_type)
+v3d_face_w,v3d_face_s,v3d_face_l=compute_face_phi(v3d,v_bc_west,v_bc_east,v_bc_south,v_bc_north,v_bc_z,\
+    v_bc_west_type,v_bc_east_type,v_bc_south_type,v_bc_north_type,v_bc_z_type)
+w3d_face_w,w3d_face_s,w3d_face_l=compute_face_phi(w3d,w_bc_west,w_bc_east,w_bc_south,w_bc_north,w_bc_z,\
+    w_bc_west_type,w_bc_east_type,w_bc_south_type,w_bc_north_type,w_bc_z_type)
+p3d_face_w,p3d_face_s,p3d_face_l=compute_face_phi(p3d,p_bc_west,p_bc_east,p_bc_south,p_bc_north,p_bc_z,\
+    p_bc_west_type,p_bc_east_type,p_bc_south_type,p_bc_north_type,p_bc_z_type)
+
+
+if not cyclic_x:
+   u_bc_west,v_bc_west,w_bc_west,k_bc_west,eps_bc_west,om_bc_west,u3d_face_w,convw = modify_inlet()
+
+
+convw,convs,convl=conv(u3d,v3d,w3d,p3d_face_w,p3d_face_s,p3d_face_l)
+
+u3d_old,v3d_old,w3d_old,k3d_old,eps3d_old,om3d_old,dpdx_old,dpdy_old,dpdz_old=update(u3d,v3d,w3d,k3d,eps3d,om3d,p3d_face_w,p3d_face_s,p3d_face_l)
+
+itstep=0
+iter=0
+
+
+if kom or kom_des:
+   urf_temp=urfvis # no under-relaxation
+   urfvis=1
+   vis3d=vist_kom(vis3d,k3d,om3d)
+   urfvis=urf_temp
+
+if pans or kom_des or keps_des:
+   fk3d=compute_fk(k3d,eps3d,fk3d)
+# compute fmu3d
+   gen=np.zeros((ni,nj,nk))
+   itstep=1
+   itstep=0
+   if launder:
+      su3d,sp3d,fmu3d= calceps_ls(su3d,sp3d,k3d,eps3d,vis3d,gen,dudx,dudy)
+   else:
+      su3d,sp3d,fmu3d= calceps(su3d,sp3d,k3d,eps3d,vis3d,gen)
+   urf_temp=urfvis # no under-relaxation
+   urfvis=1
+   vis3d=vist_pans(vis3d,k3d,eps3d,fmu3d)
+   urfvis=urf_temp
+
+if smag:
+   urf_temp=urfvis # no under-relaxation
+   urfvis=1
+   vis3d=vist_smag(u3d_face_w,u3d_face_s,u3d_face_l,v3d_face_w,v3d_face_s,v3d_face_l,w3d_face_w,w3d_face_s,w3d_face_l,vis3d)
+   urfvis=urf_temp
+
+
+iter=0
+itstep=0
+
+sys.exit()
+
+# find max index
+#sumax=np.max(su3d.flatten())
+#print('[i,j,k]', np.where(su3d == np.amax(su3d)) 
+
+residual_u=0
+residual_v=0
+residual_w=0
+residual_p=0
+residual_k=0
+residual_eps=0
+residual_om=0
+
+
+######################### start of time stepping  #############################
+
+for itstep in range(0,ntstep):
+
+######################### start of global iteration process #############################
+
+   for iter in range(0,maxit):
+
+      start_time_iter = time.time()
+# coefficients for velocities
+      start_time = time.time()
+# conpute inlet fluc
+      if iter == 0 and not cyclic_x:
+         u_bc_west,v_bc_west,w_bc_west,k_bc_west,eps_bc_west,om_bc_west,u3d_face_w,convw = modify_inlet()
+      aw3d,ae3d,as3d,an3d,al3d,ah3d,apo3d,su3d,sp3d=coeff(convw,convs,convl,vis3d,1,scheme)
+# u3d
+# boundary conditions for u3d
+      su3d,sp3d=bc(su3d,sp3d,u_bc_west,u_bc_east,u_bc_south,u_bc_north,u_bc_z, \
+                   u_bc_west_type,u_bc_east_type,u_bc_south_type,u_bc_north_type,u_bc_z_type)
+      su3d,sp3d=calcu(su3d,sp3d,dpdx_old,p3d_face_w,p3d_face_s)
+      ap3d,su3d=crank_nicol(u3d_old,aw3d,ae3d,as3d,an3d,al3d,ah3d,apo3d,su3d,sp3d,acrank_conv)
+
+      if solver_vel == 'tdma':
+         u3d,residual_u=solve_tdma(u3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_v,nsweep_vel,acrank_conv,solver_vel)
+      elif solver_vel == 'gs':
+         u3d,residual_u=solve_gs(u3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_v,nsweep_vel,acrank_conv)
+      elif solver_vel == 'pyamg':
+         u3d,residual_u=solve_pyamg(u3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_u,acrank_conv)
+      else:
+         u3d,residual_u=solve_3d(u3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_u,nsweep_vel,acrank_conv,solver_vel)
+      print(f"{'time u: '}{time.time()-start_time:.2e}")
+
+      start_time = time.time()
+# v3d
+# boundary conditions for v3d
+      su3d,sp3d=bc(su3d,sp3d,v_bc_west,v_bc_east,v_bc_south,v_bc_north,v_bc_z, \
+                   v_bc_west_type,v_bc_east_type,v_bc_south_type,v_bc_north_type,v_bc_z_type)
+      su3d,sp3d=calcv(su3d,sp3d,dpdy_old,p3d_face_w,p3d_face_s)
+      ap3d,su3d=crank_nicol(v3d_old,aw3d,ae3d,as3d,an3d,al3d,ah3d,apo3d,su3d,sp3d,acrank_conv)
+      if solver_vel == 'tdma':
+         v3d,residual_v=solve_tdma(v3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_v,nsweep_vel,acrank_conv,solver_vel)
+      elif solver_vel == 'gs':
+         v3d,residual_v=solve_gs(v3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_v,nsweep_vel,acrank_conv)
+      elif solver_vel == 'pyamg':
+         v3d,residual_v=solve_pyamg(v3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_v,acrank_conv)
+      else:
+         v3d,residual_v=solve_3d(v3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_v,nsweep_vel,acrank_conv,solver_vel)
+      print(f"{'time v: '}{time.time()-start_time:.2e}")
+
+      start_time = time.time()
+# w3d
+# boundary conditions for w3d
+      su3d,sp3d=bc(su3d,sp3d,w_bc_west,w_bc_east,w_bc_south,w_bc_north,w_bc_z, \
+                   w_bc_west_type,w_bc_east_type,w_bc_south_type,w_bc_north_type,w_bc_z_type)
+      su3d,sp3d=calcw(su3d,sp3d,dpdz_old,p3d_face_l)
+
+      
+      ap3d,su3d=crank_nicol(w3d_old,aw3d,ae3d,as3d,an3d,al3d,ah3d,apo3d,su3d,sp3d,acrank_conv)
+      if solver_vel == 'tdma':
+         w3d,residual_w=solve_tdma(w3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_w,nsweep_vel,acrank_conv,solver_vel)
+      elif solver_vel == 'gs':
+         w3d,residual_w=solve_gs(w3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_w,nsweep_vel,acrank_conv)
+      elif solver_vel == 'pyamg':
+         w3d,residual_w=solve_pyamg(w3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_w,acrank_conv)
+      else:
+         w3d,residual_w=solve_3d(w3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_w,nsweep_vel,acrank_conv,solver_vel)
+      print(f"{'time w: '}{time.time()-start_time:.2e}")
+
+      start_time = time.time()
+# p3d
+      convw,convs,convl=conv(u3d,v3d,w3d,p3d_face_w,p3d_face_s,p3d_face_l)
+
+      if not cyclic_x:
+         convw,u_bc_east =modify_outlet(convw)
+
+
+# RHS
+# continuity error
+      su3d=(convw[0:-1,:,:]-convw[1:,:,:]\
+           +convs[:,0:-1,:]-convs[:,1:,:]\
+           +convl[:,:,0:-1]-convl[:,:,1:])/acrank/dt[itstep]
+#
+      if iter == 0 and itstep == 0:
+         aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d=calcp(convw,convs,convl)
+         aw3d_p=aw3d
+         as3d_p=as3d
+         al3d_p=al3d
+
+      p3d=solve_p(p3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_p)
+      print(f"{'time p: '}{time.time()-start_time:.2e}")
+
+
+# correct u, v, w, p
+      convw,convs,convl,p3d,u3d,v3d,w3d,su3d= correct_conv(u3d,v3d,w3d,p3d,aw3d_p,as3d_p,al3d_p)
+      res_1d=np.matrix.flatten(su3d)
+      residual_p=np.linalg.norm(res_1d,ord=1)
+
+      u3d_face_w,u3d_face_s,u3d_face_l=compute_face_phi(u3d,u_bc_west,u_bc_east,u_bc_south,u_bc_north,u_bc_z,\
+        u_bc_west_type,u_bc_east_type,u_bc_south_type,u_bc_north_type,u_bc_z_type)
+      v3d_face_w,v3d_face_s,v3d_face_l=compute_face_phi(v3d,v_bc_west,v_bc_east,v_bc_south,v_bc_north,v_bc_z,\
+        v_bc_west_type,v_bc_east_type,v_bc_south_type,v_bc_north_type,v_bc_z_type)
+      w3d_face_w,w3d_face_s,w3d_face_l=compute_face_phi(w3d,w_bc_west,w_bc_east,w_bc_south,w_bc_north,w_bc_z,\
+        w_bc_west_type,w_bc_east_type,w_bc_south_type,w_bc_north_type,w_bc_z_type)
+      p3d_face_w,p3d_face_s,p3d_face_l=compute_face_phi(p3d,p_bc_west,p_bc_east,p_bc_south,p_bc_north,p_bc_z,\
+        p_bc_west_type,p_bc_east_type,p_bc_south_type,p_bc_north_type,p_bc_z_type)
+
+      start_time = time.time()
+
+      if kom or kom_des:
+         vis3d=vist_kom(vis3d,k3d,om3d)
+# coefficients
+         start_time = time.time()
+         aw3d,ae3d,as3d,an3d,al3d,ah3d,apo3d,su3d,sp3d=coeff(convw,convs,convl,vis3d,prand_k,scheme_turb)
+# k
+# boundary conditions for k3d
+         su3d,sp3d=bc(su3d,sp3d,k_bc_west,k_bc_east,k_bc_south,k_bc_north,k_bc_z, \
+                   k_bc_west_type,k_bc_east_type,k_bc_south_type,k_bc_north_type,k_bc_z_type)
+         su3d,sp3d,gen,comm_term=calck_kom(su3d,sp3d,k3d,om3d,vis3d,u3d_face_w,u3d_face_s,v3d_face_w,v3d_face_s,w3d_face_l)
+
+         ap3d,su3d=crank_nicol(k3d_old,aw3d,ae3d,as3d,an3d,al3d,ah3d,apo3d,su3d,sp3d,acrank_conv_kom)
+
+         if solver_turb == 'tdma':
+            k3d,residual_k=solve_tdma(k3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_k,nsweep_kom,acrank_conv_kom,solver_turb)
+         elif solver_turb == 'gs':
+            k3d,residual_k=solve_gs(k3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_k,nsweep_kom,acrank_conv_kom)
+         elif solver_turb == 'pyamg':
+            k3d,residual_k=solve_pyamg(k3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_k,acrank_conv_kom)
+         else:
+            k3d,residual_k=solve_3d(k3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_k,nsweep_kom,acrank_conv_kom,solver_turb)
+         k3d=np.maximum(k3d,1e-10)
+         print(f"{'time k: '}{time.time()-start_time:.2e}")
+
+         start_time = time.time()
+# omega
+# boundary conditions for om3d
+         aw3d,ae3d,as3d,an3d,al3d,ah3d,apo3d,su3d,sp3d=coeff(convw,convs,convl,vis3d,prand_k,scheme_turb)
+         su3d,sp3d=bc(su3d,sp3d,om_bc_west,om_bc_east,om_bc_south,om_bc_north,om_bc_z, \
+                   om_bc_west_type,om_bc_east_type,om_bc_south_type,om_bc_north_type,om_bc_z_type)
+         su3d,sp3d= calcom(su3d,sp3d,om3d,gen,comm_term)
+         ap3d,su3d=crank_nicol(om3d_old,aw3d,ae3d,as3d,an3d,al3d,ah3d,apo3d,su3d,sp3d,acrank_conv_kom)
+
+         aw3d,ae3d,as3d,an3d,al3d,ah3d,ap3d,su3d,sp3d=fix_omega()
+
+         if solver_turb == 'tdma':
+            om3d,residual_om=solve_tdma(om3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_om,nsweep_kom,acrank_conv_kom,solver_turb)
+         elif solver_turb == 'gs':
+            om3d,residual_om=solve_gs(om3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_om,nsweep_kom,acrank_conv_kom)
+         elif solver_turb == 'pyamg':
+            om3d,residual_om=solve_pyamg(om3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_om,acrank_conv_kom)
+         else:
+            om3d,residual_om=solve_3d(om3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_om,nsweep_kom,acrank_conv_kom,solver_turb)
+         om3d=np.maximum(om3d,1e-10)
+
+         print(f"{'time omega: '}{time.time()-start_time:.2e}")
+
+      if smag:
+         vis3d=vist_smag(u3d_face_w,u3d_face_s,u3d_face_l,v3d_face_w,v3d_face_s,v3d_face_l,w3d_face_w,w3d_face_s,w3d_face_l,vis3d)
+      if wale:
+         vis3d=vist_wale(u3d_face_w,u3d_face_s,u3d_face_l,v3d_face_w,v3d_face_s,v3d_face_l,w3d_face_w,w3d_face_s,w3d_face_l,vis3d)
+      if pans or keps or keps_des:
+         vis3d=vist_pans(vis3d,k3d,eps3d,fmu3d)
+# coefficients
+         start_time = time.time()
+         aw3d,ae3d,as3d,an3d,al3d,ah3d,apo3d,su3d,sp3d=coeff(convw,convs,convl,vis3d,prand_k,scheme_turb)
+# k
+# boundary conditions for k3d
+         su3d,sp3d=bc(su3d,sp3d,k_bc_west,k_bc_east,k_bc_south,k_bc_north,k_bc_z, \
+                   k_bc_west_type,k_bc_east_type,k_bc_south_type,k_bc_north_type,k_bc_z_type)
+         if launder:
+            su3d,sp3d,gen,dudx,dudy=calck_ls(su3d,sp3d,k3d,eps3d,vis3d,u3d_face_w,u3d_face_s,v3d_face_w,v3d_face_s,w3d_face_l)
+         else:
+            su3d,sp3d,gen,dudx,dudy,s2=calck(su3d,sp3d,k3d,eps3d,vis3d,u3d_face_w,u3d_face_s,v3d_face_w,v3d_face_s,w3d_face_l)
+
+         ap3d,su3d=crank_nicol(k3d_old,aw3d,ae3d,as3d,an3d,al3d,ah3d,apo3d,su3d,sp3d,acrank_conv_keps)
+
+         if solver_turb == 'tdma':
+            k3d,residual_k=solve_tdma(k3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_k,nsweep_keps,acrank_conv_keps,solver_turb)
+         elif solver_turb == 'gs':
+            k3d,residual_k=solve_gs(k3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_k,nsweep_keps,acrank_conv_keps)
+         elif solver_turb == 'pyamg':
+            k3d,residual_k=solve_pyamg(k3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_k,acrank_conv_kom)
+         else:
+            k3d,residual_k=solve_3d(k3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_k,nsweep_keps,acrank_conv_keps,solver_turb)
+         k3d=np.maximum(k3d,1e-10)
+         k3d=np.maximum(k3d,1e-6)
+         print(f"{'time k: '}{time.time()-start_time:.2e}")
+
+         start_time  = time.time()
+# eps
+         aw3d,ae3d,as3d,an3d,al3d,ah3d,apo3d,su3d,sp3d=coeff(convw,convs,convl,vis3d,prand_eps,scheme_turb)
+# boundary conditions for eps3d
+         su3d,sp3d=bc(su3d,sp3d,eps_bc_west,eps_bc_east,eps_bc_south,eps_bc_north,eps_bc_z, \
+                   eps_bc_west_type,eps_bc_east_type,eps_bc_south_type,eps_bc_north_type,eps_bc_z_type)
+         if launder:
+            su3d,sp3d,fmu3d= calceps_ls(su3d,sp3d,k3d,eps3d,vis3d,gen,dudx,dudy)
+         else:
+            su3d,sp3d,fmu3d= calceps(su3d,sp3d,k3d,eps3d,vis3d,gen)
+
+         ap3d,su3d=crank_nicol(eps3d_old,aw3d,ae3d,as3d,an3d,al3d,ah3d,apo3d,su3d,sp3d,acrank_conv_keps)
+
+         aw3d,ae3d,as3d,an3d,al3d,ah3d,ap3d,su3d,sp3d=fix_eps()
+
+         if solver_turb == 'tdma':
+            eps3d,residual_eps=solve_tdma(eps3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_eps,nsweep_keps,acrank_conv_keps,solver_turb)
+         elif solver_turb == 'gs':
+            eps3d,residual_eps=solve_gs(eps3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_eps,nsweep_keps,acrank_conv_keps)
+         elif solver_turb == 'pyamg':
+            eps3d,residual_eps=solve_pyamg(eps3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_k,acrank_conv_keps)
+         else:
+            eps3d,residual_eps=solve_3d(eps3d,aw3d,ae3d,as3d,an3d,al3d,ah3d,su3d,ap3d,convergence_limit_eps,nsweep_keps,acrank_conv_keps,solver_turb)
+
+         eps3d=np.maximum(eps3d,1e-6)
+
+         print(f"{'time eps: '}{time.time()-start_time:.2e}")
+
+      if pans or kom_des or keps_des:
+         fk3d=compute_fk(k3d,eps3d,fk3d)
+	       
+
+# scale residuals
+      residual_u=residual_u/resnorm_vel
+      residual_v=residual_v/resnorm_vel
+      residual_w=residual_w/resnorm_vel
+      residual_p=residual_p/resnorm_p
+      residual_k=residual_k/resnorm_vel**2
+      residual_eps=residual_eps/resnorm_vel**3
+      residual_om=residual_om/resnorm_vel
+
+#     resmax=np.max([residual_u ,residual_v,residual_p,residual_k,residual_eps,residual_om])
+      resmax=np.max([residual_u ,residual_v,residual_w,residual_p])
+
+      print(f"\n{'--time step:'}{itstep:4d}, {'iter:'}{iter:d}, {'max residul:'}{resmax:.2e}, {'u:'}{residual_u:.2e}\
+, {'v:'}{residual_v:.2e}, {'w:'}{residual_w:.2e}, {'p:'}{residual_p:.2e}, {'k:'}{residual_k:.2e}\
+, {'eps:'}{residual_eps:.2e}, {'om:'}{residual_om:.2e}\n")
+
+      print(f"\n{'monitor time step:'}{itstep:4d}, {'iter:'}{iter:1d}, {'u:'}{u3d[imon,jmon,kmon]: .2e}\
+, {'v:'}{v3d[imon,jmon,kmon]: .2e}, {'w:'}{w3d[imon,jmon,kmon]: .2e}, {'p:'}{p3d[imon,jmon,kmon]: .2e}\
+, {'k:'}{k3d[imon,jmon,kmon]: .2e}, {'eps:'}{eps3d[imon,jmon,kmon]: .2e}, {'om:'}{om3d[imon,jmon,kmon]: .2e}\n")
+
+
+
+      vismax=np.max(vis3d.flatten())/viscos
+      umax=np.max(u3d.flatten())
+      fkmax=np.max(fk3d.flatten())
+      epsmin=np.min(eps3d.flatten())
+      ommin=np.min(om3d.flatten())
+
+      kmin=np.min(k3d.flatten())
+
+      if itstep%10 == 0:
+         cfl_x=np.abs(u3d)*dt[itstep]*areaw[1:,:,:]/vol
+         cfl_y=np.abs(v3d)*dt[itstep]*areas[:,1:,:]/vol
+         cfl_x_max=np.max(cfl_x)
+         cfl_y_max=np.max(cfl_y)
+
+# number of points larger than one
+         cfl_y_no=cfl_y[np.where( cfl_y > 1 )]
+         cfl_x_no=cfl_x[np.where( cfl_x > 1 )]
+
+         [i,j,k]= np.where(cfl_y== np.amax(cfl_y))
+# check if i is an array
+         if np.size(i): 
+            ii=i[0]
+            jj=j[0]
+         else:
+            ii=i
+            jj=j
+         print(f"\n{'-- cfl_max_x: '}{cfl_x_max:.2e}, {'cfl_max_y: '}{cfl_y_max:.2e}, {'at i= '}{ii:2d}, {'j= '}{jj:2d}\n")
+
+         print(f"\n{'No of points cfl_x > 1: '}{len(cfl_x_no):2d}, {'No of points cfl_y > 1: '}{len(cfl_y_no):2d}\n")
+ 
+
+      print(f"\n{'--time step: '} {dt[itstep]:.2e}, {'iter: '}{iter:2d}, {'umax: '}{umax:.2e},{'vismax: '}{vismax:.2e}, {'kmin: '}{kmin:.2e}, {'epsmin: '}{epsmin:.2e}, {'ommin: '}{ommin:.2e}, {'fkmax: '}{fkmax:.2e}\n")
+
+      print(f"{'time one iteration: '}{time.time()-start_time_iter:.2e}")
+
+      if iter >= min_iter-1 and resmax < sormax:  
+
+         break
+
+######################### end of global iteration process #############################
+
+   u3d_old,v3d_old,w3d_old,k3d_old,eps3d_old,om3d_old,dpdx_old,dpdy_old,dpdz_old=\
+     update(u3d,v3d,w3d,k3d,eps3d,om3d,p3d_face_w,p3d_face_s,p3d_face_l)
+# save data every itstep_save timsstep
+   if itstep%itstep_save == 0 and itstep >= itstep_start:
+      save_time_aver_data(u3d_mean,v3d_mean,w3d_mean,p3d_mean,eps3d_mean,om3d_mean,fk3d_mean,vis3d_mean,k3d_mean,uu3d_stress,\
+                          vv3d_stress,ww3d_stress,uv3d_stress)
+   if save and itstep%itstep_save == 0 and itstep > 0:
+      save_data(u3d,v3d,w3d,p3d,k3d,eps3d,om3d)
+      if vtk and save_vtk_movie:
+         save_vtk()
+# save data if file save.data  = 1
+   if save and itstep%2 == 0:
+      isave=0
+      isave = np.loadtxt('save.file')
+      if isave == 1:
+         save_data(u3d,v3d,w3d,p3d,k3d,eps3d,om3d)
+         save_time_aver_data(u3d_mean,v3d_mean,w3d_mean,p3d_mean,eps3d_mean,om3d_mean,fk3d_mean,vis3d_mean,k3d_mean,uu3d_stress,\
+                          vv3d_stress,ww3d_stress,uv3d_stress)
+
+   if itstep >= itstep_start and itstep % itstep_stats == 0:
+      u3d_mean,v3d_mean,w3d_mean,p3d_mean,k3d_mean,eps3d_mean,om3d_mean,uu3d_stress,vv3d_stress,ww3d_stress,uv3d_stress,\
+          fk3d_mean,vis3d_mean= time_stats(u3d_mean,v3d_mean,w3d_mean,p3d_mean,k3d_mean,eps3d_mean,om3d_mean,uu3d_stress,\
+          vv3d_stress,ww3d_stress,uv3d_stress,fk3d_mean,vis3d_mean)
+
+######################### end of time stepping  #############################
+      
+# save data for restart
+if save:
+   save_data(u3d,v3d,w3d,p3d,k3d,eps3d,om3d)
+
+if vtk:
+   itstep=ntstep
+   save_vtk()
+
+# save time-averaged data
+save_time_aver_data(u3d_mean,v3d_mean,w3d_mean,p3d_mean,eps3d_mean,om3d_mean,fk3d_mean,vis3d_mean,k3d_mean,uu3d_stress,\
+                    vv3d_stress,ww3d_stress,uv3d_stress)
+
+print('program reached normal stop')
+

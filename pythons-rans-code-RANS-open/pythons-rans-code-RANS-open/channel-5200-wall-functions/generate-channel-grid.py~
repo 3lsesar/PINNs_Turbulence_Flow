@@ -1,0 +1,44 @@
+import numpy as np
+import sys
+ni=2 
+nj=34 
+yfac=1.0 # stretching
+ymax=2
+xmax=3
+viscos=1/10000
+yc = np.linspace(0, 2, nj+1)
+
+print('yc',yc)
+
+ustar=0.043
+
+print('y+',0.5*ustar*yc[1]/viscos)
+# make it 2D
+y2d=np.repeat(yc[None,:], repeats=ni+1, axis=0)
+
+y2d=np.append(y2d,nj)
+np.savetxt('y2d.dat', y2d)
+
+# x grid
+xc = np.linspace(0, xmax, ni+1)
+# make it 2D
+x2d=np.repeat(xc[:,None], repeats=nj+1, axis=1)
+x2d_org=x2d
+x2d=np.append(x2d,ni)
+np.savetxt('x2d.dat', x2d)
+
+# check it
+datay= np.loadtxt("y2d.dat")
+y=datay[0:-1]
+nj=int(datay[-1])
+
+y2=np.zeros((ni+1,nj+1))
+y2=np.reshape(y,(ni+1,nj+1))
+
+datax= np.loadtxt("x2d.dat")
+x=datax[0:-1]
+ni=int(datax[-1])
+
+x2=np.zeros((ni+1,nj+1))
+x2=np.reshape(x,(ni+1,nj+1))
+

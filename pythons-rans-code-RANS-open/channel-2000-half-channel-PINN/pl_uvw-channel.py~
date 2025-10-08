@@ -1,0 +1,291 @@
+import scipy.io as sio
+import sys
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+plt.rcParams.update({'font.size': 22})
+plt.rcParams.update({'figure.max_open_warning': 0})
+
+plt.interactive(True)
+
+plt.close('all')
+viscos=1/2000
+
+datax= np.loadtxt("x2d.dat")
+x=datax[0:-1]
+ni=int(datax[-1])
+datay= np.loadtxt("y2d.dat")
+y=datay[0:-1]
+nj=int(datay[-1])
+
+x2d=np.zeros((ni+1,nj+1))
+y2d=np.zeros((ni+1,nj+1))
+
+x2d=np.reshape(x,(ni+1,nj+1))
+y2d=np.reshape(y,(ni+1,nj+1))
+
+# compute cell centers
+xp2d=0.25*(x2d[0:-1,0:-1]+x2d[0:-1,1:]+x2d[1:,0:-1]+x2d[1:,1:])
+yp2d=0.25*(y2d[0:-1,0:-1]+y2d[0:-1,1:]+y2d[1:,0:-1]+y2d[1:,1:])
+
+y=yp2d[0,:]
+y_s=y2d[0,:]
+
+
+
+
+u2d=np.load('u2d_saved.npy')
+p2d=np.load('p2d_saved.npy')
+v2d=np.load('v2d_saved.npy')
+k2d=np.load('k2d_saved.npy')
+om2d=np.load('om2d_saved.npy')
+vis2d=np.load('vis2d_saved.npy')
+
+
+# average in x direction
+u=np.mean(u2d,axis=0)
+v=np.mean(v2d,axis=0)
+k=np.mean(k2d,axis=0)
+om=np.mean(om2d,axis=0)
+vis=np.mean(vis2d,axis=0)
+eps=0.09*k*om
+dudy = np.gradient(u,y)
+
+uv = vis*dudy
+
+
+vist_ML_5200 = np.loadtxt('vist_pref-from-vist-diffusion-pinn-5200-plus-units-load-5-cells-half-channel-sigmoid-fist-and-2nd-and-3rd-layer-fixed.txt')
+
+viscos_5200 = 1/5200
+
+vist_ML_5200 = vist_ML_5200*viscos_5200
+
+data_5200= np.loadtxt('../channel-5200-half-channel/y_u_k_om_uv_5200-RANS-half-channel.txt')
+y_5200 = data_5200[:,0]
+y1d= yp2d[0,:]
+
+prand_k_ML_5200 = np.loadtxt('prand_k_5200-plus-units-from-balance.txt')
+
+
+vist_ML = np.interp(y1d, y_5200, vist_ML_5200)
+prand_k_ML = np.interp(y1d, y_5200, prand_k_ML_5200)
+
+
+# make it 2D
+prand_k_ML = np.repeat(prand_k_ML[None,:], repeats=ni, axis=0)
+
+
+vist = k2d/om2d
+
+
+c_k_ML_5200= np.loadtxt('c_k_pred_5200-plus-units-from-balance.txt')
+c_k_ML = np.interp(y1d, y_5200, c_k_ML_5200)
+# make it 2D
+c_k_ML = np.repeat(c_k_ML[None,:], repeats=ni, axis=0)
+
+c_omega_2_ML_5200 = np.loadtxt('c_omega_2_pred_5200-plus-units-from-balance.txt')
+c_omega_2_ML = np.interp(y1d, y_5200, c_omega_2_ML_5200)
+# make it 2D
+c_omega_2_ML = np.repeat(c_omega_2_ML[None,:], repeats=ni, axis=0)
+
+
+
+dudy=np.gradient(u,y)
+
+ustar=(viscos*u[0]/y[0])**0.5
+yplus=y*ustar/viscos
+yplus_s=y_s*ustar/viscos
+
+
+k_iter  = np.loadtxt('k-iteration.dat')
+
+k1 = k_iter[:,1]
+k2 = k_iter[:,2]
+k3 = k_iter[:,3]
+k4 = k_iter[:,4]
+k5 = k_iter[:,5]
+k6 = k_iter[:,6]
+k7 = k_iter[:,7]
+
+# load k-omega grid
+name = '../channel-2000-half-channel/'
+
+# load k-omega grid
+kom_data = np.loadtxt(str(name)+'y_u_k_om_uv_2000-RANS-half-channel.txt')
+y_kom = kom_data[:,0]
+u_kom = kom_data[:,1]
+k_kom = kom_data[:,2]
+om_kom = kom_data[:,3]
+vist_kom = k_kom/om_kom
+
+
+
+# load DNS data
+     # y/h             y+              U+             u'+             v'+             w'+           -Om_z+          om_x'+           om_y'+           om_z'+         uv'+             uw'+           vw'+             pr'+            ps'+          psto'+            p'
+# ----------------------------------------------------------------------------------------------------------------------------------------
+DNS_mean=np.genfromtxt("Re2000_jimenez.dat",comments="%")
+y_DNS=DNS_mean[:,0]
+yplus_DNS=DNS_mean[:,1]
+u_DNS=DNS_mean[:,2]
+u2_DNS=DNS_mean[:,3]**2
+v2_DNS=DNS_mean[:,5]**2
+w2_DNS=DNS_mean[:,4]**2
+uv_DNS=DNS_mean[:,10]
+
+dudy_DNS = np.gradient(u_DNS,y_DNS)
+
+#    y/h               y+           dissip          produc         p-strain          p-diff          t-diff         v-diff            bal          tp-kbal
+
+DNS_k_terms=np.genfromtxt("Re2000_bal_k.dat",comments="%")
+
+diss_DNS=-DNS_k_terms[:,2]
+Pk_DNS=DNS_k_terms[:,3]
+diff_DNS=DNS_k_terms[:,6]
+diff_DNS_visc =  DNS_k_terms[:,7]
+
+
+k_DNS=0.5*(u2_DNS+v2_DNS+w2_DNS)
+vist_DNS = abs(uv_DNS/dudy_DNS)
+
+
+diss_DNS=diss_DNS/viscos
+Pk_DNS=Pk_DNS/viscos
+
+
+# diss = m2/s3
+# diss=viscos*ustar**2/L**2, L = viscos/ustar  => diss=viscos*ustar**2/(viscos/ustar)**2 = ustar**4/viscos
+
+# find equi.distant DNS cells in log-scale
+xx=0.
+jDNS=[1]*40
+for i in range (0,40):
+   i1 = (np.abs(10.**xx-yplus_DNS)).argmin()
+   jDNS[i]=int(i1)
+   xx=xx+0.2
+
+rt = k/om/viscos
+fk = (0.278+(rt/8)**4)*(1+(rt/8)**4)**(-1)
+fk_12 = (0.278+(rt/12)**4)*(1+(rt/12)**4)**(-1)
+fmu = (0.025+rt/6)*(1+rt/6)**(-1)
+fom = (0.1+rt/2.7)*((1+rt/2.7)*fmu)**(-1)
+
+
+########################################## U 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+i1 = 0
+plt.semilogx(yplus,u,'b-')
+plt.semilogx(yplus_DNS[jDNS],u_DNS[jDNS],'bo')
+plt.ylabel("$U^+$")
+plt.xlabel("$y^+$")
+plt.axis([1, 2000, 0, 28])
+plt.savefig('u_log_2000-channel.png',bbox_inches='tight')
+
+
+########################################## uv 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(yplus,uv,'b-',label = 'EARSM')
+plt.plot(yplus_DNS[jDNS],uv_DNS[jDNS],'bo')
+plt.ylabel(r"$\overline{u'v'}$")
+plt.xlabel("$y^+$")
+plt.axis([0, 2000, -1, 0])
+plt.savefig('uv_2000-channel.png',bbox_inches='tight')
+
+
+########################################## k 
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(yplus,k,'b-',label='RANS')
+plt.plot(yplus_DNS,k_DNS,'r--',label='DNS')
+plt.legend(loc="best",prop=dict(size=14))
+plt.ylabel(r"$k^+$")
+plt.xlabel("$y^+$")
+plt.axis([0, 2000, 0, 7.5])
+plt.savefig('k_2000-channel.png',bbox_inches='tight')
+
+
+########################################## k  zoom
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(yplus,k,'b-',label='RANS')
+plt.plot(yplus_DNS,k_DNS,'r--',label='DNS')
+plt.legend(loc="best",prop=dict(size=14))
+plt.ylabel(r"$k^+$")
+plt.xlabel("$y^+$")
+plt.axis([1, 200, 0, 7.5])
+plt.savefig('k_2000-channel-zoom.png',bbox_inches='tight')
+
+
+########################################## vist  
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+vist = k/om
+plt.plot(yplus,vis/viscos-1,'b-',label=r'$k-\omega$ ML')
+plt.plot(yplus,vist_kom/viscos,'r-',label=r'$k-\omega$')
+plt.plot(yplus_DNS,vist_DNS/viscos,'r--',label='DNS')
+plt.legend(loc="best",prop=dict(size=14))
+plt.ylabel(r"$\nu_t^+$")
+plt.xlabel("$y^+$")
+plt.axis([0, 2000, 0, 750])
+plt.savefig('vist_2000-channel.png',bbox_inches='tight')
+
+########################################## vist  zoom
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(yplus,vis/viscos-1,'b-',label=r'$k-\omega$ ML')
+plt.plot(yplus,vist_kom/viscos,'r-',label=r'$k-\omega$')
+plt.plot(yplus_DNS,vist_DNS/viscos,'r--',label='DNS')
+plt.legend(loc="best",prop=dict(size=14))
+plt.ylabel(r"$\nu_t^+$")
+plt.xlabel("$y^+$")
+plt.axis([0, 50, 0, 15.5])
+plt.savefig('vist_2000-channel-zoom.png',bbox_inches='tight')
+
+
+
+############################ u_iter
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(k1)
+plt.plot(k2)
+plt.plot(k3)
+plt.plot(k4)
+plt.plot(k5)
+plt.plot(k6)
+plt.plot(k7)
+plt.savefig('k-iter-10000-channel.png',bbox_inches='tight')
+
+
+########################################## prand_k  
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+prand_k = (vis-viscos)/vist_ML/viscos
+plt.plot(y,prand_k_ML[0,:],'r--',label='NN-CFD')
+plt.legend(loc="best",prop=dict(size=14))
+plt.ylabel(r"$\sigma_k$")
+plt.xlabel("$y$")
+plt.xlim(0, 0.05)
+plt.savefig('prand_k-2000-channel.png',bbox_inches='tight')
+
+########################################## c_k  
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(y,c_k_ML[0,:],'r--',label='NN-CFD')
+plt.legend(loc="best",prop=dict(size=14))
+plt.ylabel(r"$C_{k}$")
+plt.xlabel("$y$")
+plt.xlim(0, 0.05)
+plt.savefig('c_k-2000-channel.png',bbox_inches='tight')
+
+########################################## c_omega  
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.20,bottom=0.20)
+plt.plot(y,c_omega_2_ML[0,:],'r--',label='NN-CFD')
+plt.legend(loc="best",prop=dict(size=14))
+plt.ylabel(r"$C_{\omega 2}$")
+plt.xlabel("$y$")
+plt.xlim(0, 0.05)
+plt.savefig('c_omega-2000-channel.png',bbox_inches='tight')
+
+

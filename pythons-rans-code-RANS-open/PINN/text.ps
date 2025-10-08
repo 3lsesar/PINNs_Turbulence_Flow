@@ -1,0 +1,1443 @@
+%!PS-Adobe-3.0
+%%Title: k-diffusion-pinn-5200-half-channel-plus-units-load-skip-5-cells.py
+%%For: Lars Davidson
+%%Creator: a2ps version 4.15.5
+%%CreationDate: Sun Apr 27 09:31:23 2025
+%%BoundingBox: 24 24 571 818
+%%DocumentData: Clean7Bit
+%%Orientation: Landscape
+%%Pages: 3
+%%PageOrder: Ascend
+%%DocumentMedia: a4 595 842 0 () ()
+%%DocumentNeededResources: font Courier
+%%+ font Courier-Bold
+%%+ font Courier-BoldOblique
+%%+ font Courier-Oblique
+%%+ font Helvetica
+%%+ font Helvetica-Bold
+%%+ font Symbol
+%%+ font Times-Bold
+%%+ font Times-Roman
+%%DocumentProcessColors: Black 
+%%DocumentSuppliedResources: procset a2ps-a2ps-hdr
+%%+ procset a2ps-black+white-Prolog
+%%+ encoding ISO-8859-1Encoding
+%%EndComments
+/a2psdict 200 dict def
+a2psdict begin
+%%BeginProlog
+%%Copyright: (c) 1988-2017 Free Software Foundation, Inc.
+% Check PostScript language level.
+/languagelevel where {
+  pop /gs_languagelevel languagelevel def
+} {
+  /gs_languagelevel 1 def
+} ifelse
+
+% EPSF import as in the Red Book
+/BeginInclude {
+  /b4_Inc_state save def    		% Save state for cleanup
+  /dict_count countdictstack def	% Count objects on dict stack
+  /op_count count 1 sub def		% Count objects on operand stack 
+  userdict begin
+    0 setgray 0 setlinecap
+    1 setlinewidth 0 setlinejoin
+    10 setmiterlimit [ ] 0 setdash newpath
+    gs_languagelevel 1 ne {
+      false setstrokeadjust false setoverprint 
+    } if
+} bind def
+
+/EndInclude {
+  count op_count sub { pos } repeat	% Clean up stacks
+  countdictstack dict_count sub { end } repeat
+  b4_Inc_state restore
+} bind def
+
+/BeginEPSF {
+  BeginInclude
+  /showpage { } def
+} bind def
+
+/EndEPSF {
+  EndInclude
+} bind def
+
+% Page prefeed
+/page_prefeed {         % bool -> -
+  statusdict /prefeed known {
+    statusdict exch /prefeed exch put
+  } {
+    pop
+  } ifelse
+} bind def
+
+/deffont {
+  findfont exch scalefont def
+} bind def
+
+/reencode_font {
+  findfont reencode 2 copy definefont pop def
+} bind def
+
+% Function c-show (str => -)
+% centers text only according to x axis.
+/c-show { 
+  dup stringwidth pop
+  2 div neg 0 rmoveto
+  show
+} bind def
+
+% Function l-show (str => -)
+% prints texts so that it ends at currentpoint
+/l-show {
+  dup stringwidth pop neg 
+  0 
+  rmoveto show
+} bind def
+
+% center-fit show (str w => -)
+% show centered, and scale currentfont so that the width is less than w
+/cfshow {
+  exch dup stringwidth pop
+  % If the title is too big, try to make it smaller
+  3 2 roll 2 copy
+  gt
+  { % if, i.e. too big
+    exch div
+    currentfont exch scalefont setfont
+  } { % ifelse
+    pop pop 
+  }
+  ifelse
+  c-show			% center title
+} bind def
+
+% Return the y size of the current font
+% - => fontsize
+/currentfontsize {
+  currentfont /FontType get 0 eq {
+    currentfont /FontMatrix get 3 get
+  }{
+    currentfont /FontMatrix get 3 get 1000 mul
+  } ifelse
+} bind def
+
+% reencode the font
+% <encoding-vector> <fontdict> -> <newfontdict>
+/reencode { %def
+  dup length 5 add dict begin
+    { %forall
+      % <vector> <key> <val>
+      1 index /FID ne 
+      { def }{ pop pop } ifelse
+    } forall
+    /Encoding exch def % -
+
+    % Use the font's bounding box to determine the ascent, descent,
+    % and overall height; don't forget that these values have to be
+    % transformed using the font's matrix.
+    % We use `load' because sometimes BBox is executable, sometimes not.
+    % Since we need 4 numbers an not an array avoid BBox from being executed
+    /FontBBox load aload pop
+    FontMatrix transform /Ascent exch def pop
+    FontMatrix transform /Descent exch def pop
+    /FontHeight Ascent Descent sub def
+
+    % Get the underline position and thickness if they're defined.
+    % Use 1 if they are not defined.
+    currentdict /FontInfo 2 copy known
+    { get
+      /UnderlinePosition 2 copy % <FontInfo> /UP <FontInfo> /UP
+      2 copy known
+      { get }{ pop pop 1 } ifelse
+      0 exch FontMatrix transform exch pop
+      def % <FontInfo>
+
+      /UnderlineThickness 2 copy % <FontInfo> /UT <FontInfo> /UT
+      2 copy known
+      { get }{ pop pop 1 } ifelse
+      0 exch FontMatrix transform exch pop
+      def % <FontInfo>
+      pop % -
+    }{ pop pop
+    } ifelse
+
+    currentdict
+  end 
+} bind def
+
+% composite fonts for ASCII-EUC mixed strings
+% Version 1.2 1/31/1990
+% Original Ken'ichi HANDA (handa@etl.go.jp)
+% Modified Norio Katayama (katayama@rd.nacsis.ac.jp),1998
+% Extend & Fix Koji Nakamaru (maru@on.cs.keio.ac.jp), 1999
+% Anyone can freely copy, modify, distribute this program.
+
+/copyfont {	% font-dic extra-entry-count  copyfont  font-dic
+	1 index maxlength add dict begin
+	{	1 index /FID ne 2 index /UniqueID ne and
+		{def} {pop pop} ifelse
+	} forall
+	currentdict
+	end
+} bind def
+
+/compositefont { % ASCIIFontName EUCFontName RomanScale RomanOffset Rot(T/F) compositefont font
+    /RomanRotation exch def
+    /RomanOffset exch def
+    /RomanScale exch def
+    userdict /fixeucfont_dict known not {
+	userdict begin
+	    /fixeucfont_dict 2 dict begin
+		/UpperByteEncoding [
+		    16#00 1 16#20 { pop 0 } for
+		    16#21 1 16#28 { 16#20 sub } for
+		    16#29 1 16#2F { pop 0 } for
+		    16#30 1 16#74 { 16#27 sub } for
+		    16#75 1 16#FF { pop 0 } for
+		] def
+	        /LowerByteEncoding [
+		    16#00 1 16#A0 { pop /.notdef } for
+		    16#A1 1 16#FE { 16#80 sub 16 2 string cvrs
+				    (cXX) dup 1 4 -1 roll
+				    putinterval cvn } for
+		    /.notdef
+		] def
+		currentdict
+	    end def
+	end
+    } if
+    findfont dup /FontType get 0 eq {
+	14 dict begin
+	    %
+	    % 7+8 bit EUC font
+	    %
+	    12 dict begin
+		/EUCFont exch def
+		/FontInfo (7+8 bit EUC font) readonly def
+		/PaintType 0 def
+		/FontType 0 def
+		/FontMatrix matrix def
+		% /FontName
+		/Encoding fixeucfont_dict /UpperByteEncoding get def
+		/FMapType 2 def
+		EUCFont /WMode known
+		{ EUCFont /WMode get /WMode exch def }
+		{ /WMode 0 def } ifelse
+		/FDepVector [
+		    EUCFont /FDepVector get 0 get
+		    [ 16#21 1 16#28 {} for 16#30 1 16#74 {} for ]
+		    {
+			13 dict begin
+			    /EUCFont EUCFont def
+			    /UpperByte exch 16#80 add def	
+			    % /FontName
+			    /FontInfo (EUC lower byte font) readonly def
+			    /PaintType 0 def
+			    /FontType 3 def
+			    /FontMatrix matrix def
+			    /FontBBox {0 0 0 0} def
+			    /Encoding
+				fixeucfont_dict /LowerByteEncoding get def
+			    % /UniqueID
+			    % /WMode
+			    /BuildChar {
+				gsave
+				exch dup /EUCFont get setfont
+				/UpperByte get
+				2 string
+				dup 0 4 -1 roll put
+				dup 1 4 -1 roll put
+				dup stringwidth setcharwidth
+				0 0 moveto show
+				grestore
+			    } bind def
+			    currentdict
+			end
+			/lowerbytefont exch definefont
+		    } forall
+		] def
+		currentdict
+	    end
+	    /eucfont exch definefont
+	    exch
+	    findfont 1 copyfont dup begin
+		RomanRotation {
+			/FontMatrix FontMatrix
+			[ 0 RomanScale neg RomanScale 0 RomanOffset neg 0 ]
+			matrix concatmatrix def
+		}{
+			/FontMatrix FontMatrix
+			[ RomanScale 0 0 RomanScale 0 RomanOffset ] matrix concatmatrix
+			def
+			/CDevProc
+			    {pop pop pop pop 0 exch -1000 exch 2 div 880} def
+		} ifelse
+	    end
+	    /asciifont exch definefont
+	    exch
+	    /FDepVector [ 4 2 roll ] def
+	    /FontType 0 def
+	    /WMode 0 def
+	    /FMapType 4 def
+	    /FontMatrix matrix def
+	    /Encoding [0 1] def
+	    /FontBBox {0 0 0 0} def
+%	    /FontHeight 1.0 def % XXXX
+	    /FontHeight RomanScale 1.0 ge { RomanScale }{ 1.0 } ifelse def
+	    /Descent -0.3 def   % XXXX
+	    currentdict
+	end
+	/tmpfont exch definefont
+	pop
+	/tmpfont findfont
+    }{
+	pop findfont 0 copyfont
+    } ifelse
+} def	
+
+/slantfont {	% FontName slant-degree  slantfont  font'
+    exch findfont 1 copyfont begin
+    [ 1 0 4 -1 roll 1 0 0 ] FontMatrix exch matrix concatmatrix
+    /FontMatrix exch def
+    currentdict
+    end
+} def
+
+% Function print line number (<string> # -)
+/# {
+  gsave
+    sx cw mul neg 2 div 0 rmoveto
+    f# setfont
+    c-show
+  grestore
+} bind def
+
+% -------- Some routines to enlight plain b/w printings ---------
+
+% Underline
+% width --
+/dounderline {
+  currentpoint
+  gsave
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    0 rlineto
+    stroke
+  grestore
+} bind def
+
+% Underline a string
+% string --
+/dounderlinestring {
+  stringwidth pop
+  dounderline
+} bind def
+
+/UL {
+  /ul exch store
+} bind def
+
+% Draw a box of WIDTH wrt current font
+% width --
+/dobox {
+  currentpoint
+  gsave
+    newpath
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    dup 0 rlineto
+    0 currentfont /FontHeight get currentfontsize mul rlineto
+    neg 0 rlineto
+    closepath
+    stroke
+  grestore
+} bind def
+
+/BX {
+  /bx exch store
+} bind def
+
+% Box a string
+% string --
+/doboxstring {
+  stringwidth pop
+  dobox
+} bind def
+
+%
+% ------------- Color routines ---------------
+%
+/FG /setrgbcolor load def
+
+% Draw the background
+% width --
+/dobackground {
+  currentpoint
+  gsave
+    newpath
+    moveto
+    0 currentfont /Descent get currentfontsize mul rmoveto
+    dup 0 rlineto
+    0 currentfont /FontHeight get currentfontsize mul rlineto
+    neg 0 rlineto
+    closepath
+    bgcolor aload pop setrgbcolor
+    fill
+  grestore
+} bind def
+
+% Draw bg for a string
+% string --
+/dobackgroundstring {
+  stringwidth pop
+  dobackground
+} bind def
+
+
+/BG {
+  dup /bg exch store
+  { mark 4 1 roll ] /bgcolor exch store } if
+} bind def
+
+
+/Show {
+  bg { dup dobackgroundstring } if
+  ul { dup dounderlinestring } if
+  bx { dup doboxstring } if
+  show
+} bind def
+
+% Function T(ab), jumps to the n-th tabulation in the current line
+/T {
+  cw mul x0 add
+  bg { dup currentpoint pop sub dobackground } if
+  ul { dup currentpoint pop sub dounderline } if
+  bx { dup currentpoint pop sub dobox } if
+  y0 moveto
+} bind def
+
+% Function n: move to the next line
+/n {
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+% Function N: show and move to the next line
+/N {
+  Show
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+/S {
+  Show
+} bind def
+
+%%BeginResource: procset a2ps-a2ps-hdr 2.0 2
+%%Copyright: (c) 1988, 89, 90, 91, 92, 93 Miguel Santana
+%%Copyright: (c) 1995, 96, 97, 98 Akim Demaille, Miguel Santana
+% Function title: prints page header.
+% <ct> <rt> <lt> are passed as argument
+/title { 
+  % 1. Draw the background
+  x v get y v get moveto
+  gsave
+    0 th 2 div neg rmoveto 
+    th setlinewidth
+    0.95 setgray
+    pw 0 rlineto stroke
+  grestore
+  % 2. Border it
+  gsave
+    0.7 setlinewidth
+    pw 0 rlineto
+    0 th neg rlineto
+    pw neg 0 rlineto
+    closepath stroke
+  grestore
+  % stk: ct rt lt
+  x v get y v get th sub 1 add moveto
+%%IncludeResource: font Helvetica
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  % 3. The left title
+  gsave
+    dup stringwidth pop fnfs 0.8 mul add exch % leave space took on stack
+    fnfs 0.8 mul hm rmoveto
+    show			% left title
+  grestore
+  exch
+  % stk: ct ltw rt
+  % 4. the right title
+  gsave
+    dup stringwidth pop fnfs 0.8 mul add exch % leave space took on stack
+    dup
+    pw exch stringwidth pop fnfs 0.8 mul add sub
+    hm
+    rmoveto
+    show			% right title
+  grestore
+  % stk: ct ltw rtw
+  % 5. the center title
+  gsave
+    pw 3 1 roll
+    % stk: ct pw ltw rtw
+    3 copy 
+    % Move to the center of the left room
+    sub add 2 div hm rmoveto
+    % What is the available space in here?
+    add sub fnfs 0.8 mul sub fnfs 0.8 mul sub
+    % stk: ct space_left
+%%IncludeResource: font Helvetica-Bold
+  fHelvetica-Bold fnfs scalefont setfont
+    cfshow
+  grestore
+} bind def
+
+% Function border: prints virtual page border
+/border { %def
+  gsave				% print four sides
+    0 setgray
+    x v get y v get moveto
+    0.7 setlinewidth		% of the square
+    pw 0 rlineto
+    0 ph neg rlineto
+    pw neg 0 rlineto
+    closepath stroke
+  grestore
+} bind def
+
+% Function water: prints a water mark in background
+/water { %def
+  gsave
+    scx scy moveto rotate
+%%IncludeResource: font Times-Bold
+  fTimes-Bold 100 scalefont setfont
+    .97 setgray
+    dup stringwidth pop 2 div neg -50 rmoveto
+    show
+  grestore
+} bind def
+
+% Function rhead: prints the right header
+/rhead {  %def
+  lx ly moveto
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  l-show
+} bind def
+
+% Function footer (cf rf lf -> -)
+/footer {
+  fHelvetica fnfs 0.8 mul scalefont setfont
+  dx dy moveto
+  show
+
+  snx sny moveto
+  l-show
+  
+  fnx fny moveto
+  c-show
+} bind def
+%%EndResource
+%%BeginResource: procset a2ps-black+white-Prolog 2.0 1
+
+% Function T(ab), jumps to the n-th tabulation in the current line
+/T { 
+  cw mul x0 add y0 moveto
+} bind def
+
+% Function n: move to the next line
+/n { %def
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+} bind def
+
+% Function N: show and move to the next line
+/N {
+  Show
+  /y0 y0 bfs sub store
+  x0 y0 moveto
+}  bind def
+
+/S {
+  Show
+} bind def
+
+/p {
+  false UL
+  false BX
+  fCourier bfs scalefont setfont
+  Show
+} bind def
+
+/sy {
+  false UL
+  false BX
+  fSymbol bfs scalefont setfont
+  Show
+} bind def
+
+/k {
+  false UL
+  false BX
+  fCourier-Oblique bfs scalefont setfont
+  Show
+} bind def
+
+/K {
+  false UL
+  false BX
+  fCourier-Bold bfs scalefont setfont
+  Show
+} bind def
+
+/c {
+  false UL
+  false BX
+  fCourier-Oblique bfs scalefont setfont
+  Show
+} bind def
+
+/C {
+  false UL
+  false BX
+  fCourier-BoldOblique bfs scalefont setfont
+  Show 
+} bind def
+
+/l {
+  false UL
+  false BX
+  fHelvetica bfs scalefont setfont
+  Show
+} bind def
+
+/L {
+  false UL
+  false BX
+  fHelvetica-Bold bfs scalefont setfont
+  Show 
+} bind def
+
+/str{
+  false UL
+  false BX
+  fTimes-Roman bfs scalefont setfont
+  Show
+} bind def
+
+/e{
+  false UL
+  true BX
+  fHelvetica-Bold bfs scalefont setfont
+  Show
+} bind def
+
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Courier
+%%IncludeResource: font Courier-Oblique
+%%IncludeResource: font Courier-Bold
+%%IncludeResource: font Times-Roman
+%%IncludeResource: font Symbol
+%%IncludeResource: font Courier-BoldOblique
+%%BeginResource: encoding ISO-8859-1Encoding
+/ISO-8859-1Encoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright 
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash 
+/zero /one /two /three /four /five /six /seven 
+/eight /nine /colon /semicolon /less /equal /greater /question 
+/at /A /B /C /D /E /F /G 
+/H /I /J /K /L /M /N /O 
+/P /Q /R /S /T /U /V /W 
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore 
+/quoteleft /a /b /c /d /e /f /g 
+/h /i /j /k /l /m /n /o 
+/p /q /r /s /t /u /v /w 
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef 
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section 
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron 
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /bullet 
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown 
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla 
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis 
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply 
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls 
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla 
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis 
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide 
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis 
+] def
+%%EndResource
+% Initialize page description variables.
+/sh 595 def
+/sw 842 def
+/llx 24 def
+/urx 818 def
+/ury 571 def
+/lly 24 def
+/#copies 1 def
+/th 15.000000 def
+/fnfs 11 def
+/bfs 8.005733 def
+/cw 4.803440 def
+
+% Dictionary for ISO-8859-1 support
+/iso1dict 8 dict begin
+  /fCourier ISO-8859-1Encoding /Courier reencode_font
+  /fCourier-Bold ISO-8859-1Encoding /Courier-Bold reencode_font
+  /fCourier-BoldOblique ISO-8859-1Encoding /Courier-BoldOblique reencode_font
+  /fCourier-Oblique ISO-8859-1Encoding /Courier-Oblique reencode_font
+  /fHelvetica ISO-8859-1Encoding /Helvetica reencode_font
+  /fHelvetica-Bold ISO-8859-1Encoding /Helvetica-Bold reencode_font
+  /fTimes-Bold ISO-8859-1Encoding /Times-Bold reencode_font
+  /fTimes-Roman ISO-8859-1Encoding /Times-Roman reencode_font
+currentdict end def
+/bgcolor [ 0 0 0 ] def
+/bg false def
+/ul false def
+/bx false def
+% The font for line numbering
+/f# /Helvetica findfont bfs .6 mul scalefont def
+/fSymbol /Symbol findfont def
+/hm fnfs 0.25 mul def
+/pw
+   cw 81.400000 mul
+def
+/ph
+   501.959430 th add
+def
+/pmw urx llx sub pw 2 mul sub 1 div def
+/pmh 0 def
+/v 0 def
+/x [
+  0
+  dup pmw add pw add
+] def
+/y [
+  pmh ph add 0 mul ph add
+  dup
+] def
+/scx sw 2 div def
+/scy sh 2 div def
+/snx urx def
+/sny lly 2 add def
+/dx llx def
+/dy sny def
+/fnx scx def
+/fny dy def
+/lx snx def
+/ly ury fnfs 0.8 mul sub def
+/sx 0 def
+/tab 8 def
+/x0 0 def
+/y0 0 def
+%%EndSetup
+
+%%Page: (1-2) 1
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 3.362408 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(# taken from vist-diffusion-pinn-5200-half-channel-plus-units-load-skip-5-cells.) c n
+(py) N
+() p n
+(import) K
+( numpy as np) p n
+(from) K
+( numpy ) p
+(import) K
+( linalg as LA) p n
+(import) K
+( math as m) p n
+(import) K
+( os) p n
+(import) K
+( sys) p n
+(from) K
+( matplotlib.image ) p
+(import) K
+( imread) p n
+(import) K
+( matplotlib.pyplot as plt) p n
+(from) K
+( matplotlib ) p
+(import) K
+( rcParams ) p
+(# for changing default values) c n
+(import) K
+( scipy.io as sio) p n
+(from) K
+( scipy.optimize ) p
+(import) K
+( minimize) p n
+(import) K
+( timeit) p n
+(import) K
+( torch) p n
+(import) K
+( random) p n
+(import) K
+( torch.nn as nn) p n
+(import) K
+( torch.optim as optim) p n
+(from) K
+( scipy.integrate ) p
+(import) K
+( odeint) p n
+(from) K
+( torch.autograd ) p
+(import) K
+( grad) p n
+(import) K
+( torch.optim.lr_scheduler as lr_scheduler) p n
+() N
+(plt.close\(') S
+(all) str
+('\)) p n
+(plt.interactive\(True\)) N
+(# set all fontsizes ) c n
+(rcParams[") p
+(font.size) str
+("] = 16) p n
+() N
+(viscos = 1/5200) N
+() N
+(# load DNS data) c n
+(DNS_mean=np.genfromtxt\(") p
+(LM_Channel_5200_mean_prof.dat) str
+(",comments=") p
+(%) str
+("\)) p n
+(y_DNS=DNS_mean[:,0];) N
+(yplus_DNS=DNS_mean[:,1];) N
+(u_DNS=DNS_mean[:,2];) N
+(dudy_DNS=np.gradient\(u_DNS,yplus_DNS\)) N
+() N
+(DNS_stress=np.genfromtxt\(") S
+(LM_Channel_5200_vel_fluc_prof.dat) str
+(",comments=") p
+(%) str
+("\)) p n
+(u2_DNS=DNS_stress[:,2];) N
+(v2_DNS=DNS_stress[:,3];) N
+(w2_DNS=DNS_stress[:,4];) N
+(uv_DNS=DNS_stress[:,5];) N
+(k_DNS=0.5*\(u2_DNS+v2_DNS+w2_DNS\)) N
+(dkdy_DNS=np.gradient\(k_DNS,yplus_DNS,edge_order=2\)) N
+(d2kdy2_DNS=np.gradient\(dkdy_DNS,yplus_DNS,edge_order=2\)) N
+() N
+(#y/delta y^+ Prod Turb_Transport Viscous_Transport Pressure_Strain Pressure_Tran) c n
+(sport Viscous_Dissipation           Balance) N
+(DNS_k_terms=np.genfromtxt\(") p
+(LM_Channel_5200_RSTE_k_prof.dat) str
+(",comments=") p
+(%) str
+("\)) p n
+() N
+(diss_DNS=DNS_k_terms[:,7]) N
+(Pk_DNS=DNS_k_terms[:,2]) N
+(diff_DNS=DNS_k_terms[:,3]) N
+(diff_DNS_visc =   DNS_k_terms[:,4]) N
+() N
+(diss_iso_DNS = np.maximum\(diss_DNS-diff_DNS_visc,0\)) N
+() N
+(diss_DNS=diss_DNS) N
+(Pk_DNS=Pk_DNS) N
+(diff_DNS=diff_DNS) N
+(diss_iso_DNS=diss_iso_DNS) N
+(diff_DNS_visc = diff_DNS_visc) N
+() N
+(k-diffusion-pinn-5200-half-channel-plus-units-load-skip-5-cells.py) (Page 1/6) (apr 27, 2025 9:23) title
+border
+/v 1 store
+/x0 x v get 3.362408 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(vist_DNS = np.abs\(uv_DNS/dudy_DNS\)) p n
+() N
+(# load k-omega grid) c n
+(kom_data = np.loadtxt\(') p
+(y_u_k_om_uv_5200-RANS-half-channel.txt) str
+('\)) p n
+(y_kom = kom_data[:,0]) N
+(k_kom = kom_data[:,2]) N
+(om_kom = kom_data[:,3]) N
+(vist_kom = k_kom/om_kom/viscos) N
+() N
+(# skip 5 cells near the wall) c n
+(j=5) p n
+(y_kom = y_kom[j:]) N
+(vist_kom = vist_kom[j:]) N
+() N
+(nj = len\(y_kom\)) N
+() N
+(viscos_lam = np.ones\(nj\)) N
+() N
+(k_DNS = np.interp\(y_kom, y_DNS, k_DNS\)) N
+(k_DNS = torch.tensor\(k_DNS, requires_grad=True, dtype=torch.float32\).view\(\(-1, 1) N
+(\)\)) N
+() N
+(Pk_DNS = np.interp\(y_kom, y_DNS, Pk_DNS\)) N
+(Pk_DNS = torch.tensor\(Pk_DNS, requires_grad=True, dtype=torch.float32\).view\(\(-1,) N
+( 1\)\)) N
+() N
+(diss_DNS = np.interp\(y_kom, y_DNS, diss_DNS\)) N
+(diss_DNS = torch.tensor\(diss_DNS, requires_grad=True, dtype=torch.float32\).view\() N
+(\(-1, 1\)\)) N
+() N
+(d2kdy2_DNS = np.interp\(y_kom, y_DNS, d2kdy2_DNS\)) N
+(d2kdy2_DNS = torch.tensor\(d2kdy2_DNS, requires_grad=True, dtype=torch.float32\).v) N
+(iew\(\(-1, 1\)\)) N
+() N
+(dkdy_DNS = np.interp\(y_kom, y_DNS, dkdy_DNS\)) N
+(dkdy_DNS = torch.tensor\(dkdy_DNS, requires_grad=True, dtype=torch.float32\).view\() N
+(\(-1, 1\)\)) N
+() N
+(diff_DNS_visc = np.interp\(y_kom, y_DNS, diff_DNS_visc\)) N
+() N
+(diff_DNS = np.interp\(y_kom, y_DNS, diff_DNS\)) N
+(diff_DNS = torch.tensor\(diff_DNS, requires_grad=True, dtype=torch.float32\).view\() N
+(\(-1, 1\)\)) N
+() N
+(vist_DNS = np.interp\(y_kom, y_DNS, vist_DNS\)) N
+(vist_DNS_np = vist_DNS) N
+(vist_DNS = torch.tensor\(vist_DNS, requires_grad=True, dtype=torch.float32\).view\() N
+(\(-1, 1\)\)) N
+() N
+(viscos_lam = torch.tensor\(viscos_lam, requires_grad=True, dtype=torch.float32\).v) N
+(iew\(\(-1, 1\)\)) N
+() N
+(yplus_DNS = np.interp\(y_kom, y_DNS, yplus_DNS\)) N
+(yplus_DNS_np = yplus_DNS) N
+(yplus_DNS = torch.tensor\(yplus_DNS, requires_grad=True, dtype=torch.float32\).vie) N
+(w\(\(-1, 1\)\)) N
+() N
+(y_DNS = torch.tensor\(y_kom, requires_grad=True, dtype=torch.float32\).view\(\(-1, 1) N
+(\)\)) N
+() N
+(# b.c.) c n
+(vist_0 = vist_DNS[0]) p n
+(k-diffusion-pinn-5200-half-channel-plus-units-load-skip-5-cells.py) (Page 2/6) (apr 27, 2025 9:23) title
+border
+grestore
+(Printed by Lars Davidson) rhead
+(k-diffusion-pinn-5200-half-channel-plus-units-load-skip-5-cells.py) (1/3) (s\303\266ndag april 27, 2025) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (3-4) 2
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 3.362408 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(vist_1 = vist_DNS[-1]) p n
+() N
+(y = yplus_DNS) N
+() N
+(# Define get_derivative) c n
+(dtype = torch.float) p n
+(device = torch.device\(") S
+(cpu) str
+("\)) p n
+() N
+(def) K
+( get_derivative\(f, y\):) p n
+(    """) S
+(Compute the derivative of f = f\(y\) with respect to y.) str
+(""") p n
+(    df_dy = grad\(f, y, torch.ones\(y.size\(\)[0], 1, device=device\), create_graph=T) N
+(rue\)[0]) N
+(    ) S
+(return) K
+( df_dy) p n
+() N
+(class) K
+( MyNet2\(nn.Module\):) p n
+(  ) S
+(def) K
+( __init__\(self\):) p n
+(    super\(\).__init__\(\)) N
+(    self.ll1 = nn.Linear\(in_features=1,out_features=10\)) N
+(    self.tanh = nn.Tanh\(\)) N
+(    self.ll2 = nn.Linear\(in_features=10,out_features=10\)) N
+(    self.ll3 = nn.Linear\(in_features=10,out_features=10\)) N
+(    self.output = nn.Linear\(in_features=10,out_features=1\)) N
+() N
+(  ) S
+(def) K
+( forward\(self,x\):) p n
+(        out = self.ll1\(x\)) N
+(        out = self.tanh\(out\)) N
+(        out = self.ll2\(out\)) N
+(        out = self.tanh\(out\)) N
+(        out = self.ll3\(out\)) N
+(        out = self.output\(out\)) N
+(        ) S
+(return) K
+( out) p n
+(    ) N
+(# Create an instance ) c n
+(model = MyNet2\(\)) p n
+() N
+(#%% Define loss function) c n
+(def) K
+( PDE\(y, vist_pred\):) p n
+(        """) S
+(Compute the cost function.) str
+(""") p n
+(        ) S
+(global) K
+( temp) p n
+(        ) S
+(# Differential equation loss) c n
+(        dvist_dy = get_derivative\( vist_pred,y\)  ) p n
+(        temp = \(vist_pred+viscos_lam\) * d2kdy2_DNS + dkdy_DNS*dvist_dy) N
+() N
+(        boundary_condition_loss = 0) N
+(        differential_equation_loss = temp  + \(Pk_DNS - diss_DNS\)) N
+(        imbalance = differential_equation_loss) N
+(        differential_equation_loss = torch.sum\(differential_equation_loss ** 2\)) N
+(        ) S
+(# Boundary condition loss initialization) c n
+(        boundary_condition_loss = 0) p n
+(        ) S
+(# Sum over dirichlet boundary condition losses) c n
+(        boundary_condition_loss += \(vist_pred[0] - vist_0\) ** 2) p n
+(        boundary_condition_loss += \(vist_pred[-1] - vist_1\) ** 2) N
+(        ) N
+(        ) S
+(return) K
+( differential_equation_loss, boundary_condition_loss, imbalance) p n
+() N
+(def) K
+( loss_and_PDE\(y_tensor\):) p n
+(    optimizer.zero_grad\(\) ) S
+(# Clear gradients from the previous iteration) c n
+(    outputs = model\(y_tensor\)  ) p
+(#get vist_t ) c n
+(    loss_de,loss_bc, imbalance = PDE\(y_tensor, outputs\) ) p
+(# Compute the loss) c n
+(    loss = loss_de+1000.*loss_bc) p n
+(# Calculate the L1 regularization term) c n
+(    l1_regularization = torch.tensor\(0.\)) p n
+(k-diffusion-pinn-5200-half-channel-plus-units-load-skip-5-cells.py) (Page 3/6) (apr 27, 2025 9:23) title
+border
+/v 1 store
+/x0 x v get 3.362408 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(    ) p
+(for) K
+( param ) p
+(in) K
+( model.parameters\(\):) p n
+(        l1_regularization += torch.norm\(param, p=1\)) N
+() N
+(    ) S
+(# Add the L1 regularization term to the loss) c n
+(    lambda_l1=0.) p n
+(    loss += lambda_l1 * l1_regularization ) S
+(# Compute the loss) c n
+(    loss.backward\(\) ) p
+(# Compute gradients using backpropagation) c n
+(    ) p
+(return) K
+( loss,loss_de,loss_bc, imbalance) p n
+() N
+(#%% training) c n
+(prev_loss = float\(') p
+(inf) str
+('\)  ) p
+(# Initialize with a large value) c n
+(max_no_epoch=100000) p n
+(#max_no_epoch=2) c n
+() p n
+(optim_alg=') S
+(Adam) str
+(') p n
+(#optim_alg='SGD') c n
+(learning_rate = 0.2  ) p
+(#  4221.8496 milestones=[500000]) c n
+(learning_rate = 0.2  ) p
+(#  0.6554632 milestones=[6400,43000,54578]) c n
+(print) K
+(\(') p
+(Adam taken) str
+('\)) p n
+(optimizer = optim.Adam\(model.parameters\(\), lr=learning_rate\)) N
+() N
+(#for saving training result) c n
+(differential_equation_loss_history = np.zeros\(max_no_epoch\)) p n
+(boundary_condition_loss_history = np.zeros\(max_no_epoch\)) N
+(loss_min = 1e30) N
+(# Training loop) c n
+(for) K
+( epoch ) p
+(in) K
+( range\(max_no_epoch\):) p n
+(    loss,loss_de,loss_bc, imbalance = loss_and_PDE\(y\)) N
+(    differential_equation_loss_history[epoch] += loss_de) N
+(    boundary_condition_loss_history[epoch] += loss_bc) N
+(    optimizer.step\(\)) N
+(    loss_change = prev_loss - loss) N
+(    prev_loss = loss) N
+() N
+(# Define checkpoint) c n
+(    ) p
+(if) K
+( epoch == 0:) p n
+(       checkpoint = torch.load\(') S
+(checkpoint-vist-5200-plus-units-save-5-cells.ct) str
+('\)) p n
+() N
+(# Apply the state_dict to model and optimizer) c n
+(       model = MyNet2\(\)  ) p
+(# Initialize model; Ensure it's the same architecture) c n
+(       model.load_state_dict\(checkpoint[') p
+(model_state_dict) str
+(']\)) p n
+() N
+(       optimizer = optim.Adam\(model.parameters\(\), lr=learning_rate\) ) S
+(# Initialize) c n
+( optimizer; Ensure it's the same optimizer type) N
+(       optimizer.load_state_dict\(checkpoint[') p
+(optimizer_state_dict) str
+(']\)) p n
+(       scheduler = optim.lr_scheduler.MultiStepLR\(optimizer,  milestones=[6400,1) N
+(6700,19200,37500,38000,80000,94000], gamma=0.5\)) N
+() N
+(# Retrieve the training epoch) c n
+(       epoch = checkpoint[') p
+(epoch) str
+(']) p n
+(       loss = checkpoint[') S
+(loss) str
+(']) p n
+() N
+(       model.train\(\)  ) S
+(# For training mode \(resuming training\)) c n
+() p n
+(    scheduler.step\(\)) N
+() N
+(    loss_np = loss.detach\(\).numpy\(\)) N
+() N
+(# Print the loss every epoch) c n
+(    loss_min = np.minimum\(loss_np,loss_min\)) p n
+(    loss_min = np.float32\(loss_min\)) N
+(    torch.set_printoptions\(precision=4\)) N
+(k-diffusion-pinn-5200-half-channel-plus-units-load-skip-5-cells.py) (Page 4/6) (apr 27, 2025 9:23) title
+border
+grestore
+(Printed by Lars Davidson) rhead
+(k-diffusion-pinn-5200-half-channel-plus-units-load-skip-5-cells.py) (2/3) (s\303\266ndag april 27, 2025) footer
+end % of iso1dict
+pagesave restore
+showpage
+%%Page: (5-6) 3
+%%BeginPageSetup
+/pagesave save def
+sh 0 translate 90 rotate
+%%EndPageSetup
+iso1dict begin
+gsave
+llx lly 12 add translate
+/v 0 store
+/x0 x v get 3.362408 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(    ) p
+(print) K
+(\(f") p
+(Epoch {epoch+1}, Learning Rate: {scheduler.get_last_lr\(\)[0]}, Loss: {loss_np[0]:.2e}, Loss_min: {l) str n
+(oss_min[0]:.2e}) S
+("\)) p n
+(    ) S
+(if) K
+( loss_np < 5e-5:) p n
+(        vist_pred = model\(y\)) N
+(        vist_pred_np =  vist_pred.detach\(\).numpy\(\)[:,0]) N
+() N
+(        ) S
+(print) K
+(\(') p
+(break) str
+('\)) p n
+() N
+(        ) S
+(break) K n
+() p n
+(# Plot loss_function) c n
+(fig, ax = plt.subplots\(nrows=1, ncols=1\) ) p
+(# Create a figure with one subplot) c n
+(ax.semilogy\(np.arange\(len\(boundary_condition_loss_history\)\), boundary_condition_) p n
+(loss_history,color=') S
+(red) str
+(', label=') p
+(bc error) str
+('\)) p n
+(ax.semilogy\(np.arange\(len\(boundary_condition_loss_history\)\), differential_equati) N
+(on_loss_history,color=') S
+(blue) str
+(',label=") p
+(diff eq error) str
+("\)) p n
+(plt.xlabel\(r') S
+(epochs) str
+('\)) p n
+(ax.set_title\(r') S
+(Errors) str
+('\)) p n
+(ax.grid\(visible=True\)) N
+(ax.legend\(loc=') S
+(best) str
+('\) ) p n
+(plt.savefig\(') S
+(loss-half-5200-plus-units-load-5-cells.png) str
+(',bbox_inches=') p
+(tight) str
+('\)) p n
+() N
+() N
+(######################## plot vist zoom) c n
+(fig, ax = plt.subplots\(nrows=1, ncols=1\) ) p
+(# Create a figure with one subplot) c n
+(plt.subplots_adjust\(left=0.20,bottom=0.20\)) p n
+(ax.plot\(yplus_DNS_np, vist_DNS_np,color=') S
+(r) str
+(',linestyle=') p
+(:) str
+(',linewidth=5, label=') p
+(DN) str n
+(S) S
+('\)) p n
+(vist_pred = model\(y\) ) N
+(vist_pred_np =  vist_pred.detach\(\).numpy\(\)[:,0]) N
+(ax.plot\(yplus_DNS_np, vist_pred_np,color=') S
+(k) str
+(',linestyle=') p
+(-) str
+(',linewidth=2, label=r") p
+() str n
+($\\nu_{t,\\mathrm{pred}}$) S
+("\)) p n
+(ax.plot\(y_kom/viscos, vist_kom,color=') S
+(r) str
+(',linestyle=') p
+(-) str
+(',linewidth=2, label=r") p
+($\\nu_) str n
+({t,k-\\omega}$) S
+("\)) p n
+(ax.legend\(loc=') S
+(best) str
+('\) ) p n
+(plt.xlabel\(') S
+($y^+$) str
+('\)) p n
+(plt.ylabel\(r') S
+($\\nu_t/\\nu$) str
+('\)   ) p n
+(plt.xlim\(0,100\)) N
+(ax.axis\([0,50,0,20]\)) N
+(ax.grid\(visible=True\)) N
+(plt.savefig\(') S
+(vist-PINN-5200-plus-units-load-5-cells-zoom.png) str
+(',bbox_inches=') p
+(tight) str
+('\)) p n
+() N
+(np.savetxt\(') S
+(vist_pred-PINN-from-vist-diffusion-pinn-5200-plus-units-load-5-cells.txt) str
+(',vist_pred_np) p n
+(\)) N
+() N
+(######################## plot diffusion term) c n
+(fig, ax = plt.subplots\(nrows=1, ncols=1\) ) p
+(# Create a figure with one subplot) c n
+(plt.subplots_adjust\(left=0.20,bottom=0.20\)) p n
+(dkdy_DNS_np =  dkdy_DNS.detach\(\).numpy\(\)[:,0]) N
+(diff_DNS =  diff_DNS.detach\(\).numpy\(\)[:,0]) N
+(y_DNS =  y_DNS.detach\(\).numpy\(\)[:,0]) N
+(term = dkdy_DNS_np*vist_pred_np) N
+(dvist_dy = get_derivative\( vist_pred,y\)  ) N
+(diff_non_conserv = vist_pred * d2kdy2_DNS + dkdy_DNS*dvist_dy) N
+(diff_DNS_pred = np.gradient\(term,y_DNS\)) N
+(plt.plot\(y_DNS/viscos, \(diff_DNS_pred+diff_DNS_visc\),color=') S
+(k) str
+(',linestyle=') p
+(-) str
+(',lin) p n
+(ewidth=2, label=r") S
+(predicted) str
+("\)) p n
+(plt.plot\(y_DNS/viscos, \(diff_DNS+diff_DNS_visc\),color=') S
+(b) str
+(',linestyle=') p
+(-) str
+(',linewidt) p n
+(h=2, label=r") S
+(DNS) str
+("\)) p n
+(plt.plot\(y_DNS/viscos, diff_non_conserv.detach\(\).numpy\(\),color=') S
+(r) str
+(',linestyle=') p
+(-) str
+(') p n
+(,linewidth=2, label=r") S
+(non-cons) str
+("\)) p n
+(ax.legend\(loc=') S
+(best) str
+('\) ) p n
+(k-diffusion-pinn-5200-half-channel-plus-units-load-skip-5-cells.py) (Page 5/6) (apr 27, 2025 9:23) title
+border
+/v 1 store
+/x0 x v get 3.362408 add sx cw mul add store
+/y0 y v get bfs th add sub store
+x0 y0 moveto
+(plt.xlabel\(') p
+($y^+$) str
+('\)) p n
+(plt.ylabel\(') S
+(diffusion) str
+('\)   ) p n
+(ax.grid\(visible=True\)) N
+(plt.savefig\(') S
+(diffusion-PINN-5200-plus-units-load-5-cells.png) str
+(',bbox_inches=') p
+(tight) str
+('\)) p n
+() N
+() N
+(######################## plot diffusion term zoom more) c n
+(fig, ax = plt.subplots\(nrows=1, ncols=1\) ) p
+(# Create a figure with one subplot) c n
+(plt.subplots_adjust\(left=0.20,bottom=0.20\)) p n
+(plt.plot\(y_DNS/viscos, diff_DNS,') S
+(r--) str
+(',linewidth=2, label=r") p
+(DNS) str
+("\)) p n
+(plt.plot\(y_DNS/viscos, diff_non_conserv.detach\(\).numpy\(\),') S
+(b-) str
+(',linewidth=2, label) p n
+(=r") S
+(PINN) str
+("\)) p n
+(plt.plot\(y_DNS/viscos, diff_non_conserv.detach\(\).numpy\(\),') S
+(bo) str
+(',linewidth=2\)) p n
+(ax.legend\(loc=') S
+(best) str
+('\) ) p n
+(plt.xlabel\(') S
+($y^+$) str
+('\)) p n
+(plt.ylabel\(') S
+(diffusion) str
+('\)   ) p n
+(plt.xlim\(0,100\)) N
+(ax.grid\(visible=True\)) N
+(plt.savefig\(') S
+(diffusion-PINN-5200-plus-units-load-5-cells-zoom-more.png) str
+(',bbox_inches=') p
+(tight) str
+('\)) p n
+() N
+() N
+(################################# Plot imbalance, Pk and diss zoom) c n
+(fig, ax = plt.subplots\(nrows=1, ncols=1\) ) p
+(# Create a figure with one subplot) c n
+(plt.subplots_adjust\(left=0.20,bottom=0.20\)) p n
+(ax.plot\(yplus_DNS.detach\(\).numpy\(\), imbalance.detach\(\).numpy\(\),color=') S
+(r) str
+(',linesty) p n
+(le=') S
+(:) str
+(',linewidth=5, label=') p
+(imbalance) str
+('\)) p n
+(ax.plot\(y.detach\(\).numpy\(\), Pk_DNS.detach\(\).numpy\(\),color=') S
+(k) str
+(',linestyle=') p
+(-) str
+(',line) p n
+(width=2, label=r") S
+($P_{k,DNS}$) str
+("\)) p n
+(ax.plot\(y.detach\(\).numpy\(\), -diss_DNS.detach\(\).numpy\(\),color=') S
+(b) str
+(',linestyle=') p
+(-) str
+(',l) p n
+(inewidth=2, label=r") S
+($\\varepsilon_{DNS}$) str
+("\)) p n
+(ax.plot\(y.detach\(\).numpy\(\), diff_DNS_visc,color=') S
+(r) str
+(',linestyle=') p
+(--) str
+(',linewidth=2, ) p n
+(label=r") S
+($D^\\nu_{DNS}$) str
+("\)) p n
+(ax.plot\(y.detach\(\).numpy\(\), diff_DNS,color=') S
+(b) str
+(',linestyle=') p
+(--) str
+(',linewidth=2, label) p n
+(=r") S
+($D^t_{DNS}$) str
+("\)) p n
+(ax.legend\(loc=') S
+(best) str
+('\) ) p n
+(plt.xlabel\(') S
+($y^+$) str
+('\)) p n
+(ax.grid\(visible=True\)) N
+(plt.xlim\(0,100\)) N
+(plt.savefig\(') S
+(k-balance-PINN-5200-plus-units-load-5-cells-zoom.png) str
+(',bbox_inches=') p
+(tight) str
+('\)) p n
+(    ) N
+() N
+(k-diffusion-pinn-5200-half-channel-plus-units-load-skip-5-cells.py) (Page 6/6) (apr 27, 2025 9:23) title
+border
+grestore
+(Printed by Lars Davidson) rhead
+(k-diffusion-pinn-5200-half-channel-plus-units-load-skip-5-cells.py) (3/3) (s\303\266ndag april 27, 2025) footer
+end % of iso1dict
+pagesave restore
+showpage
+
+%%Trailer
+end
+%%EOF

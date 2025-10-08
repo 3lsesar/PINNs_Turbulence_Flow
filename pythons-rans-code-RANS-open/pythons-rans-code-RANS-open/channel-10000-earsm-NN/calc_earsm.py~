@@ -1,0 +1,166 @@
+def calc_earsm(k2d,om2d,u2d_face_w,u2d_face_s,v2d_face_w,v2d_face_s,uu2d,uv2d,vv2d,ww2d,vis2d_earsm):
+    from joblib import dump, load
+    import torch
+    import torch.nn as nn
+    import torch.optim as optim
+    from torch.utils.data import TensorDataset, DataLoader
+
+
+    global neural_net,pk_min, pk_max,scaler_yplus, scaler_pk,yplus_min, yplus_max, beta1_min, beta4_min, beta1_max, beta4_max, dudy,ttau,pk,vis2d_earsm1, beta2_min, beta2_max
+
+    if iter == 0:
+      print('NN calc_earsm called')
+      folder='../NN/'
+
+# load data
+      filename=str(folder)+'model.pth'
+      neural_net = torch.load(filename)
+      print('model',neural_net)
+      scaler_pk = load(str(folder)+'model_scaler-pk.bin')
+      scaler_yplus = load(str(folder)+'model_scaler-yplus.bin')
+
+      beta1_min, beta1_max, beta2_min, beta2_max, beta4_min, beta4_max, pk_min, pk_max, yplus_min, yplus_max = np.loadtxt(str(folder)+'min-max.txt')
+
+#     beta1_max = -0.08
+#     beta2_min = 0.03
+#     beta4_max = -0.04
+
+      print('pk_min, pk_max',pk_min, pk_max, yplus_min, yplus_max)
+      print('beta1_min, beta1_max',beta1_min, beta1_max)
+      print('beta2_min, beta2_max',beta2_min, beta2_max)
+      print('beta4_min, beta4_max',beta4_min, beta4_max)
+
+      vis2d_earsm = vis2d
+
+
+    dudx=dphidx(u2d_face_w,u2d_face_s)
+    dudy=dphidy(u2d_face_w,u2d_face_s)
+
+    dvdx=dphidx(v2d_face_w,v2d_face_s)
+    dvdy=dphidy(v2d_face_w,v2d_face_s)
+
+    diss=0.09*k2d*om2d
+
+    rk=k2d
+    ttau=np.maximum(rk/diss,6*(viscos/diss)**0.5)
+    s11=ttau*dudx
+    s12=ttau*0.5*(dudy+dvdx)
+    s21=s12
+    s22=ttau*dvdy
+    om12=ttau*0.5*(dudy-dvdx)
+    om21=-om12
+    om22=0.
+    om11=0.
+    s11=ttau*dudx
+    s12=ttau*0.5*(dudy+dvdx)
+    s21=s12
+    s22=ttau*dvdy
+    II_S=(s11**2+s12**2+s21**2+s22**2)  # s_ij s_ji = s_ij s_ij
+    vist = vis2d_earsm-viscos
+#   vist = vis2d-viscos
+#   vist = k2d/om2d
+    uv_tot = uv2d - vist*(dudy+dvdx)
+#   if iter  == 0:
+#   if iter % 100  == 0:
+    pk = vist*dudy**2*viscos
+#   pk = -uv_tot*dudy*viscos
+
+    yplus = dist/viscos
+      
+# limit min/max
+# count values larger/smaller than max/min
+    pk_min_number= (pk < pk_min).sum()
+    pk_max_number= (pk > pk_max).sum()
+
+    print('pk_min_number',pk_min_number)
+    print('pk_max_number',pk_max_number)
+
+    yplus_min_number= (yplus< yplus_min).sum()
+    yplus_max_number= (yplus > yplus_max).sum()
+
+    print('yplus_min_number',yplus_min_number)
+    print('yplus_max_number',yplus_max_number)
+
+# set limits
+    pk=np.minimum(pk,pk_max)
+    pk=np.maximum(pk,pk_min)
+
+    yplus=np.minimum(yplus,yplus_max)
+    yplus=np.maximum(yplus,yplus_min)
+
+# re-shape
+    pk_org = pk
+    pk = pk.reshape(-1,1)
+    yplus= yplus.reshape(-1,1)
+    X=np.zeros((nj,2))
+    X[:,0] = scaler_pk.transform(pk)[:,0]
+    X[:,1] = scaler_yplus.transform(yplus)[:,0]
+
+    X_tensor = torch.tensor(X, dtype=torch.float32)
+    preds = neural_net(X_tensor)
+
+#transform from tensor to numpy
+    c_NN = preds.detach().numpy()
+
+    beta1=c_NN[:,0]
+    beta2=c_NN[:,1]
+    beta4=c_NN[:,2]
+   
+    beta1 = np.reshape(beta1,(ni,nj))
+    beta2 = np.reshape(beta2,(ni,nj))
+    beta4 = np.reshape(beta4,(ni,nj))
+      
+# limit min/max
+# count values larger/smaller than max/min
+    beta1_min_number= (beta1< beta1_min).sum()
+    beta1_max_number= (beta1> beta1_max).sum()
+
+    print('beta1_min_number',beta1_min_number)
+    print('beta1_max_number',beta1_max_number)
+
+    beta4_min_number= (beta4< beta4_min).sum()
+    beta4_max_number= (beta4> beta4_max).sum()
+
+    print('beta4_min_number',beta4_min_number)
+    print('beta4_max_number',beta4_max_number)
+
+# set limits
+    beta1=np.minimum(beta1,beta1_max)
+    beta1=np.maximum(beta1,beta1_min)
+
+    beta2=np.minimum(beta2,beta2_max)
+    beta2=np.maximum(beta2,beta2_min)
+
+    beta4=np.minimum(beta4,beta4_max)
+    beta4=np.maximum(beta4,beta4_min)
+
+#   uu=rk*beta4*(s12*om21-om12*s21)   # +rk*beta1*s11 # this is included via vis_earsm
+#   vv=rk*beta4*(s21*om12-om21*s12)   # +rk*beta1*s22+  # this is included via vis_earsm
+    uu=rk*(beta4*(s12*om21-om12*s21)+beta2*(s11**2+s12**2-II_S/3))   # +rk*beta1*s11 # this is included via vis_earsm
+    vv=rk*(beta4*(s21*om12-om21*s12)+beta2*(s22**2+s12**2-II_S/3))  
+    ww=-rk*beta2*II_S/3  
+    uu = np.maximum(uu+0.6666*k2d,0)-0.6666*k2d
+    vv = np.maximum(vv+0.6666*k2d,0)-0.6666*k2d
+#   ww = np.maximum(ww+0.6666*k2d,0)-0.6666*k2d
+    uv = rk*beta4*(s11*om12-om12*s22) #+rk*beta1*s12 # this is included via vis_earsm
+
+    vis2d_earsm_old= vis2d_earsm
+    vis2d_earsm=-0.5*rk*beta1*ttau+viscos
+
+    uu2d = urfvis*uu+(1-urfvis)*uu2d
+    uv2d = urfvis*uv+(1-urfvis)*uv2d
+    vv2d = urfvis*vv+(1-urfvis)*vv2d
+    ww2d = urfvis*ww+(1-urfvis)*ww2d
+    vis2d_earsm=urfvis*vis2d_earsm+(1-urfvis)*vis2d_earsm_old
+    vis2d_earsm1= vis2d_earsm
+
+    if iter % 100 == 0:
+
+      np.save('beta1_saved', beta1)
+      np.save('beta2_saved', beta2)
+      np.save('beta4_saved', beta4)
+      np.save('diss_saved', diss)
+      np.save('pk_saved', pk_org)
+
+
+    return uu2d,vv2d,ww2d,uv2d,vis2d_earsm
