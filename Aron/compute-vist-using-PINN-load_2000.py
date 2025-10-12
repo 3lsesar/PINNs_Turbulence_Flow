@@ -28,32 +28,33 @@ plt.interactive(True)
 # set all fontsizes to 16
 rcParams["font.size"] = 16
 
-viscos = 1/5200
+viscos = 1/2000
 
 # solve differential equation for k
 # load DNS data
-DNS_mean=np.genfromtxt("LM_Channel_5200_mean_prof.dat",comments="%")
+
+DNS_mean=np.genfromtxt("Re2000_jimenez.dat",comments="%") # Can use jiminez 2000
 y_DNS=DNS_mean[:,0];
 yplus_DNS=DNS_mean[:,1];
 u_DNS=DNS_mean[:,2];
 dudy_DNS=np.gradient(u_DNS,yplus_DNS)
 
-DNS_stress=np.genfromtxt("LM_Channel_5200_vel_fluc_prof.dat",comments="%")
-u2_DNS=DNS_stress[:,2];
-v2_DNS=DNS_stress[:,3];
-w2_DNS=DNS_stress[:,4];
-uv_DNS=DNS_stress[:,5];
+
+DNS_stress=np.genfromtxt("Re2000_jimenez.dat",comments="%") #Also jiminewz 2000
+u2_DNS=(DNS_stress[:,3])**2;
+v2_DNS=(DNS_stress[:,4])**2;
+w2_DNS=(DNS_stress[:,5])**2;
+uv_DNS=DNS_stress[:,10];
 k_DNS=0.5*(u2_DNS+v2_DNS+w2_DNS)
 dkdy_DNS=np.gradient(k_DNS,yplus_DNS,edge_order=2)
 d2kdy2_DNS=np.gradient(dkdy_DNS,yplus_DNS,edge_order=2)
 
-         #y/delta                    y^+                   Production          Turbulent_Transport        Viscous_Transport       Pressure_Strain         Pressure_Transport        Viscous_Dissipation           Balance
-DNS_k_terms=np.genfromtxt("LM_Channel_5200_RSTE_k_prof.dat",comments="%")
+DNS_k_terms=np.genfromtxt("Re2000_bal_k.dat",comments="%")
 
-diss_DNS=DNS_k_terms[:,7]
-Pk_DNS=DNS_k_terms[:,2]
-diff_DNS=DNS_k_terms[:,3]
-diff_DNS_visc =   DNS_k_terms[:,4]
+diss_DNS=DNS_k_terms[:,2]
+Pk_DNS=DNS_k_terms[:,3]
+diff_DNS=DNS_k_terms[:,6]
+diff_DNS_visc=DNS_k_terms[:,7]
 
 diss_DNS=diss_DNS
 Pk_DNS=Pk_DNS
@@ -65,7 +66,7 @@ vist_DNS = np.abs(uv_DNS/dudy_DNS)
 
 
 # load k-omega grid
-kom_data = np.loadtxt('y_u_k_om_uv_5200-RANS-half-channel.txt')
+kom_data = np.loadtxt('y_u_k_om_uv_2000-RANS-half-channel.txt')
 y_kom = kom_data[:,0]
 k_kom = kom_data[:,2]
 om_kom = kom_data[:,3]
@@ -158,43 +159,44 @@ def PDE(y, vist_pred):
         """Compute the cost function."""
         global temp
         # Differential equation loss
-        dvist_dy = get_derivative(vist_pred,y)  
+        dvist_dy = get_derivative( vist_pred,y)  
         temp = (vist_pred+viscos_lam) * d2kdy2_DNS + dkdy_DNS*dvist_dy
 
         boundary_condition_loss = 0
         differential_equation_loss = temp  + (Pk_DNS - diss_DNS)
         imbalance = differential_equation_loss
-        differential_equation_loss = torch.mean(differential_equation_loss ** 2)
+        differential_equation_loss = torch.sum(differential_equation_loss ** 2)
         # Boundary condition loss initialization
         boundary_condition_loss = 0
         # Sum over dirichlet boundary condition losses
         boundary_condition_loss += (vist_pred[0] - vist_0) ** 2
         boundary_condition_loss += (vist_pred[-1] - vist_1) ** 2
-        mse_loss = torch.mean((vist_pred - vist_DNS) ** 2)
-
+        mse_loss = torch.mean((vist_pred - vist_DNS)**2)
+        
         return differential_equation_loss, boundary_condition_loss, imbalance, mse_loss
 
 def loss_and_PDE(y_tensor):
     optimizer.zero_grad() # Clear gradients from the previous iteration
     outputs = model(y_tensor)  #get k 
     loss_de,loss_bc, imbalance, mse_loss = PDE(y_tensor, outputs) # Compute the loss
-    loss = loss_de+10*loss_bc+mse_loss
+    A = 1
+    B = 1000
+    C = 100
+    D = 1
+    
 # Calculate the L1 regularization term
-    l1_regularization = torch.tensor(0.)
+    l1_regularization = torch.tensor(.0)
     for param in model.parameters():
         l1_regularization += torch.norm(param, p=1)
 
     # Add the L1 regularization term to the loss
-    lambda_l1=10
-    loss += lambda_l1 * l1_regularization # Compute the loss
-    
-    loss += lambda_l1 * mse_loss
 
+    loss = A*loss_de+B*loss_bc+C*mse_loss+D*l1_regularization
     loss.backward() # Compute gradients using backpropagation
-    return loss,loss_de,loss_bc, imbalance, mse_loss
+    return loss,loss_de,loss_bc, imbalance
 
 #%% training
-max_no_epoch=50000
+max_no_epoch=25000
 #max_no_epoch=2
 
 learning_rate = 0.2  #  4221.8496 milestones=[500000]
@@ -203,15 +205,12 @@ optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 #saving training result
 differential_equation_loss_history = np.zeros(max_no_epoch)
 boundary_condition_loss_history = np.zeros(max_no_epoch)
-mse_loss_history = np.zeros(max_no_epoch)
-
 loss_min = 1e30
 # Training loop
 for epoch in range(max_no_epoch):
-    loss,loss_de,loss_bc, imbalance, mse_loss = loss_and_PDE(x)
+    loss,loss_de,loss_bc, imbalance = loss_and_PDE(x)
     differential_equation_loss_history[epoch] += loss_de
     boundary_condition_loss_history[epoch] += loss_bc
-    mse_loss_history[epoch] += mse_loss
 
 # Define checkpoint
     if epoch == 0:
@@ -249,11 +248,11 @@ for epoch in range(max_no_epoch):
 
         break
 
+#%%
 # Plot loss_function
 fig, ax = plt.subplots(nrows=1, ncols=1) # Create a figure with one subplot
 ax.semilogy(np.arange(len(boundary_condition_loss_history)), boundary_condition_loss_history,color='red', label='bc error')
 ax.semilogy(np.arange(len(boundary_condition_loss_history)), differential_equation_loss_history,color='blue',label="diff eq error")
-ax.semilogy(np.arange(len(boundary_condition_loss_history)), differential_equation_loss_history,color='green',label="MSE error")
 plt.xlabel(r'epochs')
 ax.set_title(r'Errors')
 ax.grid(visible=True)
@@ -340,26 +339,61 @@ plt.xlabel('$y^+$')
 ax.grid(visible=True)
 plt.xlim(0,100)
 #plt.savefig('k-balance-PINN-5200-plus-units-load-5-cells-zoom-required-grad-false.png',bbox_inches='tight')
-plt.show() 
+plt.show()
+
 #%%
-sigma_k=np.minimum(vist_kom/(vist_pred_np*viscos),2)
+######################## plot PRANDLT
 
-# sigma_k=(vist_pred*viscos*dkdy_DNS)/((Pk_DNS-diss_DNS)-viscos*d2kdy2_DNS)
-# sigma_k_np=sigma_k.detach().numpy()[:,0]
+vist_pred = model(x)  #get k
+vist_pred_np =  vist_pred.detach().numpy()[:,0]
 
+sigma_k = vist_kom/vist_pred_np
+#sigma_k[4]=sigma_k[0]
+#sigma_k[5]=sigma_k[0]
+#sigma_k[6]=sigma_k[0]
+
+#sigma_k[7]=sigma_k[0]
+#sigma_k[8]=sigma_k[0]
+#sigma_k[9]=sigma_k[0]
+
+
+#sigma_k[0:25] = np.linspace(sigma_k[0], sigma_k[25], 25)
+#sigma_k[4:21] = np.clip(sigma_k[4:21], sigma_k[3], sigma_k[22])
+#sigma_k=np.abs(sigma_k)
+
+
+################ plots sigma_k with y+
 fig, ax = plt.subplots(nrows=1, ncols=1) # Create a figure with one subplot
 plt.subplots_adjust(left=0.20,bottom=0.20)
-ax.plot(yplus_DNS_np, sigma_k,color='r',linestyle=':',linewidth=5, label='DNS')
+ax.plot(yplus_DNS_np, sigma_k,color='k',linestyle='-',linewidth=2, label=r"$\nu_t{\mathrm{pred}}$")
 ax.legend(loc='best') 
 plt.xlabel('$y^+$')
-plt.ylabel(r'$\nu_t/\nu$')   
+plt.ylabel(r'$\sigma_k$')   
 ax.grid(visible=True)
+#plt.savefig('test-PINN-vist-half-5200-plus-units-load-5-cells-required-grad-false.png',bbox_inches='tight')
+plt.show()
 
-plt.show(block=True)
+################ plots sigma_k with y+ ZOOM ver.
+fig, ax = plt.subplots(nrows=1, ncols=1) # Create a figure with one subplot
+plt.subplots_adjust(left=0.20,bottom=0.20)
+ax.plot(yplus_DNS_np, sigma_k,color='k',linestyle='-',linewidth=2, label=r"$\nu_t{\mathrm{pred}}$")
+ax.legend(loc='best') 
+plt.xlabel('$y^+$')
+plt.ylabel(r'$\sigma_k$')   
+ax.grid(visible=True)
+plt.axis([0,50,-10,10])
+plt.show()
 
+################ plots sigma_k with y
+fig, ax = plt.subplots(nrows=1, ncols=1) # Create a figure with one subplot
+plt.subplots_adjust(left=0.20,bottom=0.20)
+ax.plot(y_DNS, sigma_k,color='k',linestyle='-',linewidth=2, label=r"$\nu_t{\mathrm{pred}}$")
+ax.legend(loc='best') 
+plt.xlabel('$y$')
+plt.ylabel(r'$y$')   
+ax.grid(visible=True)
+plt.show()
+ 
+
+#%%
 np.savetxt('prandtl-y.txt',np.c_[sigma_k,y_DNS])
-
-# #####################################
-# another case = x
-# vist_pred=model(x)
-

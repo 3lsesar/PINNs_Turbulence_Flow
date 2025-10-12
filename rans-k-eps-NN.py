@@ -414,19 +414,31 @@ for n in range(1,maxit):
 # print residuals
     print(f"\n{'---iter: '}{n:2d}, {'res u: '}{res_u:.2e},{'  res k='}{res_k:.2e},{'  res eps='}{res_eps:.2e}\n")
 
-DNS_mean=np.genfromtxt("LM_Channel_5200_mean_prof.dat",comments="%")
+# DNS_mean=np.genfromtxt("LM_Channel_5200_mean_prof.dat",comments="%")
+# y_DNS=DNS_mean[:,0];
+# yplus_DNS=DNS_mean[:,1];
+# u_DNS=DNS_mean[:,2];
+
+# DNS_stress=np.genfromtxt("LM_Channel_5200_vel_fluc_prof.dat",comments="%")
+# u2DNS=DNS_stress[:,2];
+# v2DNS=DNS_stress[:,3];
+# w2DNS=DNS_stress[:,4];
+# uvDNS=DNS_stress[:,5];
+
+# k_DNS = 0.5*(u2DNS + v2DNS + w2DNS) 
+
+DNS_mean=np.genfromtxt("Re2000_jimenez.dat",comments="%") # Can use jiminez 2000
 y_DNS=DNS_mean[:,0];
 yplus_DNS=DNS_mean[:,1];
 u_DNS=DNS_mean[:,2];
 
-DNS_stress=np.genfromtxt("LM_Channel_5200_vel_fluc_prof.dat",comments="%")
-u2DNS=DNS_stress[:,2];
-v2DNS=DNS_stress[:,3];
-w2DNS=DNS_stress[:,4];
-uvDNS=DNS_stress[:,5];
 
-k_DNS = 0.5*(u2DNS + v2DNS + w2DNS) 
-
+DNS_stress=np.genfromtxt("Re2000_jimenez.dat",comments="%") #Also jiminewz 2000
+u2DNS=(DNS_stress[:,3])**2;
+v2DNS=(DNS_stress[:,4])**2;
+w2DNS=(DNS_stress[:,5])**2;
+uvDNS=DNS_stress[:,10];
+k_DNS=0.5*(u2DNS+v2DNS+w2DNS)
 
 # plot u
 fig1,ax1 = plt.subplots()
@@ -436,7 +448,7 @@ plt.plot(u_DNS,y_DNS,'r-',label="DNS")
 plt.xlabel("$U^+$")
 plt.ylabel("$y$")
 plt.legend(loc="best",prop=dict(size=18))
-plt.savefig('u_5200-NN-kom.png')
+# plt.savefig('u_5200-NN-kom.png')
 
 # plot u log-scale
 fig1,ax1 = plt.subplots()
@@ -449,7 +461,7 @@ plt.ylabel("$U^+$")
 plt.xlabel("$y^+$")
 plt.axis([1, 5200, 0, 28])
 plt.legend(loc="best",prop=dict(size=18))
-plt.savefig('u_log-5200-NN-kom.png')
+# plt.savefig('u_log-5200-NN-kom.png')
 
 # plot visc
 fig1,ax1 = plt.subplots()
@@ -458,7 +470,7 @@ plt.plot(vist/viscos,yp,'b-',label=r"$k-\varepsilon$")
 plt.legend(loc="best",prop=dict(size=18))
 plt.xlabel(r'$\nu_t/\nu$')
 plt.ylabel('y')
-plt.savefig('vis_5200-NN-kom.png')
+# plt.savefig('vis_5200-NN-kom.png')
 
 # plot eps
 fig1,ax1 = plt.subplots()
@@ -467,7 +479,7 @@ plt.plot(eps,yp,'b-',label=r"$k-\varepsilon$")
 plt.legend(loc="best",prop=dict(size=18))
 plt.xlabel(r'$\varepsilon$')
 plt.ylabel('y')
-plt.savefig('eps_5200-NN-kom.png')
+# plt.savefig('eps_5200-NN-kom.png')
 
 # plot k
 fig1,ax1 = plt.subplots()
@@ -477,7 +489,7 @@ plt.plot(k_DNS,y_DNS,'r-',label="DNS")
 plt.legend(loc="best",prop=dict(size=18))
 plt.xlabel('k')
 plt.ylabel('y')
-plt.savefig('k_5200-NN-kom.png')
+# plt.savefig('k_5200-NN-kom.png')
 
 # plot uv
 fig1,ax1 = plt.subplots()
@@ -488,4 +500,6 @@ plt.plot(uvDNS,yplus_DNS,'r-',label="DNS")
 plt.legend(loc="best",prop=dict(size=18))
 plt.xlabel(r"$\overline{u'v'}$")
 plt.ylabel('y')
-plt.savefig('uv_5200-NN-kom.png')
+# plt.savefig('uv_5200-NN-kom.png')
+
+plt.show(block=True)

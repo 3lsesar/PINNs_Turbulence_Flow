@@ -317,4 +317,4 @@ ax.grid(visible=True)
 plt.xlim(0,100)
 plt.savefig('k-balance-PINN-5200-plus-units-load-5-cells-zoom.png',bbox_inches='tight')
     
-
+plt.show(block=True)

@@ -33,16 +33,16 @@ viscos = 1/5200
 # solve differential equation for k
 # load DNS data
 DNS_mean=np.genfromtxt("LM_Channel_5200_mean_prof.dat",comments="%")
-y_DNS=DNS_mean[:,0];
-yplus_DNS=DNS_mean[:,1];
-u_DNS=DNS_mean[:,2];
+y_DNS=DNS_mean[:,0]
+yplus_DNS=DNS_mean[:,1]
+u_DNS=DNS_mean[:,2]
 dudy_DNS=np.gradient(u_DNS,yplus_DNS)
 
 DNS_stress=np.genfromtxt("LM_Channel_5200_vel_fluc_prof.dat",comments="%")
-u2_DNS=DNS_stress[:,2];
-v2_DNS=DNS_stress[:,3];
-w2_DNS=DNS_stress[:,4];
-uv_DNS=DNS_stress[:,5];
+u2_DNS=DNS_stress[:,2]
+v2_DNS=DNS_stress[:,3]
+w2_DNS=DNS_stress[:,4]
+uv_DNS=DNS_stress[:,5]
 k_DNS=0.5*(u2_DNS+v2_DNS+w2_DNS)
 dkdy_DNS=np.gradient(k_DNS,yplus_DNS,edge_order=2)
 d2kdy2_DNS=np.gradient(dkdy_DNS,yplus_DNS,edge_order=2)
@@ -131,10 +131,10 @@ class MyNet2(nn.Module):
     super().__init__()
     self.ll1 = nn.Linear(in_features=1,out_features=32)
     self.tanh = nn.Tanh()
-    self.ll2 = nn.Linear(in_features=32,out_features=64)
-    self.ll3 = nn.Linear(in_features=64,out_features=128)
-    self.ll4 = nn.Linear(in_features=128,out_features=64)
-    self.output = nn.Linear(in_features=64,out_features=1)
+    self.ll2 = nn.Linear(in_features=32,out_features=32)
+    self.ll3 = nn.Linear(in_features=32,out_features=32)
+    self.ll4 = nn.Linear(in_features=32,out_features=32)
+    self.output = nn.Linear(in_features=32,out_features=1)
 
   def forward(self,x):
 #       print('self',self)
@@ -170,7 +170,7 @@ def PDE(y, vist_pred):
         # Sum over dirichlet boundary condition losses
         boundary_condition_loss += (vist_pred[0] - vist_0) ** 2
         boundary_condition_loss += (vist_pred[-1] - vist_1) ** 2
-        mse_loss = torch.mean((vist_pred - vist_DNS) ** 2)
+        mse_loss = torch.sum((vist_pred - vist_DNS) ** 2)
 
         return differential_equation_loss, boundary_condition_loss, imbalance, mse_loss
 
@@ -178,27 +178,25 @@ def loss_and_PDE(y_tensor):
     optimizer.zero_grad() # Clear gradients from the previous iteration
     outputs = model(y_tensor)  #get k 
     loss_de,loss_bc, imbalance, mse_loss = PDE(y_tensor, outputs) # Compute the loss
-    loss = loss_de+1000.*loss_bc
+    loss = loss_de+100*loss_bc+mse_loss
 # Calculate the L1 regularization term
     l1_regularization = torch.tensor(0.)
     for param in model.parameters():
         l1_regularization += torch.norm(param, p=1)
 
     # Add the L1 regularization term to the loss
-    lambda_l1=1e-4
+    lambda_l1=0
     loss += lambda_l1 * l1_regularization # Compute the loss
     
-    loss += lambda_l1 * mse_loss
-
     loss.backward() # Compute gradients using backpropagation
-    return loss,loss_de,loss_bc, imbalance
+    return loss,loss_de,loss_bc, imbalance, mse_loss
 
 #%% training
-max_no_epoch=60000
+max_no_epoch=7000
 # max_no_epoch=2
 
-learning_rate = 0.02  #  4221.8496 milestones=[500000]
-learning_rate = 0.02  #  0.6554632 milestones=[6400,43000,54578]
+learning_rate = 0.2  #  4221.8496 milestones=[500000]
+learning_rate = 0.2  #  0.6554632 milestones=[6400,43000,54578]
 optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
 scheduler = optim.lr_scheduler.MultiStepLR(optimizer,  milestones=[5000], gamma=0.5)
@@ -206,13 +204,15 @@ scheduler = optim.lr_scheduler.MultiStepLR(optimizer,  milestones=[5000], gamma=
 #saving training result
 differential_equation_loss_history = np.zeros(max_no_epoch)
 boundary_condition_loss_history = np.zeros(max_no_epoch)
+mse_loss_history = np.zeros(max_no_epoch)
+
 loss_min = 1e30
 # Training loop
 for epoch in range(max_no_epoch):
-    loss,loss_de,loss_bc, imbalance = loss_and_PDE(x)
+    loss,loss_de,loss_bc, imbalance, mse_loss = loss_and_PDE(x)
     differential_equation_loss_history[epoch] += loss_de
     boundary_condition_loss_history[epoch] += loss_bc
-    optimizer.step()
+    mse_loss_history[epoch] += mse_loss
 
 # Define checkpoint
     if epoch == 1:
@@ -265,7 +265,7 @@ plt.xlabel('$y^+$')
 plt.ylabel(r'$\nu_t/\nu$')   
 ax.grid(visible=True)
 #plt.savefig('test-PINN-vist-half-5200-plus-units-load-5-cells-required-grad-false-save.png',bbox_inches='tight')
-plt.show()
+# plt.show()
 
 ######################## plot vist zoom
 fig, ax = plt.subplots(nrows=1, ncols=1) # Create a figure with one subplot
@@ -314,7 +314,7 @@ plt.ylabel('diffusion')
 plt.xlim(0,100)
 ax.grid(visible=True)
 #plt.savefig('diffusion-PINN-5200-plus-units-load-5-cells-zoom-more-required-grad-false-save.png',bbox_inches='tight')
-plt.show()
+# plt.show()
 
 ################################# Plot imbalance, Pk and diss zoom
 fig, ax = plt.subplots(nrows=1, ncols=1) # Create a figure with one subplot
@@ -330,4 +330,4 @@ ax.grid(visible=True)
 plt.xlim(0,100)
 #plt.savefig('k-balance-PINN-5200-plus-units-load-5-cells-zoom-required-grad-false-save.png',bbox_inches='tight')
 
-plt.show(block=True)
+# plt.show(block=True)
