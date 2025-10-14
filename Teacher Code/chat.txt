@@ -1,0 +1,44 @@
+Unified PINN trainer for turbulent viscosity estimation
+======================================================
+
+This module merges the functionality of the original ``compute-vist-using-PINN-load.py``
+and ``compute-vist-using-PINN-save.py`` scripts.  Both of the original programs
+trained a simple physics‑informed neural network (PINN) to estimate the turbulent
+eddy viscosity ``ν_t`` from one-dimensional channel flow data.  The ``save``
+variant trained the model from scratch and optionally wrote a PyTorch checkpoint,
+while the ``load`` variant resumed training from a previously saved checkpoint
+and continued to improve the model.  The unified version below provides a
+single entry point that can both start from scratch or resume from a saved
+checkpoint, controlled via command‑line arguments.
+
+Major improvements over the original scripts
+-------------------------------------------
+
+* **Encapsulated logic into functions.**  Data loading, model building,
+  training, and plotting are each implemented in separate functions for
+  improved readability and maintainability.
+* **Command‑line interface.**  You can now specify the data directory,
+  checkpoint path, output directory, maximum epochs, learning rate, and
+  whether to resume from a checkpoint via ``argparse``.  This removes
+  hard‑coded paths such as ``'/Users/cesar/Documents/GitHub/PINNs_Turbulence_Flow/…'``.
+* **Device selection.**  The network will run on a GPU if available, falling
+  back to CPU otherwise.  The original scripts only used the CPU.
+* **Cleaner training loop.**  The training loop now supports resuming from
+  arbitrary epochs, gracefully handles the scheduler, and offers early
+  stopping once the loss falls below a specified tolerance.  Previously, the
+  ``save`` version omitted scheduler updates and the ``load`` version
+  redefined the model mid‑loop.
+* **Robust checkpointing.**  When training from scratch, you can set
+  ``--checkpoint-out`` to save intermediate progress.  When resuming, the script
+  validates the checkpoint file before loading and can restore the scheduler
+  state if available.
+* **Comprehensive plotting.**  The plotting routines are factored into a
+  helper that reproduces the diagnostic figures from the original scripts.
+  Plots are saved into a user‑specified output directory.
+* **Documentation and type hints.**  Each function has a docstring, and
+  critical variables are type‑annotated for clarity.  Additional comments
+  explain the physics and training objective.
+
+To use this script as a module, run ``python compute_vist_using_PINN.py --help``
+to view the available options.
+"""
