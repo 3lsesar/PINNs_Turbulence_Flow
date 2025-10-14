@@ -125,8 +125,14 @@ jmon=8
 c_eps_1=1.5
 c_eps_2=1.9
 
+# Prandtl number 
 prand_eps=1.4
-prand_k=1.4
+prandtl_y=np.loadtxt('prand_k_5200-plus-units-from-balance.txt')
+prandtl_k=prandtl_y[:,1]
+y_=prandtl_y[:,0]
+
+
+
 
 cmu=0.09
 
@@ -150,6 +156,8 @@ k_iter=np.zeros(maxit)
 eps_iter=np.zeros(maxit)
 dudy=np.gradient(u,yp)
 
+
+prand_k=np.interp(yp,y_,prandtl_k)
 # load NN model
 if NN_bool:
    NN = torch.load('model-neural-k-omega-f_2.pth',weights_only=False)
@@ -334,9 +342,9 @@ for n in range(1,maxit):
 
 # compute an & as
       vist_n=fy[j]*vist[j+1]+(1.-fy[j])*vist[j]
-      an[j]=(vist_n/prand_k+viscos)*dn[j]
+      an[j]=(vist_n/prand_k[j]+viscos)*dn[j]
       vist_s=fy[j-1]*vist[j]+(1.-fy[j-1])*vist[j-1]
-      as1[j]=(vist_s/prand_k+viscos)*ds[j]
+      as1[j]=(vist_s/prand_k[j]+viscos)*ds[j]
 
 # boundary conditions for k
     k[0]=0.
@@ -407,18 +415,30 @@ for n in range(1,maxit):
     print(f"\n{'---iter: '}{n:2d}, {'res u: '}{res_u:.2e},{'  res k='}{res_k:.2e},{'  res eps='}{res_eps:.2e}\n")
 
 DNS_mean=np.genfromtxt("LM_Channel_5200_mean_prof.dat",comments="%")
-y_DNS=DNS_mean[:,0];
-yplus_DNS=DNS_mean[:,1];
-u_DNS=DNS_mean[:,2];
+y_DNS=DNS_mean[:,0]
+yplus_DNS=DNS_mean[:,1]
+u_DNS=DNS_mean[:,2]
 
 DNS_stress=np.genfromtxt("LM_Channel_5200_vel_fluc_prof.dat",comments="%")
-u2DNS=DNS_stress[:,2];
-v2DNS=DNS_stress[:,3];
-w2DNS=DNS_stress[:,4];
-uvDNS=DNS_stress[:,5];
+u2DNS=DNS_stress[:,2]
+v2DNS=DNS_stress[:,3]
+w2DNS=DNS_stress[:,4]
+uvDNS=DNS_stress[:,5]
 
 k_DNS = 0.5*(u2DNS + v2DNS + w2DNS) 
 
+# DNS_mean=np.genfromtxt("Re2000_jimenez.dat",comments="%") # Can use jiminez 2000
+# y_DNS=DNS_mean[:,0];
+# yplus_DNS=DNS_mean[:,1];
+# u_DNS=DNS_mean[:,2];
+
+
+# DNS_stress=np.genfromtxt("Re2000_jimenez.dat",comments="%") #Also jiminewz 2000
+# u2DNS=(DNS_stress[:,3])**2;
+# v2DNS=(DNS_stress[:,4])**2;
+# w2DNS=(DNS_stress[:,5])**2;
+# uvDNS=DNS_stress[:,10];
+# k_DNS=0.5*(u2DNS+v2DNS+w2DNS)
 
 # plot u
 fig1,ax1 = plt.subplots()
@@ -481,6 +501,5 @@ plt.legend(loc="best",prop=dict(size=18))
 plt.xlabel(r"$\overline{u'v'}$")
 plt.ylabel('y')
 # plt.savefig('uv_5200-NN-kom.png')
-plt.show(block=True)
 
-np.savetxt("willcox.txt",np.c_[u, yp, vist, eps, ustar, uplus,uv])
+plt.show(block=True)

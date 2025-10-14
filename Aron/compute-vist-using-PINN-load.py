@@ -131,10 +131,10 @@ class MyNet2(nn.Module):
     super().__init__()
     self.ll1 = nn.Linear(in_features=1,out_features=32)
     self.tanh = nn.Tanh()
-    self.ll2 = nn.Linear(in_features=32,out_features=64)
-    self.ll3 = nn.Linear(in_features=64,out_features=128)
-    self.ll4 = nn.Linear(in_features=128,out_features=64)
-    self.output = nn.Linear(in_features=64,out_features=1)
+    self.ll2 = nn.Linear(in_features=32,out_features=32)
+    self.ll3 = nn.Linear(in_features=32,out_features=32)
+    self.ll4 = nn.Linear(in_features=32,out_features=32)
+    self.output = nn.Linear(in_features=32,out_features=1)
 
   def forward(self,x):
 #       print('self',self)

@@ -179,6 +179,7 @@ def loss_and_PDE(y_tensor):
     outputs = model(y_tensor)  #get k 
     loss_de,loss_bc, imbalance, mse_loss = PDE(y_tensor, outputs) # Compute the loss
     loss = loss_de+100*loss_bc+mse_loss
+
 # Calculate the L1 regularization term
     l1_regularization = torch.tensor(0.)
     for param in model.parameters():
@@ -192,11 +193,11 @@ def loss_and_PDE(y_tensor):
     return loss,loss_de,loss_bc, imbalance, mse_loss
 
 #%% training
-max_no_epoch=7000
+max_no_epoch=50000
 # max_no_epoch=2
 
-learning_rate = 0.2  #  4221.8496 milestones=[500000]
-learning_rate = 0.2  #  0.6554632 milestones=[6400,43000,54578]
+# learning_rate = 0.2  #  4221.8496 milestones=[500000]
+learning_rate = 0.01  #  0.6554632 milestones=[6400,43000,54578]
 optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
 scheduler = optim.lr_scheduler.MultiStepLR(optimizer,  milestones=[5000], gamma=0.5)
@@ -213,6 +214,8 @@ for epoch in range(max_no_epoch):
     differential_equation_loss_history[epoch] += loss_de
     boundary_condition_loss_history[epoch] += loss_bc
     mse_loss_history[epoch] += mse_loss
+    optimizer.step()
+    scheduler.step()
 
 # Define checkpoint
     if epoch == 1:
@@ -244,6 +247,8 @@ for epoch in range(max_no_epoch):
 fig, ax = plt.subplots(nrows=1, ncols=1) # Create a figure with one subplot
 ax.semilogy(np.arange(len(boundary_condition_loss_history)), boundary_condition_loss_history,color='red', label='bc error')
 ax.semilogy(np.arange(len(boundary_condition_loss_history)), differential_equation_loss_history,color='blue',label="diff eq error")
+ax.semilogy(np.arange(len(boundary_condition_loss_history)), mse_loss_history,color='green', label='MSE')
+
 plt.xlabel(r'epochs')
 ax.set_title(r'Errors')
 ax.grid(visible=True)
@@ -330,4 +335,4 @@ ax.grid(visible=True)
 plt.xlim(0,100)
 #plt.savefig('k-balance-PINN-5200-plus-units-load-5-cells-zoom-required-grad-false-save.png',bbox_inches='tight')
 
-# plt.show(block=True)
+plt.show(block=True)
