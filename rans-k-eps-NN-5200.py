@@ -71,8 +71,8 @@ NN_bool = False
 #NN_bool = True
 
 # max number of iterations
-maxit=25000
-maxit=20000
+# maxit=25000
+maxit=50000
 #maxit=2
 
 plt.rcParams.update({'font.size': 22})
@@ -135,6 +135,9 @@ vistload=np.loadtxt('vist-y.txt')
 vist=vistload[:,0]
 y_=vistload[:,1]
 
+plt.plot(y_,vist)
+plt.show(block=True)
+
 cmu=0.09
 
 small=1.e-10
@@ -146,6 +149,10 @@ k=np.ones(nj+1)*1.e-4
 y=np.zeros(nj+1)
 eps=np.ones(nj+1)*1.e-5
 vist=np.interp(yp,y_,vist)
+
+plt.plot(vist,yp)
+plt.show(block=True)
+
 # vist=np.ones(nj+1)*100.*viscos
 dn=np.zeros(nj+1)
 ds=np.zeros(nj+1)
