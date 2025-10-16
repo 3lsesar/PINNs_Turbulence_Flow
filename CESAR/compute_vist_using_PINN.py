@@ -577,7 +577,7 @@ def train_pinn(
             vist_DNS,
             vist_0,
             vist_1,
-            l1 = 1e-6
+            l1 = 0
         )
 
         #Method flag
