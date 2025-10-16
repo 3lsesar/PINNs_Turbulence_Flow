@@ -71,8 +71,8 @@ NN_bool = False
 #NN_bool = True
 
 # max number of iterations
-maxit=25000
-maxit=20000
+# maxit=25000
+maxit=50000
 #maxit=2
 
 plt.rcParams.update({'font.size': 22})
@@ -125,8 +125,18 @@ jmon=8
 c_eps_1=1.5
 c_eps_2=1.9
 
+# Prandtl number 
 prand_eps=1.4
-prand_k=1.4
+# prandtl_y=np.loadtxt('prand_k_5200-plus-units-from-balance.txt')
+# prandtl_k=prandtl_y[:,1]
+# y_=prandtl_y[:,0]
+
+vistload=np.loadtxt('vist-y.txt')
+vist=vistload[:,0]
+y_=vistload[:,1]
+
+plt.plot(y_,vist)
+plt.show(block=True)
 
 cmu=0.09
 
@@ -138,7 +148,12 @@ u=np.zeros(nj+1)
 k=np.ones(nj+1)*1.e-4
 y=np.zeros(nj+1)
 eps=np.ones(nj+1)*1.e-5
-vist=np.ones(nj+1)*100.*viscos
+vist=np.interp(yp,y_,vist)
+
+plt.plot(vist,yp)
+plt.show(block=True)
+
+# vist=np.ones(nj+1)*100.*viscos
 dn=np.zeros(nj+1)
 ds=np.zeros(nj+1)
 dy_s=np.zeros(nj+1)
@@ -150,6 +165,9 @@ k_iter=np.zeros(maxit)
 eps_iter=np.zeros(maxit)
 dudy=np.gradient(u,yp)
 
+
+# prand_k=np.interp(yp,y_,prandtl_k)
+prand_k=np.ones(nj+1)
 # load NN model
 if NN_bool:
    NN = torch.load('model-neural-k-omega-f_2.pth',weights_only=False)
@@ -323,8 +341,8 @@ for n in range(1,maxit):
       fmu[j]=np.minimum(fmu[j],1.)
 
 # compute viscosity
-      vist_new = cmu*fmu[j]*k[j]**2/eps[j]
-      vist[j] = vist_new*urf + (1-urf)*vist[j]
+    #   vist_new = cmu*fmu[j]*k[j]**2/eps[j]
+    #   vist[j] = vist_new*urf + (1-urf)*vist[j]
 
 # production term
       su[j]=vist[j]*dudy2[j]*delta_y[j]
@@ -334,9 +352,9 @@ for n in range(1,maxit):
 
 # compute an & as
       vist_n=fy[j]*vist[j+1]+(1.-fy[j])*vist[j]
-      an[j]=(vist_n/prand_k+viscos)*dn[j]
+      an[j]=(vist_n/prand_k[j]+viscos)*dn[j]
       vist_s=fy[j-1]*vist[j]+(1.-fy[j-1])*vist[j-1]
-      as1[j]=(vist_s/prand_k+viscos)*ds[j]
+      as1[j]=(vist_s/prand_k[j]+viscos)*ds[j]
 
 # boundary conditions for k
     k[0]=0.
@@ -406,19 +424,31 @@ for n in range(1,maxit):
 # print residuals
     print(f"\n{'---iter: '}{n:2d}, {'res u: '}{res_u:.2e},{'  res k='}{res_k:.2e},{'  res eps='}{res_eps:.2e}\n")
 
-DNS_mean=np.genfromtxt("LM_Channel_5200_mean_prof.dat",comments="%")
+# DNS_mean=np.genfromtxt("LM_Channel_5200_mean_prof.dat",comments="%")
+# y_DNS=DNS_mean[:,0]
+# yplus_DNS=DNS_mean[:,1]
+# u_DNS=DNS_mean[:,2]
+
+# DNS_stress=np.genfromtxt("LM_Channel_5200_vel_fluc_prof.dat",comments="%")
+# u2DNS=DNS_stress[:,2]
+# v2DNS=DNS_stress[:,3]
+# w2DNS=DNS_stress[:,4]
+# uvDNS=DNS_stress[:,5]
+
+# k_DNS = 0.5*(u2DNS + v2DNS + w2DNS) 
+
+DNS_mean=np.genfromtxt("Re2000_jimenez.dat",comments="%") # Can use jiminez 2000
 y_DNS=DNS_mean[:,0];
 yplus_DNS=DNS_mean[:,1];
 u_DNS=DNS_mean[:,2];
 
-DNS_stress=np.genfromtxt("LM_Channel_5200_vel_fluc_prof.dat",comments="%")
-u2DNS=DNS_stress[:,2];
-v2DNS=DNS_stress[:,3];
-w2DNS=DNS_stress[:,4];
-uvDNS=DNS_stress[:,5];
 
-k_DNS = 0.5*(u2DNS + v2DNS + w2DNS) 
-
+DNS_stress=np.genfromtxt("Re2000_jimenez.dat",comments="%") #Also jiminewz 2000
+u2DNS=(DNS_stress[:,3])**2;
+v2DNS=(DNS_stress[:,4])**2;
+w2DNS=(DNS_stress[:,5])**2;
+uvDNS=DNS_stress[:,10];
+k_DNS=0.5*(u2DNS+v2DNS+w2DNS)
 
 # plot u
 fig1,ax1 = plt.subplots()
@@ -481,6 +511,5 @@ plt.legend(loc="best",prop=dict(size=18))
 plt.xlabel(r"$\overline{u'v'}$")
 plt.ylabel('y')
 # plt.savefig('uv_5200-NN-kom.png')
-plt.show(block=True)
 
-np.savetxt("willcox.txt",np.c_[u, yp, vist, eps, ustar, uplus,uv])
+plt.show(block=True)
