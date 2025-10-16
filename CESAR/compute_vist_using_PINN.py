@@ -514,10 +514,10 @@ def train_pinn(
     # Definir parámetros libres
     # --------------------------
     if trainable_weights:
-        log_var_diff = nn.Parameter(torch.tensor(-0.1))
-        log_var_bc   = nn.Parameter(torch.tensor(0.5))
-        log_var_mse  = nn.Parameter(torch.tensor(0.7))
-        log_var_l1   = nn.Parameter(torch.tensor(-0.4))
+        log_var_diff = nn.Parameter(torch.tensor(0.9))
+        log_var_bc   = nn.Parameter(torch.tensor(0.1))
+        log_var_mse  = nn.Parameter(torch.tensor(0.2))
+        log_var_l1   = nn.Parameter(torch.tensor(0.5))
 
         optimizer = torch.optim.AdamW([
             {'params': model.parameters()},
@@ -608,10 +608,10 @@ def train_pinn(
             L_total = loss_diff + loss_bc + loss_mse + loss_l1
         
         else:
-            A = 1
-            B = 1000
-            C = 1000
-            D = 1
+            A = 195
+            B = 1
+            C = 2
+            D = 25
 
             L_total = A*L_diff + B*L_bc + C*L_mse + D*L_l1
 
@@ -722,13 +722,14 @@ def train_pinn(
         l1_history[epoch_indices]
     )).T, header="Epochs, DE_loss, BC_loss, MSE_loss, L1_loss")
 
+    if trainable_weights:
     #Save final loss weights
-    with open(os.path.join(output_dir, 'loss_weights.txt'), 'w') as f:
-        f.write(f"Method: {method}\n")
-        f.write(f"Weight_diff: {torch.exp(-log_var_diff).item():.6f}\n")
-        f.write(f"Weight_bc: {torch.exp(-log_var_bc).item():.6f}\n")
-        f.write(f"Weight_mse: {torch.exp(-log_var_mse).item():.6f}\n")
-        f.write(f"Weight_l1: {torch.exp(-log_var_l1).item():.6f}\n")
+        with open(os.path.join(output_dir, 'loss_weights.txt'), 'w') as f:
+            f.write(f"Method: {method}\n")
+            f.write(f"Weight_diff: {torch.exp(-log_var_diff).item():.6f}\n")
+            f.write(f"Weight_bc: {torch.exp(-log_var_bc).item():.6f}\n")
+            f.write(f"Weight_mse: {torch.exp(-log_var_mse).item():.6f}\n")
+            f.write(f"Weight_l1: {torch.exp(-log_var_l1).item():.6f}\n")
     
 
     return {
@@ -739,9 +740,9 @@ def train_pinn(
     }
 
 #---------PARAMETERS FOR THE SCRIPT------------
-EPOCHS = 250000
+EPOCHS = 500000
 METHOD = "softplus"  # opciones: "clamp" o "softplus"
-TW = False  # Trainable weights
+TW = True  # Trainable weights
 #----------------------------------------------
 
 def main() -> None:
