@@ -1,0 +1,5 @@
+Method: softplus
+Weight_diff: 195.111923
+Weight_bc: 0.229918
+Weight_mse: 1.302139
+Weight_l1: 23.073708

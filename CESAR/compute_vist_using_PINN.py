@@ -23,7 +23,7 @@ class TrainingConfig:
     learning_rate: float = 0.2  # Adam learning rate
     milestones: Tuple[int, ...] = (6400, 16700, 19200, 37500, 38000, 80000, 94000)
     gamma: float = 0.5  # Multiplicative factor for the LR scheduler
-    early_stop_tol: float = 5e-5  # Loss tolerance for early stopping
+    #early_stop_tol: float = 5e-5  # Loss tolerance for early stopping
     device: torch.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
@@ -136,26 +136,55 @@ def load_dns_data(config: TrainingConfig) -> Tuple[torch.Tensor, ...]:
         viscos_lam_t,
     )
 
-
 class PINN(nn.Module):
     """Simple fully connected neural network used to represent the eddy viscosity field."""
-
-    def __init__(self, hidden: int = 10) -> None:
+    
+    def __init__(self, activation_function=nn.SiLU):
         super().__init__()
-        # Use three hidden layers with tanh activation.  Larger networks may
-        # capture more complex relationships but require more training data.
-        self.ll1 = nn.Linear(1, hidden)
-        self.act = nn.Tanh()
-        self.ll2 = nn.Linear(hidden, hidden)
-        self.ll3 = nn.Linear(hidden, hidden)
-        self.out = nn.Linear(hidden, 1)
+        
+        self.activation = activation_function()
+        
+        # Bloque 1: 3 capas de 256
+        self.block1 = nn.Sequential(
+            nn.Linear(1, 64),
+            self.activation)
+        
+        '''
+            nn.Linear(256, 256),
+            self.activation,
+            nn.Linear(256, 256),
+            self.activation
+            '''
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        z = self.act(self.ll1(x))
-        z = self.act(self.ll2(z))
-        z = self.act(self.ll3(z))
-        return self.out(z)
-
+        
+        # Bloque 2: 3 capas de 64
+        self.block2 = nn.Sequential(
+            nn.Linear(64, 128),
+            self.activation,
+            nn.Linear(128, 256),
+            self.activation,
+            nn.Linear(256, 128),
+            self.activation
+            )
+        
+        
+        # Bloque 3: 3 capas de 16
+        self.block3 = nn.Sequential(
+            nn.Linear(128, 64),
+            self.activation,
+            nn.Linear(64, 16),
+            self.activation
+        )
+        
+        # Capa de salida
+        self.out = nn.Linear(16, 1)
+        
+    def forward(self, x):
+        x = self.block1(x)
+        x = self.block2(x)
+        x = self.block3(x)
+        x = self.out(x)
+        return x
 
 def get_derivative(f: torch.Tensor, x: torch.Tensor) -> torch.Tensor:
     """Compute df/dx using automatic differentiation."""
@@ -166,7 +195,6 @@ def get_derivative(f: torch.Tensor, x: torch.Tensor) -> torch.Tensor:
         create_graph=True,
         retain_graph=True,
     )[0]
-
 
 def compute_losses(
     model: PINN,
@@ -179,6 +207,7 @@ def compute_losses(
     vist_DNS: torch.Tensor,
     vist_0: torch.Tensor,
     vist_1: torch.Tensor,
+    l1: float = 1e-6
 ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
     """
     Compute the differential equation and boundary losses for the PINN.
@@ -218,21 +247,47 @@ def compute_losses(
     """
     vist_pred = model(x)
     dvist_dy = get_derivative(vist_pred, x)
+    temp = (vist_pred+viscos_lam) * d2kdy2 + dkdy*dvist_dy
+
+    boundary_condition_loss = 0
+
+    differential_equation_loss = temp + (Pk - diss)
+    imbalance = differential_equation_loss.detach()
+    differential_equation_loss = torch.sum(differential_equation_loss ** 2)
+
+    mse_loss = torch.mean((vist_pred - vist_DNS)**2)
+
+
+    boundary_condition_loss += (vist_pred[0] - vist_0) ** 2 + (vist_pred[-1] - vist_1) ** 2
+    
     # term from the conservative formulation of the diffusion
     diff_term = (vist_pred + viscos_lam) * d2kdy2 + dkdy * dvist_dy
-    # The imbalance should vanish when the PDE is satisfied
-    imbalance = diff_term + (Pk - diss)
-    de_loss = torch.sum(imbalance ** 2)
-    bc_loss = (vist_pred[0] - vist_0) ** 2 + (vist_pred[-1] - vist_1) ** 2
-    total_loss = de_loss + 1000.0 * bc_loss
-    return de_loss, bc_loss, total_loss, imbalance.detach()
+    
+    l1_regularization = torch.tensor(0.)
+    for param in model.parameters():
+        l1_regularization += torch.norm(param, 1)
 
+    lambda_l1 = l1  # Regularization strength
+    '''
+    A=1
+    B=1000
+    C=1000
+    D=1
+    '''
+    l1_value = lambda_l1 * l1_regularization
+
+    #total_loss = A*differential_equation_loss + B*boundary_condition_loss + C*mse_loss + D*l1_value
+    total_loss = None
+
+    return differential_equation_loss, boundary_condition_loss, mse_loss, l1_value, total_loss, imbalance
 
 def plot_results(
     output_dir: str,
     epoch_range: np.ndarray,
     de_history: np.ndarray,
     bc_history: np.ndarray,
+    mse_history: np.ndarray,
+    l1_history: np.ndarray,
     x: torch.Tensor,
     y_DNS: torch.Tensor,
     yplus_DNS: torch.Tensor,
@@ -301,11 +356,15 @@ def plot_results(
     vist_kom_np = to_np(vist_kom)
     de_hist = de_history
     bc_hist = bc_history
+    mse_hist = mse_history
+    l1_hist = l1_history
 
     # 1. Plot training losses
     fig, ax = plt.subplots()
     ax.semilogy(epoch_range, bc_hist, 'r-', label='BC error')
     ax.semilogy(epoch_range, de_hist, 'b-', label='PDE error')
+    ax.semilogy(epoch_range, mse_hist, 'g-', label='MSE error')
+    ax.semilogy(epoch_range, l1_hist, 'm-', label='L1 regularization')
     ax.set_xlabel('Epochs')
     ax.set_ylabel('Loss')
     ax.set_title('Training errors')
@@ -352,8 +411,8 @@ def plot_results(
     # Finite difference gradient for the conservative term
     diff_pred_np = np.gradient(term, y_phys)
     # Non‑conservative formulation using automatic differentiation
-    vist_pred_t = vist_pred.detach()
-    dvist_dy_t = get_derivative(vist_pred_t, x).detach()
+    vist_pred_t = vist_pred.clone().requires_grad_(True)
+    dvist_dy_t = get_derivative(vist_pred, x).detach()
     diff_non_cons = vist_pred_np * d2kdy2_np + dkdy_np * to_np(dvist_dy_t)
     ax.plot(y_phys / viscos, diff_pred_np + diff_visc_np, 'k-', linewidth=2, label='Predicted (cons)')
     ax.plot(y_phys / viscos, diff_dns_np + diff_visc_np, 'b-', linewidth=2, label='DNS')
@@ -381,8 +440,9 @@ def plot_results(
     # 6. k‑equation balance (imbalance, Pk, dissipation, diffusive terms)
     fig, ax = plt.subplots()
     # Recompute the non‑conservative diffusion term
-    vist_pred_t = vist_pred.detach()
-    dvist_dy_t = get_derivative(vist_pred_t, x).detach()
+    dvist_dy_t = get_derivative(vist_pred, x).detach()
+    vist_pred_np = vist_pred.detach().cpu().numpy().flatten()
+
     diff_non_cons = vist_pred_np * d2kdy2_np + dkdy_np * to_np(dvist_dy_t)
     # Compute imbalance = diffusion + Pk - diss
     Pk_np = to_np(Pk_DNS)
@@ -406,6 +466,8 @@ def train_pinn(
     checkpoint_in: Optional[str] = None,
     checkpoint_out: Optional[str] = None,
     output_dir: str = ".",
+    method: str = "clamp",
+    trainable_weights: bool = True
 ) -> Dict[str, torch.Tensor]:
     """
     Train or resume training of the PINN for turbulent viscosity estimation.
@@ -448,8 +510,23 @@ def train_pinn(
     ) = load_dns_data(config)
 
     model = PINN().to(config.device)
-    optimizer = optim.Adam(model.parameters(), lr=config.learning_rate)
-    scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=list(config.milestones), gamma=config.gamma)
+    # --------------------------
+    # Definir parámetros libres
+    # --------------------------
+    if trainable_weights:
+        log_var_diff = nn.Parameter(torch.tensor(0.9))
+        log_var_bc   = nn.Parameter(torch.tensor(0.1))
+        log_var_mse  = nn.Parameter(torch.tensor(0.2))
+        log_var_l1   = nn.Parameter(torch.tensor(0.5))
+
+        optimizer = torch.optim.AdamW([
+            {'params': model.parameters()},
+            {'params': [log_var_diff, log_var_bc, log_var_mse, log_var_l1]}
+            ], lr=1e-3, weight_decay=1e-6)
+    else:
+        optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-6)
+    
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.75, patience=10000, verbose=True)
 
     start_epoch = 0
     # If resuming, load checkpoint
@@ -470,15 +547,26 @@ def train_pinn(
     # Storage for loss history
     de_history = np.zeros(config.max_epochs)
     bc_history = np.zeros(config.max_epochs)
+    mse_history = np.zeros(config.max_epochs)
+    l1_history = np.zeros(config.max_epochs)
 
     vist_0 = vist_DNS[0]
     vist_1 = vist_DNS[-1]
 
+    #best_loss = np.inf
+    #epochs_no_improve = 0
+    #patience = 5000  # Early stopping patience
+
+    best_loss = np.inf
+    best_model_state = None
+
     loss_min = np.inf
     total_epochs = config.max_epochs
+
     for epoch in range(start_epoch, total_epochs):
+
         optimizer.zero_grad()
-        de_loss, bc_loss, total_loss, _ = compute_losses(
+        L_diff, L_bc, L_mse, L_l1, _, _ = compute_losses(
             model,
             x,
             d2kdy2_DNS,
@@ -489,22 +577,83 @@ def train_pinn(
             vist_DNS,
             vist_0,
             vist_1,
+            l1 = 0
         )
-        total_loss.backward()
+
+        #Method flag
+        F = torch.nn.functional
+        #method = "clamp"  # opciones: "clamp" o "softplus"
+        min_weight = 0.1
+        if trainable_weights:
+            if method == "clamp":
+                # Opción 2: log_var con clamp
+                log_var_diff.data.clamp_(-10, 10)
+                log_var_bc.data.clamp_(-10, 10)
+                log_var_mse.data.clamp_(-10, 10)
+                log_var_l1.data.clamp_(-10, 10)
+
+                loss_diff = 0.5 * torch.exp(-log_var_diff) * L_diff + 0.5 * log_var_diff
+                loss_bc   = 0.5 * torch.exp(-log_var_bc)   * L_bc   + 0.5 * log_var_bc
+                loss_mse  = 0.5 * torch.exp(-log_var_mse)  * L_mse  + 0.5 * log_var_mse
+                loss_l1   = 0.5 * torch.exp(-log_var_l1)   * L_l1   + 0.5 * log_var_l1
+
+            elif method == "softplus":
+                # Opción 3: log_var con softplus para la parte log
+                loss_diff = 0.5 * torch.exp(-log_var_diff) * L_diff + 0.5 * F.softplus(log_var_diff)
+                loss_bc   = 0.5 * torch.exp(-log_var_bc)   * L_bc   + 0.5 * F.softplus(log_var_bc)
+                loss_mse  = 0.5 * torch.exp(-log_var_mse)  * L_mse  + 0.5 * F.softplus(log_var_mse)
+                loss_l1   = 0.5 * torch.exp(-log_var_l1)   * L_l1   + 0.5 * F.softplus(log_var_l1)
+
+            # Loss total
+            L_total = loss_diff + loss_bc + loss_mse + loss_l1
+        
+        else:
+            A = 195
+            B = 1
+            C = 2
+            D = 25
+
+            L_total = A*L_diff + B*L_bc + C*L_mse + D*L_l1
+
+        optimizer.zero_grad()
+        L_total.backward()
+        
+        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)  # evita explosión de gradientes
         optimizer.step()
-        scheduler.step()
+
+        scheduler.step(L_total)
 
         # Record losses
-        de_history[epoch] = de_loss.item()
-        bc_history[epoch] = bc_loss.item()
-        loss_np = total_loss.item()
+        de_history[epoch] = L_diff.item()
+        bc_history[epoch] = L_bc.item()
+        mse_history[epoch] = L_mse.item()
+        l1_history[epoch] = L_l1.item()
+        loss_np = L_total.item()
         loss_min = min(loss_np, loss_min)
 
         # Print progress every few thousand epochs to avoid flooding stdout
-        if (epoch - start_epoch) % 500 == 0:
-            current_lr = scheduler.get_last_lr()[0]
-            print(f"Epoch {epoch+1}, LR: {current_lr:.4e}, loss: {loss_np:.4e}, best: {loss_min:.4e}")
 
+        if (epoch - start_epoch) % 100 == 0:
+            if trainable_weights:
+                current_lr = optimizer.param_groups[0]['lr']
+                print(f"epoch {epoch}, learning rate {current_lr}, best loss {np.round(best_loss,4)} \n total_loss {L_total.item():.6f} | "
+                    f"weights: diff {torch.exp(-log_var_diff).item():.3f}, "
+                    f"bc {torch.exp(-log_var_bc).item():.3f}, "
+                    f"mse {torch.exp(-log_var_mse).item():.3f}, "
+                    f"l1 {torch.exp(-log_var_l1).item():.3f}")
+                print("-" * 80, '\n')
+            else:
+                current_lr = optimizer.param_groups[0]['lr']
+                print(f"epoch {epoch}, learning rate {current_lr}, best loss {np.round(best_loss,4)} \n total_loss {L_total.item():.6f} | "
+                    f"fixed weights: diff {A}, "
+                    f"bc {B}, "
+                    f"mse {C}, "
+                    f"l1 {D}")
+                print("-" * 80, '\n')
+
+        if L_total.item() < best_loss:
+            best_loss = L_total.item()
+            best_model_state = {k: v.cpu() for k, v in model.state_dict().items()}
         # Save a checkpoint after the first epoch if requested
         if checkpoint_out and epoch == 1:
             ckpt_out = {
@@ -518,21 +667,32 @@ def train_pinn(
             print(f"Checkpoint saved to {checkpoint_out}")
 
         # Early stopping
-        if loss_np < config.early_stop_tol:
-            print(f"Early stopping at epoch {epoch+1} with loss {loss_np:.4e} < {config.early_stop_tol:.4e}")
-            break
+        #if loss_np < config.early_stop_tol:
+            #print(f"Early stopping at epoch {epoch+1} with loss {loss_np:.4e} < {config.early_stop_tol:.4e}")
+            #break
 
-    # Compute final predictions and produce plots
-    with torch.no_grad():
-        vist_pred = model(x).cpu()
+    # Load best model state before final evaluation
+    if best_model_state is not None:
+        model.load_state_dict(best_model_state)
+        print(f"Loaded best model state with loss {best_loss:.4e}")
+
+    # Compute final predictions with gradients enabled
+    x = x.detach().clone().requires_grad_(True)
+    vist_pred = model(x)  # x ya tiene requires_grad=True
 
     # Determine actual number of epochs used for history arrays
     epoch_indices = np.arange(start_epoch, epoch + 1)
+    if trainable_weights:
+        output_dir += f"_method-{method}_final-loss-{loss_min:.4f}"
+    else:
+        output_dir += f"_fixed-weights_{'A',A,'B',B,'C',C,'D',D}_final-loss-{loss_min:.4f}"
     plot_results(
         output_dir,
         epoch_indices,
         de_history[epoch_indices],
         bc_history[epoch_indices],
+        mse_history[epoch_indices],
+        l1_history[epoch_indices],
         x.cpu(),
         y_DNS.cpu(),
         yplus_DNS.cpu(),
@@ -548,7 +708,29 @@ def train_pinn(
     )
 
     # Save predicted ν_t to a text file for post‑processing
-    np.savetxt(os.path.join(output_dir, 'vist_predicted.txt'), vist_pred.numpy().flatten())
+    np.savetxt(os.path.join(output_dir, 'vist_predicted.txt'), vist_pred.detach().cpu().numpy().flatten())
+    
+    #Save final model on the folder
+    torch.save(model.state_dict(), os.path.join(output_dir, 'pinn_model.pth'))
+
+    #Save loss and loss weights history
+    np.savetxt(os.path.join(output_dir, 'loss_history.txt'), np.vstack((
+        epoch_indices,
+        de_history[epoch_indices],
+        bc_history[epoch_indices],
+        mse_history[epoch_indices],
+        l1_history[epoch_indices]
+    )).T, header="Epochs, DE_loss, BC_loss, MSE_loss, L1_loss")
+
+    if trainable_weights:
+    #Save final loss weights
+        with open(os.path.join(output_dir, 'loss_weights.txt'), 'w') as f:
+            f.write(f"Method: {method}\n")
+            f.write(f"Weight_diff: {torch.exp(-log_var_diff).item():.6f}\n")
+            f.write(f"Weight_bc: {torch.exp(-log_var_bc).item():.6f}\n")
+            f.write(f"Weight_mse: {torch.exp(-log_var_mse).item():.6f}\n")
+            f.write(f"Weight_l1: {torch.exp(-log_var_l1).item():.6f}\n")
+    
 
     return {
         'model': model,
@@ -557,6 +739,11 @@ def train_pinn(
         'vist_dns': vist_DNS,
     }
 
+#---------PARAMETERS FOR THE SCRIPT------------
+EPOCHS = 500000
+METHOD = "softplus"  # opciones: "clamp" o "softplus"
+TW = True  # Trainable weights
+#----------------------------------------------
 
 def main() -> None:
     parser = argparse.ArgumentParser(
@@ -578,7 +765,7 @@ def main() -> None:
     parser.add_argument(
         '--max-epochs',
         type=int,
-        default=100000,
+        default=EPOCHS,
         help='Maximum number of training epochs',
     )
     parser.add_argument(
@@ -588,24 +775,19 @@ def main() -> None:
         help='Learning rate for the Adam optimizer',
     )
     parser.add_argument(
-        '--milestones',
-        type=int,
-        nargs='*',
-        default=[6400, 16700, 19200, 37500, 38000, 80000, 94000],
-        help='Epochs at which to decay the learning rate',
-    )
-    parser.add_argument(
         '--gamma',
         type=float,
         default=0.5,
         help='Multiplicative factor for the learning rate decay',
     )
+    '''
     parser.add_argument(
         '--early-stop-tol',
         type=float,
         default=5e-5,
         help='Stop training when the total loss drops below this threshold',
     )
+    '''
     parser.add_argument(
         '--checkpoint-in',
         type=str,
@@ -624,6 +806,13 @@ def main() -> None:
         default='output',
         help='Directory where plots and the predicted ν_t will be saved',
     )
+    parser.add_argument(
+        '--method',
+        type=str,
+        default=METHOD,
+        choices=['clamp', 'softplus'],
+        help='Method for handling log variance parameters',
+    )
     args = parser.parse_args()
 
     config = TrainingConfig(
@@ -631,9 +820,8 @@ def main() -> None:
         skip_cells=args.skip_cells,
         max_epochs=args.max_epochs,
         learning_rate=args.learning_rate,
-        milestones=tuple(args.milestones),
         gamma=args.gamma,
-        early_stop_tol=args.early_stop_tol,
+        #early_stop_tol=args.early_stop_tol,
     )
 
     train_pinn(
@@ -641,6 +829,8 @@ def main() -> None:
         checkpoint_in=args.checkpoint_in,
         checkpoint_out=args.checkpoint_out,
         output_dir=args.output_dir,
+        method=args.method,
+        trainable_weights=TW
     )
 
 

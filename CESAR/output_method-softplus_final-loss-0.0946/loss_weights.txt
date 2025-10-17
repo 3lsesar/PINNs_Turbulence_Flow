@@ -1,0 +1,5 @@
+Method: softplus
+Weight_diff: 266.261353
+Weight_bc: 21.971119
+Weight_mse: 11.652148
+Weight_l1: 3605450240.000000 (l1 value set to 0, so no l1 at all)

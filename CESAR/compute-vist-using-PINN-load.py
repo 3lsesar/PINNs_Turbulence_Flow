@@ -1,6 +1,6 @@
 # taken from vist-diffusion-pinn-5200-half-channel-plus-units-load-skip-5-cells.py
 
-# In thie script the turbulent viscosity in the k equation is computed using PINN (solving the ODE for
+# In thie script the turbulent f in the k equation is computed using PINN (solving the ODE for
 # the k eq.)
 
 
