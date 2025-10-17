@@ -180,7 +180,7 @@ great=1.e10
 u=np.zeros(nj+1)
 k=np.ones(nj+1)*1.e-4
 y=np.zeros(nj+1)
-eps=np.ones(nj+1)*1.e-5
+#eps=np.ones(nj+1)*1.e-5
 # vist=np.ones(nj+1)*100.*viscos
 vist=np.interp(yp,y_,vist)
 
@@ -383,14 +383,14 @@ for n in range(1,maxit):
 
 ########## Old ###########
 # production term
-    su[j]=vist[j]*dudy2[j]*delta_y[j]
+#      su[j]=vist[j]*dudy2[j]*delta_y[j]
 
 # dissipation term
-    sp[j]=-eps[j]/k[j]*delta_y[j]
+#      sp[j]=-eps[j]/k[j]*delta_y[j]
   
 ############ New ##############    
-    #   su[j] = Pk_DNS_interp[j] * delta_y[j]       # DNS production
-    #   sp[j] = -diss_DNS_interp[j]/(k[j]+1e-10) * delta_y[j]    # DNS dissipation
+      su[j] = Pk_DNS_interp[j] * delta_y[j]       # DNS production
+      sp[j] = -diss_DNS_interp[j]/(k[j]+1e-10) * delta_y[j]    # DNS dissipation
       
 ########### New 2 ###############
       
@@ -398,10 +398,10 @@ for n in range(1,maxit):
       #sp[j] = 0.
 
 # compute an & as
-    vist_n=fy[j]*vist[j+1]+(1.-fy[j])*vist[j]
-    an[j]=(vist_n/prand_k[j]+viscos)*dn[j]
-    vist_s=fy[j-1]*vist[j]+(1.-fy[j-1])*vist[j-1]
-    as1[j]=(vist_s/prand_k[j]+viscos)*ds[j]
+      vist_n=fy[j]*vist[j+1]+(1.-fy[j])*vist[j]
+      an[j]=(vist_n/prand_k[j]+viscos)*dn[j]
+      vist_s=fy[j-1]*vist[j]+(1.-fy[j-1])*vist[j-1]
+      as1[j]=(vist_s/prand_k[j]+viscos)*ds[j]
 
 # boundary conditions for k
     # k[0]=0.
@@ -426,32 +426,32 @@ for n in range(1,maxit):
     k=tdma(ap,an,as1,su,k,nj)
 
 #****** solve eps-eq.
-    res_eps = 0
-    eps_iter[n]=eps[jmon]
+#    res_eps = 0
+#    eps_iter[n]=eps[jmon]
 
-    for j in range(1,nj):
+#    for j in range(1,nj):
 # compute an & as
-     vist_n=fy[j]*vist[j+1]+(1.-fy[j])*vist[j]
-     an[j]=(vist_n/prand_eps+viscos)*dn[j]
-     vist_s=fy[j-1]*vist[j]+(1.-fy[j-1])*vist[j-1]
-     as1[j]=(vist_s/prand_eps+viscos)*ds[j]
+#      vist_n=fy[j]*vist[j+1]+(1.-fy[j])*vist[j]
+#      an[j]=(vist_n/prand_eps+viscos)*dn[j]
+#      vist_s=fy[j-1]*vist[j]+(1.-fy[j-1])*vist[j-1]
+#      as1[j]=(vist_s/prand_eps+viscos)*ds[j]
 
 ################# Old ###########
 # production term
-     su[j]=c_eps_1*cmu*fmu[j]*dudy2[j]*k[j]*delta_y[j]
+#      su[j]=c_eps_1*cmu*fmu[j]*dudy2[j]*k[j]*delta_y[j]
 # su3d=su3d+c_eps_1*cmu*fmu3d*gen*k3d*vol
 
 # dissipation term
-     sp[j]=-c_eps_2*f2[j]*eps[j]*delta_y[j]/k[j]
+#      sp[j]=-c_eps_2*f2[j]*eps[j]*delta_y[j]/k[j]
 ################# New ##############
     #su[j] = c_eps_1 * (Pk_DNS_interp[j] * diss_DNS_interp[j] / k[j]) * delta_y[j]
     #sp[j] = -c_eps_2 * diss_DNS_interp[j] * delta_y[j] / k[j]   
 
 # b.c. south wall
-    dy=yp[1]
-    eps_wall=2*viscos*k[1]/yp[1]**2  # cell 0 is outside the domain
-    sp[1]=-great
-    su[1]=great*eps_wall
+#    dy=yp[1]
+#    eps_wall=2*viscos*k[1]/yp[1]**2  # cell 0 is outside the domain
+#    sp[1]=-great
+#    su[1]=great*eps_wall
     
 
 
@@ -463,23 +463,23 @@ for n in range(1,maxit):
     # su[-2]=great*eps_wall
 
     # b.c. north wall (centerline symmetry)
-    eps[-1] = eps[-2]
+#    eps[-1] = eps[-2]
 
 #    for j in range(1,nj):
 # compute ap
-    ap[j]=an[j]+as1[j]-sp[j]
+#      ap[j]=an[j]+as1[j]-sp[j]
 
 # under-relaxate
-    ap[j]= ap[j]/urf
-    su[j]= su[j]+(1.-urf)*ap[j]*eps[j]
+#      ap[j]= ap[j]/urf
+#      su[j]= su[j]+(1.-urf)*ap[j]*eps[j]
 
-    if j != 1 and j != nj-1: # omit the wall-adjacent cells where eps is set
-        res_eps += abs(an[j]*eps[j+1]+as1[j]*eps[j-1]+su[j]-ap[j]*eps[j])
+#      if j != 1 and j != nj-1: # omit the wall-adjacent cells where eps is set
+#         res_eps += abs(an[j]*eps[j+1]+as1[j]*eps[j-1]+su[j]-ap[j]*eps[j])
 # use Gauss-Seidel
 #     eps[j]=(an[j]*eps[j+1]+as1[j]*eps[j-1]+su[j])/ap[j]
 
 # use TDMA
-    eps=tdma(ap,an,as1,su,eps,nj)
+#    eps=tdma(ap,an,as1,su,eps,nj)
 
 # print residuals
     print(f"\n{'---iter: '}{n:2d}, {'res u: '}{res_u:.2e},{'  res k='}{res_k:.2e}\n")
@@ -552,14 +552,14 @@ plt.legend(loc="best",prop=dict(size=18))
 # plt.ylabel('y')
 # # plt.savefig('vis_5200-NN-kom.png')
 
-# plot eps
-fig1,ax1 = plt.subplots()
-plt.subplots_adjust(left=0.20,bottom=0.20)
-plt.plot(yp,eps,'b-',label=r"$k-\varepsilon$")
-plt.legend(loc="best",prop=dict(size=18))
-plt.xlabel(r'$\varepsilon$')
-plt.ylabel('y')
-# plt.savefig('eps_5200-NN-kom.png')
+# # plot eps
+# fig1,ax1 = plt.subplots()
+# plt.subplots_adjust(left=0.20,bottom=0.20)
+# plt.plot(eps,yp,'b-',label=r"$k-\varepsilon$")
+# plt.legend(loc="best",prop=dict(size=18))
+# plt.xlabel(r'$\varepsilon$')
+# plt.ylabel('y')
+# # plt.savefig('eps_5200-NN-kom.png')
 
 # plot k
 fig1,ax1 = plt.subplots()
