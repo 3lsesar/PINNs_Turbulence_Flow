@@ -529,20 +529,56 @@ def train_pinn(
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.75, patience=10000, verbose=True)
 
     start_epoch = 0
+
     # If resuming, load checkpoint
     if checkpoint_in:
         if not os.path.exists(checkpoint_in):
             raise FileNotFoundError(f"Checkpoint file '{checkpoint_in}' not found.")
+
         ckpt = torch.load(checkpoint_in, map_location=config.device)
-        model.load_state_dict(ckpt['model_state_dict'])
-        optimizer.load_state_dict(ckpt['optimizer_state_dict'])
-        # Restore scheduler state if available in checkpoint
-        if 'scheduler_state_dict' in ckpt:
-            scheduler.load_state_dict(ckpt['scheduler_state_dict'])
-        start_epoch = ckpt['epoch'] + 1
-        # When resuming training, ensure that x requires gradient
+
+        # --- Detectar formato del checkpoint ---
+        if isinstance(ckpt, dict) and 'model_state_dict' in ckpt:
+            # ✅ Checkpoint completo
+            model.load_state_dict(ckpt['model_state_dict'])
+            print("Loaded 'model_state_dict' from checkpoint.")
+
+            if optimizer is not None and 'optimizer_state_dict' in ckpt:
+                try:
+                    optimizer.load_state_dict(ckpt['optimizer_state_dict'])
+                    print("Loaded optimizer state.")
+                except Exception as e:
+                    print(f"Warning: no se pudo cargar el estado del optimizer: {e}")
+
+            if scheduler is not None and 'scheduler_state_dict' in ckpt and ckpt['scheduler_state_dict'] is not None:
+                try:
+                    scheduler.load_state_dict(ckpt['scheduler_state_dict'])
+                    print("Loaded scheduler state.")
+                except Exception as e:
+                    print(f"Warning: no se pudo cargar el estado del scheduler: {e}")
+
+            if 'epoch' in ckpt:
+                try:
+                    start_epoch = int(ckpt['epoch']) + 1
+                    print(f"Resuming from epoch {start_epoch}.")
+                except Exception:
+                    start_epoch = 0
+            else:
+                start_epoch = 0
+
+        else:
+            # ✅ Checkpoint simple (solo pesos del modelo)
+            try:
+                model.load_state_dict(ckpt)
+                print("Loaded model weights (checkpoint contiene solo state_dict).")
+                start_epoch = 0
+            except Exception as e:
+                raise RuntimeError(f"El checkpoint no tiene el formato esperado y no pudo cargarse como state_dict. Error: {e}")
+
+        # --- Al reanudar, asegurar que x requiera gradientes ---
         x = x.detach().clone().requires_grad_(True)
-        print(f"Resuming training from epoch {start_epoch}.")
+
+
 
     # Storage for loss history
     de_history = np.zeros(config.max_epochs)
@@ -577,7 +613,7 @@ def train_pinn(
             vist_DNS,
             vist_0,
             vist_1,
-            l1 = 0
+            l1 = 1e-6
         )
 
         #Method flag
@@ -636,12 +672,13 @@ def train_pinn(
         if (epoch - start_epoch) % 100 == 0:
             if trainable_weights:
                 current_lr = optimizer.param_groups[0]['lr']
-                print(f"epoch {epoch}, learning rate {current_lr}, best loss {np.round(best_loss,4)} \n total_loss {L_total.item():.6f} | "
+                print(f"epoch {epoch}/{total_epochs}, learning rate {current_lr}, best loss {np.round(best_loss,4)} \n total_loss {L_total.item():.6f} | "
                     f"weights: diff {torch.exp(-log_var_diff).item():.3f}, "
                     f"bc {torch.exp(-log_var_bc).item():.3f}, "
                     f"mse {torch.exp(-log_var_mse).item():.3f}, "
-                    f"l1 {torch.exp(-log_var_l1).item():.3f}")
-                print("-" * 80, '\n')
+                    f"l1 {torch.exp(-log_var_l1).item():.3f}, \n")
+                
+
             else:
                 current_lr = optimizer.param_groups[0]['lr']
                 print(f"epoch {epoch}, learning rate {current_lr}, best loss {np.round(best_loss,4)} \n total_loss {L_total.item():.6f} | "
@@ -650,6 +687,11 @@ def train_pinn(
                     f"mse {C}, "
                     f"l1 {D}")
                 print("-" * 80, '\n')
+               
+            print("-" * 80)
+            #Progress bar with a print
+            print('[' + '#' * (epoch // (total_epochs // 50)) + '#' + '-' * (50 - epoch // (total_epochs // 50)) + ']' +'     '+ f' {np.round((epoch/total_epochs)*100, 2)}% completed')                
+            print("-" * 80, '\n')
 
         if L_total.item() < best_loss:
             best_loss = L_total.item()
@@ -711,7 +753,12 @@ def train_pinn(
     np.savetxt(os.path.join(output_dir, 'vist_predicted.txt'), vist_pred.detach().cpu().numpy().flatten())
     
     #Save final model on the folder
-    torch.save(model.state_dict(), os.path.join(output_dir, 'pinn_model.pth'))
+    torch.save({
+        'epoch': epoch,
+        'model_state_dict': model.state_dict(),
+        'optimizer_state_dict': optimizer.state_dict(),
+        'scheduler_state_dict': scheduler.state_dict(),
+    }, os.path.join(output_dir, 'pinn_checkpoint.pth'))
 
     #Save loss and loss weights history
     np.savetxt(os.path.join(output_dir, 'loss_history.txt'), np.vstack((
