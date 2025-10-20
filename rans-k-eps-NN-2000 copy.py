@@ -1,3 +1,4 @@
+#%%
 import numpy as np
 import torch
 import sys
@@ -71,7 +72,7 @@ NN_bool = False
 #NN_bool = True
 
 # max number of iterations
-# maxit=25000
+maxit=25000
 maxit=50000
 #maxit=2
 
@@ -83,37 +84,75 @@ plt.rcParams.update({'font.size': 22})
 
 # create the grid
 
-nj=31 # coarse grid
-nj=99 # fine grid
-njm1=nj-1
-yfac=1.6 # coarse grid
-yfac=1.15 # fine grid
-dy=0.1
-yc=np.zeros(nj)
+# nj=31 # coarse grid
+# nj=99 # fine grid
+# njm1=nj-1
+# yfac=1.6 # coarse grid
+# yfac=1.15 # fine grid
+# dy=0.1
+# yc=np.zeros(nj)
+# delta_y=np.zeros(nj)
+# yc[0]=0.
+# for j in range(1,int((nj+1)/2)):
+#     yc[j]=yc[j-1]+dy
+#     dy=yfac*dy
+
+
+# ymax= yc[int((nj-1)/2)]
+
+# # cell faces
+# for j in range(0,int((nj+1)/2)):
+#    yc[j]=yc[j]/ymax
+#    yc[nj-j-1]=2.-yc[j]
+# yc[-1]=2.
+
+# # cell centres
+# yp=np.zeros(nj+1)
+# for j in range(1,nj):
+#    yp[j]=0.5*(yc[j]+yc[j-1])
+# yp[-1]=yc[-1]
+
+nj = 99  # still fine grid, but now only half
+yfac = 1.15
+dy = 0.1
+yc = np.zeros(nj)
+yc[0] = 0.
 delta_y=np.zeros(nj)
-yc[0]=0.
-for j in range(1,int((nj+1)/2)):
-    yc[j]=yc[j-1]+dy
-    dy=yfac*dy
 
+for j in range(1, nj):
+    yc[j] = yc[j-1] + dy
+    dy = yfac * dy
 
-ymax= yc[int((nj-1)/2)]
+# Normalize so that top boundary (centerline) is y=1
+ymax = yc[-1]
+yc = yc / ymax
 
-# cell faces
-for j in range(0,int((nj+1)/2)):
-   yc[j]=yc[j]/ymax
-   yc[nj-j-1]=2.-yc[j]
-yc[-1]=2.
+# cell centers
+yp = np.zeros(nj+1)
+for j in range(1, nj):
+    yp[j] = 0.5 * (yc[j] + yc[j-1]) 
 
-# cell centres
-yp=np.zeros(nj+1)
-for j in range(1,nj):
-   yp[j]=0.5*(yc[j]+yc[j-1])
+yp[0]=yc[0]
 yp[-1]=yc[-1]
 
 
 # viscosity
-viscos=1/5200
+viscos=1/2000
+
+# load DNS data
+DNS_k_terms=np.genfromtxt("Re2000_bal_k.dat",comments="%")
+
+y_DNS = DNS_k_terms[:,0]
+diss_DNS=DNS_k_terms[:,2]
+Pk_DNS=DNS_k_terms[:,3]
+Pk_DNS_interp   = 1/viscos*np.interp(yp, y_DNS, Pk_DNS)
+diss_DNS_interp = 1/viscos*np.abs(np.interp(yp, y_DNS, diss_DNS))
+eps = diss_DNS_interp
+
+########### EXTRA FIX ###########
+DNS_stress=np.genfromtxt("Re2000_jimenez.dat",comments="%")
+om_DNS=DNS_stress[:,6];
+om_DNS_interp = np.interp(yp, y_DNS, om_DNS)
 
 # under-relaxation
 urf=0.5
@@ -147,13 +186,14 @@ great=1.e10
 u=np.zeros(nj+1)
 k=np.ones(nj+1)*1.e-4
 y=np.zeros(nj+1)
-eps=np.ones(nj+1)*1.e-5
+#eps=np.ones(nj+1)*1.e-5
+# vist=np.ones(nj+1)*100.*viscos
 vist=np.interp(yp,y_,vist)
 
-# plt.plot(vist,yp)
-# plt.show(block=True)
 
-# vist=np.ones(nj+1)*100.*viscos
+plt.plot(yp,vist)
+plt.show(block=True)
+
 dn=np.zeros(nj+1)
 ds=np.zeros(nj+1)
 dy_s=np.zeros(nj+1)
@@ -164,10 +204,10 @@ tau_w=np.zeros(maxit)
 k_iter=np.zeros(maxit)
 eps_iter=np.zeros(maxit)
 dudy=np.gradient(u,yp)
+prand_k=np.ones(nj+1)
 
 
 # prand_k=np.interp(yp,y_,prandtl_k)
-prand_k=np.ones(nj+1)
 # load NN model
 if NN_bool:
    NN = torch.load('model-neural-k-omega-f_2.pth',weights_only=False)
@@ -208,6 +248,7 @@ sp=np.zeros(nj+1)
 an=np.zeros(nj+1)
 as1=np.zeros(nj+1)
 ap=np.zeros(nj+1)
+
 # do max. maxit iterations
 for n in range(1,maxit):
 
@@ -263,7 +304,12 @@ for n in range(1,maxit):
        f2_NN=np.minimum(f2_NN,f2_max)
        f2_NN=np.maximum(f2_NN,f2_min)
 
-
+########### EXTRA FIX 1 #############
+    vist_prand = k/om_DNS_interp
+    prand_k = np.minimum(vist_prand/(vist+1e-10),1) # viscos ??
+    prand_k[-1]=prand_k[-2]
+    vist_t = vist/(prand_k+1e-10)
+    vist_t[-1]=vist_t[-2]
 # solve u
 
     for j in range(1,nj):
@@ -278,12 +324,17 @@ for n in range(1,maxit):
       vist_s=fy[j-1]*vist[j]+(1-fy[j-1])*vist[j-1]
 
 # compute an & as
-      an[j]=(vist_n+viscos)*dn[j]
-      as1[j]=(vist_s+viscos)*ds[j]
+      #an[j]=(vist_n+viscos)*dn[j] OLD
+      an[j]=(vist_n+viscos)*dn[j] # NEW
+      #as1[j]=(vist_s+viscos)*ds[j] # OLD
+      as1[j]=(vist_s+viscos)*ds[j] # NEW
 
 # boundary conditions for u
-    u[0]=0.
-    u[-1]=0.
+    # u[0]=0.
+    # u[-1]=0.
+    u[0] = 0.              # no-slip wall
+    u[-1] = u[-2]          # symmetry: du/dy = 0
+
 
     res_u = 0
     for j in range(1,nj):
@@ -344,21 +395,38 @@ for n in range(1,maxit):
     #   vist_new = cmu*fmu[j]*k[j]**2/eps[j]
     #   vist[j] = vist_new*urf + (1-urf)*vist[j]
 
+########## Old ###########
 # production term
-      su[j]=vist[j]*dudy2[j]*delta_y[j]
+#      su[j]=vist[j]*dudy2[j]*delta_y[j]
 
 # dissipation term
-      sp[j]=-eps[j]/k[j]*delta_y[j]
+#      sp[j]=-eps[j]/k[j]*delta_y[j]
+  
+############ New ##############    
+      su[j] = Pk_DNS_interp[j] * delta_y[j]       # DNS production
+      sp[j] = -diss_DNS_interp[j]/(k[j]+1e-10) * delta_y[j]    # DNS dissipation
+      
+########### New 2 ###############
+      
+      #su[j] = (Pk_DNS_interp[j] - diss_DNS_interp[j]) * delta_y[j]
+      #sp[j] = 0.
 
+
+############## EXTRA FIX 2 ############
 # compute an & as
-      vist_n=fy[j]*vist[j+1]+(1.-fy[j])*vist[j]
-      an[j]=(vist_n/prand_k[j]+viscos)*dn[j]
-      vist_s=fy[j-1]*vist[j]+(1.-fy[j-1])*vist[j-1]
-      as1[j]=(vist_s/prand_k[j]+viscos)*ds[j]
+      vist_n=fy[j]*vist_t[j+1]+(1.-fy[j])*vist_t[j]
+      an[j]=(vist_n+viscos)*dn[j] #NEW
+      #an[j]=(vist_n/prand_k[j]+viscos)*dn[j] #OLD
+      vist_s=fy[j-1]*vist_t[j]+(1.-fy[j-1])*vist_t[j-1]
+      as1[j]=(vist_s+viscos)*ds[j] # NEW
+      #as1[j]=(vist_s/prand_k[j]+viscos)*ds[j] # OLD
 
 # boundary conditions for k
-    k[0]=0.
-    k[-1]=0.
+    # k[0]=0.
+    # k[-1]=0.
+    k[0] = 0.              # wall condition
+    k[-1] = k[-2]          # symmetry: dk/dy = 0
+
 
     for j in range(1,nj):
 # compute ap
@@ -376,80 +444,101 @@ for n in range(1,maxit):
     k=tdma(ap,an,as1,su,k,nj)
 
 #****** solve eps-eq.
-    res_eps = 0
-    eps_iter[n]=eps[jmon]
+#    res_eps = 0
+#    eps_iter[n]=eps[jmon]
 
-    for j in range(1,nj):
+#    for j in range(1,nj):
 # compute an & as
-      vist_n=fy[j]*vist[j+1]+(1.-fy[j])*vist[j]
-      an[j]=(vist_n/prand_eps+viscos)*dn[j]
-      vist_s=fy[j-1]*vist[j]+(1.-fy[j-1])*vist[j-1]
-      as1[j]=(vist_s/prand_eps+viscos)*ds[j]
+#      vist_n=fy[j]*vist[j+1]+(1.-fy[j])*vist[j]
+#      an[j]=(vist_n/prand_eps+viscos)*dn[j]
+#      vist_s=fy[j-1]*vist[j]+(1.-fy[j-1])*vist[j-1]
+#      as1[j]=(vist_s/prand_eps+viscos)*ds[j]
 
+################# Old ###########
 # production term
-      su[j]=c_eps_1*cmu*fmu[j]*dudy2[j]*k[j]*delta_y[j]
+#      su[j]=c_eps_1*cmu*fmu[j]*dudy2[j]*k[j]*delta_y[j]
 # su3d=su3d+c_eps_1*cmu*fmu3d*gen*k3d*vol
 
 # dissipation term
-      sp[j]=-c_eps_2*f2[j]*eps[j]*delta_y[j]/k[j]
+#      sp[j]=-c_eps_2*f2[j]*eps[j]*delta_y[j]/k[j]
+################# New ##############
+    #su[j] = c_eps_1 * (Pk_DNS_interp[j] * diss_DNS_interp[j] / k[j]) * delta_y[j]
+    #sp[j] = -c_eps_2 * diss_DNS_interp[j] * delta_y[j] / k[j]   
 
 # b.c. south wall
-    dy=yp[1]
-    eps_wall=2*viscos*k[1]/yp[1]**2  # cell 0 is outside the domain
-    sp[1]=-great
-    su[1]=great*eps_wall
+#    dy=yp[1]
+#    eps_wall=2*viscos*k[1]/yp[1]**2  # cell 0 is outside the domain
+#    sp[1]=-great
+#    su[1]=great*eps_wall
+    
+
+
 
 # b.c. north wall
-    dy=yc[-1]-yp[-2] # cell yp[-1] is outside the domain
-    eps_wall=2*viscos*k[-2]/dy**2 
-    sp[-2]=-great
-    su[-2]=great*eps_wall
+    # dy=yc[-1]-yp[-2] # cell yp[-1] is outside the domain
+    # eps_wall=2*viscos*k[-2]/dy**2 
+    # sp[-2]=-great
+    # su[-2]=great*eps_wall
 
-    for j in range(1,nj):
+    # b.c. north wall (centerline symmetry)
+#    eps[-1] = eps[-2]
+
+#    for j in range(1,nj):
 # compute ap
-      ap[j]=an[j]+as1[j]-sp[j]
+#      ap[j]=an[j]+as1[j]-sp[j]
 
 # under-relaxate
-      ap[j]= ap[j]/urf
-      su[j]= su[j]+(1.-urf)*ap[j]*eps[j]
+#      ap[j]= ap[j]/urf
+#      su[j]= su[j]+(1.-urf)*ap[j]*eps[j]
 
-      if j != 1 and j != nj-1: # omit the wall-adjacent cells where eps is set
-         res_eps += abs(an[j]*eps[j+1]+as1[j]*eps[j-1]+su[j]-ap[j]*eps[j])
+#      if j != 1 and j != nj-1: # omit the wall-adjacent cells where eps is set
+#         res_eps += abs(an[j]*eps[j+1]+as1[j]*eps[j-1]+su[j]-ap[j]*eps[j])
 # use Gauss-Seidel
 #     eps[j]=(an[j]*eps[j+1]+as1[j]*eps[j-1]+su[j])/ap[j]
 
 # use TDMA
-    eps=tdma(ap,an,as1,su,eps,nj)
+#    eps=tdma(ap,an,as1,su,eps,nj)
 
 # print residuals
-    print(f"\n{'---iter: '}{n:2d}, {'res u: '}{res_u:.2e},{'  res k='}{res_k:.2e},{'  res eps='}{res_eps:.2e}\n")
+    print(f"\n{'---iter: '}{n:2d}, {'res u: '}{res_u:.2e},{'  res k='}{res_k:.2e}\n")
 
-DNS_mean=np.genfromtxt("LM_Channel_5200_mean_prof.dat",comments="%")
-y_DNS=DNS_mean[:,0]
-yplus_DNS=DNS_mean[:,1]
-u_DNS=DNS_mean[:,2]
-
-DNS_stress=np.genfromtxt("LM_Channel_5200_vel_fluc_prof.dat",comments="%")
-u2DNS=DNS_stress[:,2]
-v2DNS=DNS_stress[:,3]
-w2DNS=DNS_stress[:,4]
-uvDNS=DNS_stress[:,5]
-
-k_DNS = 0.5*(u2DNS + v2DNS + w2DNS) 
-
-# DNS_mean=np.genfromtxt("Re2000_jimenez.dat",comments="%") # Can use jiminez 2000
+# DNS_mean=np.genfromtxt("LM_Channel_5200_mean_prof.dat",comments="%")
 # y_DNS=DNS_mean[:,0];
 # yplus_DNS=DNS_mean[:,1];
 # u_DNS=DNS_mean[:,2];
 
+# DNS_stress=np.genfromtxt("LM_Channel_5200_vel_fluc_prof.dat",comments="%")
+# u2DNS=DNS_stress[:,2];
+# v2DNS=DNS_stress[:,3];
+# w2DNS=DNS_stress[:,4];
+# uvDNS=DNS_stress[:,5];
 
-# DNS_stress=np.genfromtxt("Re2000_jimenez.dat",comments="%") #Also jiminewz 2000
-# u2DNS=(DNS_stress[:,3])**2;
-# v2DNS=(DNS_stress[:,4])**2;
-# w2DNS=(DNS_stress[:,5])**2;
-# uvDNS=DNS_stress[:,10];
-# k_DNS=0.5*(u2DNS+v2DNS+w2DNS)
+# k_DNS = 0.5*(u2DNS + v2DNS + w2DNS) 
 
+DNS_mean=np.genfromtxt("Re2000_jimenez.dat",comments="%") # Can use jiminez 2000
+y_DNS=DNS_mean[:,0];
+yplus_DNS=DNS_mean[:,1];
+u_DNS=DNS_mean[:,2];
+
+
+DNS_stress=np.genfromtxt("Re2000_jimenez.dat",comments="%") #Also jiminewz 2000
+u2DNS=(DNS_stress[:,3])**2;
+v2DNS=(DNS_stress[:,4])**2;
+w2DNS=(DNS_stress[:,5])**2;
+uvDNS=DNS_stress[:,10];
+k_DNS=0.5*(u2DNS+v2DNS+w2DNS)
+
+# load k-omega grid
+kom_data = np.loadtxt('y_u_k_om_uv_2000-RANS-half-channel.txt')
+y_kom = kom_data[:,0]
+k_kom = kom_data[:,2]
+om_kom = kom_data[:,3]
+vist_kom = k_kom/om_kom/viscos
+
+
+
+
+#%%
 # plot u
 fig1,ax1 = plt.subplots()
 plt.subplots_adjust(left=0.20,bottom=0.20)
@@ -473,32 +562,33 @@ plt.axis([1, 5200, 0, 28])
 plt.legend(loc="best",prop=dict(size=18))
 # plt.savefig('u_log-5200-NN-kom.png')
 
-# plot visc
-fig1,ax1 = plt.subplots()
-plt.subplots_adjust(left=0.20,bottom=0.20)
-plt.plot(vist/viscos,yp,'b-',label=r"$k-\varepsilon$")
-plt.legend(loc="best",prop=dict(size=18))
-plt.xlabel(r'$\nu_t/\nu$')
-plt.ylabel('y')
-# plt.savefig('vis_5200-NN-kom.png')
+# # plot visc
+# fig1,ax1 = plt.subplots()
+# plt.subplots_adjust(left=0.20,bottom=0.20)
+# plt.plot(vist/viscos,yp,'b-',label=r"$k-\varepsilon$")
+# plt.legend(loc="best",prop=dict(size=18))
+# plt.xlabel(r'$\nu_t/\nu$')
+# plt.ylabel('y')
+# # plt.savefig('vis_5200-NN-kom.png')
 
-# plot eps
-fig1,ax1 = plt.subplots()
-plt.subplots_adjust(left=0.20,bottom=0.20)
-plt.plot(eps,yp,'b-',label=r"$k-\varepsilon$")
-plt.legend(loc="best",prop=dict(size=18))
-plt.xlabel(r'$\varepsilon$')
-plt.ylabel('y')
-# plt.savefig('eps_5200-NN-kom.png')
+# # plot eps
+# fig1,ax1 = plt.subplots()
+# plt.subplots_adjust(left=0.20,bottom=0.20)
+# plt.plot(eps,yp,'b-',label=r"$k-\varepsilon$")
+# plt.legend(loc="best",prop=dict(size=18))
+# plt.xlabel(r'$\varepsilon$')
+# plt.ylabel('y')
+# # plt.savefig('eps_5200-NN-kom.png')
 
 # plot k
 fig1,ax1 = plt.subplots()
 plt.subplots_adjust(left=0.20,bottom=0.20)
-plt.plot(k,yp,'b-',label="CFD")
-plt.plot(k_DNS,y_DNS,'r-',label="DNS")
+plt.plot(yp,k,'b-',label="CFD")
+plt.plot(y_DNS,k_DNS,'r-',label="DNS")
+plt.plot(y_kom,k_kom,'k--',label='Willcox')
 plt.legend(loc="best",prop=dict(size=18))
-plt.xlabel('k')
-plt.ylabel('y')
+plt.ylabel('k')
+plt.xlabel('y')
 # plt.savefig('k_5200-NN-kom.png')
 
 # plot uv
@@ -511,5 +601,26 @@ plt.legend(loc="best",prop=dict(size=18))
 plt.xlabel(r"$\overline{u'v'}$")
 plt.ylabel('y')
 # plt.savefig('uv_5200-NN-kom.png')
+
+# plot Pk_DNS
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.25,bottom=0.20)
+uv = -vist*dudy
+plt.plot(Pk_DNS_interp,'b-',label="Pk")
+plt.legend(loc="best",prop=dict(size=18))
+
+# plot diss_DNS
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.25,bottom=0.20)
+uv = -vist*dudy
+plt.plot(yp,diss_DNS_interp,'b-',label="diss")
+plt.legend(loc="best",prop=dict(size=18))
+
+# plot vist*dudy2
+fig1,ax1 = plt.subplots()
+plt.subplots_adjust(left=0.25,bottom=0.20)
+uv = -vist*dudy
+plt.plot(vist*dudy2,'b-',label="vist*dudy2")
+plt.legend(loc="best",prop=dict(size=18))
 
 plt.show(block=True)
