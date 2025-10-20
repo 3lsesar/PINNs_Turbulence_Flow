@@ -135,8 +135,8 @@ vistload=np.loadtxt('vist-y.txt')
 vist=vistload[:,0]
 y_=vistload[:,1]
 
-plt.plot(y_,vist)
-plt.show(block=True)
+# plt.plot(y_,vist)
+# plt.show(block=True)
 
 cmu=0.09
 
@@ -150,8 +150,8 @@ y=np.zeros(nj+1)
 eps=np.ones(nj+1)*1.e-5
 vist=np.interp(yp,y_,vist)
 
-plt.plot(vist,yp)
-plt.show(block=True)
+# plt.plot(vist,yp)
+# plt.show(block=True)
 
 # vist=np.ones(nj+1)*100.*viscos
 dn=np.zeros(nj+1)
@@ -424,31 +424,31 @@ for n in range(1,maxit):
 # print residuals
     print(f"\n{'---iter: '}{n:2d}, {'res u: '}{res_u:.2e},{'  res k='}{res_k:.2e},{'  res eps='}{res_eps:.2e}\n")
 
-# DNS_mean=np.genfromtxt("LM_Channel_5200_mean_prof.dat",comments="%")
-# y_DNS=DNS_mean[:,0]
-# yplus_DNS=DNS_mean[:,1]
-# u_DNS=DNS_mean[:,2]
+DNS_mean=np.genfromtxt("LM_Channel_5200_mean_prof.dat",comments="%")
+y_DNS=DNS_mean[:,0]
+yplus_DNS=DNS_mean[:,1]
+u_DNS=DNS_mean[:,2]
 
-# DNS_stress=np.genfromtxt("LM_Channel_5200_vel_fluc_prof.dat",comments="%")
-# u2DNS=DNS_stress[:,2]
-# v2DNS=DNS_stress[:,3]
-# w2DNS=DNS_stress[:,4]
-# uvDNS=DNS_stress[:,5]
+DNS_stress=np.genfromtxt("LM_Channel_5200_vel_fluc_prof.dat",comments="%")
+u2DNS=DNS_stress[:,2]
+v2DNS=DNS_stress[:,3]
+w2DNS=DNS_stress[:,4]
+uvDNS=DNS_stress[:,5]
 
-# k_DNS = 0.5*(u2DNS + v2DNS + w2DNS) 
+k_DNS = 0.5*(u2DNS + v2DNS + w2DNS) 
 
-DNS_mean=np.genfromtxt("Re2000_jimenez.dat",comments="%") # Can use jiminez 2000
-y_DNS=DNS_mean[:,0];
-yplus_DNS=DNS_mean[:,1];
-u_DNS=DNS_mean[:,2];
+# DNS_mean=np.genfromtxt("Re2000_jimenez.dat",comments="%") # Can use jiminez 2000
+# y_DNS=DNS_mean[:,0];
+# yplus_DNS=DNS_mean[:,1];
+# u_DNS=DNS_mean[:,2];
 
 
-DNS_stress=np.genfromtxt("Re2000_jimenez.dat",comments="%") #Also jiminewz 2000
-u2DNS=(DNS_stress[:,3])**2;
-v2DNS=(DNS_stress[:,4])**2;
-w2DNS=(DNS_stress[:,5])**2;
-uvDNS=DNS_stress[:,10];
-k_DNS=0.5*(u2DNS+v2DNS+w2DNS)
+# DNS_stress=np.genfromtxt("Re2000_jimenez.dat",comments="%") #Also jiminewz 2000
+# u2DNS=(DNS_stress[:,3])**2;
+# v2DNS=(DNS_stress[:,4])**2;
+# w2DNS=(DNS_stress[:,5])**2;
+# uvDNS=DNS_stress[:,10];
+# k_DNS=0.5*(u2DNS+v2DNS+w2DNS)
 
 # plot u
 fig1,ax1 = plt.subplots()

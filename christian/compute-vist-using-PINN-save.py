@@ -170,13 +170,14 @@ def PDE(y, vist_pred):
         # Sum over dirichlet boundary condition losses
         boundary_condition_loss += (vist_pred[0] - vist_0) ** 2
         boundary_condition_loss += (vist_pred[-1] - vist_1) ** 2
-        
-        return differential_equation_loss, boundary_condition_loss, imbalance
+        mse_loss = torch.mean((vist_pred - vist_DNS) ** 2)
+
+        return differential_equation_loss, boundary_condition_loss, imbalance, mse_loss
 
 def loss_and_PDE(y_tensor):
     optimizer.zero_grad() # Clear gradients from the previous iteration
     outputs = model(y_tensor)  #get k 
-    loss_de,loss_bc, imbalance = PDE(y_tensor, outputs) # Compute the loss
+    loss_de,loss_bc, imbalance, mse_loss = PDE(y_tensor, outputs) # Compute the loss
     loss = loss_de+1000.*loss_bc
 # Calculate the L1 regularization term
     l1_regularization = torch.tensor(0.)
@@ -184,14 +185,17 @@ def loss_and_PDE(y_tensor):
         l1_regularization += torch.norm(param, p=1)
 
     # Add the L1 regularization term to the loss
-    lambda_l1=0.
+    lambda_l1=1e-4
     loss += lambda_l1 * l1_regularization # Compute the loss
+    
+    loss += lambda_l1 * mse_loss
+
     loss.backward() # Compute gradients using backpropagation
     return loss,loss_de,loss_bc, imbalance
 
 #%% training
-max_no_epoch=25000
-#max_no_epoch=2
+max_no_epoch=60000
+# max_no_epoch=2
 
 learning_rate = 0.02  #  4221.8496 milestones=[500000]
 learning_rate = 0.02  #  0.6554632 milestones=[6400,43000,54578]
@@ -325,5 +329,5 @@ plt.xlabel('$y^+$')
 ax.grid(visible=True)
 plt.xlim(0,100)
 #plt.savefig('k-balance-PINN-5200-plus-units-load-5-cells-zoom-required-grad-false-save.png',bbox_inches='tight')
-plt.show()   
 
+plt.show(block=True)
