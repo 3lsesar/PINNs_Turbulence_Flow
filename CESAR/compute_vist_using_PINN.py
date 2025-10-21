@@ -514,6 +514,7 @@ def train_pinn(
     # Definir parámetros libres
     # --------------------------
     if trainable_weights:
+        #Random initialization of the log variances
         log_var_diff = nn.Parameter(torch.tensor(0.9))
         log_var_bc   = nn.Parameter(torch.tensor(0.1))
         log_var_mse  = nn.Parameter(torch.tensor(0.2))
